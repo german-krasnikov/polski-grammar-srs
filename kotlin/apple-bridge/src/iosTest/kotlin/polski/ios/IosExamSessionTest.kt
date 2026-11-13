@@ -170,6 +170,33 @@ class IosExamSessionTest {
     }
 
     @Test
+    fun writingGuidanceReachesStandaloneAndTimedNativeSnapshots() {
+        for ((route, category, languagePoints, total) in listOf(
+            listOf("b1-2017", "bogactwo językowe", "10", "30"),
+            listOf("b2-2017", "bogactwo językowe", "16", "40"),
+            listOf("c1-2022-11", "Środki językowe", "18", "40"),
+        )) {
+            val session = IosExamSession()
+            session.selectExam(route)
+            session.selectModule("writing")
+            session.selectWritingSet("I")
+            val standalone = session.view().getValue("part").jsonObject.getValue("instruction").jsonPrimitive.content
+            assertTrue(standalone.contains(category), route)
+            assertTrue(standalone.contains("0 – $languagePoints p."), route)
+            assertTrue(standalone.contains("$total p."), route)
+            session.startTimed(1_000L)
+            var now = 1_001L
+            while (session.view().getValue("sitting").jsonObject.getValue("module").jsonPrimitive.content != "writing") {
+                val module = session.view().getValue("sitting").jsonObject.getValue("module").jsonPrimitive.content
+                session.submitInModule(module, now++)
+            }
+            session.selectWritingSetAt("I", now)
+            val timed = session.view().getValue("part").jsonObject.getValue("instruction").jsonPrimitive.content
+            assertEquals(standalone, timed, route)
+        }
+    }
+
+    @Test
     fun compactOpenSetAnswerKeepsManualPendingRatherThanBecomingMalformed() {
         val session = IosExamSession()
         session.selectExam("b2-2019")

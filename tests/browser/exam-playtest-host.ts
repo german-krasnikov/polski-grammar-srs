@@ -85,7 +85,11 @@ export async function runExamPlaytest(page: Page, sourceFile: string) {
         'reading.selectedSecond': readingRows[1]?.querySelector('.exam-option.selected')?.textContent ?? '',
         'writing.setChoiceCount': [...document.querySelectorAll<HTMLButtonElement>('.exam-nav-btn')].filter(button => button.textContent?.startsWith('Набор ')).length,
         'writing.taskLabel': document.querySelector('.exam-progress-text')?.textContent ?? '',
-        'writing.instructionOpening': document.querySelector('h3.exam-title')?.textContent?.split('.')[0]?.trim() + '.' || '',
+        'writing.instructionOpening': document.querySelector<HTMLDetailsElement>('.exam-writing-details')?.open
+          ? (document.querySelector('.exam-writing-instruction p')?.textContent?.split('.')[0]?.trim() ?? '') + '.' : '',
+        'writing.guidance': document.querySelector<HTMLDetailsElement>('.exam-writing-details')?.open
+          ? document.querySelector('.exam-writing-instruction p:last-child')?.textContent ?? '' : '',
+        'writing.wordLimit': document.querySelector('.exam-word-limit')?.textContent ?? '',
         'writing.prompt': document.querySelector('.exam-writing-prompt')?.textContent ?? '',
         'writing.promptOpening': document.querySelector('.exam-writing-prompt p')?.textContent ?? '',
         'writing.draft': document.querySelector<HTMLTextAreaElement>('.exam-textarea')?.value ?? '',
@@ -322,6 +326,7 @@ export async function runExamPlaytest(page: Page, sourceFile: string) {
   action('selectWritingSet', string('set'), async args => {
     await page.getByRole('button', { name: `Набор ${String(args.set)}`, exact: true }).click();
   });
+  action('openWritingGuidance', [], async () => { await page.locator('.exam-writing-details summary').click(); });
   action('changeWritingSet', [], async () => { await button('Сменить набор'); });
   action('writeDraft', string('text'), async args => { await page.locator('.exam-textarea').fill(String(args.text)); });
   action('nextWriting', [], async () => { await button('Dalej →'); });
@@ -373,6 +378,7 @@ export async function runExamPlaytest(page: Page, sourceFile: string) {
     'reading.genericOptionCount': 'number', 'reading.selectedFirst': 'string', 'reading.selectedSecond': 'string',
     'writing.setChoiceCount': 'number', 'writing.taskLabel': 'string',
     'writing.instructionOpening': 'string', 'writing.prompt': 'string', 'writing.draft': 'string', 'writing.reviewCount': 'number',
+    'writing.guidance': 'string', 'writing.wordLimit': 'string',
     'writing.promptOpening': 'string',
     'writing.reviewDrafts': 'string', 'writing.manualAssessment': 'string', 'writing.autoScoreVisible': 'bool',
     'writing.manualPoints': 'string',

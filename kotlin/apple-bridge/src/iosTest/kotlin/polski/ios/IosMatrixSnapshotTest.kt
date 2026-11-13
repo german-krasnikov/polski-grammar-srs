@@ -24,6 +24,7 @@ import polski.data.referenceAspectRows
 import polski.data.maleAccRows
 import polski.data.enPersonalPronouns
 import polski.data.enVerbForm
+import polski.data.selectActiveCoursePack
 import polski.presentation.AppUiState
 
 class IosMatrixSnapshotTest {
@@ -275,7 +276,12 @@ class IosMatrixSnapshotTest {
     // host now also calls (promoted to `:shared` commonMain by this task, not duplicated).
     @Test
     fun nativeMatrixReceivesTheEnglishExampleVerbAndDoSupportRows() {
-        val matrix = Json.parseToJsonElement(snapshot(AppUiState())).jsonObject.getValue("matrix").jsonObject
+        selectActiveCoursePack("en-ru")
+        val matrix = try {
+            Json.parseToJsonElement(snapshot(AppUiState())).jsonObject.getValue("matrix").jsonObject
+        } finally {
+            selectActiveCoursePack("pl-ru")
+        }
         assertEquals("see", matrix.getValue("englishExampleLemma").jsonPrimitive.content)
 
         val verbRows = matrix.getValue("englishVerbsRows").jsonArray
@@ -308,6 +314,29 @@ class IosMatrixSnapshotTest {
 
         // Cross-check against the exact function both hosts share, not a re-derived expectation.
         assertEquals(enVerbForm("see", Tense.PAST, "he"), rowFor("he").getValue("pastPair").jsonObject.getValue("to").jsonPrimitive.content)
+    }
+
+    @Test
+    fun englishMatrixRowsFollowTheActiveTargetAcrossCourseSwitches() {
+        try {
+            selectActiveCoursePack("pl-ru")
+            fun matrix() = Json.parseToJsonElement(snapshot(AppUiState())).jsonObject.getValue("matrix").jsonObject
+            assertEquals("pl", matrix().getValue("targetLanguage").jsonPrimitive.content)
+            assertTrue("englishExampleLemma" !in matrix())
+            assertTrue("englishVerbsRows" !in matrix())
+            assertTrue("englishDoSupportRows" !in matrix())
+
+            selectActiveCoursePack("en-ru")
+            assertEquals("en", matrix().getValue("targetLanguage").jsonPrimitive.content)
+            assertTrue(matrix().getValue("englishVerbsRows").jsonArray.isNotEmpty())
+            assertTrue(matrix().getValue("englishDoSupportRows").jsonArray.isNotEmpty())
+
+            selectActiveCoursePack("pl-ru")
+            assertTrue("englishVerbsRows" !in matrix())
+            assertTrue("englishDoSupportRows" !in matrix())
+        } finally {
+            selectActiveCoursePack("pl-ru")
+        }
     }
 
     @Test

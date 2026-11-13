@@ -1,0 +1,16 @@
+TEST "C1 November 2022 printed number and noun pair confirms both slots" PROFILE playmode
+  open exam="C1 Certyfikat 2022-11" module="grammar"
+  advance count=8
+  ASSERT grammar.context == "(30)"
+  enter text="trzydzieściorgiem"
+  next
+  ASSERT grammar.context == "(rozbitek)"
+  enter text="rozbitków"
+  advance count=65
+  submit
+  inspectReview index=9
+  ASSERT grammar.reviewStatus == "correct"
+  inspectReview index=10
+  ASSERT grammar.reviewStatus == "correct"
+  ASSERT exam.scoreDetail == "1 / 40 баллов"
+END

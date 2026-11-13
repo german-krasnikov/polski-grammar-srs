@@ -3,7 +3,7 @@ GRAMMAR_ITEM {
   itemId: certyfikat-polski-C1-2022-03-g1-q1
   testRef: certyfikat-polski-C1-2022-03-grammar-1
   questionType: fill_gap
-  context: "()"
+  context: "(3)"
   correctAnswer: trzema
   pointsQuarter: 2
 }
@@ -51,7 +51,7 @@ GRAMMAR_ITEM {
   itemId: certyfikat-polski-C1-2022-03-g1-q7
   testRef: certyfikat-polski-C1-2022-03-grammar-1
   questionType: fill_gap
-  context: "()"
+  context: "(40)"
   correctAnswer: "czterdzieści"
   pointsQuarter: 2
 }

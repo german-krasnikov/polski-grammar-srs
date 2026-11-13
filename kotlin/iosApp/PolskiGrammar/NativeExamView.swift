@@ -228,7 +228,7 @@ struct NativeExamView: View {
                     .accessibilityIdentifier("exam-writing-set")
                 }
                 if !card.string("instruction").isEmpty {
-                    Text(card.string("instruction")).font(.headline)
+                    Text(card.string("instruction")).font(module == "writing" ? .body : .headline)
                         .accessibilityIdentifier("exam-part-instruction")
                 }
                 if !card.string("text").isEmpty {

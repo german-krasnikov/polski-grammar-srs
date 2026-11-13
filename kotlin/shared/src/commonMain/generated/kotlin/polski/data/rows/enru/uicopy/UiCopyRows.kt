@@ -836,6 +836,7 @@ val UI_COPY_ROW_ROWS: List<UiCopyRow> = listOf(
     UiCopyRow(key = "listening", text = "Listening"),
     UiCopyRow(key = "reading", text = "Reading"),
     UiCopyRow(key = "writing", text = "Writing"),
+    UiCopyRow(key = "writingInstructionsAndCriteria", text = "Instructions and criteria"),
     UiCopyRow(key = "selectWritingSet", text = "Select a set"),
     UiCopyRow(key = "changeWritingSet", text = "Change set"),
     UiCopyRow(key = "writingSet", text = "Set"),

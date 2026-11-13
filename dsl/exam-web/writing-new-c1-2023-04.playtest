@@ -2,6 +2,7 @@ TEST "C1 2023-04 official Writing set I retains Polish drafts and awaits manual 
   open exam="C1 Certyfikat 2023-04" module="writing"
   ASSERT writing.setChoiceCount == 3
   selectWritingSet set="I"
+  openWritingGuidance
   ASSERT writing.taskLabel == "Задание 1 / 2"
   ASSERT writing.instructionOpening == "INSTRUKCJA WYKONANIA ZADAŃ W tej części egzaminu znajdują się trzy zestawy."
   ASSERT writing.promptOpening == "Otwiera Pani/Pan w Polsce klub fitness/restaurację. Proszę napisać reklamę tego miejsca, którą zamieści Pani/Pan w internecie."

@@ -2,6 +2,7 @@ TEST "B2 2024-02 official Writing set I retains Polish drafts and awaits manual 
   open exam="B2 Certyfikat 2024-02" module="writing"
   ASSERT writing.setChoiceCount == 3
   selectWritingSet set="I"
+  openWritingGuidance
   ASSERT writing.taskLabel == "Задание 1 / 2"
   ASSERT writing.instructionOpening == "INSTRUKCJA WYKONANIA ZADAŃ W tej części egzaminu znajdują się trzy zestawy."
   ASSERT writing.promptOpening == "Proszę napisać e-mail do swojej polskiej przyjaciółki / swojego polskiego przyjaciela i opisać w nim swój nowy samochód / swój nowy sprzęt kuchenny."

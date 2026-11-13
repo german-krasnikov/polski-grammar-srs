@@ -1,6 +1,27 @@
 import XCTest
 
 final class NativeExamUITests: XCTestCase {
+    private func assertWritingGuidance(_ app: XCUIApplication, category: String,
+                                       languagePoints: Int, correctnessPoints: Int) {
+        let picker = app.descendants(matching: .any)["exam-writing-set"].firstMatch
+        XCTAssertTrue(picker.waitForExistence(timeout: 10), app.debugDescription)
+        picker.tap()
+        app.buttons["I"].tap()
+        let instruction = app.staticTexts["exam-part-instruction"]
+        XCTAssertTrue(instruction.waitForExistence(timeout: 10), app.debugDescription)
+        XCTAssertTrue(instruction.label.localizedCaseInsensitiveContains("Wykonanie zadania"), instruction.label)
+        XCTAssertTrue(instruction.label.localizedCaseInsensitiveContains(category), instruction.label)
+        XCTAssertTrue(instruction.label.contains("0 – \(languagePoints) p."), instruction.label)
+        XCTAssertTrue(instruction.label.contains("0 – \(correctnessPoints) p."), instruction.label)
+        XCTAssertTrue(app.staticTexts["exam-part-text"].exists, app.debugDescription)
+        XCTAssertTrue(app.textViews["exam-writing-draft"].exists, app.debugDescription)
+        XCTContext.runActivity(named: "Native writing criteria \(category) \(languagePoints)/\(correctnessPoints)") { activity in
+            let screenshot = XCTAttachment(screenshot: app.screenshot())
+            screenshot.lifetime = .keepAlways
+            activity.add(screenshot)
+        }
+    }
+
     private func openPaper(_ id: String = "b1-2019") -> XCUIApplication {
         let app = XCUIApplication()
         app.launch()
@@ -35,6 +56,41 @@ final class NativeExamUITests: XCTestCase {
         XCTAssertTrue((draft.value as? String ?? "").contains("Żółć"), app.debugDescription)
         app.buttons["exam-submit"].tap()
         XCTAssertTrue(app.descendants(matching: .any)["exam-part-result"].waitForExistence(timeout: 5), app.debugDescription)
+    }
+
+    func testOfficialWritingGuidanceAppearsInStandaloneNativePapers() {
+        for (paper, category, language, correctness) in [
+            ("b1-2017", "Bogactwo językowe", 10, 10),
+            ("b2-2017", "Bogactwo językowe", 16, 14),
+            ("c1-2022-11", "Środki językowe", 18, 12),
+        ] {
+            let app = openPaper(paper)
+            app.buttons["exam-module-writing"].tap()
+            assertWritingGuidance(app, category: category, languagePoints: language,
+                                  correctnessPoints: correctness)
+            app.terminate()
+        }
+    }
+
+    func testOfficialWritingGuidanceAppearsInTimedNativePapers() {
+        for (paper, category, language, correctness) in [
+            ("b1-2017", "Bogactwo językowe", 10, 10),
+            ("b2-2017", "Bogactwo językowe", 16, 14),
+            ("c1-2022-11", "Środki językowe", 18, 12),
+        ] {
+            let app = openPaper(paper)
+            app.buttons["exam-start-timed"].tap()
+            XCTAssertTrue(app.staticTexts["exam-timer"].waitForExistence(timeout: 10), app.debugDescription)
+            app.buttons["exam-submit"].tap() // Listening → Reading
+            XCTAssertTrue(app.staticTexts["exam-part-text"].waitForExistence(timeout: 10), app.debugDescription)
+            app.buttons["exam-submit"].tap() // Reading → Grammar
+            XCTAssertTrue(app.staticTexts["exam-context"].waitForExistence(timeout: 10), app.debugDescription)
+            app.buttons["exam-finish-part"].tap() // Grammar → Writing
+            XCTAssertTrue(app.staticTexts["exam-timer"].exists, app.debugDescription)
+            assertWritingGuidance(app, category: category, languagePoints: language,
+                                  correctnessPoints: correctness)
+            app.terminate()
+        }
     }
 
     func testPublishedListeningLoadsOfflineSegment() {

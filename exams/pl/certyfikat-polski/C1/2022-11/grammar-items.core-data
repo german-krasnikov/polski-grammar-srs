@@ -67,7 +67,7 @@ GRAMMAR_ITEM {
   itemId: certyfikat-polski-C1-2022-11-g1-q9
   testRef: certyfikat-polski-C1-2022-11-grammar-1
   questionType: fill_gap
-  context: "()"
+  context: "(30)"
   correctAnswer: trzydziestu
   pointsQuarter: 2
 }

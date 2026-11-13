@@ -4,6 +4,7 @@ import kotlin.test.Test
 import kotlin.test.assertEquals
 import kotlin.test.assertNull
 import polski.exam.data.published.EXAM_PUBLICATION_ROW_ROWS
+import polski.exam.data.published.EXAM_MODULE_ROW_ROWS
 import polski.exam.data.published.LISTENING_QUESTION_ROW_ROWS
 import polski.exam.data.published.LISTENING_TASK_ROW_ROWS
 import polski.exam.data.published.READING_PASSAGE_ROW_ROWS
@@ -67,5 +68,24 @@ class ExamPublishedModulesTest {
             assertEquals(ExamCatalog.find(published.routeId)!!.modules.single { it.module == ExamModule.Writing }.maximumQuarter,
                 writing.maximumQuarter)
         }
+    }
+
+    @Test
+    fun writingInstructionAppendsExactlyItsAuthoredCoverGuidance() {
+        val legacyInstruction = "Zestaw I, zadanie a\nDruga linia."
+        assertEquals(legacyInstruction, effectiveWritingInstruction(legacyInstruction, null))
+        var count = 0
+        for (published in EXAM_PUBLICATION_ROW_ROWS) {
+            val cover = EXAM_MODULE_ROW_ROWS.single { it.examRef == published.examRef && it.module.tag == "writing" }
+            val guidance = requireNotNull(cover.writingGuidance)
+            val source = WRITING_TASK_ROW_ROWS.filter { it.examRef == published.examRef }
+            val model = officialWritingData.getValue(published.routeId).tasks
+            for ((row, task) in source.zip(model)) {
+                assertEquals("${row.instruction}\n\n$guidance", task.instruction, row.taskId)
+                assertEquals(1, task.instruction.split(guidance).size - 1, row.taskId)
+                count++
+            }
+        }
+        assertEquals(91, count)
     }
 }

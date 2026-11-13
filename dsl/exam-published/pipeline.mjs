@@ -236,6 +236,25 @@ export async function validateSources(cli, { root = projectRoot, publication = p
       orders.add(order);
       if (durationSeconds <= 0) sourceFieldError(moduleSource.file, cover, 'durationSeconds', 'expected positive durationSeconds');
       if (maximumQuarter <= 0) sourceFieldError(moduleSource.file, cover, 'maximumQuarter', 'expected positive maximumQuarter');
+      const guidance = cover.value.writingGuidance;
+      if (guidance !== undefined) {
+        if (cover.value.module !== 'writing') {
+          sourceFieldError(moduleSource.file, cover, 'writingGuidance', 'writingGuidance belongs only on a writing cover');
+        }
+        if (!guidance.trim()) sourceFieldError(moduleSource.file, cover, 'writingGuidance', 'writingGuidance must not be blank');
+      }
+    }
+    const writingCover = covers.find(({ value }) => value.module === 'writing');
+    if (writingCover?.value.writingGuidance !== undefined) {
+      const writingSource = sources.find(({ record }) => record === 'WritingTaskRow');
+      const writingRows = writingSource
+        ? readDataText(readFileSync(writingSource.file, 'utf8'), writingSource.file, { tag: 'WRITING_TASK' }).entries
+        : [];
+      for (const task of writingRows) {
+        if (/KRYTERIA OCENY|ZASADY OCENIANIA ZADAŃ/i.test(task.value.instruction)) {
+          sourceFieldError(writingSource.file, task, 'instruction', 'duplicate writing criteria in task and cover');
+        }
+      }
     }
     for (const { record, rows, file } of sources) {
       if (record === 'ListeningTaskRow') for (const row of rows) {

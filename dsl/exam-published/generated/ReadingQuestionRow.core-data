@@ -3696,7 +3696,7 @@ READING_QUESTION {
   questionId: certyfikat-polski-B2-2024-06-r1-q1
   passageRef: certyfikat-polski-B2-2024-06-read-1
   questionType: multiple_choice
-  questionText: "Z tekstu o blokadzie drogi do lotniska dowiadujemy się, że"
+  questionText: "Z tekstu dowiadujemy się, że"
   options: "a) protestujący rolnicy będą eskortowani na lotnisko przez policję.|b) po godzinie 15:00 policjanci opuszczą miejsce rolniczego protestu.|c) klienci linii lotniczych mogą mieć problem, żeby zdążyć na swój lot."
   correctAnswer: "c) klienci linii lotniczych mogą mieć problem, żeby zdążyć na swój lot."
   pointsQuarter: 4

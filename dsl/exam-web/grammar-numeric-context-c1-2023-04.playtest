@@ -1,0 +1,9 @@
+TEST "C1 April 2023 numeric operands appear in three grammar cards" PROFILE playmode
+  open exam="C1 Certyfikat 2023-04" module="grammar"
+  advance count=2
+  ASSERT grammar.context == "(2)"
+  advance count=4
+  ASSERT grammar.context == "(300)"
+  advance count=2
+  ASSERT grammar.context == "(3)"
+END

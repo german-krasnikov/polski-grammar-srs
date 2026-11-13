@@ -1,5 +1,5 @@
 // Generated from dsl/exam.data-contract
-// source-sha256=c25663c7842effa836bb812b389b1c0384ddfb8c602fa15fdc03765737f8cfa6
+// source-sha256=d042fe012299c6328ebcf0e4cdbdb40b49b95886364fbfd07ef55064fbd4e415
 // Edit the source, then run biome generate.
 
 package polski.exam.data.published
@@ -206,6 +206,7 @@ data class ExamModuleRow(
     val order: Int,
     val durationSeconds: Int,
     val maximumQuarter: Int,
+    val writingGuidance: String? = null,
 )
 
 data class ListeningTaskRow(
@@ -823,6 +824,7 @@ private fun examModuleRowRowsPart0(): List<ExamModuleRow> = listOf(
         order = 4,
         durationSeconds = 4500,
         maximumQuarter = 120,
+        writingGuidance = "ZASADY OCENIANIA ZADAŃ Oceniane są: • wykonanie zadania 0 – 10 p. • bogactwo językowe 0 – 10 p. • poprawność językowa 0 – 10 p. RAZEM ……../ 30 p.",
     ),
     ExamModuleRow(
         moduleId = "certyfikat-polski-B1-2019-listening",
@@ -855,6 +857,7 @@ private fun examModuleRowRowsPart0(): List<ExamModuleRow> = listOf(
         order = 4,
         durationSeconds = 4500,
         maximumQuarter = 120,
+        writingGuidance = "ZASADY OCENIANIA ZADAŃ Kryteria oceny: • wykonanie zadania 0 – 10 p. • środki językowe 0 – 10 p. • poprawność językowa 0 – 10 p. RAZEM: maksymalnie 30 p.",
     ),
     ExamModuleRow(
         moduleId = "certyfikat-polski-B1-2020-listening",
@@ -887,6 +890,7 @@ private fun examModuleRowRowsPart0(): List<ExamModuleRow> = listOf(
         order = 4,
         durationSeconds = 4500,
         maximumQuarter = 120,
+        writingGuidance = "KRYTERIA OCENY • wykonanie zadania 0 – 10 p. • środki językowe 0 – 10 p. • poprawność językowa 0 – 10 p. RAZEM: maksymalnie 30 p.",
     ),
     ExamModuleRow(
         moduleId = "certyfikat-polski-B2-2017-listening",
@@ -919,6 +923,7 @@ private fun examModuleRowRowsPart0(): List<ExamModuleRow> = listOf(
         order = 4,
         durationSeconds = 5400,
         maximumQuarter = 160,
+        writingGuidance = "ZASADY OCENIANIA ZADAŃ Kryteria oceny: • wykonanie zadania (treść, długość, forma, kompozycja) 0 – 10 p. • bogactwo językowe 0 – 16 p. • poprawność językowa 0 – 14 p. RAZEM: maksymalnie 40 p.",
     ),
     ExamModuleRow(
         moduleId = "certyfikat-polski-B2-2019-listening",
@@ -951,6 +956,7 @@ private fun examModuleRowRowsPart0(): List<ExamModuleRow> = listOf(
         order = 4,
         durationSeconds = 5400,
         maximumQuarter = 160,
+        writingGuidance = "ZASADY OCENIANIA ZADAŃ Kryteria oceny: • wykonanie zadania 0 – 10 p. • środki językowe 0 – 16 p. • poprawność językowa 0 – 14 p. RAZEM: maksymalnie 40 p.",
     ),
     ExamModuleRow(
         moduleId = "certyfikat-polski-B2-2020-listening",
@@ -983,6 +989,7 @@ private fun examModuleRowRowsPart0(): List<ExamModuleRow> = listOf(
         order = 4,
         durationSeconds = 5400,
         maximumQuarter = 160,
+        writingGuidance = "KRYTERIA OCENY • wykonanie zadania 0 – 10 p. • środki językowe 0 – 16 p. • poprawność językowa 0 – 14 p. RAZEM: maksymalnie 40 p.",
     ),
     ExamModuleRow(
         moduleId = "certyfikat-polski-B2-2022-02-listening",
@@ -1015,6 +1022,7 @@ private fun examModuleRowRowsPart0(): List<ExamModuleRow> = listOf(
         order = 4,
         durationSeconds = 5400,
         maximumQuarter = 160,
+        writingGuidance = "KRYTERIA OCENY • Wykonanie zadania (treść, forma, objętość) 0 – 10 p. • Środki językowe 0 – 16 p. • poprawność językowa 0 – 14 p. RAZEM: maksymalnie 40 p.",
     ),
     ExamModuleRow(
         moduleId = "certyfikat-polski-B2-2023-02-listening",
@@ -1047,6 +1055,7 @@ private fun examModuleRowRowsPart0(): List<ExamModuleRow> = listOf(
         order = 4,
         durationSeconds = 5400,
         maximumQuarter = 160,
+        writingGuidance = "KRYTERIA OCENY • Wykonanie zadania (treść, forma, objętość) 0 – 10 p. • Środki językowe 0 – 16 p. • poprawność językowa 0 – 14 p. RAZEM: maksymalnie 40 p.",
     ),
     ExamModuleRow(
         moduleId = "certyfikat-polski-B2-2023-06-listening",
@@ -1079,6 +1088,7 @@ private fun examModuleRowRowsPart0(): List<ExamModuleRow> = listOf(
         order = 4,
         durationSeconds = 5400,
         maximumQuarter = 160,
+        writingGuidance = "KRYTERIA OCENY • Wykonanie zadania (treść, forma, objętość) 0 – 10 p. • Środki językowe 0 – 16 p. • poprawność językowa 0 – 14 p. RAZEM: maksymalnie 40 p.",
     ),
     ExamModuleRow(
         moduleId = "certyfikat-polski-B2-2024-02-listening",
@@ -1111,6 +1121,7 @@ private fun examModuleRowRowsPart0(): List<ExamModuleRow> = listOf(
         order = 4,
         durationSeconds = 5400,
         maximumQuarter = 160,
+        writingGuidance = "KRYTERIA OCENY • Wykonanie zadania (treść, forma, objętość) 0 – 10 p. • Środki językowe 0 – 16 p. • poprawność językowa 0 – 14 p. RAZEM: maksymalnie 40 p.",
     ),
     ExamModuleRow(
         moduleId = "certyfikat-polski-B2-2024-06-listening",
@@ -1143,6 +1154,7 @@ private fun examModuleRowRowsPart0(): List<ExamModuleRow> = listOf(
         order = 4,
         durationSeconds = 5400,
         maximumQuarter = 160,
+        writingGuidance = "KRYTERIA OCENY • Wykonanie zadania (treść, forma, objętość) 0 – 10 p. • Środki językowe 0 – 16 p. • poprawność językowa 0 – 14 p. RAZEM: maksymalnie 40 p.",
     ),
     ExamModuleRow(
         moduleId = "certyfikat-polski-C1-2022-03-listening",
@@ -1175,6 +1187,7 @@ private fun examModuleRowRowsPart0(): List<ExamModuleRow> = listOf(
         order = 4,
         durationSeconds = 5400,
         maximumQuarter = 160,
+        writingGuidance = "KRYTERIA OCENY • Wykonanie zadania (treść, forma, objętość) 0 – 10 p. • Środki językowe 0 – 18 p. • poprawność językowa 0 – 12 p. RAZEM: maksymalnie 40 p.",
     ),
     ExamModuleRow(
         moduleId = "certyfikat-polski-C1-2022-11-listening",
@@ -1207,6 +1220,7 @@ private fun examModuleRowRowsPart0(): List<ExamModuleRow> = listOf(
         order = 4,
         durationSeconds = 5400,
         maximumQuarter = 160,
+        writingGuidance = "KRYTERIA OCENY • Wykonanie zadania (treść, forma, objętość) 0 – 10 p. • Środki językowe 0 – 18 p. • poprawność językowa 0 – 12 p. RAZEM: maksymalnie 40 p.",
     ),
     ExamModuleRow(
         moduleId = "certyfikat-polski-C1-2023-04-listening",
@@ -1239,6 +1253,7 @@ private fun examModuleRowRowsPart0(): List<ExamModuleRow> = listOf(
         order = 4,
         durationSeconds = 5400,
         maximumQuarter = 160,
+        writingGuidance = "KRYTERIA OCENY • Wykonanie zadania (treść, forma, objętość) 0 – 10 p. • Środki językowe 0 – 18 p. • poprawność językowa 0 – 12 p. RAZEM: maksymalnie 40 p.",
     ),
     ExamModuleRow(
         moduleId = "certyfikat-polski-C1-2023-11-listening",
@@ -1271,6 +1286,7 @@ private fun examModuleRowRowsPart0(): List<ExamModuleRow> = listOf(
         order = 4,
         durationSeconds = 5400,
         maximumQuarter = 160,
+        writingGuidance = "KRYTERIA OCENY • Wykonanie zadania (treść, forma, objętość) 0 – 10 p. • Środki językowe 0 – 18 p. • poprawność językowa 0 – 12 p. RAZEM: maksymalnie 40 p.",
     ),
     ExamModuleRow(
         moduleId = "certyfikat-polski-C1-2024-04-listening",
@@ -1303,6 +1319,7 @@ private fun examModuleRowRowsPart0(): List<ExamModuleRow> = listOf(
         order = 4,
         durationSeconds = 5400,
         maximumQuarter = 160,
+        writingGuidance = "KRYTERIA OCENY • Wykonanie zadania (treść, forma, objętość) 0 – 10 p. • Środki językowe 0 – 18 p. • poprawność językowa 0 – 12 p. RAZEM: maksymalnie 40 p.",
     ),
 )
 
@@ -5491,7 +5508,7 @@ private fun listeningQuestionRowRowsPart2(): List<ListeningQuestionRow> = listOf
         taskRef = "certyfikat-polski-B2-2024-02-listen-5",
         questionType = ListeningQuestionRowQuestionType.FILL_GAP,
         questionText = "W jaki sposób zorientowano się, że bobry zniszczyły drogę?",
-        correctAnswer = "(Na drodze) zapadł się asfalt.",
+        correctAnswer = "Zapadł się asfalt.",
         pointsQuarter = 4,
         gradingMode = ListeningQuestionRowGradingMode.OPEN_MANUAL,
     ),
@@ -5500,7 +5517,7 @@ private fun listeningQuestionRowRowsPart2(): List<ListeningQuestionRow> = listOf
         taskRef = "certyfikat-polski-B2-2024-02-listen-5",
         questionType = ListeningQuestionRowQuestionType.FILL_GAP,
         questionText = "Co odkrył nadzór budowlany pod powierzchnią jezdni?",
-        correctAnswer = "Sieć korytarzy/tuneli (zbudowanych przez bobry).",
+        correctAnswer = "Sieć korytarzy.",
         pointsQuarter = 4,
         gradingMode = ListeningQuestionRowGradingMode.OPEN_MANUAL,
     ),
@@ -7841,6 +7858,12 @@ private fun listeningAnswerVariantRowRowsPart0(): List<ListeningAnswerVariantRow
         earnedQuarter = 4,
     ),
     ListeningAnswerVariantRow(
+        variantId = "certyfikat-polski-B2-2024-02-l5-q1-v2",
+        questionRef = "certyfikat-polski-B2-2024-02-l5-q1",
+        answer = "Na drodze zapadł się asfalt.",
+        earnedQuarter = 4,
+    ),
+    ListeningAnswerVariantRow(
         variantId = "certyfikat-polski-B2-2024-02-l5-q2-v1",
         questionRef = "certyfikat-polski-B2-2024-02-l5-q2",
         answer = "labirynt",
@@ -7856,6 +7879,24 @@ private fun listeningAnswerVariantRowRowsPart0(): List<ListeningAnswerVariantRow
         variantId = "certyfikat-polski-B2-2024-02-l5-q2-v3",
         questionRef = "certyfikat-polski-B2-2024-02-l5-q2",
         answer = "podziemne tunele",
+        earnedQuarter = 4,
+    ),
+    ListeningAnswerVariantRow(
+        variantId = "certyfikat-polski-B2-2024-02-l5-q2-v4",
+        questionRef = "certyfikat-polski-B2-2024-02-l5-q2",
+        answer = "Sieć tuneli.",
+        earnedQuarter = 4,
+    ),
+    ListeningAnswerVariantRow(
+        variantId = "certyfikat-polski-B2-2024-02-l5-q2-v5",
+        questionRef = "certyfikat-polski-B2-2024-02-l5-q2",
+        answer = "Sieć korytarzy zbudowanych przez bobry.",
+        earnedQuarter = 4,
+    ),
+    ListeningAnswerVariantRow(
+        variantId = "certyfikat-polski-B2-2024-02-l5-q2-v6",
+        questionRef = "certyfikat-polski-B2-2024-02-l5-q2",
+        answer = "Sieć tuneli zbudowanych przez bobry.",
         earnedQuarter = 4,
     ),
     ListeningAnswerVariantRow(
@@ -12886,7 +12927,7 @@ private fun readingQuestionRowRowsPart2(): List<ReadingQuestionRow> = listOf(
         questionId = "certyfikat-polski-B2-2024-06-r1-q1",
         passageRef = "certyfikat-polski-B2-2024-06-read-1",
         questionType = ReadingQuestionRowQuestionType.MULTIPLE_CHOICE,
-        questionText = "Z tekstu o blokadzie drogi do lotniska dowiadujemy się, że",
+        questionText = "Z tekstu dowiadujemy się, że",
         options = "a) protestujący rolnicy będą eskortowani na lotnisko przez policję.|b) po godzinie 15:00 policjanci opuszczą miejsce rolniczego protestu.|c) klienci linii lotniczych mogą mieć problem, żeby zdążyć na swój lot.",
         correctAnswer = "c) klienci linii lotniczych mogą mieć problem, żeby zdążyć na swój lot.",
         pointsQuarter = 4,
@@ -17795,6 +17836,7 @@ private fun grammarItemRowRowsPart0(): List<GrammarItemRow> = listOf(
         context = "Ewelina nie wie, kim jest ta pani. (zna) → ___",
         correctAnswer = "Ewelina nie zna tej pani.",
         pointsQuarter = 4,
+        gradingMode = GrammarItemRowGradingMode.OPEN_MANUAL,
     ),
     GrammarItemRow(
         itemId = "B1-2017-g7-2",
@@ -17803,6 +17845,7 @@ private fun grammarItemRowRowsPart0(): List<GrammarItemRow> = listOf(
         context = "Jestem starszy niż ty. (od) → ___",
         correctAnswer = "Jestem starszy od ciebie.",
         pointsQuarter = 4,
+        gradingMode = GrammarItemRowGradingMode.OPEN_MANUAL,
     ),
     GrammarItemRow(
         itemId = "B1-2017-g7-3",
@@ -17811,6 +17854,7 @@ private fun grammarItemRowRowsPart0(): List<GrammarItemRow> = listOf(
         context = "Magdę interesują stare fotografie. (interesuje się) → ___",
         correctAnswer = "Magda interesuje się starymi fotografiami.",
         pointsQuarter = 4,
+        gradingMode = GrammarItemRowGradingMode.OPEN_MANUAL,
     ),
     GrammarItemRow(
         itemId = "B1-2017-g7-4",
@@ -17819,6 +17863,7 @@ private fun grammarItemRowRowsPart0(): List<GrammarItemRow> = listOf(
         context = "Michel jest francuskim studentem. (to) → ___",
         correctAnswer = "Michel to francuski student.",
         pointsQuarter = 4,
+        gradingMode = GrammarItemRowGradingMode.OPEN_MANUAL,
     ),
     GrammarItemRow(
         itemId = "B1-2017-g7-5",
@@ -17827,6 +17872,7 @@ private fun grammarItemRowRowsPart0(): List<GrammarItemRow> = listOf(
         context = "Jak nazywa się autor tej powieści? (napisał) → ___",
         correctAnswer = "Kto napisał tę powieść.",
         pointsQuarter = 4,
+        gradingMode = GrammarItemRowGradingMode.OPEN_MANUAL,
     ),
     GrammarItemRow(
         itemId = "B1-2019-g1",
@@ -19086,6 +19132,9 @@ private fun grammarItemRowRowsPart0(): List<GrammarItemRow> = listOf(
         correctAnswer = "mieście",
         pointsQuarter = 2,
     ),
+)
+
+private fun grammarItemRowRowsPart1(): List<GrammarItemRow> = listOf(
     GrammarItemRow(
         itemId = "certyfikat-polski-B2-2017-grammar-4-7",
         testRef = "certyfikat-polski-B2-2017-grammar-4",
@@ -19094,9 +19143,6 @@ private fun grammarItemRowRowsPart0(): List<GrammarItemRow> = listOf(
         correctAnswer = "zmęczeni",
         pointsQuarter = 2,
     ),
-)
-
-private fun grammarItemRowRowsPart1(): List<GrammarItemRow> = listOf(
     GrammarItemRow(
         itemId = "certyfikat-polski-B2-2017-grammar-4-8",
         testRef = "certyfikat-polski-B2-2017-grammar-4",
@@ -20788,6 +20834,9 @@ private fun grammarItemRowRowsPart1(): List<GrammarItemRow> = listOf(
         correctAnswer = "rozebrano",
         pointsQuarter = 2,
     ),
+)
+
+private fun grammarItemRowRowsPart2(): List<GrammarItemRow> = listOf(
     GrammarItemRow(
         itemId = "certyfikat-polski-B2-2022-02-g3-q4",
         testRef = "certyfikat-polski-B2-2022-02-grammar-3",
@@ -20797,9 +20846,6 @@ private fun grammarItemRowRowsPart1(): List<GrammarItemRow> = listOf(
         correctAnswer = "uznaje się",
         pointsQuarter = 2,
     ),
-)
-
-private fun grammarItemRowRowsPart2(): List<GrammarItemRow> = listOf(
     GrammarItemRow(
         itemId = "certyfikat-polski-B2-2022-02-g3-q5",
         testRef = "certyfikat-polski-B2-2022-02-grammar-3",
@@ -22490,6 +22536,9 @@ private fun grammarItemRowRowsPart2(): List<GrammarItemRow> = listOf(
         pointsQuarter = 4,
         gradingMode = GrammarItemRowGradingMode.OPEN_MANUAL,
     ),
+)
+
+private fun grammarItemRowRowsPart3(): List<GrammarItemRow> = listOf(
     GrammarItemRow(
         itemId = "certyfikat-polski-B2-2023-06-g8-q5",
         testRef = "certyfikat-polski-B2-2023-06-grammar-8",
@@ -22499,9 +22548,6 @@ private fun grammarItemRowRowsPart2(): List<GrammarItemRow> = listOf(
         pointsQuarter = 4,
         gradingMode = GrammarItemRowGradingMode.OPEN_MANUAL,
     ),
-)
-
-private fun grammarItemRowRowsPart3(): List<GrammarItemRow> = listOf(
     GrammarItemRow(
         itemId = "certyfikat-polski-B2-2024-02-g1-q1",
         testRef = "certyfikat-polski-B2-2024-02-grammar-1",
@@ -23776,7 +23822,7 @@ private fun grammarItemRowRowsPart3(): List<GrammarItemRow> = listOf(
         itemId = "certyfikat-polski-C1-2022-03-g1-q1",
         testRef = "certyfikat-polski-C1-2022-03-grammar-1",
         questionType = GrammarItemRowQuestionType.FILL_GAP,
-        context = "()",
+        context = "(3)",
         correctAnswer = "trzema",
         pointsQuarter = 2,
     ),
@@ -23824,7 +23870,7 @@ private fun grammarItemRowRowsPart3(): List<GrammarItemRow> = listOf(
         itemId = "certyfikat-polski-C1-2022-03-g1-q7",
         testRef = "certyfikat-polski-C1-2022-03-grammar-1",
         questionType = GrammarItemRowQuestionType.FILL_GAP,
-        context = "()",
+        context = "(40)",
         correctAnswer = "czterdzieści",
         pointsQuarter = 2,
     ),
@@ -24193,6 +24239,9 @@ private fun grammarItemRowRowsPart3(): List<GrammarItemRow> = listOf(
         correctAnswer = "zalegających",
         pointsQuarter = 2,
     ),
+)
+
+private fun grammarItemRowRowsPart4(): List<GrammarItemRow> = listOf(
     GrammarItemRow(
         itemId = "certyfikat-polski-C1-2022-03-g6-q8",
         testRef = "certyfikat-polski-C1-2022-03-grammar-6",
@@ -24201,9 +24250,6 @@ private fun grammarItemRowRowsPart3(): List<GrammarItemRow> = listOf(
         correctAnswer = "oddający",
         pointsQuarter = 2,
     ),
-)
-
-private fun grammarItemRowRowsPart4(): List<GrammarItemRow> = listOf(
     GrammarItemRow(
         itemId = "certyfikat-polski-C1-2022-03-g6-q9",
         testRef = "certyfikat-polski-C1-2022-03-grammar-6",
@@ -24448,7 +24494,7 @@ private fun grammarItemRowRowsPart4(): List<GrammarItemRow> = listOf(
         itemId = "certyfikat-polski-C1-2022-11-g1-q9",
         testRef = "certyfikat-polski-C1-2022-11-grammar-1",
         questionType = GrammarItemRowQuestionType.FILL_GAP,
-        context = "()",
+        context = "(30)",
         correctAnswer = "trzydziestu",
         pointsQuarter = 2,
     ),
@@ -25005,7 +25051,7 @@ private fun grammarItemRowRowsPart4(): List<GrammarItemRow> = listOf(
         itemId = "certyfikat-polski-C1-2023-04-g1-q3",
         testRef = "certyfikat-polski-C1-2023-04-grammar-1",
         questionType = GrammarItemRowQuestionType.FILL_GAP,
-        context = "()",
+        context = "(2)",
         correctAnswer = "dwoma",
         pointsQuarter = 2,
     ),
@@ -25037,7 +25083,7 @@ private fun grammarItemRowRowsPart4(): List<GrammarItemRow> = listOf(
         itemId = "certyfikat-polski-C1-2023-04-g1-q7",
         testRef = "certyfikat-polski-C1-2023-04-grammar-1",
         questionType = GrammarItemRowQuestionType.FILL_GAP,
-        context = "()",
+        context = "(300)",
         correctAnswer = "trzystu",
         pointsQuarter = 2,
     ),
@@ -25053,7 +25099,7 @@ private fun grammarItemRowRowsPart4(): List<GrammarItemRow> = listOf(
         itemId = "certyfikat-polski-C1-2023-04-g1-q9",
         testRef = "certyfikat-polski-C1-2023-04-grammar-1",
         questionType = GrammarItemRowQuestionType.FILL_GAP,
-        context = "()",
+        context = "(3)",
         correctAnswer = "Trzem",
         pointsQuarter = 2,
     ),
@@ -25594,7 +25640,7 @@ private fun grammarItemRowRowsPart4(): List<GrammarItemRow> = listOf(
         itemId = "certyfikat-polski-C1-2023-11-g1-q1",
         testRef = "certyfikat-polski-C1-2023-11-grammar-1",
         questionType = GrammarItemRowQuestionType.FILL_GAP,
-        context = "()",
+        context = "(300)",
         correctAnswer = "trzystu",
         pointsQuarter = 2,
     ),
@@ -25618,7 +25664,7 @@ private fun grammarItemRowRowsPart4(): List<GrammarItemRow> = listOf(
         itemId = "certyfikat-polski-C1-2023-11-g1-q4",
         testRef = "certyfikat-polski-C1-2023-11-grammar-1",
         questionType = GrammarItemRowQuestionType.FILL_GAP,
-        context = "()",
+        context = "(4)",
         correctAnswer = "czworga",
         pointsQuarter = 2,
     ),
@@ -25634,7 +25680,7 @@ private fun grammarItemRowRowsPart4(): List<GrammarItemRow> = listOf(
         itemId = "certyfikat-polski-C1-2023-11-g1-q6",
         testRef = "certyfikat-polski-C1-2023-11-grammar-1",
         questionType = GrammarItemRowQuestionType.FILL_GAP,
-        context = "()",
+        context = "(50)",
         correctAnswer = "pięćdziesięciu",
         pointsQuarter = 2,
     ),
@@ -25650,7 +25696,7 @@ private fun grammarItemRowRowsPart4(): List<GrammarItemRow> = listOf(
         itemId = "certyfikat-polski-C1-2023-11-g1-q8",
         testRef = "certyfikat-polski-C1-2023-11-grammar-1",
         questionType = GrammarItemRowQuestionType.FILL_GAP,
-        context = "()",
+        context = "(10)",
         correctAnswer = "dziesięciu",
         pointsQuarter = 2,
     ),
@@ -25907,6 +25953,9 @@ private fun grammarItemRowRowsPart4(): List<GrammarItemRow> = listOf(
         correctAnswer = "w tym także",
         pointsQuarter = 2,
     ),
+)
+
+private fun grammarItemRowRowsPart5(): List<GrammarItemRow> = listOf(
     GrammarItemRow(
         itemId = "certyfikat-polski-C1-2023-11-g5-q5",
         testRef = "certyfikat-polski-C1-2023-11-grammar-5",
@@ -25915,9 +25964,6 @@ private fun grammarItemRowRowsPart4(): List<GrammarItemRow> = listOf(
         correctAnswer = "co",
         pointsQuarter = 2,
     ),
-)
-
-private fun grammarItemRowRowsPart5(): List<GrammarItemRow> = listOf(
     GrammarItemRow(
         itemId = "certyfikat-polski-C1-2023-11-g5-q6",
         testRef = "certyfikat-polski-C1-2023-11-grammar-5",
@@ -27621,6 +27667,33 @@ val GRAMMAR_RUBRIC_COMPONENT_ROW_ROWS: List<GrammarRubricComponentRow> = grammar
 
 private fun grammarAnswerPairRowRowsPart0(): List<GrammarAnswerPairRow> = listOf(
     GrammarAnswerPairRow(
+        pairId = "certyfikat-polski-C1-2022-11-g1-pair-1",
+        firstItemRef = "certyfikat-polski-C1-2022-11-g1-q9",
+        firstAnswer = "trzydziestu",
+        secondItemRef = "certyfikat-polski-C1-2022-11-g1-q10",
+        secondAnswer = "rozbitkami",
+        firstEarnedQuarter = 2,
+        secondEarnedQuarter = 2,
+    ),
+    GrammarAnswerPairRow(
+        pairId = "certyfikat-polski-C1-2022-11-g1-pair-2",
+        firstItemRef = "certyfikat-polski-C1-2022-11-g1-q9",
+        firstAnswer = "trzydziestoma",
+        secondItemRef = "certyfikat-polski-C1-2022-11-g1-q10",
+        secondAnswer = "rozbitkami",
+        firstEarnedQuarter = 2,
+        secondEarnedQuarter = 2,
+    ),
+    GrammarAnswerPairRow(
+        pairId = "certyfikat-polski-C1-2022-11-g1-pair-3",
+        firstItemRef = "certyfikat-polski-C1-2022-11-g1-q9",
+        firstAnswer = "trzydzieściorgiem",
+        secondItemRef = "certyfikat-polski-C1-2022-11-g1-q10",
+        secondAnswer = "rozbitków",
+        firstEarnedQuarter = 2,
+        secondEarnedQuarter = 2,
+    ),
+    GrammarAnswerPairRow(
         pairId = "certyfikat-polski-C1-2024-04-g1-pair-1",
         firstItemRef = "certyfikat-polski-C1-2024-04-g1-q8",
         firstAnswer = "kilku",
@@ -28427,7 +28500,7 @@ private fun writingTaskRowRowsPart0(): List<WritingTaskRow> = listOf(
         examRef = "certyfikat-polski-C1-2023-04",
         taskNumber = 1,
         setId = "I",
-        instruction = "INSTRUKCJA WYKONANIA ZADAŃ W tej części egzaminu znajdują się trzy zestawy. Zestawy I i II zawierają dwa zadania: a i b; zestaw III – jedno zadanie. Należy wybrać tylko jeden zestaw i wykonać zadania (zadanie) w tym zestawie, zgodnie z poleceniami, np.: • zestaw I – dwa zadania (a i b) z zestawu I lub • zestaw II – dwa zadania (a i b) z zestawu II lub • zestaw III – jedno zadanie (a) z zestawu III KRYTERIA OCENY • Wykonanie zadania (treść, forma, objętość) 0 – 10 p. • Środki językowe 0 – 18 p. • Poprawność językowa 0 – 12 p. RAZEM: maksymalnie 40 p. PISANIE",
+        instruction = "INSTRUKCJA WYKONANIA ZADAŃ W tej części egzaminu znajdują się trzy zestawy. Zestawy I i II zawierają dwa zadania: a i b; zestaw III – jedno zadanie. Należy wybrać tylko jeden zestaw i wykonać zadania (zadanie) w tym zestawie, zgodnie z poleceniami, np.: • zestaw I – dwa zadania (a i b) z zestawu I lub • zestaw II – dwa zadania (a i b) z zestawu II lub • zestaw III – jedno zadanie (a) z zestawu III",
         promptText = "Otwiera Pani/Pan w Polsce klub fitness/restaurację. Proszę napisać reklamę tego miejsca, którą zamieści Pani/Pan w internecie.",
         wordLimit = 80,
         genre = WritingTaskRowGenre.ADVERTISEMENT,
@@ -28437,7 +28510,7 @@ private fun writingTaskRowRowsPart0(): List<WritingTaskRow> = listOf(
         examRef = "certyfikat-polski-C1-2023-04",
         taskNumber = 1,
         setId = "I",
-        instruction = "INSTRUKCJA WYKONANIA ZADAŃ W tej części egzaminu znajdują się trzy zestawy. Zestawy I i II zawierają dwa zadania: a i b; zestaw III – jedno zadanie. Należy wybrać tylko jeden zestaw i wykonać zadania (zadanie) w tym zestawie, zgodnie z poleceniami, np.: • zestaw I – dwa zadania (a i b) z zestawu I lub • zestaw II – dwa zadania (a i b) z zestawu II lub • zestaw III – jedno zadanie (a) z zestawu III KRYTERIA OCENY • Wykonanie zadania (treść, forma, objętość) 0 – 10 p. • Środki językowe 0 – 18 p. • Poprawność językowa 0 – 12 p. RAZEM: maksymalnie 40 p. PISANIE",
+        instruction = "INSTRUKCJA WYKONANIA ZADAŃ W tej części egzaminu znajdują się trzy zestawy. Zestawy I i II zawierają dwa zadania: a i b; zestaw III – jedno zadanie. Należy wybrać tylko jeden zestaw i wykonać zadania (zadanie) w tym zestawie, zgodnie z poleceniami, np.: • zestaw I – dwa zadania (a i b) z zestawu I lub • zestaw II – dwa zadania (a i b) z zestawu II lub • zestaw III – jedno zadanie (a) z zestawu III",
         promptText = "„Ziarnko do ziarnka zbierając, do niczego nie dojdziesz, chyba żebyś żył kilkaset lat” (Stefan Kisielewski). Czy zgadza się Pani/Pan z tym stwierdzeniem? Proszę napisać tekst argumentacyjny (rozprawkę), w którym wyrazi Pani/Pan swoją opinię.",
         wordLimit = 320,
         genre = WritingTaskRowGenre.ARGUMENT,
@@ -28447,7 +28520,7 @@ private fun writingTaskRowRowsPart0(): List<WritingTaskRow> = listOf(
         examRef = "certyfikat-polski-C1-2023-04",
         taskNumber = 2,
         setId = "II",
-        instruction = "INSTRUKCJA WYKONANIA ZADAŃ W tej części egzaminu znajdują się trzy zestawy. Zestawy I i II zawierają dwa zadania: a i b; zestaw III – jedno zadanie. Należy wybrać tylko jeden zestaw i wykonać zadania (zadanie) w tym zestawie, zgodnie z poleceniami, np.: • zestaw I – dwa zadania (a i b) z zestawu I lub • zestaw II – dwa zadania (a i b) z zestawu II lub • zestaw III – jedno zadanie (a) z zestawu III KRYTERIA OCENY • Wykonanie zadania (treść, forma, objętość) 0 – 10 p. • Środki językowe 0 – 18 p. • Poprawność językowa 0 – 12 p. RAZEM: maksymalnie 40 p. PISANIE",
+        instruction = "INSTRUKCJA WYKONANIA ZADAŃ W tej części egzaminu znajdują się trzy zestawy. Zestawy I i II zawierają dwa zadania: a i b; zestaw III – jedno zadanie. Należy wybrać tylko jeden zestaw i wykonać zadania (zadanie) w tym zestawie, zgodnie z poleceniami, np.: • zestaw I – dwa zadania (a i b) z zestawu I lub • zestaw II – dwa zadania (a i b) z zestawu II lub • zestaw III – jedno zadanie (a) z zestawu III",
         promptText = "Jest Pani/Pan w sanatorium w jednej z polskich miejscowości uzdrowiskowych. Nie jest Pani zadowolona / Pan zadowolony z pobytu (m.in. z mieszkania, wyżywienia, opieki medycznej, zabiegów). Proszę napisać w tej sprawie e-mail (skargę) do dyrektora placówki.",
         wordLimit = 200,
         genre = WritingTaskRowGenre.EMAIL,
@@ -28457,7 +28530,7 @@ private fun writingTaskRowRowsPart0(): List<WritingTaskRow> = listOf(
         examRef = "certyfikat-polski-C1-2023-04",
         taskNumber = 2,
         setId = "II",
-        instruction = "INSTRUKCJA WYKONANIA ZADAŃ W tej części egzaminu znajdują się trzy zestawy. Zestawy I i II zawierają dwa zadania: a i b; zestaw III – jedno zadanie. Należy wybrać tylko jeden zestaw i wykonać zadania (zadanie) w tym zestawie, zgodnie z poleceniami, np.: • zestaw I – dwa zadania (a i b) z zestawu I lub • zestaw II – dwa zadania (a i b) z zestawu II lub • zestaw III – jedno zadanie (a) z zestawu III KRYTERIA OCENY • Wykonanie zadania (treść, forma, objętość) 0 – 10 p. • Środki językowe 0 – 18 p. • Poprawność językowa 0 – 12 p. RAZEM: maksymalnie 40 p. PISANIE",
+        instruction = "INSTRUKCJA WYKONANIA ZADAŃ W tej części egzaminu znajdują się trzy zestawy. Zestawy I i II zawierają dwa zadania: a i b; zestaw III – jedno zadanie. Należy wybrać tylko jeden zestaw i wykonać zadania (zadanie) w tym zestawie, zgodnie z poleceniami, np.: • zestaw I – dwa zadania (a i b) z zestawu I lub • zestaw II – dwa zadania (a i b) z zestawu II lub • zestaw III – jedno zadanie (a) z zestawu III",
         promptText = "W celu uzyskania uprawnień opiekuna zwierząt uczestniczyła Pani / uczestniczył Pan w szkoleniu organizowanym przez jedną z polskich fundacji ratującej życie koniom i osłom. Proszę napisać sprawozdanie z tego kursu na prośbę redakcji czasopisma „Człowiek i Natura”, z którą Pani/Pan współpracuje.",
         wordLimit = 200,
         genre = WritingTaskRowGenre.REPORT,
@@ -28467,7 +28540,7 @@ private fun writingTaskRowRowsPart0(): List<WritingTaskRow> = listOf(
         examRef = "certyfikat-polski-C1-2023-04",
         taskNumber = 3,
         setId = "III",
-        instruction = "INSTRUKCJA WYKONANIA ZADAŃ W tej części egzaminu znajdują się trzy zestawy. Zestawy I i II zawierają dwa zadania: a i b; zestaw III – jedno zadanie. Należy wybrać tylko jeden zestaw i wykonać zadania (zadanie) w tym zestawie, zgodnie z poleceniami, np.: • zestaw I – dwa zadania (a i b) z zestawu I lub • zestaw II – dwa zadania (a i b) z zestawu II lub • zestaw III – jedno zadanie (a) z zestawu III KRYTERIA OCENY • Wykonanie zadania (treść, forma, objętość) 0 – 10 p. • Środki językowe 0 – 18 p. • Poprawność językowa 0 – 12 p. RAZEM: maksymalnie 40 p. PISANIE",
+        instruction = "INSTRUKCJA WYKONANIA ZADAŃ W tej części egzaminu znajdują się trzy zestawy. Zestawy I i II zawierają dwa zadania: a i b; zestaw III – jedno zadanie. Należy wybrać tylko jeden zestaw i wykonać zadania (zadanie) w tym zestawie, zgodnie z poleceniami, np.: • zestaw I – dwa zadania (a i b) z zestawu I lub • zestaw II – dwa zadania (a i b) z zestawu II lub • zestaw III – jedno zadanie (a) z zestawu III",
         promptText = "„Prawdziwy sportowiec walczy do końca. Nawet jeśli wie, że dobiegnie na metę ostatni, nie przestaje biec” (Małgorzata Wach). Proszę napisać esej zainspirowany tym cytatem.",
         wordLimit = 400,
         genre = WritingTaskRowGenre.ESSAY,
@@ -28477,7 +28550,7 @@ private fun writingTaskRowRowsPart0(): List<WritingTaskRow> = listOf(
         examRef = "certyfikat-polski-C1-2023-11",
         taskNumber = 1,
         setId = "I",
-        instruction = "INSTRUKCJA WYKONANIA ZADAŃ W tej części egzaminu znajdują się trzy zestawy. Zestawy I i II zawierają dwa zadania: a i b; zestaw III – jedno zadanie. Należy wybrać tylko jeden zestaw i wykonać zadania (zadanie) w tym zestawie, zgodnie z poleceniami, np.: • zestaw I – dwa zadania (a i b) z zestawu I lub • zestaw II – dwa zadania (a i b) z zestawu II lub • zestaw III – jedno zadanie (a) z zestawu III KRYTERIA OCENY • Wykonanie zadania (treść, forma, objętość) 0 – 10 p. • Środki językowe 0 – 18 p. • Poprawność językowa 0 – 12 p. RAZEM: maksymalnie 40 p. PISANIE",
+        instruction = "INSTRUKCJA WYKONANIA ZADAŃ W tej części egzaminu znajdują się trzy zestawy. Zestawy I i II zawierają dwa zadania: a i b; zestaw III – jedno zadanie. Należy wybrać tylko jeden zestaw i wykonać zadania (zadanie) w tym zestawie, zgodnie z poleceniami, np.: • zestaw I – dwa zadania (a i b) z zestawu I lub • zestaw II – dwa zadania (a i b) z zestawu II lub • zestaw III – jedno zadanie (a) z zestawu III",
         promptText = "Zmienia Pani/Pan pracę ze względu na przeprowadzkę do innego miasta. Proszę napisać pożegnalny e-mail do swoich dotychczasowych współpracowników z Polski.",
         wordLimit = 80,
         genre = WritingTaskRowGenre.EMAIL,
@@ -28487,7 +28560,7 @@ private fun writingTaskRowRowsPart0(): List<WritingTaskRow> = listOf(
         examRef = "certyfikat-polski-C1-2023-11",
         taskNumber = 1,
         setId = "I",
-        instruction = "INSTRUKCJA WYKONANIA ZADAŃ W tej części egzaminu znajdują się trzy zestawy. Zestawy I i II zawierają dwa zadania: a i b; zestaw III – jedno zadanie. Należy wybrać tylko jeden zestaw i wykonać zadania (zadanie) w tym zestawie, zgodnie z poleceniami, np.: • zestaw I – dwa zadania (a i b) z zestawu I lub • zestaw II – dwa zadania (a i b) z zestawu II lub • zestaw III – jedno zadanie (a) z zestawu III KRYTERIA OCENY • Wykonanie zadania (treść, forma, objętość) 0 – 10 p. • Środki językowe 0 – 18 p. • Poprawność językowa 0 – 12 p. RAZEM: maksymalnie 40 p. PISANIE",
+        instruction = "INSTRUKCJA WYKONANIA ZADAŃ W tej części egzaminu znajdują się trzy zestawy. Zestawy I i II zawierają dwa zadania: a i b; zestaw III – jedno zadanie. Należy wybrać tylko jeden zestaw i wykonać zadania (zadanie) w tym zestawie, zgodnie z poleceniami, np.: • zestaw I – dwa zadania (a i b) z zestawu I lub • zestaw II – dwa zadania (a i b) z zestawu II lub • zestaw III – jedno zadanie (a) z zestawu III",
         promptText = "Proszę napisać opowiadanie zaczynające się od słów: „Nigdy nie sądziłam / nie sądziłem, że zwykła pomyłka telefoniczna całkowicie odmieni moje życie…”.",
         wordLimit = 320,
         genre = WritingTaskRowGenre.STORY,
@@ -28497,7 +28570,7 @@ private fun writingTaskRowRowsPart0(): List<WritingTaskRow> = listOf(
         examRef = "certyfikat-polski-C1-2023-11",
         taskNumber = 2,
         setId = "II",
-        instruction = "INSTRUKCJA WYKONANIA ZADAŃ W tej części egzaminu znajdują się trzy zestawy. Zestawy I i II zawierają dwa zadania: a i b; zestaw III – jedno zadanie. Należy wybrać tylko jeden zestaw i wykonać zadania (zadanie) w tym zestawie, zgodnie z poleceniami, np.: • zestaw I – dwa zadania (a i b) z zestawu I lub • zestaw II – dwa zadania (a i b) z zestawu II lub • zestaw III – jedno zadanie (a) z zestawu III KRYTERIA OCENY • Wykonanie zadania (treść, forma, objętość) 0 – 10 p. • Środki językowe 0 – 18 p. • Poprawność językowa 0 – 12 p. RAZEM: maksymalnie 40 p. PISANIE",
+        instruction = "INSTRUKCJA WYKONANIA ZADAŃ W tej części egzaminu znajdują się trzy zestawy. Zestawy I i II zawierają dwa zadania: a i b; zestaw III – jedno zadanie. Należy wybrać tylko jeden zestaw i wykonać zadania (zadanie) w tym zestawie, zgodnie z poleceniami, np.: • zestaw I – dwa zadania (a i b) z zestawu I lub • zestaw II – dwa zadania (a i b) z zestawu II lub • zestaw III – jedno zadanie (a) z zestawu III",
         promptText = "„Ta książka wywołuje wiele emocji”. Proszę napisać recenzję o takim tytule, którą zamieści Pani/Pan na stronie internetowej wydawnictwa.",
         wordLimit = 200,
         genre = WritingTaskRowGenre.REVIEW,
@@ -28507,7 +28580,7 @@ private fun writingTaskRowRowsPart0(): List<WritingTaskRow> = listOf(
         examRef = "certyfikat-polski-C1-2023-11",
         taskNumber = 2,
         setId = "II",
-        instruction = "INSTRUKCJA WYKONANIA ZADAŃ W tej części egzaminu znajdują się trzy zestawy. Zestawy I i II zawierają dwa zadania: a i b; zestaw III – jedno zadanie. Należy wybrać tylko jeden zestaw i wykonać zadania (zadanie) w tym zestawie, zgodnie z poleceniami, np.: • zestaw I – dwa zadania (a i b) z zestawu I lub • zestaw II – dwa zadania (a i b) z zestawu II lub • zestaw III – jedno zadanie (a) z zestawu III KRYTERIA OCENY • Wykonanie zadania (treść, forma, objętość) 0 – 10 p. • Środki językowe 0 – 18 p. • Poprawność językowa 0 – 12 p. RAZEM: maksymalnie 40 p. PISANIE",
+        instruction = "INSTRUKCJA WYKONANIA ZADAŃ W tej części egzaminu znajdują się trzy zestawy. Zestawy I i II zawierają dwa zadania: a i b; zestaw III – jedno zadanie. Należy wybrać tylko jeden zestaw i wykonać zadania (zadanie) w tym zestawie, zgodnie z poleceniami, np.: • zestaw I – dwa zadania (a i b) z zestawu I lub • zestaw II – dwa zadania (a i b) z zestawu II lub • zestaw III – jedno zadanie (a) z zestawu III",
         promptText = "Prowadzi Pani/Pan w swojej miejscowości klub dla seniorów i potrzebuje dodatkowych funduszy na poszerzenie jego oferty. Proszę napisać w tej sprawie list do właściciela lokalnej firmy, znanego z działalności charytatywnej.",
         wordLimit = 200,
         genre = WritingTaskRowGenre.LETTER,
@@ -28517,7 +28590,7 @@ private fun writingTaskRowRowsPart0(): List<WritingTaskRow> = listOf(
         examRef = "certyfikat-polski-C1-2023-11",
         taskNumber = 3,
         setId = "III",
-        instruction = "INSTRUKCJA WYKONANIA ZADAŃ W tej części egzaminu znajdują się trzy zestawy. Zestawy I i II zawierają dwa zadania: a i b; zestaw III – jedno zadanie. Należy wybrać tylko jeden zestaw i wykonać zadania (zadanie) w tym zestawie, zgodnie z poleceniami, np.: • zestaw I – dwa zadania (a i b) z zestawu I lub • zestaw II – dwa zadania (a i b) z zestawu II lub • zestaw III – jedno zadanie (a) z zestawu III KRYTERIA OCENY • Wykonanie zadania (treść, forma, objętość) 0 – 10 p. • Środki językowe 0 – 18 p. • Poprawność językowa 0 – 12 p. RAZEM: maksymalnie 40 p. PISANIE",
+        instruction = "INSTRUKCJA WYKONANIA ZADAŃ W tej części egzaminu znajdują się trzy zestawy. Zestawy I i II zawierają dwa zadania: a i b; zestaw III – jedno zadanie. Należy wybrać tylko jeden zestaw i wykonać zadania (zadanie) w tym zestawie, zgodnie z poleceniami, np.: • zestaw I – dwa zadania (a i b) z zestawu I lub • zestaw II – dwa zadania (a i b) z zestawu II lub • zestaw III – jedno zadanie (a) z zestawu III",
         promptText = "„Każdy z nas jest – lepszym lub gorszym – aktorem, każdy czasem udaje, zmyśla, mija się z prawdą” (Wojciech Pokora). Czy zgadza się Pani/Pan z tą opinią? Proszę napisać tekst argumentacyjny (rozprawkę).",
         wordLimit = 400,
         genre = WritingTaskRowGenre.ARGUMENT,

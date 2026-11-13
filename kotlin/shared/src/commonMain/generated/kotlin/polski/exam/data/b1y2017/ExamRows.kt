@@ -1,5 +1,5 @@
 // Generated from dsl/exam.data-contract
-// source-sha256=c25663c7842effa836bb812b389b1c0384ddfb8c602fa15fdc03765737f8cfa6
+// source-sha256=d042fe012299c6328ebcf0e4cdbdb40b49b95886364fbfd07ef55064fbd4e415
 // Edit the source, then run biome generate.
 
 package polski.exam.data.b1y2017
@@ -206,6 +206,7 @@ data class ExamModuleRow(
     val order: Int,
     val durationSeconds: Int,
     val maximumQuarter: Int,
+    val writingGuidance: String? = null,
 )
 
 data class ListeningTaskRow(
@@ -1764,6 +1765,7 @@ val GRAMMAR_ITEM_ROW_ROWS: List<GrammarItemRow> = listOf(
         context = "Ewelina nie wie, kim jest ta pani. (zna) → ___",
         correctAnswer = "Ewelina nie zna tej pani.",
         pointsQuarter = 4,
+        gradingMode = GrammarItemRowGradingMode.OPEN_MANUAL,
     ),
     GrammarItemRow(
         itemId = "B1-2017-g7-2",
@@ -1772,6 +1774,7 @@ val GRAMMAR_ITEM_ROW_ROWS: List<GrammarItemRow> = listOf(
         context = "Jestem starszy niż ty. (od) → ___",
         correctAnswer = "Jestem starszy od ciebie.",
         pointsQuarter = 4,
+        gradingMode = GrammarItemRowGradingMode.OPEN_MANUAL,
     ),
     GrammarItemRow(
         itemId = "B1-2017-g7-3",
@@ -1780,6 +1783,7 @@ val GRAMMAR_ITEM_ROW_ROWS: List<GrammarItemRow> = listOf(
         context = "Magdę interesują stare fotografie. (interesuje się) → ___",
         correctAnswer = "Magda interesuje się starymi fotografiami.",
         pointsQuarter = 4,
+        gradingMode = GrammarItemRowGradingMode.OPEN_MANUAL,
     ),
     GrammarItemRow(
         itemId = "B1-2017-g7-4",
@@ -1788,6 +1792,7 @@ val GRAMMAR_ITEM_ROW_ROWS: List<GrammarItemRow> = listOf(
         context = "Michel jest francuskim studentem. (to) → ___",
         correctAnswer = "Michel to francuski student.",
         pointsQuarter = 4,
+        gradingMode = GrammarItemRowGradingMode.OPEN_MANUAL,
     ),
     GrammarItemRow(
         itemId = "B1-2017-g7-5",
@@ -1796,6 +1801,7 @@ val GRAMMAR_ITEM_ROW_ROWS: List<GrammarItemRow> = listOf(
         context = "Jak nazywa się autor tej powieści? (napisał) → ___",
         correctAnswer = "Kto napisał tę powieść.",
         pointsQuarter = 4,
+        gradingMode = GrammarItemRowGradingMode.OPEN_MANUAL,
     ),
 )
 
@@ -1911,5 +1917,6 @@ val EXAM_MODULE_ROW_ROWS: List<ExamModuleRow> = listOf(
         order = 4,
         durationSeconds = 4500,
         maximumQuarter = 120,
+        writingGuidance = "ZASADY OCENIANIA ZADAŃ Oceniane są: • wykonanie zadania 0 – 10 p. • bogactwo językowe 0 – 10 p. • poprawność językowa 0 – 10 p. RAZEM ……../ 30 p.",
     ),
 )

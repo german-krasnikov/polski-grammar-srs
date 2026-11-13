@@ -39,6 +39,7 @@ object UiCopy {
     val Listening: String get() = text("listening")
     val Reading: String get() = text("reading")
     val Writing: String get() = text("writing")
+    val WritingInstructionsAndCriteria: String get() = text("writingInstructionsAndCriteria")
     val SelectWritingSet: String get() = text("selectWritingSet")
     val ChangeWritingSet: String get() = text("changeWritingSet")
     val WritingSet: String get() = text("writingSet")

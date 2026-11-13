@@ -1150,19 +1150,41 @@ final class PolskiGrammarUITests: XCTestCase {
     func testEnglishMatrixTableShowsRealFormsAndDoSupportSplit() {
         let app = XCUIApplication()
         app.launch()
+        func selectTarget(_ target: String) {
+            app.buttons["openSettings"].tap()
+            let picker = app.descendants(matching: .any)["settingsTargetPicker"].firstMatch
+            XCTAssertTrue(picker.waitForExistence(timeout: 5), app.debugDescription)
+            picker.tap()
+            app.buttons[target].tap()
+            let done = app.buttons["Готово"].exists ? app.buttons["Готово"] : app.buttons["Done"]
+            done.tap()
+        }
+        selectTarget("Польский")
         app.buttons["Матрица"].firstMatch.tap()
         let section = app.buttons.matching(NSPredicate(format: "label CONTAINS %@", "Раздел")).firstMatch
         XCTAssertTrue(section.waitForExistence(timeout: 10))
         section.tap()
         app.buttons["Времена и лица"].tap()
+        XCTAssertTrue(app.staticTexts["Лицо × число × время"].waitForExistence(timeout: 5), app.debugDescription)
+        XCTAssertFalse(app.staticTexts.matching(NSPredicate(format: "label BEGINSWITH %@", "English: лицо × время")).firstMatch.exists)
+        XCTAssertFalse(app.staticTexts["do-support: вопрос и отрицание"].exists)
 
-        let heSees = app.descendants(matching: .any)["Было: see; Стало: sees"].firstMatch
+        selectTarget("Английский")
+        XCTAssertFalse(app.staticTexts["Лицо × число × время"].exists)
+        app.buttons["Matrix"].tap()
+        let englishSectionPicker = app.descendants(matching: .any)["matrixSectionPicker"].firstMatch
+        XCTAssertTrue(englishSectionPicker.waitForExistence(timeout: 5), app.debugDescription)
+        englishSectionPicker.tap()
+        app.buttons["Tenses and persons"].tap()
+        XCTAssertTrue(app.staticTexts.matching(NSPredicate(format: "label BEGINSWITH %@", "English: лицо × время")).firstMatch.waitForExistence(timeout: 5), app.debugDescription)
+
+        let heSees = app.descendants(matching: .any)["Before: see; After: sees"].firstMatch
         for _ in 0..<30 {
             if heSees.exists { break }
             app.swipeUp()
         }
         XCTAssertTrue(heSees.waitForExistence(timeout: 5))
-        XCTAssertTrue(app.descendants(matching: .any)["Было: see; Стало: saw"].firstMatch.exists)
+        XCTAssertTrue(app.descendants(matching: .any)["Before: see; After: saw"].firstMatch.exists)
         // UC-09 (ios host, EN-24 minimum slice): visual evidence the English matrix table is real,
         // MatrixTableViewModel-sourced content, not a mock.
         let englishCapture = XCTAttachment(screenshot: app.screenshot())
@@ -1170,18 +1192,26 @@ final class PolskiGrammarUITests: XCTestCase {
         englishCapture.lifetime = .keepAlways
         add(englishCapture)
 
-        let doDoes = app.descendants(matching: .any)["Было: do; Стало: does"].firstMatch
+        let doDoes = app.descendants(matching: .any)["Before: do; After: does"].firstMatch
         for _ in 0..<30 {
             if doDoes.exists { break }
             app.swipeUp()
         }
         XCTAssertTrue(doDoes.waitForExistence(timeout: 5))
-        XCTAssertTrue(app.descendants(matching: .any)["Было: do; Стало: did"].firstMatch.exists)
+        XCTAssertTrue(app.descendants(matching: .any)["Before: do; After: did"].firstMatch.exists)
         XCTAssertTrue(app.staticTexts["не нужен — только will"].exists)
         let doSupportCapture = XCTAttachment(screenshot: app.screenshot())
         doSupportCapture.name = "matrix-do-support-uc09"
         doSupportCapture.lifetime = .keepAlways
         add(doSupportCapture)
+        selectTarget("Польский")
+        app.buttons["Матрица"].tap()
+        let polishSectionPicker = app.descendants(matching: .any)["matrixSectionPicker"].firstMatch
+        polishSectionPicker.tap()
+        app.buttons["Времена и лица"].tap()
+        XCTAssertTrue(app.staticTexts["Лицо × число × время"].waitForExistence(timeout: 5), app.debugDescription)
+        XCTAssertFalse(app.staticTexts.matching(NSPredicate(format: "label BEGINSWITH %@", "English: лицо × время")).firstMatch.exists)
+        XCTAssertFalse(app.staticTexts["do-support: вопрос и отрицание"].exists)
     }
 
     func testNativeCasesShowCompactNoteAndOrderedComparisonNouns() {

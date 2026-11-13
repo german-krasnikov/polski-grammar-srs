@@ -1,0 +1,6 @@
+TEST "C1 March 2022 numeric operands appear in two grammar cards" PROFILE playmode
+  open exam="C1 Certyfikat 2022-03" module="grammar"
+  ASSERT grammar.context == "(3)"
+  advance count=6
+  ASSERT grammar.context == "(40)"
+END

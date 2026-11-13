@@ -1,0 +1,20 @@
+TEST "B1 2017 Grammar VII retains known credit and awaits other same-meaning sentences" PROFILE playmode
+  open exam="B1 Certyfikat 2017" module="grammar"
+  advance count=45
+  ASSERT grammar.context == "Ewelina nie wie, kim jest ta pani. (zna) → ___"
+  enter text="Ewelina tej pani nie zna."
+  next
+  ASSERT grammar.context == "Jestem starszy niż ty. (od) → ___"
+  enter text="Jestem starszy od ciebie."
+  advance count=3
+  submit
+  inspectReview index=46
+  ASSERT grammar.reviewStatus == "pending"
+  ASSERT exam.reviewAnswer == "Ewelina tej pani nie zna."
+  inspectReview index=47
+  ASSERT grammar.reviewStatus == "correct"
+  ASSERT exam.reviewAnswer == "Jestem starszy od ciebie."
+  ASSERT grammar.manualReviewCount == 1
+  ASSERT exam.score == "Подтверждено: 1 / 30"
+  ASSERT exam.scoreDetail == "Ожидает проверки: 1"
+END

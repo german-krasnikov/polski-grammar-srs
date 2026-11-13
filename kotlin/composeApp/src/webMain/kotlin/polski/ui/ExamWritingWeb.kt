@@ -56,7 +56,11 @@ internal class ExamWritingController(
         c.appendChild(node("div", "exam-progress").apply {
             appendChild(node("span", "exam-progress-text", "${UiCopy.Task} ${currentTaskIdx + 1} / ${tasks.size}"))
         })
-        c.appendChild(node("h3", "exam-title", task.instruction))
+        c.appendChild(node("h3", "exam-title", "${UiCopy.Task} ${currentTaskIdx + 1}"))
+        c.appendChild(node("details", "exam-writing-details").apply {
+            appendChild(node("summary", text = UiCopy.WritingInstructionsAndCriteria))
+            appendInstruction(this, task.instruction)
+        })
         if (sets.isNotEmpty()) c.appendChild(navBtn(UiCopy.ChangeWritingSet) { dispatch(WritingExamAction.SelectSet(null)); redraw() })
         c.appendChild(node("div", "exam-writing-prompt").apply {
             setAttribute("lang", "pl")
@@ -110,12 +114,22 @@ internal class ExamWritingController(
         })
         activeTasks.forEachIndexed { i, task ->
             c.appendChild(node("div", "exam-writing-review").apply {
-                appendChild(node("h4", text = "${UiCopy.Task} ${i + 1}: ${task.instruction}"))
+                appendChild(node("h4", text = "${UiCopy.Task} ${i + 1}"))
+                appendInstruction(this, task.instruction)
                 appendChild(node("pre", "exam-writing-draft", drafts[task.id].orEmpty().ifEmpty { "[пусто]" }))
             })
         }
         c.appendChild(node("div", "exam-nav").apply {
             appendChild(navBtn("← К модулям") { onBack() })
+        })
+    }
+
+    private fun appendInstruction(container: HTMLElement, instruction: String) {
+        container.appendChild(node("div", "exam-writing-instruction").apply {
+            setAttribute("lang", "pl")
+            instruction.split("\n\n").forEach { paragraph ->
+                appendChild(node("p", text = paragraph))
+            }
         })
     }
 

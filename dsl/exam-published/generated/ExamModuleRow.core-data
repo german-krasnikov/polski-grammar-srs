@@ -30,6 +30,7 @@ EXAM_MODULE {
   order: 4
   durationSeconds: 4500
   maximumQuarter: 120
+  writingGuidance: "ZASADY OCENIANIA ZADAŃ Oceniane są: • wykonanie zadania 0 – 10 p. • bogactwo językowe 0 – 10 p. • poprawność językowa 0 – 10 p. RAZEM ……../ 30 p."
 }
 EXAM_MODULE {
   moduleId: certyfikat-polski-B1-2019-listening
@@ -62,6 +63,7 @@ EXAM_MODULE {
   order: 4
   durationSeconds: 4500
   maximumQuarter: 120
+  writingGuidance: "ZASADY OCENIANIA ZADAŃ Kryteria oceny: • wykonanie zadania 0 – 10 p. • środki językowe 0 – 10 p. • poprawność językowa 0 – 10 p. RAZEM: maksymalnie 30 p."
 }
 EXAM_MODULE {
   moduleId: certyfikat-polski-B1-2020-listening
@@ -94,6 +96,7 @@ EXAM_MODULE {
   order: 4
   durationSeconds: 4500
   maximumQuarter: 120
+  writingGuidance: "KRYTERIA OCENY • wykonanie zadania 0 – 10 p. • środki językowe 0 – 10 p. • poprawność językowa 0 – 10 p. RAZEM: maksymalnie 30 p."
 }
 EXAM_MODULE {
   moduleId: certyfikat-polski-B2-2017-listening
@@ -126,6 +129,7 @@ EXAM_MODULE {
   order: 4
   durationSeconds: 5400
   maximumQuarter: 160
+  writingGuidance: "ZASADY OCENIANIA ZADAŃ Kryteria oceny: • wykonanie zadania (treść, długość, forma, kompozycja) 0 – 10 p. • bogactwo językowe 0 – 16 p. • poprawność językowa 0 – 14 p. RAZEM: maksymalnie 40 p."
 }
 EXAM_MODULE {
   moduleId: certyfikat-polski-B2-2019-listening
@@ -158,6 +162,7 @@ EXAM_MODULE {
   order: 4
   durationSeconds: 5400
   maximumQuarter: 160
+  writingGuidance: "ZASADY OCENIANIA ZADAŃ Kryteria oceny: • wykonanie zadania 0 – 10 p. • środki językowe 0 – 16 p. • poprawność językowa 0 – 14 p. RAZEM: maksymalnie 40 p."
 }
 EXAM_MODULE {
   moduleId: certyfikat-polski-B2-2020-listening
@@ -190,6 +195,7 @@ EXAM_MODULE {
   order: 4
   durationSeconds: 5400
   maximumQuarter: 160
+  writingGuidance: "KRYTERIA OCENY • wykonanie zadania 0 – 10 p. • środki językowe 0 – 16 p. • poprawność językowa 0 – 14 p. RAZEM: maksymalnie 40 p."
 }
 EXAM_MODULE {
   moduleId: certyfikat-polski-B2-2022-02-listening
@@ -222,6 +228,7 @@ EXAM_MODULE {
   order: 4
   durationSeconds: 5400
   maximumQuarter: 160
+  writingGuidance: "KRYTERIA OCENY • Wykonanie zadania (treść, forma, objętość) 0 – 10 p. • Środki językowe 0 – 16 p. • poprawność językowa 0 – 14 p. RAZEM: maksymalnie 40 p."
 }
 EXAM_MODULE {
   moduleId: certyfikat-polski-B2-2023-02-listening
@@ -254,6 +261,7 @@ EXAM_MODULE {
   order: 4
   durationSeconds: 5400
   maximumQuarter: 160
+  writingGuidance: "KRYTERIA OCENY • Wykonanie zadania (treść, forma, objętość) 0 – 10 p. • Środki językowe 0 – 16 p. • poprawność językowa 0 – 14 p. RAZEM: maksymalnie 40 p."
 }
 EXAM_MODULE {
   moduleId: certyfikat-polski-B2-2023-06-listening
@@ -286,6 +294,7 @@ EXAM_MODULE {
   order: 4
   durationSeconds: 5400
   maximumQuarter: 160
+  writingGuidance: "KRYTERIA OCENY • Wykonanie zadania (treść, forma, objętość) 0 – 10 p. • Środki językowe 0 – 16 p. • poprawność językowa 0 – 14 p. RAZEM: maksymalnie 40 p."
 }
 EXAM_MODULE {
   moduleId: certyfikat-polski-B2-2024-02-listening
@@ -318,6 +327,7 @@ EXAM_MODULE {
   order: 4
   durationSeconds: 5400
   maximumQuarter: 160
+  writingGuidance: "KRYTERIA OCENY • Wykonanie zadania (treść, forma, objętość) 0 – 10 p. • Środki językowe 0 – 16 p. • poprawność językowa 0 – 14 p. RAZEM: maksymalnie 40 p."
 }
 EXAM_MODULE {
   moduleId: certyfikat-polski-B2-2024-06-listening
@@ -350,6 +360,7 @@ EXAM_MODULE {
   order: 4
   durationSeconds: 5400
   maximumQuarter: 160
+  writingGuidance: "KRYTERIA OCENY • Wykonanie zadania (treść, forma, objętość) 0 – 10 p. • Środki językowe 0 – 16 p. • poprawność językowa 0 – 14 p. RAZEM: maksymalnie 40 p."
 }
 EXAM_MODULE {
   moduleId: certyfikat-polski-C1-2022-03-listening
@@ -382,6 +393,7 @@ EXAM_MODULE {
   order: 4
   durationSeconds: 5400
   maximumQuarter: 160
+  writingGuidance: "KRYTERIA OCENY • Wykonanie zadania (treść, forma, objętość) 0 – 10 p. • Środki językowe 0 – 18 p. • poprawność językowa 0 – 12 p. RAZEM: maksymalnie 40 p."
 }
 EXAM_MODULE {
   moduleId: certyfikat-polski-C1-2022-11-listening
@@ -414,6 +426,7 @@ EXAM_MODULE {
   order: 4
   durationSeconds: 5400
   maximumQuarter: 160
+  writingGuidance: "KRYTERIA OCENY • Wykonanie zadania (treść, forma, objętość) 0 – 10 p. • Środki językowe 0 – 18 p. • poprawność językowa 0 – 12 p. RAZEM: maksymalnie 40 p."
 }
 EXAM_MODULE {
   moduleId: certyfikat-polski-C1-2023-04-listening
@@ -446,6 +459,7 @@ EXAM_MODULE {
   order: 4
   durationSeconds: 5400
   maximumQuarter: 160
+  writingGuidance: "KRYTERIA OCENY • Wykonanie zadania (treść, forma, objętość) 0 – 10 p. • Środki językowe 0 – 18 p. • poprawność językowa 0 – 12 p. RAZEM: maksymalnie 40 p."
 }
 EXAM_MODULE {
   moduleId: certyfikat-polski-C1-2023-11-listening
@@ -478,6 +492,7 @@ EXAM_MODULE {
   order: 4
   durationSeconds: 5400
   maximumQuarter: 160
+  writingGuidance: "KRYTERIA OCENY • Wykonanie zadania (treść, forma, objętość) 0 – 10 p. • Środki językowe 0 – 18 p. • poprawność językowa 0 – 12 p. RAZEM: maksymalnie 40 p."
 }
 EXAM_MODULE {
   moduleId: certyfikat-polski-C1-2024-04-listening
@@ -510,4 +525,5 @@ EXAM_MODULE {
   order: 4
   durationSeconds: 5400
   maximumQuarter: 160
+  writingGuidance: "KRYTERIA OCENY • Wykonanie zadania (treść, forma, objętość) 0 – 10 p. • Środki językowe 0 – 18 p. • poprawność językowa 0 – 12 p. RAZEM: maksymalnie 40 p."
 }

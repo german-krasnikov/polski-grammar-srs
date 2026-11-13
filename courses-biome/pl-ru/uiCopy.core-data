@@ -28,6 +28,7 @@ UI_COPY {key: grammar text: "Грамматика"}
 UI_COPY {key: listening text: "Аудирование"}
 UI_COPY {key: reading text: "Чтение"}
 UI_COPY {key: writing text: "Письмо"}
+UI_COPY {key: writingInstructionsAndCriteria text: "Инструкция и критерии"}
 UI_COPY {key: selectWritingSet text: "Выберите набор"}
 UI_COPY {key: changeWritingSet text: "Сменить набор"}
 UI_COPY {key: writingSet text: "Набор"}

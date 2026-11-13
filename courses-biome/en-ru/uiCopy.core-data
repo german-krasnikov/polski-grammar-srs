@@ -28,6 +28,7 @@ UI_COPY {key: grammar text: Grammar}
 UI_COPY {key: listening text: Listening}
 UI_COPY {key: reading text: Reading}
 UI_COPY {key: writing text: Writing}
+UI_COPY {key: writingInstructionsAndCriteria text: "Instructions and criteria"}
 UI_COPY {key: selectWritingSet text: "Select a set"}
 UI_COPY {key: changeWritingSet text: "Change set"}
 UI_COPY {key: writingSet text: Set}

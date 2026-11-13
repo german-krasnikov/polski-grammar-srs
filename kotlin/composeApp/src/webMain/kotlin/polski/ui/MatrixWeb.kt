@@ -4,6 +4,7 @@ import kotlinx.browser.document
 import org.w3c.dom.HTMLElement
 import org.w3c.dom.HTMLSelectElement
 import polski.data.courseMatrixIntroduction
+import polski.data.activeCoursePackOption
 import polski.data.courseWebCaseCompositionHeader
 import polski.data.courseContextHelp
 import polski.data.courseMaleAccIntro
@@ -81,9 +82,7 @@ internal fun renderMatrixWeb(root: HTMLElement, state: AppUiState, dispatch: (Ap
     // (ADR-36: [nouns] is honestly empty, not fabricated, for such a pack). Wiring a rich
     // en-ru-specific reference screen is separate, unstarted work (ADR-36's own scope note); this
     // guard's only job is to make that absence a calm placeholder instead of a crash. [renderVerbs]
-    // is always called (its own `verbs.isEmpty()` guard inside handles the caseless-pack case the
-    // same way) since it also unconditionally appends EN-24's pack-independent English verb/
-    // do-support tables, which work regardless of which pack is active.
+    // uses the active pack's target for the English verb and do-support tables.
     val hasCaseSystem = nouns.isNotEmpty()
     when (state.matrixSelection.section) {
         MatrixSection.Map -> if (hasCaseSystem) renderMap(root, dispatch) else renderNoCaseSystemNotice(root)
@@ -101,7 +100,7 @@ private fun renderNoCaseSystemNotice(root: HTMLElement) {
     // now also Verbs) this renders for. Not one of this task's 2 assigned blockers, but found
     // while verifying blocker 1's fix (the only path that made this render observable) and in
     // the same file/feature area, so fixed alongside it rather than left broken.
-    root.matrixAdd("p", "Для текущего курса эта таблица недоступна: в этом языке нет падежей/рода. Открой «Времена и лица» — таблица глаголов и do-support работает для любого курса.", "muted")
+    root.matrixAdd("p", "Для текущего курса эта таблица недоступна: в этом языке нет падежей/рода. Открой «Времена и лица» — там доступны английские формы и do-support.", "muted")
 }
 
 /**
@@ -293,8 +292,7 @@ private fun renderCases(root: HTMLElement, state: AppUiState, dispatch: (AppActi
 // build the pl aspect/tense grid unconditionally, so with en-ru active and the default
 // `verbId = "do"` it crashed inside `verbById("do")` the moment the engine evaluated a cell. Gate
 // the whole pl-conjugation portion behind `verbs.isNotEmpty()`, same pattern as Map/Cases/Pronouns,
-// and fall through to a calm notice instead. `renderEnglishVerbMatrix` stays unconditional — EN-24
-// already reads its own pack-independent data and works regardless of which pack is active.
+// and fall through to a calm notice instead. The English table belongs only to an English target.
 private fun renderVerbs(root: HTMLElement, state: AppUiState, dispatch: (AppAction) -> Unit) {
     if (verbs.isEmpty()) {
         renderNoCaseSystemNotice(root)
@@ -357,7 +355,7 @@ private fun renderVerbs(root: HTMLElement, state: AppUiState, dispatch: (AppActi
             ).toViewModel(),
         )
     }
-    renderEnglishVerbMatrix(root)
+    if (activeCoursePackOption.target == "en") renderEnglishVerbMatrix(root)
 }
 
 /**
@@ -377,7 +375,7 @@ private fun renderEnglishVerbMatrix(root: HTMLElement) {
     fun tenseLabel(t: Tense) = polski.presentation.UiCopy.tenseLabel(t.id)
 
     val section = root.matrixSection("English: лицо × время (\"$exampleLemma\")")
-    section.matrixAdd("p", "Формы читаются из forms.generated.json(en) тем же MatrixTableViewModel, что и польские таблицы выше — движок не знает, что это английский.")
+    section.matrixAdd("p", "Формы английского глагола по лицам и временам.")
     section.matrixTable(
         MatrixTableEngine.build(
             rowAxis = enPersonalPronouns,

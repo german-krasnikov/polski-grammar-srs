@@ -9,6 +9,26 @@ async function forceJsCompatibilityFallback(page: Page) {
   });
 }
 
+function colorContrast(foreground: string, background: string) {
+  const luminance = (color: string) => {
+    const channels = color.match(/[\d.]+/g)!.slice(0, 3).map(Number).map(value => {
+      const scaled = value / 255;
+      return scaled <= 0.04045 ? scaled / 12.92 : ((scaled + 0.055) / 1.055) ** 2.4;
+    });
+    return channels[0] * 0.2126 + channels[1] * 0.7152 + channels[2] * 0.0722;
+  };
+  const values = [luminance(foreground), luminance(background)].sort((a, b) => b - a);
+  return (values[0] + 0.05) / (values[1] + 0.05);
+}
+
+async function panelContrast(page: Page, selector: string) {
+  const colors = await page.locator(selector).evaluate(element => {
+    const style = getComputedStyle(element);
+    return { foreground: style.color, background: style.backgroundColor };
+  });
+  return colorContrast(colors.foreground, colors.background);
+}
+
 test('DSL grammar PlayTest: Polish input, caret, return and score', async ({ page }) => {
   await runExamPlaytest(page, resolve('dsl/exam-web/grammar.playtest'));
 });
@@ -32,6 +52,10 @@ for (const exam of ['b1-2020', 'b2-2017', 'b2-2019']) {
 
 test('DSL grammar PlayTest: open transformation stays pending manual review', async ({ page }) => {
   await runExamPlaytest(page, resolve('dsl/exam-web/grammar-manual.playtest'));
+});
+
+test('DSL grammar PlayTest: B1 2017 key permits other same-meaning sentences', async ({ page }) => {
+  await runExamPlaytest(page, resolve('dsl/exam-web/grammar-b1-2017-open-manual.playtest'));
 });
 
 test('DSL grammar PlayTest: official transformation earns confirmed point', async ({ page }) => {
@@ -130,6 +154,14 @@ test('DSL listening PlayTest: B2 2020 keyed word earns half point', async ({ pag
 
 test('DSL listening PlayTest: B2 2017 unknown word awaits review', async ({ page }) => {
   await runExamPlaytest(page, resolve('dsl/exam-web/listening-b2-2017-manual.playtest'));
+});
+
+test('DSL listening PlayTest: B2 2024-02 printed key wording earns full credit', async ({ page }) => {
+  await runExamPlaytest(page, resolve('dsl/exam-web/listening-b2-2024-02-key-variants.playtest'));
+});
+
+test('DSL listening PlayTest: B2 2024-02 unlisted wording awaits review', async ({ page }) => {
+  await runExamPlaytest(page, resolve('dsl/exam-web/listening-b2-2024-02-unknown.playtest'));
 });
 
 test('DSL listening PlayTest: B2 2019 task IV loads source photographs', async ({ page }) => {
@@ -284,6 +316,80 @@ test('DSL writing PlayTest: certified maximum remains pending manual assessment'
   await runExamPlaytest(page, resolve('dsl/exam-web/writing-certified-manual.playtest'));
 });
 
+for (const paper of ['b1-2017', 'b2-2017', 'b2-2024-06', 'c1-2022-11', 'c1-2024-04']) {
+  test(`DSL writing PlayTest: ${paper} official guidance in sets I and III`, async ({ page }) => {
+    await runExamPlaytest(page, resolve(`dsl/exam-web/writing-guidance-${paper}.playtest`));
+  });
+}
+
+test('official writing text stays readable at mobile width in both themes', async ({ page }) => {
+  await page.setViewportSize({ width: 375, height: 667 });
+  for (const theme of ['Light', 'Dark']) {
+    await page.goto('/#/settings');
+    await page.getByRole('combobox', { name: 'Тема' }).selectOption(theme);
+    await page.goto('/#/exam');
+    await page.locator('.exam-card').filter({ hasText: 'C1 Certyfikat 2022-11' }).getByRole('button', { name: 'Начать' }).click();
+    await page.locator('.exam-module-card').filter({ hasText: 'IV. Pisanie' }).getByRole('button', { name: 'Начать' }).click();
+    await page.getByRole('button', { name: 'Набор I', exact: true }).click();
+    const disclosure = page.locator('.exam-writing-details');
+    await expect(disclosure).not.toHaveAttribute('open');
+    await expect(page.locator('.exam-writing-prompt')).toBeInViewport();
+    await page.locator('.exam-writing-details summary').click();
+    await expect(disclosure).toHaveAttribute('open');
+    expect(await panelContrast(page, '.exam-writing-prompt'), theme).toBeGreaterThanOrEqual(4.5);
+    await expect(page.locator('.exam-writing-instruction p')).toHaveCount(2);
+    const heading = await page.locator('h3.exam-title').boundingBox();
+    expect(heading!.height, theme).toBeLessThan(70);
+    await expect(page.locator('.exam-writing-prompt')).toBeVisible();
+    await expect(page.locator('.exam-textarea')).toBeVisible();
+  }
+});
+
+test('writing criteria disclosure works with keyboard and pointer', async ({ page }) => {
+  await page.setViewportSize({ width: 375, height: 667 });
+  await page.goto('/#/exam');
+  await page.locator('.exam-card').filter({ hasText: 'C1 Certyfikat 2022-11' }).getByRole('button', { name: 'Начать' }).click();
+  await page.locator('.exam-module-card').filter({ hasText: 'IV. Pisanie' }).getByRole('button', { name: 'Начать' }).click();
+  await page.getByRole('button', { name: 'Набор I', exact: true }).click();
+  const disclosure = page.locator('.exam-writing-details');
+  const summary = disclosure.locator('summary');
+  await expect(summary).toHaveText('Инструкция и критерии');
+  await expect(disclosure).not.toHaveAttribute('open');
+  await summary.focus();
+  await page.keyboard.press('Enter');
+  await expect(disclosure).toHaveAttribute('open');
+  await expect(disclosure).toContainText('Środki językowe 0 – 18 p.');
+  await page.keyboard.press('Space');
+  await expect(disclosure).not.toHaveAttribute('open');
+  await summary.click();
+  await expect(disclosure).toHaveAttribute('open');
+});
+
+test('grammar, reading and audio panels use readable theme colors', async ({ page }) => {
+  for (const theme of ['Light', 'Dark']) {
+    await page.goto('/#/settings');
+    await page.getByRole('combobox', { name: 'Тема' }).selectOption(theme);
+    for (const [module, panel] of [
+      ['III. Poprawność gramatyczna', '.exam-context'],
+      ['II. Rozumienie tekstów pisanych', '.exam-reading-text'],
+      ['I. Rozumienie ze słuchu', '.exam-custom-player'],
+    ]) {
+      await page.getByRole('button', { name: 'Карточки' }).click();
+      await page.getByRole('button', { name: 'Экзамен' }).click();
+      await page.locator('.exam-card').filter({ hasText: 'B1 Certyfikat 2017' }).getByRole('button', { name: 'Начать' }).click();
+      await page.locator('.exam-module-card').filter({ hasText: module }).getByRole('button', { name: 'Начать' }).click();
+      expect(await panelContrast(page, panel), `${theme}/${module}`).toBeGreaterThanOrEqual(4.5);
+      if (panel === '.exam-custom-player') {
+        const colors = await page.locator('.player-time').evaluate(element => ({
+          foreground: getComputedStyle(element).color,
+          background: getComputedStyle(element.closest('.exam-custom-player')!).backgroundColor,
+        }));
+        expect(colorContrast(colors.foreground, colors.background), `${theme}/audio time`).toBeGreaterThanOrEqual(4.5);
+      }
+    }
+  }
+});
+
 test('DSL grammar PlayTest: C1 April 2024 valid paired inflections', async ({ page }) => {
   test.setTimeout(120_000);
   await runExamPlaytest(page, resolve('dsl/exam-web/grammar-pair-c1-2024-valid.playtest'));
@@ -293,6 +399,20 @@ test('DSL grammar PlayTest: C1 April 2024 crossed inflections', async ({ page })
   test.setTimeout(120_000);
   await runExamPlaytest(page, resolve('dsl/exam-web/grammar-pair-c1-2024-crossed.playtest'));
 });
+
+test('DSL grammar PlayTest: C1 November 2022 valid number and noun pair', async ({ page }) => {
+  await runExamPlaytest(page, resolve('dsl/exam-web/grammar-pair-c1-2022-11-valid.playtest'));
+});
+
+test('DSL grammar PlayTest: C1 November 2022 crossed pair awaits review', async ({ page }) => {
+  await runExamPlaytest(page, resolve('dsl/exam-web/grammar-pair-c1-2022-11-crossed.playtest'));
+});
+
+for (const session of ['2022-03', '2023-04', '2023-11']) {
+  test(`DSL grammar PlayTest: C1 ${session} printed numeric operands`, async ({ page }) => {
+    await runExamPlaytest(page, resolve(`dsl/exam-web/grammar-numeric-context-c1-${session}.playtest`));
+  });
+}
 
 test('DSL grammar PlayTest: C1 November 2022 source rubric appears for manual review', async ({ page }) => {
   test.setTimeout(120_000);

@@ -856,6 +856,12 @@ val UI_COPY_CASE_ROW_ROWS: List<UiCopyCaseRow> = listOf(
     UiCopyCaseRow(key = "listening", plRu = "Аудирование", enRu = "Listening", placeholders = ""),
     UiCopyCaseRow(key = "reading", plRu = "Чтение", enRu = "Reading", placeholders = ""),
     UiCopyCaseRow(key = "writing", plRu = "Письмо", enRu = "Writing", placeholders = ""),
+    UiCopyCaseRow(
+        key = "writingInstructionsAndCriteria",
+        plRu = "Инструкция и критерии",
+        enRu = "Instructions and criteria",
+        placeholders = "",
+    ),
     UiCopyCaseRow(key = "selectWritingSet", plRu = "Выберите набор", enRu = "Select a set", placeholders = ""),
     UiCopyCaseRow(key = "changeWritingSet", plRu = "Сменить набор", enRu = "Change set", placeholders = ""),
     UiCopyCaseRow(key = "writingSet", plRu = "Набор", enRu = "Set", placeholders = ""),

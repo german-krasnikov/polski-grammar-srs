@@ -4,7 +4,7 @@ WRITING_TASK {
   examRef: certyfikat-polski-C1-2023-04
   taskNumber: 1
   setId: I
-  instruction: "INSTRUKCJA WYKONANIA ZADAŃ W tej części egzaminu znajdują się trzy zestawy. Zestawy I i II zawierają dwa zadania: a i b; zestaw III – jedno zadanie. Należy wybrać tylko jeden zestaw i wykonać zadania (zadanie) w tym zestawie, zgodnie z poleceniami, np.: • zestaw I – dwa zadania (a i b) z zestawu I lub • zestaw II – dwa zadania (a i b) z zestawu II lub • zestaw III – jedno zadanie (a) z zestawu III KRYTERIA OCENY • Wykonanie zadania (treść, forma, objętość) 0 – 10 p. • Środki językowe 0 – 18 p. • Poprawność językowa 0 – 12 p. RAZEM: maksymalnie 40 p. PISANIE"
+  instruction: "INSTRUKCJA WYKONANIA ZADAŃ W tej części egzaminu znajdują się trzy zestawy. Zestawy I i II zawierają dwa zadania: a i b; zestaw III – jedno zadanie. Należy wybrać tylko jeden zestaw i wykonać zadania (zadanie) w tym zestawie, zgodnie z poleceniami, np.: • zestaw I – dwa zadania (a i b) z zestawu I lub • zestaw II – dwa zadania (a i b) z zestawu II lub • zestaw III – jedno zadanie (a) z zestawu III"
   promptText: "Otwiera Pani/Pan w Polsce klub fitness/restaurację. Proszę napisać reklamę tego miejsca, którą zamieści Pani/Pan w internecie."
   wordLimit: 80
   genre: advertisement
@@ -14,7 +14,7 @@ WRITING_TASK {
   examRef: certyfikat-polski-C1-2023-04
   taskNumber: 1
   setId: I
-  instruction: "INSTRUKCJA WYKONANIA ZADAŃ W tej części egzaminu znajdują się trzy zestawy. Zestawy I i II zawierają dwa zadania: a i b; zestaw III – jedno zadanie. Należy wybrać tylko jeden zestaw i wykonać zadania (zadanie) w tym zestawie, zgodnie z poleceniami, np.: • zestaw I – dwa zadania (a i b) z zestawu I lub • zestaw II – dwa zadania (a i b) z zestawu II lub • zestaw III – jedno zadanie (a) z zestawu III KRYTERIA OCENY • Wykonanie zadania (treść, forma, objętość) 0 – 10 p. • Środki językowe 0 – 18 p. • Poprawność językowa 0 – 12 p. RAZEM: maksymalnie 40 p. PISANIE"
+  instruction: "INSTRUKCJA WYKONANIA ZADAŃ W tej części egzaminu znajdują się trzy zestawy. Zestawy I i II zawierają dwa zadania: a i b; zestaw III – jedno zadanie. Należy wybrać tylko jeden zestaw i wykonać zadania (zadanie) w tym zestawie, zgodnie z poleceniami, np.: • zestaw I – dwa zadania (a i b) z zestawu I lub • zestaw II – dwa zadania (a i b) z zestawu II lub • zestaw III – jedno zadanie (a) z zestawu III"
   promptText: "„Ziarnko do ziarnka zbierając, do niczego nie dojdziesz, chyba żebyś żył kilkaset lat” (Stefan Kisielewski). Czy zgadza się Pani/Pan z tym stwierdzeniem? Proszę napisać tekst argumentacyjny (rozprawkę), w którym wyrazi Pani/Pan swoją opinię."
   wordLimit: 320
   genre: argument
@@ -24,7 +24,7 @@ WRITING_TASK {
   examRef: certyfikat-polski-C1-2023-04
   taskNumber: 2
   setId: II
-  instruction: "INSTRUKCJA WYKONANIA ZADAŃ W tej części egzaminu znajdują się trzy zestawy. Zestawy I i II zawierają dwa zadania: a i b; zestaw III – jedno zadanie. Należy wybrać tylko jeden zestaw i wykonać zadania (zadanie) w tym zestawie, zgodnie z poleceniami, np.: • zestaw I – dwa zadania (a i b) z zestawu I lub • zestaw II – dwa zadania (a i b) z zestawu II lub • zestaw III – jedno zadanie (a) z zestawu III KRYTERIA OCENY • Wykonanie zadania (treść, forma, objętość) 0 – 10 p. • Środki językowe 0 – 18 p. • Poprawność językowa 0 – 12 p. RAZEM: maksymalnie 40 p. PISANIE"
+  instruction: "INSTRUKCJA WYKONANIA ZADAŃ W tej części egzaminu znajdują się trzy zestawy. Zestawy I i II zawierają dwa zadania: a i b; zestaw III – jedno zadanie. Należy wybrać tylko jeden zestaw i wykonać zadania (zadanie) w tym zestawie, zgodnie z poleceniami, np.: • zestaw I – dwa zadania (a i b) z zestawu I lub • zestaw II – dwa zadania (a i b) z zestawu II lub • zestaw III – jedno zadanie (a) z zestawu III"
   promptText: "Jest Pani/Pan w sanatorium w jednej z polskich miejscowości uzdrowiskowych. Nie jest Pani zadowolona / Pan zadowolony z pobytu (m.in. z mieszkania, wyżywienia, opieki medycznej, zabiegów). Proszę napisać w tej sprawie e-mail (skargę) do dyrektora placówki."
   wordLimit: 200
   genre: email
@@ -34,7 +34,7 @@ WRITING_TASK {
   examRef: certyfikat-polski-C1-2023-04
   taskNumber: 2
   setId: II
-  instruction: "INSTRUKCJA WYKONANIA ZADAŃ W tej części egzaminu znajdują się trzy zestawy. Zestawy I i II zawierają dwa zadania: a i b; zestaw III – jedno zadanie. Należy wybrać tylko jeden zestaw i wykonać zadania (zadanie) w tym zestawie, zgodnie z poleceniami, np.: • zestaw I – dwa zadania (a i b) z zestawu I lub • zestaw II – dwa zadania (a i b) z zestawu II lub • zestaw III – jedno zadanie (a) z zestawu III KRYTERIA OCENY • Wykonanie zadania (treść, forma, objętość) 0 – 10 p. • Środki językowe 0 – 18 p. • Poprawność językowa 0 – 12 p. RAZEM: maksymalnie 40 p. PISANIE"
+  instruction: "INSTRUKCJA WYKONANIA ZADAŃ W tej części egzaminu znajdują się trzy zestawy. Zestawy I i II zawierają dwa zadania: a i b; zestaw III – jedno zadanie. Należy wybrać tylko jeden zestaw i wykonać zadania (zadanie) w tym zestawie, zgodnie z poleceniami, np.: • zestaw I – dwa zadania (a i b) z zestawu I lub • zestaw II – dwa zadania (a i b) z zestawu II lub • zestaw III – jedno zadanie (a) z zestawu III"
   promptText: "W celu uzyskania uprawnień opiekuna zwierząt uczestniczyła Pani / uczestniczył Pan w szkoleniu organizowanym przez jedną z polskich fundacji ratującej życie koniom i osłom. Proszę napisać sprawozdanie z tego kursu na prośbę redakcji czasopisma „Człowiek i Natura”, z którą Pani/Pan współpracuje."
   wordLimit: 200
   genre: report
@@ -44,7 +44,7 @@ WRITING_TASK {
   examRef: certyfikat-polski-C1-2023-04
   taskNumber: 3
   setId: III
-  instruction: "INSTRUKCJA WYKONANIA ZADAŃ W tej części egzaminu znajdują się trzy zestawy. Zestawy I i II zawierają dwa zadania: a i b; zestaw III – jedno zadanie. Należy wybrać tylko jeden zestaw i wykonać zadania (zadanie) w tym zestawie, zgodnie z poleceniami, np.: • zestaw I – dwa zadania (a i b) z zestawu I lub • zestaw II – dwa zadania (a i b) z zestawu II lub • zestaw III – jedno zadanie (a) z zestawu III KRYTERIA OCENY • Wykonanie zadania (treść, forma, objętość) 0 – 10 p. • Środki językowe 0 – 18 p. • Poprawność językowa 0 – 12 p. RAZEM: maksymalnie 40 p. PISANIE"
+  instruction: "INSTRUKCJA WYKONANIA ZADAŃ W tej części egzaminu znajdują się trzy zestawy. Zestawy I i II zawierają dwa zadania: a i b; zestaw III – jedno zadanie. Należy wybrać tylko jeden zestaw i wykonać zadania (zadanie) w tym zestawie, zgodnie z poleceniami, np.: • zestaw I – dwa zadania (a i b) z zestawu I lub • zestaw II – dwa zadania (a i b) z zestawu II lub • zestaw III – jedno zadanie (a) z zestawu III"
   promptText: "„Prawdziwy sportowiec walczy do końca. Nawet jeśli wie, że dobiegnie na metę ostatni, nie przestaje biec” (Małgorzata Wach). Proszę napisać esej zainspirowany tym cytatem."
   wordLimit: 400
   genre: essay

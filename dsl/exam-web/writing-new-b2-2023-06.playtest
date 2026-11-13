@@ -2,6 +2,7 @@ TEST "B2 2023-06 official Writing set I retains Polish drafts and awaits manual 
   open exam="B2 Certyfikat 2023-06" module="writing"
   ASSERT writing.setChoiceCount == 3
   selectWritingSet set="I"
+  openWritingGuidance
   ASSERT writing.taskLabel == "Задание 1 / 2"
   ASSERT writing.instructionOpening == "INSTRUKCJA WYKONANIA ZADAŃ W tej części egzaminu znajdują się trzy zestawy."
   ASSERT writing.promptOpening == "Obchodzi Pani/Pan urodziny i z tej okazji organizuje Pani/Pan imprezę w restauracji. Proszę napisać e-mail z zaproszeniem, które wyśle Pani/Pan do swojej polskiej koleżanki / swojego polskiego kolegi."

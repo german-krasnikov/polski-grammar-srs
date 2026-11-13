@@ -19,7 +19,7 @@ GRAMMAR_ITEM {
   itemId: certyfikat-polski-C1-2023-04-g1-q3
   testRef: certyfikat-polski-C1-2023-04-grammar-1
   questionType: fill_gap
-  context: "()"
+  context: "(2)"
   correctAnswer: dwoma
   pointsQuarter: 2
 }
@@ -51,7 +51,7 @@ GRAMMAR_ITEM {
   itemId: certyfikat-polski-C1-2023-04-g1-q7
   testRef: certyfikat-polski-C1-2023-04-grammar-1
   questionType: fill_gap
-  context: "()"
+  context: "(300)"
   correctAnswer: trzystu
   pointsQuarter: 2
 }
@@ -67,7 +67,7 @@ GRAMMAR_ITEM {
   itemId: certyfikat-polski-C1-2023-04-g1-q9
   testRef: certyfikat-polski-C1-2023-04-grammar-1
   questionType: fill_gap
-  context: "()"
+  context: "(3)"
   correctAnswer: Trzem
   pointsQuarter: 2
 }

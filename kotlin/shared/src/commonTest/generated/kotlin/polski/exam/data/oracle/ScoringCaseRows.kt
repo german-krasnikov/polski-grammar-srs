@@ -1,5 +1,5 @@
 // Generated from dsl/exam.data-contract
-// source-sha256=c25663c7842effa836bb812b389b1c0384ddfb8c602fa15fdc03765737f8cfa6
+// source-sha256=d042fe012299c6328ebcf0e4cdbdb40b49b95886364fbfd07ef55064fbd4e415
 // Edit the source, then run biome generate.
 
 package polski.exam.data.oracle
@@ -206,6 +206,7 @@ data class ExamModuleRow(
     val order: Int,
     val durationSeconds: Int,
     val maximumQuarter: Int,
+    val writingGuidance: String? = null,
 )
 
 data class ListeningTaskRow(

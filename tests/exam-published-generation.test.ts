@@ -141,6 +141,28 @@ describe.skipIf(!hasCli)('published exam source gate', () => {
     }
   }, 60_000);
 
+  it('rejects misplaced, blank and duplicated writing guidance at authored source lines', async () => {
+    for (const fault of ['listening', 'blank', 'inline']) {
+      const { root, directory, publication, audioManifest } = fixture();
+      const cover = join(directory, 'modules.core-data');
+      const source = readFileSync(cover, 'utf8');
+      if (fault === 'listening') {
+        writeFileSync(cover, source.replace('module: listening', 'module: listening\n  writingGuidance: "KRYTERIA OCENY"'));
+      } else if (fault === 'blank') {
+        writeFileSync(cover, source.replace(/writingGuidance: "[^"]+"/, 'writingGuidance: "   "'));
+      }
+      if (fault === 'inline') {
+        const writing = join(directory, 'writing.core-data');
+        writeFileSync(writing, readFileSync(writing, 'utf8').replace('instruction: "', 'instruction: "KRYTERIA OCENY '));
+      }
+      await expect(validateSources(cli, { root, publication, audioManifest })).rejects.toThrow(
+        fault === 'inline'
+          ? /writing\.core-data:\d+:\d+:.*duplicate.*criteria/i
+          : /modules\.core-data:\d+:\d+:.*writingGuidance/i,
+      );
+    }
+  }, 60_000);
+
   it('preserves every source value, six stable routes and ten dated P9 routes', async () => {
     const papers = await validateSources(cli);
     const reader = pathToFileURL(join(dirname(cli), 'support/data-reader.mjs')).href;

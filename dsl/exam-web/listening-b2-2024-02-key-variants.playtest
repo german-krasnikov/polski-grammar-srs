@@ -1,0 +1,13 @@
+TEST "B2 February 2024 listening key notation confirms natural printed forms" PROFILE playmode
+  open exam="B2 Certyfikat 2024-02" module="listening"
+  advanceTask count=4
+  ASSERT media.taskLabel == "Задание 5 / 5"
+  enterListening index=1 slot=1 text="Na drodze zapadł się asfalt."
+  enterListening index=2 slot=1 text="Sieć tuneli zbudowanych przez bobry."
+  submit
+  inspectReview index=31
+  ASSERT grammar.reviewStatus == "correct"
+  inspectReview index=32
+  ASSERT grammar.reviewStatus == "correct"
+  ASSERT exam.scoreDetail == "2 / 40 баллов"
+END

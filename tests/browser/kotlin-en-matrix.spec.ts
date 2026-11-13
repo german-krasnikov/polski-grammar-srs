@@ -1,5 +1,4 @@
 import { expect, test, type Locator } from '@playwright/test';
-import { continueIntroductionIfPresent } from './kotlin-introduction';
 
 // EN-24 (UC-09 part 2/2 minimum, Plans/Kotlin/EnRuPackPlan.md §6): the one live English matrix
 // table on the web host, read from `lang/en/forms.generated.json` through `MatrixTableViewModel` —
@@ -22,11 +21,15 @@ async function tableRows(section: Locator): Promise<string[][]> {
   );
 }
 
-test('English person × tense table shows real, irregular forms.generated.json(en) values', async ({ page }) => {
-  await page.goto('/');
-  await continueIntroductionIfPresent(page);
-  await page.getByRole('button', { name: 'Таблицы и схема' }).click();
+async function openEnglishVerbMatrix(page: import('@playwright/test').Page) {
+  await page.goto('/#/settings');
+  await page.getByRole('combobox', { name: 'Изучаемый язык' }).selectOption('en');
+  await page.goto('/#/matrix');
   await page.click('#matrix-section-verbs');
+}
+
+test('English person × tense table shows real, irregular forms.generated.json(en) values', async ({ page }) => {
+  await openEnglishVerbMatrix(page);
 
   const enSection = page.locator('section.matrix-section').filter({ has: page.getByRole('heading', { name: /English/ }) });
   await expect(enSection).toBeVisible();
@@ -50,10 +53,7 @@ test('English person × tense table shows real, irregular forms.generated.json(e
 });
 
 test('do-support table shows do/does present split, invariant "did", and no future do-support', async ({ page }) => {
-  await page.goto('/');
-  await continueIntroductionIfPresent(page);
-  await page.getByRole('button', { name: 'Таблицы и схема' }).click();
-  await page.click('#matrix-section-verbs');
+  await openEnglishVerbMatrix(page);
 
   const doSection = page.locator('section.matrix-section').filter({ has: page.getByRole('heading', { name: /do-support/ }) });
   await expect(doSection).toBeVisible();

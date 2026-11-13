@@ -396,6 +396,7 @@ GRAMMAR_ITEM {
   context: "Ewelina nie wie, kim jest ta pani. (zna) → ___"
   correctAnswer: "Ewelina nie zna tej pani."
   pointsQuarter: 4
+  gradingMode: open_manual
 }
 GRAMMAR_ITEM {
   itemId: B1-2017-g7-2
@@ -404,6 +405,7 @@ GRAMMAR_ITEM {
   context: "Jestem starszy niż ty. (od) → ___"
   correctAnswer: "Jestem starszy od ciebie."
   pointsQuarter: 4
+  gradingMode: open_manual
 }
 GRAMMAR_ITEM {
   itemId: B1-2017-g7-3
@@ -412,6 +414,7 @@ GRAMMAR_ITEM {
   context: "Magdę interesują stare fotografie. (interesuje się) → ___"
   correctAnswer: "Magda interesuje się starymi fotografiami."
   pointsQuarter: 4
+  gradingMode: open_manual
 }
 GRAMMAR_ITEM {
   itemId: B1-2017-g7-4
@@ -420,6 +423,7 @@ GRAMMAR_ITEM {
   context: "Michel jest francuskim studentem. (to) → ___"
   correctAnswer: "Michel to francuski student."
   pointsQuarter: 4
+  gradingMode: open_manual
 }
 GRAMMAR_ITEM {
   itemId: B1-2017-g7-5
@@ -428,6 +432,7 @@ GRAMMAR_ITEM {
   context: "Jak nazywa się autor tej powieści? (napisał) → ___"
   correctAnswer: "Kto napisał tę powieść."
   pointsQuarter: 4
+  gradingMode: open_manual
 }
 GRAMMAR_ITEM {
   itemId: B1-2019-g1
@@ -6368,7 +6373,7 @@ GRAMMAR_ITEM {
   itemId: certyfikat-polski-C1-2022-03-g1-q1
   testRef: certyfikat-polski-C1-2022-03-grammar-1
   questionType: fill_gap
-  context: "()"
+  context: "(3)"
   correctAnswer: trzema
   pointsQuarter: 2
 }
@@ -6416,7 +6421,7 @@ GRAMMAR_ITEM {
   itemId: certyfikat-polski-C1-2022-03-g1-q7
   testRef: certyfikat-polski-C1-2022-03-grammar-1
   questionType: fill_gap
-  context: "()"
+  context: "(40)"
   correctAnswer: "czterdzieści"
   pointsQuarter: 2
 }
@@ -7037,7 +7042,7 @@ GRAMMAR_ITEM {
   itemId: certyfikat-polski-C1-2022-11-g1-q9
   testRef: certyfikat-polski-C1-2022-11-grammar-1
   questionType: fill_gap
-  context: "()"
+  context: "(30)"
   correctAnswer: trzydziestu
   pointsQuarter: 2
 }
@@ -7594,7 +7599,7 @@ GRAMMAR_ITEM {
   itemId: certyfikat-polski-C1-2023-04-g1-q3
   testRef: certyfikat-polski-C1-2023-04-grammar-1
   questionType: fill_gap
-  context: "()"
+  context: "(2)"
   correctAnswer: dwoma
   pointsQuarter: 2
 }
@@ -7626,7 +7631,7 @@ GRAMMAR_ITEM {
   itemId: certyfikat-polski-C1-2023-04-g1-q7
   testRef: certyfikat-polski-C1-2023-04-grammar-1
   questionType: fill_gap
-  context: "()"
+  context: "(300)"
   correctAnswer: trzystu
   pointsQuarter: 2
 }
@@ -7642,7 +7647,7 @@ GRAMMAR_ITEM {
   itemId: certyfikat-polski-C1-2023-04-g1-q9
   testRef: certyfikat-polski-C1-2023-04-grammar-1
   questionType: fill_gap
-  context: "()"
+  context: "(3)"
   correctAnswer: Trzem
   pointsQuarter: 2
 }
@@ -8183,7 +8188,7 @@ GRAMMAR_ITEM {
   itemId: certyfikat-polski-C1-2023-11-g1-q1
   testRef: certyfikat-polski-C1-2023-11-grammar-1
   questionType: fill_gap
-  context: "()"
+  context: "(300)"
   correctAnswer: trzystu
   pointsQuarter: 2
 }
@@ -8207,7 +8212,7 @@ GRAMMAR_ITEM {
   itemId: certyfikat-polski-C1-2023-11-g1-q4
   testRef: certyfikat-polski-C1-2023-11-grammar-1
   questionType: fill_gap
-  context: "()"
+  context: "(4)"
   correctAnswer: czworga
   pointsQuarter: 2
 }
@@ -8223,7 +8228,7 @@ GRAMMAR_ITEM {
   itemId: certyfikat-polski-C1-2023-11-g1-q6
   testRef: certyfikat-polski-C1-2023-11-grammar-1
   questionType: fill_gap
-  context: "()"
+  context: "(50)"
   correctAnswer: "pięćdziesięciu"
   pointsQuarter: 2
 }
@@ -8239,7 +8244,7 @@ GRAMMAR_ITEM {
   itemId: certyfikat-polski-C1-2023-11-g1-q8
   testRef: certyfikat-polski-C1-2023-11-grammar-1
   questionType: fill_gap
-  context: "()"
+  context: "(10)"
   correctAnswer: "dziesięciu"
   pointsQuarter: 2
 }

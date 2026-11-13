@@ -2,6 +2,7 @@ TEST "C1 2022-03 official Writing set I retains Polish drafts and awaits manual 
   open exam="C1 Certyfikat 2022-03" module="writing"
   ASSERT writing.setChoiceCount == 3
   selectWritingSet set="I"
+  openWritingGuidance
   ASSERT writing.taskLabel == "Задание 1 / 2"
   ASSERT writing.instructionOpening == "INSTRUKCJA WYKONANIA ZADAŃ W tej części egzaminu znajdują się trzy zestawy."
   ASSERT writing.promptOpening == "Jest Pani/Pan prezesem Fundacji „Uśmiech” działającej na rzecz chorych dzieci. Chce Pani/Pan pomóc w wyposażeniu sali zabaw dla małych pacjentów jednego ze szpitali. Proszę napisać w tej sprawie list do dyrekcji placówki."

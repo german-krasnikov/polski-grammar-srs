@@ -6,6 +6,12 @@ LISTENING_ANSWER_VARIANT {
   earnedQuarter: 4
 }
 LISTENING_ANSWER_VARIANT {
+  variantId: certyfikat-polski-B2-2024-02-l5-q1-v2
+  questionRef: certyfikat-polski-B2-2024-02-l5-q1
+  answer: "Na drodze zapadł się asfalt."
+  earnedQuarter: 4
+}
+LISTENING_ANSWER_VARIANT {
   variantId: certyfikat-polski-B2-2024-02-l5-q2-v1
   questionRef: certyfikat-polski-B2-2024-02-l5-q2
   answer: labirynt
@@ -21,6 +27,24 @@ LISTENING_ANSWER_VARIANT {
   variantId: certyfikat-polski-B2-2024-02-l5-q2-v3
   questionRef: certyfikat-polski-B2-2024-02-l5-q2
   answer: "podziemne tunele"
+  earnedQuarter: 4
+}
+LISTENING_ANSWER_VARIANT {
+  variantId: certyfikat-polski-B2-2024-02-l5-q2-v4
+  questionRef: certyfikat-polski-B2-2024-02-l5-q2
+  answer: "Sieć tuneli."
+  earnedQuarter: 4
+}
+LISTENING_ANSWER_VARIANT {
+  variantId: certyfikat-polski-B2-2024-02-l5-q2-v5
+  questionRef: certyfikat-polski-B2-2024-02-l5-q2
+  answer: "Sieć korytarzy zbudowanych przez bobry."
+  earnedQuarter: 4
+}
+LISTENING_ANSWER_VARIANT {
+  variantId: certyfikat-polski-B2-2024-02-l5-q2-v6
+  questionRef: certyfikat-polski-B2-2024-02-l5-q2
+  answer: "Sieć tuneli zbudowanych przez bobry."
   earnedQuarter: 4
 }
 LISTENING_ANSWER_VARIANT {
