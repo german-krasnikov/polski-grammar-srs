@@ -38,6 +38,239 @@ final class NativeExamUITests: XCTestCase {
         return app
     }
 
+    private func setImmediateFeedback(_ enabled: Bool, in app: XCUIApplication) {
+        app.buttons["openSettings"].tap()
+        let toggle = app.switches["settingsExamImmediateFeedback"]
+        XCTAssertTrue(toggle.waitForExistence(timeout: 5), app.debugDescription)
+        if (toggle.value as? String == "1") != enabled {
+            toggle.coordinate(withNormalizedOffset: CGVector(dx: 0.95, dy: 0.5)).tap()
+        }
+        XCTAssertEqual(toggle.value as? String, enabled ? "1" : "0", app.debugDescription)
+        app.buttons["Готово"].tap()
+    }
+
+    private func setAppearance(_ label: String, in app: XCUIApplication) {
+        app.buttons["openSettings"].tap()
+        let theme = app.buttons.matching(NSPredicate(format: "label BEGINSWITH %@", "Тема")).firstMatch
+        for _ in 0..<7 {
+            if theme.isHittable { break }
+            app.swipeDown()
+        }
+        XCTAssertTrue(theme.isHittable, app.debugDescription)
+        if !theme.label.contains(label) {
+            theme.tap()
+            let option = app.descendants(matching: .any)[label].firstMatch
+            XCTAssertTrue(option.waitForExistence(timeout: 5), app.debugDescription)
+            option.tap()
+        }
+        app.buttons["Готово"].tap()
+    }
+
+    func testGrammarPracticeFeedbackLocksFirstChoiceAndAdvancesAfterTwoSeconds() {
+        let app = openPaper("b1-2017")
+        setImmediateFeedback(true, in: app)
+        app.buttons["exam-module-grammar"].tap()
+        let wrong = app.buttons["exam-option-dobry teatr"]
+        let correct = app.buttons["exam-option-dobrego teatru"]
+        XCTAssertTrue(wrong.waitForExistence(timeout: 5), app.debugDescription)
+        wrong.tap()
+        let feedback = app.staticTexts.matching(NSPredicate(
+            format: "identifier == %@ AND label CONTAINS %@ AND label CONTAINS %@ AND label CONTAINS %@",
+            "exam-feedback-B1-2017-g1-1", "Неверно", "dobry teatr", "dobrego teatru")).firstMatch
+        XCTAssertTrue(feedback.waitForExistence(timeout: 2), app.debugDescription)
+        let second = XCTNSPredicateExpectation(predicate: NSPredicate(format: "label BEGINSWITH '2 /'"),
+                                                object: app.staticTexts["exam-grammar-position"])
+        XCTAssertEqual(XCTWaiter.wait(for: [second], timeout: 5), .completed, app.debugDescription)
+        app.buttons["exam-previous"].tap()
+        XCTAssertTrue(app.staticTexts["exam-locked-answer"].waitForExistence(timeout: 5), app.debugDescription)
+        XCTAssertFalse(wrong.isEnabled)
+        XCTAssertFalse(correct.isEnabled)
+        XCTAssertFalse(feedback.exists)
+    }
+
+    func testReadingPracticeFocusStaysInPassageAndSettingUnlocksDraft() {
+        let app = openPaper("b1-2017")
+        setImmediateFeedback(true, in: app)
+        app.buttons["exam-module-reading"].tap()
+        let wrong = app.buttons.matching(NSPredicate(format: "label CONTAINS %@", "kioski internetowe są popularne w całym kraju")).firstMatch
+        XCTAssertTrue(wrong.waitForExistence(timeout: 5), app.debugDescription)
+        wrong.tap()
+        let feedback = app.descendants(matching: .any).matching(NSPredicate(format: "identifier BEGINSWITH %@", "exam-feedback-")).firstMatch
+        XCTAssertTrue(feedback.waitForExistence(timeout: 3), app.debugDescription)
+        XCTAssertTrue(feedback.label.contains("kioski internetowe oferują dostęp do Internetu"), feedback.label)
+        XCTAssertFalse(wrong.isEnabled)
+        setImmediateFeedback(false, in: app)
+        let unlocked = XCTNSPredicateExpectation(predicate: NSPredicate(format: "enabled == true"), object: wrong)
+        XCTAssertEqual(XCTWaiter.wait(for: [unlocked], timeout: 5), .completed, app.debugDescription)
+        XCTAssertFalse(feedback.exists)
+        let source = app.buttons.matching(NSPredicate(format: "label CONTAINS %@", "kioski internetowe oferują dostęp do Internetu")).firstMatch
+        source.tap()
+        let selected = XCTNSPredicateExpectation(predicate: NSPredicate(format: "selected == true"), object: source)
+        XCTAssertEqual(XCTWaiter.wait(for: [selected], timeout: 5), .completed, app.debugDescription)
+        setImmediateFeedback(true, in: app)
+        let editable = XCTNSPredicateExpectation(predicate: NSPredicate(format: "enabled == true"), object: source)
+        XCTAssertEqual(XCTWaiter.wait(for: [editable], timeout: 5), .completed,
+                       "Turning practice back on keeps the reducer answer as an editable draft\n\(app.debugDescription)")
+        XCTAssertEqual(app.staticTexts["exam-part-position"].label, "1 / 5")
+    }
+
+    func testListeningPracticeFeedbackKeepsBundledSegmentPlayingInCurrentTask() {
+        let app = openPaper("b1-2019")
+        setImmediateFeedback(true, in: app)
+        app.buttons["exam-module-listening"].tap()
+        app.buttons["exam-audio-play"].tap()
+        let elapsed = app.staticTexts["exam-audio-elapsed"]
+        XCTAssertTrue(elapsed.waitForExistence(timeout: 5), app.debugDescription)
+        let wrong = app.buttons.matching(NSPredicate(format: "label CONTAINS %@", "a) w kinie.")).firstMatch
+        XCTAssertTrue(wrong.waitForExistence(timeout: 5), app.debugDescription)
+        wrong.tap()
+        let feedback = app.descendants(matching: .any).matching(NSPredicate(format: "identifier BEGINSWITH %@", "exam-feedback-")).firstMatch
+        XCTAssertTrue(feedback.waitForExistence(timeout: 3), app.debugDescription)
+        XCTAssertTrue(feedback.label.contains("b) w bibliotece."), feedback.label)
+        let before = elapsed.label
+        let later = XCTNSPredicateExpectation(predicate: NSPredicate(format: "label != %@", before), object: elapsed)
+        XCTAssertEqual(XCTWaiter.wait(for: [later], timeout: 5), .completed, app.debugDescription)
+        XCTAssertEqual(app.staticTexts["exam-part-position"].label, "1 / 5")
+        XCTAssertTrue(app.buttons["exam-audio-play"].label.contains("Пауза"), app.debugDescription)
+    }
+
+    func testReadingAndListeningFrozenReportsNameWrongSourceAndBlank() {
+        let app = openPaper("b1-2017")
+        setImmediateFeedback(true, in: app)
+        app.buttons["exam-module-reading"].tap()
+        app.buttons.matching(NSPredicate(format: "label == %@", "kioski internetowe są popularne w całym kraju")).firstMatch.tap()
+        app.buttons["exam-submit"].tap()
+        XCTAssertTrue(app.staticTexts["exam-part-result"].waitForExistence(timeout: 5), app.debugDescription)
+        let wrong = app.descendants(matching: .any)["exam-review-B1-2017-r1-1"].firstMatch
+        XCTAssertTrue(wrong.waitForExistence(timeout: 5), app.debugDescription)
+        XCTAssertTrue(wrong.label.contains("Ваш ответ: kioski internetowe są popularne w całym kraju"), wrong.label)
+        XCTAssertTrue(wrong.label.contains("kioski internetowe oferują dostęp do Internetu"), wrong.label)
+        let blank = app.descendants(matching: .any)["exam-review-B1-2017-r1-2"].firstMatch
+        XCTAssertTrue(blank.label.contains("Ответ не введён"), blank.label)
+        app.buttons["exam-exit-part"].tap()
+        app.buttons["exam-module-listening"].tap()
+        app.buttons.matching(NSPredicate(format: "label == %@", "w kinie")).firstMatch.tap()
+        app.buttons["exam-submit"].tap()
+        let listeningWrong = app.descendants(matching: .any)["exam-review-B1-2017-l1-1"].firstMatch
+        XCTAssertTrue(listeningWrong.waitForExistence(timeout: 5), app.debugDescription)
+        XCTAssertTrue(listeningWrong.label.contains("Ваш ответ"), listeningWrong.label)
+        XCTAssertTrue(listeningWrong.label.contains("Образцы из ключа"), listeningWrong.label)
+    }
+
+    func testListeningPartialAndManualReviewRemainDistinct() {
+        let app = openPaper("b2-2017")
+        setImmediateFeedback(true, in: app)
+        app.buttons["exam-module-listening"].tap()
+        for _ in 0..<3 { app.buttons["exam-next"].tap() }
+        let first = app.buttons.matching(NSPredicate(format: "label == %@", "1")).firstMatch
+        let third = app.buttons.matching(NSPredicate(format: "label == %@", "3")).firstMatch
+        XCTAssertTrue(first.waitForExistence(timeout: 5), app.debugDescription)
+        first.tap()
+        XCTAssertTrue(third.isEnabled, "An incomplete source set must remain editable")
+        third.tap()
+        app.buttons["exam-next"].tap()
+        let input = app.textFields.matching(NSPredicate(format: "identifier BEGINSWITH %@", "exam-answer-")).firstMatch
+        XCTAssertTrue(input.waitForExistence(timeout: 5), app.debugDescription)
+        input.tap()
+        input.typeText("uprzejmą")
+        app.buttons.matching(NSPredicate(format: "identifier BEGINSWITH %@", "exam-check-")).firstMatch.tap()
+        app.buttons["exam-submit"].tap()
+        let reviews = app.descendants(matching: .any).matching(NSPredicate(format: "identifier BEGINSWITH %@", "exam-review-"))
+        let partial = reviews.matching(NSPredicate(format: "label CONTAINS %@", "Ваш ответ: 1|3")).firstMatch
+        XCTAssertTrue(partial.waitForExistence(timeout: 5), app.debugDescription)
+        XCTAssertTrue(partial.label.contains("Частично"), partial.label)
+        XCTAssertTrue(partial.label.contains("+1 / 2"), partial.label)
+        let pending = reviews.matching(NSPredicate(format: "label CONTAINS %@", "Ваш ответ: uprzejmą")).firstMatch
+        XCTAssertTrue(pending.waitForExistence(timeout: 5), app.debugDescription)
+        XCTAssertTrue(pending.label.contains("Требуется ручная проверка"), pending.label)
+    }
+
+    func testTimedListeningChoicesStayEditableWithoutEarlyKey() {
+        let app = openPaper("b1-2019")
+        setImmediateFeedback(true, in: app)
+        app.buttons["exam-start-timed"].tap()
+        let first = app.buttons.matching(NSPredicate(format: "label == %@", "a) w kinie.")).firstMatch
+        let second = app.buttons.matching(NSPredicate(format: "label == %@", "b) w bibliotece.")).firstMatch
+        XCTAssertTrue(first.waitForExistence(timeout: 5), app.debugDescription)
+        first.tap()
+        XCTAssertTrue(second.isEnabled)
+        XCTAssertFalse(app.descendants(matching: .any).matching(NSPredicate(format: "identifier BEGINSWITH %@", "exam-feedback-")).firstMatch.exists)
+        second.tap()
+        XCTAssertTrue(second.isSelected)
+    }
+
+    func testReadingLastAnsweredRowNeverChangesPassageWithoutNext() {
+        let app = openPaper("b1-2017")
+        setImmediateFeedback(true, in: app)
+        app.buttons["exam-module-reading"].tap()
+        let last = app.buttons.matching(NSPredicate(format: "identifier BEGINSWITH %@", "exam-option-B1-2017-r1-5-")).firstMatch
+        for _ in 0..<5 {
+            if last.isHittable { break }
+            app.scrollViews.firstMatch.swipeUp()
+        }
+        XCTAssertTrue(last.isHittable, app.debugDescription)
+        last.tap()
+        Thread.sleep(forTimeInterval: 2.5)
+        XCTAssertEqual(app.staticTexts["exam-part-position"].label, "1 / 5")
+        app.buttons["exam-next"].tap()
+        XCTAssertEqual(app.staticTexts["exam-part-position"].label, "2 / 5")
+    }
+
+    func testBackgroundClearsGrammarVerdictWithoutGhostAdvance() {
+        let app = openPaper("b1-2017")
+        setImmediateFeedback(true, in: app)
+        app.buttons["exam-module-grammar"].tap()
+        app.buttons["exam-option-dobry teatr"].tap()
+        XCUIDevice.shared.press(.home)
+        Thread.sleep(forTimeInterval: 2.5)
+        app.activate()
+        XCTAssertEqual(app.staticTexts["exam-grammar-position"].label, "1 / 50")
+        XCTAssertTrue(app.staticTexts["exam-locked-answer"].waitForExistence(timeout: 5), app.debugDescription)
+        XCTAssertFalse(app.buttons["exam-option-dobry teatr"].isEnabled)
+        XCTAssertFalse(app.descendants(matching: .any)["exam-feedback-B1-2017-g1-1"].exists)
+    }
+
+    func testGrammarFrozenReportNamesWrongChoiceSourceAndBlank() {
+        let app = openPaper("b1-2017")
+        setImmediateFeedback(true, in: app)
+        app.buttons["exam-module-grammar"].tap()
+        app.buttons["exam-option-dobry teatr"].tap()
+        for _ in 0..<60 {
+            if app.buttons["exam-submit"].exists { break }
+            app.buttons["exam-next"].tap()
+        }
+        XCTAssertTrue(app.buttons["exam-submit"].waitForExistence(timeout: 5), app.debugDescription)
+        app.buttons["exam-submit"].tap()
+        let wrong = app.descendants(matching: .any)["exam-review-B1-2017-g1-1"].firstMatch
+        XCTAssertTrue(wrong.waitForExistence(timeout: 5), app.debugDescription)
+        XCTAssertTrue(wrong.label.contains("Ваш ответ: dobry teatr"), wrong.label)
+        XCTAssertTrue(wrong.label.contains("Образцы из ключа: dobrego teatru"), wrong.label)
+        let blank = app.descendants(matching: .any)["exam-review-B1-2017-g1-2"].firstMatch
+        XCTAssertTrue(blank.label.contains("Ответ не введён"), blank.label)
+    }
+
+    func testPracticeReportLightAndDarkScreenshotsPreserveSourceText() {
+        let app = openPaper("b1-2017")
+        setImmediateFeedback(true, in: app)
+        app.buttons["exam-module-reading"].tap()
+        app.buttons.matching(NSPredicate(format: "label == %@", "kioski internetowe są popularne w całym kraju")).firstMatch.tap()
+        app.buttons["exam-submit"].tap()
+        let row = app.descendants(matching: .any)["exam-review-B1-2017-r1-1"].firstMatch
+        XCTAssertTrue(row.waitForExistence(timeout: 5), app.debugDescription)
+        for (theme, name) in [("Светлая", "p14-native-reading-review-light"),
+                              ("Тёмная", "p14-native-reading-review-dark")] {
+            setAppearance(theme, in: app)
+            XCTAssertTrue(row.label.contains("kioski internetowe oferują dostęp do Internetu"), row.label)
+            for _ in 0..<8 where !row.isHittable { app.swipeUp() }
+            XCTAssertTrue(row.isHittable, "Capture the review itself rather than the question list")
+            let shot = XCTAttachment(screenshot: app.screenshot())
+            shot.name = name
+            shot.lifetime = .keepAlways
+            add(shot)
+        }
+        setAppearance("Системная", in: app)
+    }
+
     func testPublishedReadingAndWritingAreInteractive() {
         let app = openPaper()
         app.buttons["exam-module-reading"].tap()

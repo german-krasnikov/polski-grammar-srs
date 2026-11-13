@@ -153,6 +153,26 @@ class IosExamSessionTest {
     }
 
     @Test
+    fun timedReviewAppearsOnlyAfterPartFreezeAndRejectsLateDraft() {
+        val session = IosExamSession()
+        session.selectExam("b1-2019")
+        session.startTimed(1_000L)
+        val question = session.view().getValue("part").jsonObject.getValue("questions").jsonArray.first().jsonObject
+        val id = question.getValue("id").jsonPrimitive.content
+        assertTrue(session.view().getValue("sitting").jsonObject.getValue("reviews").jsonArray.isEmpty())
+        session.answerInModule("listening", id, "a) w kinie.", 1_001L)
+        session.submitInModule("listening", 1_002L)
+        val frozen = session.view().getValue("sitting").jsonObject.getValue("reviews").jsonArray.first().jsonObject
+        assertEquals("listening", frozen.getValue("module").jsonPrimitive.content)
+        val review = frozen.getValue("review").jsonArray
+        assertEquals("a) w kinie.", review.first().jsonObject.getValue("chosenAnswer").jsonPrimitive.content)
+        assertEquals(JsonNull, review[1].jsonObject.getValue("chosenAnswer"))
+        session.answerInModule("listening", id, "b) w bibliotece.", 1_003L)
+        assertEquals(review, session.view().getValue("sitting").jsonObject.getValue("reviews").jsonArray.first()
+            .jsonObject.getValue("review").jsonArray)
+    }
+
+    @Test
     fun publishedPartsExposeSourceCardsAndKeepIndependentDrafts() {
         val session = IosExamSession()
         session.selectExam("b1-2019")

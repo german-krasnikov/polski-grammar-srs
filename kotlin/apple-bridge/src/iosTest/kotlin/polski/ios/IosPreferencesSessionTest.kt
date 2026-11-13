@@ -32,9 +32,13 @@ class IosPreferencesSessionTest {
         try {
             val session = IosPreferencesSession(defaults)
             assertEquals(true, session.snapshotBool("immediateExamFeedbackEnabled"))
+            val observed = mutableListOf<String>()
+            session.onState = { observed += it }
             assertEquals("Неверное значение", session.set("immediateExamFeedbackEnabled", "maybe"))
             assertNull(session.set("immediateExamFeedbackEnabled", "false"))
             assertEquals(false, session.snapshotBool("immediateExamFeedbackEnabled"))
+            assertEquals(false, Json.parseToJsonElement(observed.last()).jsonObject
+                .getValue("immediateExamFeedbackEnabled").jsonPrimitive.boolean)
             val exported = assertNotNull(session.exportJson())
             assertEquals(false, assertIs<PreferencesDecode.Loaded>(UserPreferencesCodec.decode(exported)).value.immediateExamFeedbackEnabled)
             val restarted = IosPreferencesSession(defaults)
