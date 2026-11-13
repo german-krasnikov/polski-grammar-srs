@@ -123,6 +123,7 @@ RECIPE {
   ]
   tags: [acc]
   includeNounGenderTag: true
+  tileTargetSlots: [adjective noun]
 }
 RECIPE {
   skill: case.acc.m
@@ -185,6 +186,7 @@ RECIPE {
   ]
   tags: [acc]
   includeNounGenderTag: true
+  tileTargetSlots: [adjective noun]
 }
 RECIPE {
   skill: case.gen.neg
@@ -242,6 +244,7 @@ RECIPE {
     }
   ]
   tags: [gen negation]
+  tileTargetSlots: [adjective noun]
 }
 RECIPE {
   skill: case.inst

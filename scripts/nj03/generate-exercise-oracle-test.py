@@ -20,19 +20,41 @@ ORACLE, TARGET, EXPECTED = ROOT / sys.argv[1], ROOT / sys.argv[2], int(sys.argv[
 
 def ks(s): return s.replace('\\','\\\\').replace('"','\\"').replace('$','\\$')
 
+def kt_str_list(items):
+    return 'listOf()' if not items else f'listOf({", ".join(f""""{ks(t)}\"""" for t in items)})'
+
+def kt_str_map(d):
+    return 'mapOf()' if not d else f'mapOf({", ".join(f""""{ks(k)}" to "{ks(v)}\"""" for k, v in d.items())})'
+
+def kt_span_map(d):
+    return 'mapOf()' if not d else f'mapOf({", ".join(f""""{ks(k)}" to ({v[0]} until {v[1]})""" for k, v in d.items())})'
+
+def kt_tile_phrase(tp):
+    if tp is None:
+        return 'null'
+    return (f'TilePhrase("{ks(tp["construction"])}", {kt_str_map(tp["bundle"])}, '
+            f'"{ks(tp["text"])}", {kt_span_map(tp["slotSpans"])})')
+
 def kt_exercise(ex):
     acc = ex.get('accepted') or []
-    acc_s = 'listOf()' if not acc else f'listOf({", ".join(f""""{ks(a)}\"""" for a in acc)})'
     ch = [f'FormChange("{ks(c["from"])}", "{ks(c["to"])}", "{ks(c["reason"])}")' for c in ex['changes']]
     ch_s = 'listOf()' if not ch else f'listOf({", ".join(ch)})'
-    return (f'Exercise("{ks(ex["id"])}", "{ks(ex["primarySkill"])}", '
+    base = (f'Exercise("{ks(ex["id"])}", "{ks(ex["primarySkill"])}", '
             f'"{ks(ex["source"])}", "{ks(ex["prompt"])}", "{ks(ex["expected"])}", '
-            f'{acc_s}, "{ks(ex["explanation"])}", '
-            f'listOf({", ".join(f""""{ks(t)}\"""" for t in ex["tags"])}), '
+            f'{kt_str_list(acc)}, "{ks(ex["explanation"])}", '
+            f'{kt_str_list(ex["tags"])}, '
             f'"{ks(ex["nounId"])}", "{ks(ex["adjectiveId"])}", '
             f'PossessiveId.fromId("{ks(ex["possessive"])}"), '
             f'NumberGram.fromId("{ks(ex["number"])}"), '
-            f'{ch_s})')
+            f'{ch_s}')
+    # SB-5 pilot opt-in (case.acc.f/m, case.gen.neg): oracle entries may carry tileTargetSlots/
+    # tilePhrase, a Kotlin-only addition with no React equivalent — append only when present so
+    # every untouched case keeps relying on Exercise's trailing defaults (emptyList()/null).
+    tile_targets = ex.get('tileTargetSlots')
+    tile_phrase = ex.get('tilePhrase')
+    if tile_targets or tile_phrase:
+        base += f', {kt_str_list(tile_targets or [])}, {kt_tile_phrase(tile_phrase)}'
+    return base + ')'
 
 def emit(case):
     cid = case['id']; inp = case['input']; ctx = case['context']

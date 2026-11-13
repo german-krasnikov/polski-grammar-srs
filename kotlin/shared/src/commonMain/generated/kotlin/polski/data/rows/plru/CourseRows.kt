@@ -5720,6 +5720,7 @@ private fun skillRecipeRowRowsPart0(): List<SkillRecipeRow> = listOf(
         ),
         tags = listOf("acc"),
         includeNounGenderTag = true,
+        tileTargetSlots = listOf("adjective", "noun"),
     ),
     SkillRecipeRow(
         skill = "case.acc.m",
@@ -5794,6 +5795,7 @@ private fun skillRecipeRowRowsPart0(): List<SkillRecipeRow> = listOf(
         ),
         tags = listOf("acc"),
         includeNounGenderTag = true,
+        tileTargetSlots = listOf("adjective", "noun"),
     ),
     SkillRecipeRow(
         skill = "case.gen.neg",
@@ -5863,6 +5865,7 @@ private fun skillRecipeRowRowsPart0(): List<SkillRecipeRow> = listOf(
             ),
         ),
         tags = listOf("gen", "negation"),
+        tileTargetSlots = listOf("adjective", "noun"),
     ),
     SkillRecipeRow(
         skill = "case.inst",
