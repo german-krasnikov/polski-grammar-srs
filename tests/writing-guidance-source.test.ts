@@ -46,7 +46,7 @@ describe.skipIf(!hasCli)('official writing guidance source', () => {
       const tasks = sources.find((source) => source.record === 'WritingTaskRow')!.rows.map((row) => row.value);
       taskCount += tasks.length;
       for (const task of tasks) {
-        expect(task.instruction, task.taskId).not.toMatch(/KRYTERIA OCENY|ZASADY OCENIANIA ZADAŃ/);
+        expect(task.instruction, String(task.taskId)).not.toMatch(/KRYTERIA OCENY|ZASADY OCENIANIA ZADAŃ/);
       }
     }
     expect(taskCount).toBe(91);
@@ -57,7 +57,7 @@ describe.skipIf(!hasCli)('official writing guidance source', () => {
       const sources = discoverSources(cli, join(repo, 'exams/pl/certyfikat-polski', paper), reader);
       const tasks = sources.find((source) => source.record === 'WritingTaskRow')!.rows.map((row) => row.value);
       expect(tasks, paper).toHaveLength(5);
-      for (const task of tasks) expect(task.instruction, task.taskId).not.toContain('KRYTERIA OCENY');
+      for (const task of tasks) expect(task.instruction, String(task.taskId)).not.toContain('KRYTERIA OCENY');
     }
   });
 });
