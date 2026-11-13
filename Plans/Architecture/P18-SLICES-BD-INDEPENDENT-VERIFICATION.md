@@ -76,3 +76,18 @@ From `kotlin/`, I ran `./gradlew :shared:desktopTest :shared:jsBrowserTest :shar
 The source test `PlRuExpansionCoverageTest` checks the exact old 16-ID prefix followed by the ten P18 IDs. I also independently ran `tests/browser/kotlin-progress-migration.spec.ts` on the final JS and Wasm production distributions under Chromium (ports 4226 and 4225): **3/3 PASS on each** (`independent/{js,wasm}-migration.log`). This includes old progress import with exactly one old review, additive 26-card export and reload, plus invalid-source/retry behavior. Those checks do not require a live user's progress and did not touch Simulator storage.
 
 Independent test-only adjustment: in `tests/browser/kotlin-course-expansion-nine.spec.ts`, I made the return/reduced-motion pointer assertions require `pointer-events:auto` within 600 ms, explicitly reenabled animations before OS reduced motion, and added a normal-motion Matrix route return with a fourth persisted rating. I made no production changes, commits, or index updates. `git diff --check` and `npm run typecheck` passed after that change (`independent/typecheck-after-test-adjustment.log`).
+
+## Main merge browser test correction
+
+At Main `f8bb4fb814905371823945ee74c08937ce1bbae5`, the first integrated Wasm/Chromium course/reference run had four passes and one strict-locator failure in the added motion/route-return test. After Matrix → training navigation, `RouteSlider` temporarily keeps outgoing and incoming `.route-content` nodes during the slide. It sets `inert` and `aria-hidden="true"` on the outgoing node (`RouteSlide.kt`), and the failure's accessibility snapshot contains exactly one `Учебная карточка` region even though the raw CSS locator `.answer-sentence` matched two DOM nodes. This is a test locator issue, not evidence that two cards are accessible to users.
+
+The test now selects `page.getByRole('region', { name: 'Учебная карточка' })`, requires exactly one such accessible region, and scopes the answer, rating pointer-state and click checks to it. It retains the 600 ms pointer release assertion and the fourth persisted review count. The earlier failure, snapshot and trace remain in `../polski-grammar-srs-worktrees/recovery-logs/20261113/course-expansion/main-merge-browser.log` and `test-results/kotlin-wasm/kotlin-course-expansion-ni-9ac90-after-returning-to-training-chromium/`.
+
+On the unchanged Main production Wasm bundle (`composeApp.js` SHA-256 `c6a73233acdd8577b6bf640df0686f034aaea04b045c112b834170801f2900ff`), the failed motion case passed **1/1** with Chromium. The full affected course/reference set then passed **5/5** with Chromium, and the motion case passed **1/1** with WebKit. Commands from Main root:
+
+```sh
+KOTLIN_SPIKE_DIST=kotlin/composeApp/build/dist/wasmJs/productionExecutable KOTLIN_SPIKE_BRANCH=wasm KOTLIN_SPIKE_PORT=4230 npx playwright test tests/browser/kotlin-course-expansion-nine.spec.ts tests/browser/kotlin-course-expansion.spec.ts tests/browser/kotlin-reference-panel-leak.spec.ts --config playwright.kotlin.config.ts --project=chromium --workers=1
+KOTLIN_SPIKE_DIST=kotlin/composeApp/build/dist/wasmJs/productionExecutable KOTLIN_SPIKE_BRANCH=wasm KOTLIN_SPIKE_PORT=4231 npx playwright test tests/browser/kotlin-course-expansion-nine.spec.ts --config playwright.kotlin.config.ts --project=webkit --workers=1 --grep 'rating hit target'
+```
+
+Retained passing logs: `../polski-grammar-srs-worktrees/recovery-logs/20261113/course-expansion/main-merge-{motion-scoped,five-scoped,webkit-scoped}.log`. `npm run typecheck` and `git diff --check` also passed after the test edit. I changed only the Main browser test and this evidence; no production code, index, commit or release state was changed.
