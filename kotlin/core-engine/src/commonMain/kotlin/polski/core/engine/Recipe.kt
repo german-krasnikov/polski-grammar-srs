@@ -96,6 +96,9 @@ data class SkillRecipe(
     val numberOverride: String? = null,
     val staticOverride: StaticExercise? = null,
     val staticPool: List<StaticExercise> = emptyList(),
+    /** SB-5: the slot names of [expected]'s own construction a sentence-builder UI may turn into a
+     *  Choice tile — see [polski.core.model.CoreExercise.tileTargetSlots]. */
+    val tileTargetSlots: List<String> = emptyList(),
 )
 
 /**

@@ -49,6 +49,9 @@ data class ConstructionTemplate(
     val orderWhen: Map<String, List<SlotTemplate>> = emptyMap(),
 )
 
+/** SB-2 blueprint §3b: one slot's lexeme-category + exact required [FeatureBundle] — see [ConstructionRealizer.slotFacts]. */
+data class SlotFact(val category: String, val lexeme: String, val requiredBundle: FeatureBundle)
+
 /**
  * UniversalCorePlan.md §5.1/§5.2/§12 UC-07: realizes one construction's surface text from a
  * [FeatureBundle] and the lexemes filling its slots — the generic replacement for
@@ -77,6 +80,24 @@ class ConstructionRealizer(
             parts += text
         }
         return RealizedSentence(parts.joinToString(template.separator), spans)
+    }
+
+    /**
+     * SB-2 blueprint §3b: the lexeme-category + exact [FeatureBundle] [realize] would use for each
+     * of [construction]'s slots, given the same [bundle]/[lexicalSlots] — the per-slot facts
+     * `TileGenerator` needs to look up alternative forms, without this class leaking [templates]
+     * or duplicating [slotBundle]. Reuses the exact same `applyGovernment`/`slotBundle`/`orderWhen`
+     * resolution [realize] already does privately, so callers never re-implement agreement/
+     * government logic; [realize] itself is unchanged.
+     */
+    fun slotFacts(construction: String, bundle: FeatureBundle, lexicalSlots: Map<String, String>): Map<String, SlotFact> {
+        val template = templates[construction] ?: error("ConstructionRealizer: no template for construction=\"$construction\"")
+        val resolved = applyGovernment(template, bundle)
+        val slots = template.orderWhen.entries.firstOrNull { (condition, _) -> matches(condition, resolved) }?.value ?: template.slots
+        return slots.mapNotNull { slot ->
+            val lexeme = lexicalSlots[slot.name] ?: return@mapNotNull null
+            slot.name to SlotFact(slot.category, lexeme, slotBundle(slot, resolved, lexicalSlots))
+        }.toMap()
     }
 
     private fun applyGovernment(template: ConstructionTemplate, bundle: FeatureBundle): FeatureBundle {

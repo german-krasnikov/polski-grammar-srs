@@ -22,4 +22,15 @@ class TableMorphologyTest {
         val instBundle = mapOf(FeatureKey("Number") to FeatureValue("sg"), FeatureKey("Case") to FeatureValue("inst"))
         assertFailsWith<IllegalStateException> { morphology.form("noun:wife", instBundle) }
     }
+
+    // SB-2 blueprint §3a AC2.5: formsOf enumerates the whole paradigm (differs intentionally from form()'s error()).
+    private val paradigm: MorphologyParadigm = TableMorphology(mapOf("noun:wife" to mapOf(genBundle to "żony", nomBundle to "żona")))
+
+    @Test fun formsOfReturnsTheExactMapPassedToTheConstructorForAKnownLexeme() {
+        assertEquals(mapOf(genBundle to "żony", nomBundle to "żona"), paradigm.formsOf("noun:wife"))
+    }
+
+    @Test fun formsOfReturnsAnEmptyMapForAnUnknownLexemeRatherThanThrowing() {
+        assertEquals(emptyMap(), paradigm.formsOf("noun:unknown"))
+    }
 }

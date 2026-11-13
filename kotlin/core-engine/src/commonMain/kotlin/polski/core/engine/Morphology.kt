@@ -12,6 +12,16 @@ interface Morphology {
 }
 
 /**
+ * SB-2 blueprint §3a: enumerates a lexeme's whole paradigm — every (FeatureBundle, form)
+ * [TableMorphology] knows for it. A separate interface from [Morphology] (not a default method on
+ * it) because a future rule-based `MorphologyPlugin` (§4.4) may be unable to enumerate a
+ * productive paradigm; only a table-backed [Morphology] can promise this for free.
+ */
+fun interface MorphologyParadigm {
+    fun formsOf(lexeme: String): Map<FeatureBundle, String>
+}
+
+/**
  * UniversalCorePlan.md §1.5/§5.1: table lookup — the only [Morphology] needed now, and the only
  * one pl (a table language) will ever need. [forms] is materialized entirely at build time (a
  * converter such as `scripts/build-pack.mjs`, UniversalCorePlan.md §8) from a language's own
@@ -19,8 +29,10 @@ interface Morphology {
  * language whose morphology is too productive for a table gets `MorphologyPlugin` (§4.4), not a
  * rule engine bolted onto this class.
  */
-class TableMorphology(private val forms: Map<String, Map<FeatureBundle, String>>) : Morphology {
+class TableMorphology(private val forms: Map<String, Map<FeatureBundle, String>>) : Morphology, MorphologyParadigm {
     override fun form(lexeme: String, bundle: FeatureBundle): String =
         forms[lexeme]?.get(bundle)
             ?: error("TableMorphology: no form for lexeme=\"$lexeme\" bundle=$bundle")
+
+    override fun formsOf(lexeme: String): Map<FeatureBundle, String> = forms[lexeme].orEmpty()
 }

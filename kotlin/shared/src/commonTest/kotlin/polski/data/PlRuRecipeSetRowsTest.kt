@@ -36,6 +36,17 @@ class PlRuRecipeSetRowsTest {
         assertEquals(false, recipe().copy(includeNounGenderTag = false).toSkillRecipe().includeNounGenderTag)
     }
 
+    // SB-5 blueprint §6: tileTargetSlots is an opt-in, pass-through field on a constructed recipe — absent defaults to empty, like numberOverride/ownerDraw.
+    @Test fun aConstructedRecipesTileTargetSlotsPassThroughToSkillRecipeAndDefaultToEmpty() {
+        assertEquals(emptyList(), recipe().toSkillRecipe().tileTargetSlots)
+        assertEquals(listOf("adjective", "noun"), recipe().copy(tileTargetSlots = listOf("adjective", "noun")).toSkillRecipe().tileTargetSlots)
+    }
+
+    @Test fun aStaticOrPooledRecipeRefusesTileTargetSlots() {
+        assertFailsWith<IllegalArgumentException> { SkillRecipeRow("a", staticOverride = static, tileTargetSlots = listOf("noun")).toSkillRecipe() }
+        assertFailsWith<IllegalArgumentException> { SkillRecipeRow("a", staticPool = listOf(static), tileTargetSlots = listOf("noun")).toSkillRecipe() }
+    }
+
     @Test fun aConstructedRecipeWithoutWhatItNeedsIsRefusedAndAPromptCanComeFromTheDrawAlone() {
         val lacking = listOf(
             recipe().copy(source = null), recipe().copy(expected = null), recipe().copy(explanationKey = null), recipe().copy(changes = null), recipe().copy(tags = null),

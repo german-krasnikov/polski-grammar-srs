@@ -1,5 +1,5 @@
 // Generated from dsl/course.data-contract, dsl/ui-copy/uicopy-oracle.core-data
-// source-sha256=07f4d769764530f59238256147033d78917ac437e0e4dbf4fbdc62012fec4854
+// source-sha256=2f8dad4084603525b9e584862776962c5c51e9affefc02cbb4e27a17ac7f120a
 // Edit the source, then run biome generate.
 
 package polski.data.oracle.uicopy
@@ -662,6 +662,7 @@ data class SkillRecipeRow(
     val numberOverride: String? = null,
     val staticOverride: StaticExerciseRow? = null,
     val staticPool: List<StaticExerciseRow>? = null,
+    val tileTargetSlots: List<String>? = null,
 )
 
 data class ChainStepRecipeRow(

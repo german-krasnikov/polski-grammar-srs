@@ -603,6 +603,8 @@ END
 # a static one writes only staticOverride: the contract has no union, so PlRuRecipeRows.kt refuses any other combination. A recipe is one row of the skill
 # it names (the mapper refuses a second one for the same skill). The owners are possessive ids; the ids of the noun and the adjective of a static exercise are
 # texts, because the other pack has its own noun and adjective records. The chain's first step has no skill: it is the first skill of the noun's gender.
+# A constructed recipe may also name tileTargetSlots (SB-5): the slot names of expected's own construction that a sentence-builder UI may turn into a
+# picker tile; absent (the default for every existing recipe) means that skill has no sentence-builder tiles. A static recipe never writes it.
 RECORD SkillRecipeRow COUNT 1..
   skill: ref SkillRow
   source: TextSpecRow OPTIONAL
@@ -617,6 +619,7 @@ RECORD SkillRecipeRow COUNT 1..
   numberOverride: string OPTIONAL
   staticOverride: StaticExerciseRow OPTIONAL
   staticPool: [StaticExerciseRow] OPTIONAL
+  tileTargetSlots: [string] OPTIONAL
 END
 
 # The second draw of a skill: one owner out of these, with the copy entry that names it in the prompt (the prompt is prefix, name, suffix).

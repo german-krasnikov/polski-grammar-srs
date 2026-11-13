@@ -109,6 +109,7 @@ internal fun SkillRecipeRow.toSkillRecipe(): SkillRecipe {
     val others = mapOf(
         "source" to source, "expected" to expected, "promptKey" to promptKey, "explanationKey" to explanationKey, "changes" to changes, "accepted" to accepted,
         "tags" to tags, "includeNounGenderTag" to includeNounGenderTag, "ownerDraw" to ownerDraw, "numberOverride" to numberOverride,
+        "tileTargetSlots" to tileTargetSlots,
     )
     if (staticOverride != null) {
         require(staticPool == null) { "$skill: staticOverride and staticPool are exclusive" }
@@ -127,6 +128,7 @@ internal fun SkillRecipeRow.toSkillRecipe(): SkillRecipe {
         skillId = skill, source = source!!.toTextSpec(), expected = expected!!.toTextSpec(), promptKey = promptKey.orEmpty(), explanationKey = explanationKey!!,
         changes = changes!!.map { it.toChangeSpec() }, accepted = accepted.orEmpty().map { it.toTextSpec() }, tags = tags!!,
         includeNounGenderTag = includeNounGenderTag == true, ownerDraw = ownerDraw?.toOwnerDraw(), numberOverride = numberOverride,
+        tileTargetSlots = tileTargetSlots.orEmpty(),
     )
 }
 

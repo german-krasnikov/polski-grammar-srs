@@ -2,6 +2,14 @@
 
 Новые сверху. Формат: решение → почему → где подробно.
 
+## ADR-61 · 2026-11-13 · Sentence Builder как Tier 0 механика вовлечённости
+
+Новый тип упражнения: сборка предложения из тайлов с выбором грамматической формы. Тайлы вычисляются из существующего `CoreExercise` + `Morphology`, не хранятся в DSL. Три уровня scaffolding (Full → Partial → None) определяются прогрессом, не автором. Ошибка в форме переводит в мини-правило через `StyleComposer`. Ядро (`core-model`, `core-engine`) не знает языков — `TileGenerator` работает для любого языка с таблицей форм.
+
+DSL-расширение минимальное: одно optional поле `tileTargetSlots: [string]` на `SkillRecipeRow` (непустой список = opt-in, отдельный `tileEnabled` не нужен). `CoreExercise` получает `tileTargetSlots` + `tilePhrase` (прогресс-независимые факты); `TileExercise` вычисляется на спрос `TileGenerator`'ом с учётом `ScaffoldingLevel`. Новый `AnswerMode.TileBuilder` в shared, UI контракт `TileBuilderState`/`TileAction` — каждый хост реализует свой. Совместимость: пустой `tileTargetSlots` = обычное упражнение, FSRS и прогресс без изменений.
+
+Причина: мобильный tap удобнее клавиатуры; дистракторы-формы тренируют чутьё на падежи; desirable difficulty между multiple choice и free input. [Дизайн](../Plans/Architecture/SENTENCE-BUILDER-DESIGN.md), [blueprint](../Plans/Architecture/SENTENCE-BUILDER-BLUEPRINT.md), [план обучения](../Plans/Learning/Plan.md).
+
 ## ADR-60 · 2026-11-13 · Официальные критерии письма как общий источник данных
 
 Критерии оценки письма каждой сдачи хранятся один раз в optional `ExamModuleRow.writingGuidance` её writing cover. Общий mapper механически дополняет ими существующую инструкцию задания, поэтому web и Apple получают одинаковый источник без отдельных host правил. Отсутствующее поле сохраняет старую инструкцию дословно; новые данные не меняют баллы, выбор комплекта, word limits или ручную оценку письма. Диапазоны относятся ко всему выбранному комплекту, а не к каждому prompt.

@@ -2,9 +2,13 @@ package polski.core.engine
 
 import polski.core.model.FeatureKey
 import polski.core.model.FeatureValue
+import polski.core.model.ScaffoldingLevel
 import polski.core.model.SkillSpec
 import kotlin.test.Test
 import kotlin.test.assertEquals
+import kotlin.test.assertNotNull
+import kotlin.test.assertNull
+import kotlin.test.assertTrue
 
 /**
  * EnRuPackPlan.md §5 gap A / task EN-02: a synthetic (not pl, not en) construction whose lexical
@@ -30,9 +34,15 @@ class ExerciseGeneratorTest {
         ),
     )
 
-    private fun generator(constantSlots: List<ConstantSlot>, recipeOverride: SkillRecipe? = null): ExerciseGenerator {
-        val realizer = ConstructionRealizer(mapOf("test.slot-presence" to template), morphology, LexemeFeatures { emptyMap() })
-        val skill = SkillSpec(id = "test.skill", construction = "test.slot-presence")
+    private val realizer = ConstructionRealizer(mapOf("test.slot-presence" to template), morphology, LexemeFeatures { emptyMap() })
+    private val testSkill = SkillSpec(id = "test.skill", construction = "test.slot-presence")
+
+    private fun generator(
+        constantSlots: List<ConstantSlot>,
+        recipeOverride: SkillRecipe? = null,
+        pattern: PackPattern = PackPattern { _, _ -> error("not used") },
+        casePrefix: CasePrefix = CasePrefix { _, _ -> error("not used") },
+    ): ExerciseGenerator {
         val recipe = SkillRecipe(
             skillId = "test.skill",
             source = TextSpec.Direct(TextValue.Phrase(PhraseSpec("test.slot-presence", mapOf("Number" to "sg", "Polarity" to "Pos")))),
@@ -40,11 +50,11 @@ class ExerciseGeneratorTest {
         )
         return ExerciseGenerator(
             realizer = realizer, morphology = morphology, lexemeFeatures = LexemeFeatures { emptyMap() },
-            skills = mapOf(skill.id to skill), recipes = mapOf(recipe.skillId to (recipeOverride ?: recipe)),
+            skills = mapOf(testSkill.id to testSkill), recipes = mapOf(recipe.skillId to (recipeOverride ?: recipe)),
             seeds = listOf(mapOf("noun" to "thing", "adjective" to "unused")),
             random = RandomSource { 0.0 }, ids = ExerciseIdFactory { "generated" },
-            copy = PackCopy { it }, pattern = PackPattern { _, _ -> error("not used") },
-            casePrefix = CasePrefix { _, _ -> error("not used") }, pronouns = PronounForms { _, _ -> error("not used") },
+            copy = PackCopy { it }, pattern = pattern,
+            casePrefix = casePrefix, pronouns = PronounForms { _, _ -> error("not used") },
             textCase = TextCase { it }, defaultOwnerLexeme = "unused-owner", verbLexeme = "unused-verb",
             constantSlots = constantSlots,
         )
@@ -79,5 +89,105 @@ class ExerciseGeneratorTest {
         assertEquals(pool.map { it.sourceKey }.toSet(), firstCycle.toSet())
         val seventh = generator.generateForSkill("test.skill").source
         kotlin.test.assertNotEquals(firstCycle.last(), seventh)
+    }
+
+    // SB-5 blueprint §6 AC5.2/AC5.3: tileTargetSlots opts a constructed recipe into CoreExercise.tilePhrase; absent stays empty/null.
+    @Test fun recipeWithTileTargetSlotsProducesATilePhraseForItsSingleEmbeddedPhrase() {
+        val recipe = SkillRecipe(
+            skillId = "test.skill",
+            source = TextSpec.Direct(TextValue.Phrase(PhraseSpec("test.slot-presence", mapOf("Number" to "sg", "Polarity" to "Pos")))),
+            expected = TextSpec.Direct(TextValue.Phrase(PhraseSpec("test.slot-presence", mapOf("Number" to "sg", "Polarity" to "Neg")))),
+            tileTargetSlots = listOf("noun"),
+        )
+        val exercise = generator(emptyList(), recipe).generateForSkill("test.skill")
+        assertEquals(listOf("noun"), exercise.tileTargetSlots)
+        val tilePhrase = exercise.tilePhrase
+        kotlin.test.assertNotNull(tilePhrase)
+        assertEquals("test.slot-presence", tilePhrase.construction)
+        assertEquals(mapOf("Number" to "sg", "Polarity" to "Neg"), tilePhrase.bundle)
+        assertEquals(exercise.expected, tilePhrase.text)
+        assertEquals(setOf("noun"), tilePhrase.slotSpans.keys)
+    }
+
+    @Test fun recipeWithoutTileTargetSlotsLeavesTileFieldsAtTheirDefaults() {
+        val exercise = generator(emptyList()).generateForSkill("test.skill")
+        assertEquals(emptyList(), exercise.tileTargetSlots)
+        assertNull(exercise.tilePhrase)
+    }
+
+    // Reviewer-flagged gap: real pl-ru recipes (e.g. case.acc.f) use expected = Pattern(key, {one named value is the sole embedded Phrase}) —
+    // only Direct was covered before. singlePhraseSpec's Pattern branch, and TileGenerator finding that phrase inside the rendered text, now both have a test.
+    @Test fun patternShapedExpectedIsolatesItsSoleEmbeddedPhraseAndTileGeneratorFindsItInTheRenderedText() {
+        val patternPhrase = PhraseSpec("test.slot-presence", mapOf("Number" to "sg", "Polarity" to "Neg"))
+        val recipe = SkillRecipe(
+            skillId = "test.skill",
+            source = TextSpec.Direct(TextValue.Phrase(PhraseSpec("test.slot-presence", mapOf("Number" to "sg", "Polarity" to "Pos")))),
+            expected = TextSpec.Pattern("seen", mapOf("acc" to TextValue.Phrase(patternPhrase))),
+            tileTargetSlots = listOf("noun"),
+        )
+        val pattern = PackPattern { key, values -> "<$key: " + values.entries.joinToString(", ") { (k, v) -> "$k=$v" } + ">" }
+        val exercise = generator(emptyList(), recipe, pattern = pattern).generateForSkill("test.skill")
+
+        assertEquals("<seen: acc=thing>", exercise.expected)
+        val tilePhrase = exercise.tilePhrase
+        assertNotNull(tilePhrase)
+        assertEquals("test.slot-presence", tilePhrase.construction)
+        assertEquals(mapOf("Number" to "sg", "Polarity" to "Neg"), tilePhrase.bundle)
+        assertEquals("thing", tilePhrase.text)
+        assertTrue(exercise.expected.indexOf(tilePhrase.text) >= 0, "TileGenerator.fromAnswerPhrase locates the phrase by substring; it must be present")
+
+        val tileGenerator = TileGenerator(realizer, morphology as MorphologyParadigm, mapOf(testSkill.id to testSkill), RandomSource { 0.0 })
+        assertNotNull(tileGenerator.fromExercise(exercise, ScaffoldingLevel.None), "TileGenerator must build real tiles for a Pattern-shaped expected, not null")
+    }
+
+    @Test fun concatShapedExpectedIsolatesItsSoleEmbeddedPhraseAmongItsParts() {
+        val concatPhrase = PhraseSpec("test.slot-presence", mapOf("Number" to "sg", "Polarity" to "Neg"))
+        val recipe = SkillRecipe(
+            skillId = "test.skill",
+            source = TextSpec.Direct(TextValue.Phrase(PhraseSpec("test.slot-presence", mapOf("Number" to "sg", "Polarity" to "Pos")))),
+            expected = TextSpec.Concat(listOf(TextValue.Copy("open:"), TextValue.Phrase(concatPhrase))),
+            tileTargetSlots = listOf("noun"),
+        )
+        val exercise = generator(emptyList(), recipe).generateForSkill("test.skill")
+
+        assertEquals("open:thing", exercise.expected)
+        val tilePhrase = exercise.tilePhrase
+        assertNotNull(tilePhrase)
+        assertEquals("test.slot-presence", tilePhrase.construction)
+        assertEquals("thing", tilePhrase.text)
+        assertTrue(exercise.expected.indexOf(tilePhrase.text) >= 0)
+    }
+
+    @Test fun prefixedExpectedWithANonVocativePrefixCaseIsolatesItsOwnPhrase() {
+        val prefixedPhrase = PhraseSpec("test.slot-presence", mapOf("Number" to "sg", "Polarity" to "Neg"))
+        val recipe = SkillRecipe(
+            skillId = "test.skill",
+            source = TextSpec.Direct(TextValue.Phrase(PhraseSpec("test.slot-presence", mapOf("Number" to "sg", "Polarity" to "Pos")))),
+            expected = TextSpec.Prefixed(prefixedPhrase, prefixCase = "nom", punct = "."),
+            tileTargetSlots = listOf("noun"),
+        )
+        val casePrefix = CasePrefix { caseId, _ -> "[$caseId]" }
+        val exercise = generator(emptyList(), recipe, casePrefix = casePrefix).generateForSkill("test.skill")
+
+        assertEquals("[nom] thing.", exercise.expected)
+        val tilePhrase = exercise.tilePhrase
+        assertNotNull(tilePhrase)
+        assertEquals("test.slot-presence", tilePhrase.construction)
+        assertEquals("thing", tilePhrase.text)
+        assertTrue(exercise.expected.indexOf(tilePhrase.text) >= 0)
+    }
+
+    // prefixCase == "voc" capitalizes the phrase (TextCase), breaking verbatim substring matching against expected — singlePhraseSpec must refuse it, fail-soft.
+    @Test fun prefixedExpectedWithAVocativePrefixCaseIsIneligibleForTiles() {
+        val prefixedPhrase = PhraseSpec("test.slot-presence", mapOf("Number" to "sg", "Polarity" to "Neg"))
+        val recipe = SkillRecipe(
+            skillId = "test.skill",
+            source = TextSpec.Direct(TextValue.Phrase(PhraseSpec("test.slot-presence", mapOf("Number" to "sg", "Polarity" to "Pos")))),
+            expected = TextSpec.Prefixed(prefixedPhrase, prefixCase = "voc", punct = "!"),
+            tileTargetSlots = listOf("noun"),
+        )
+        val exercise = generator(emptyList(), recipe).generateForSkill("test.skill")
+        assertEquals(listOf("noun"), exercise.tileTargetSlots)
+        assertNull(exercise.tilePhrase)
     }
 }

@@ -40,4 +40,5 @@ private fun CoreExercise.toExercise(): Exercise = Exercise(
     nounId = slots.getValue("noun"), adjectiveId = slots.getValue("adjective"),
     possessive = PossessiveId.fromId(slots.getValue("owner")), number = NumberGram.fromId(slots.getValue("number")),
     changes = changes.map { FormChange(it.from, it.to, it.reason) },
+    tileTargetSlots = tileTargetSlots, tilePhrase = tilePhrase,
 )

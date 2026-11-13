@@ -112,6 +112,25 @@ class ConstructionRealizerTest {
         assertEquals(4 until 8, question.slotSpans.getValue("subject"))
     }
 
+    // SB-2 blueprint §3b: slotFacts exposes the same per-slot category + exact FeatureBundle realize() resolves privately, without changing realize() itself.
+    @Test fun slotFactsExposesTheSameCategoryAndRequiredBundleRealizeUsesPrivately() {
+        val realizer = ConstructionRealizer(mapOf("core.argument.case-role" to nounPhraseTemplate), morphology, lexemeFeatures)
+        val facts = realizer.slotFacts(
+            "core.argument.case-role",
+            bundle("Number" to "sg", "Case" to "acc"),
+            mapOf("owner" to "my", "adjective" to "beautiful", "noun" to "wife"),
+        )
+        assertEquals(SlotFact("adjective", "beautiful", bundle("Number" to "sg", "Gender" to "f", "Case" to "acc")), facts.getValue("adjective"))
+        assertEquals(SlotFact("noun", "wife", bundle("Number" to "sg", "Case" to "acc")), facts.getValue("noun"))
+        assertEquals(SlotFact("possessive", "my", bundle("Number" to "sg", "Gender" to "f", "Case" to "acc")), facts.getValue("owner"))
+    }
+
+    @Test fun slotFactsOmitsAnAbsentOptionalSlotRatherThanThrowing() {
+        val realizer = ConstructionRealizer(mapOf("core.argument.case-role" to nounPhraseTemplate), morphology, lexemeFeatures)
+        val facts = realizer.slotFacts("core.argument.case-role", bundle("Number" to "sg", "Case" to "nom"), mapOf("adjective" to "beautiful", "noun" to "wife"))
+        assertEquals(setOf("adjective", "noun"), facts.keys)
+    }
+
     @Test fun missingRequiredSlotOrUnknownConstructionErrorsRatherThanGuessing() {
         val realizer = ConstructionRealizer(mapOf("core.argument.case-role" to nounPhraseTemplate), morphology, lexemeFeatures)
         assertFailsWith<IllegalStateException> {

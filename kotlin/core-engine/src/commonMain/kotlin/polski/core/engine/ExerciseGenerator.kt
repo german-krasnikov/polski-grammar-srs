@@ -5,7 +5,9 @@ import polski.core.model.CoreFormChange
 import polski.core.model.FeatureKey
 import polski.core.model.FeatureValue
 import polski.core.model.LexicalFilter
+import polski.core.model.RealizedSentence
 import polski.core.model.SkillSpec
+import polski.core.model.TilePhrase
 
 /** Values must be in [0, 1); a caller may use any repeatable or platform source (existing port shape, `polski.training.RandomSource`). */
 fun interface RandomSource {
@@ -127,10 +129,40 @@ class ExerciseGenerator(
         .filter { it.whenFeature == null || bundle[it.whenFeature] in it.whenValues }
         .associate { it.slot to it.lexeme }
 
-    private fun resolvePhrase(spec: PhraseSpec, lexicalSlots: Map<String, String>): String {
+    /** SB-5 blueprint §6: returns the full [RealizedSentence] (slot spans included), unlike
+     *  [resolvePhrase]'s `.text`-only shortcut — [generateForSkill] needs the spans to build
+     *  [CoreExercise.tilePhrase] without re-running [ConstructionRealizer.realize]. */
+    private fun realizePhrase(spec: PhraseSpec, lexicalSlots: Map<String, String>): RealizedSentence {
         val withOwner = if (spec.ownerLexeme == null) lexicalSlots else lexicalSlots + ("owner" to spec.ownerLexeme)
         val slots = withOwner + constantSlotsFor(spec.bundle)
-        return realizer.realize(spec.construction, bundleOf(spec.bundle), slots).text
+        return realizer.realize(spec.construction, bundleOf(spec.bundle), slots)
+    }
+
+    private fun resolvePhrase(spec: PhraseSpec, lexicalSlots: Map<String, String>): String = realizePhrase(spec, lexicalSlots).text
+
+    /**
+     * SB-5 blueprint §6 eligibility constraint: the sole embedded [TextValue.Phrase] inside
+     * [spec], when [spec] has exactly one — a `Direct(Phrase)`, the sole `Phrase`-typed entry of
+     * a `Pattern`'s `values`, the sole `Phrase` among a `Concat`'s `parts`, or `Prefixed` with
+     * `prefixCase != "voc"` (whose capitalization would otherwise break verbatim substring
+     * matching against `expected`). `null` (fail-soft, not an error) for every other shape —
+     * content authors find out at tile-UI-time (empty tile picker), not at `biome generate` time.
+     */
+    private fun singlePhraseSpec(spec: TextSpec): PhraseSpec? = when (spec) {
+        is TextSpec.Direct -> (spec.value as? TextValue.Phrase)?.spec
+        is TextSpec.Pattern -> spec.values.values.filterIsInstance<TextValue.Phrase>().singleOrNull()?.spec
+        is TextSpec.Concat -> spec.parts.filterIsInstance<TextValue.Phrase>().singleOrNull()?.spec
+        is TextSpec.Prefixed -> if (spec.prefixCase == "voc") null else spec.spec
+    }
+
+    /** SB-5 blueprint §6: [CoreExercise.tilePhrase] for a constructed recipe whose
+     *  [SkillRecipe.tileTargetSlots] opts in, or `null` (fail-soft) when [singlePhraseSpec] can't
+     *  isolate exactly one embedded phrase in [recipe]'s `expected`. */
+    private fun tilePhraseFor(recipe: SkillRecipe, lexicalSlots: Map<String, String>): TilePhrase? {
+        if (recipe.tileTargetSlots.isEmpty()) return null
+        val phraseSpec = singlePhraseSpec(recipe.expected) ?: return null
+        val realized = realizePhrase(phraseSpec, lexicalSlots)
+        return TilePhrase(phraseSpec.construction, phraseSpec.bundle, realized.text, realized.slotSpans)
     }
 
     private fun resolveValue(value: TextValue, lexicalSlots: Map<String, String>): String = when (value) {
@@ -233,6 +265,8 @@ class ExerciseGenerator(
                 "noun" to seed.getValue("noun"), "adjective" to seed.getValue("adjective"),
                 "owner" to owner, "number" to (recipe.numberOverride ?: "sg"),
             ),
+            tileTargetSlots = recipe.tileTargetSlots,
+            tilePhrase = tilePhraseFor(recipe, lexicalSlots),
         )
     }
 

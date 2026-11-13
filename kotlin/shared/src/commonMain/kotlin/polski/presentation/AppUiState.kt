@@ -9,7 +9,12 @@ import polski.srs.SchedulePreview
 
 enum class TrainingMode { Chain, Schedule, Focused }
 enum class AppTab { Training, Vocabulary, Matrix, Progress }
-enum class AnswerMode { Oral, Typed }
+// SB-4 blueprint §5: TileBuilder is additive — every existing `state.answerMode == AnswerMode.Typed`/
+// `== AnswerMode.Oral` check in TrainingCardModel.kt/TrainingStore.kt (no exhaustive `when` over
+// this enum exists today) leaves TileBuilder to fall through exactly like Oral (no draft input,
+// "Show answer" label) until SB-6+ wires its own UI — a deliberate, documented fallback, not an
+// oversight (blueprint AC4.3).
+enum class AnswerMode { Oral, Typed, TileBuilder }
 enum class CardPhase { Question, Revealed, ChainComplete, NoDue }
 // `Lifehacks` (EnRuPackPlan.md §4.3): a Matrix sub-section like the other four, so it shares the
 // reset-on-tab-entry/highlight/deep-link machinery below.

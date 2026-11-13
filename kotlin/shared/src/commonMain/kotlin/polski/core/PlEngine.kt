@@ -12,6 +12,7 @@ import polski.core.engine.PronounForms
 import polski.core.engine.RandomSource
 import polski.core.engine.TableMorphology
 import polski.core.engine.TextCase
+import polski.core.engine.TileGenerator
 import polski.core.model.FeatureKey
 import polski.core.model.FeatureValue
 import polski.data.CoursePackFields
@@ -72,6 +73,11 @@ internal class PackEngine(private val pack: CoursePackFields) {
         constantSlots = recipeSet.constantSlots,
     )
 
+    /** SB-2 blueprint §3c wiring: builds the live [TileGenerator] for one session's [random] port.
+     *  Because [PackEngine] is already pack-generic, en-ru gets a working [TileGenerator] with
+     *  this one addition alone — no en-ru-specific code (SB-AC7). */
+    fun tileGenerator(random: RandomSource): TileGenerator = TileGenerator(realizer, morphology, skills, random)
+
     /** The chain's 5 fixed steps with step 1's skill resolved for [nounId]'s own gender
      *  (UniversalCorePlan.md §5.3) — falls back to `"default"` for a genderless language's noun,
      *  same as an unrecognized gender id always has (EnRuAcceptance §7 item 1; en's own
@@ -109,6 +115,9 @@ fun plExerciseGenerator(random: RandomSource, ids: ExerciseIdFactory): ExerciseG
 
 /** The chain's 5 fixed steps with step 1's skill resolved for [nounId]'s own gender (UniversalCorePlan.md §5.3). */
 fun plChainSteps(nounId: String): List<ChainStepRecipe> = activeEngine.chainSteps(nounId)
+
+/** SB-2 blueprint §3c wiring: builds the live [TileGenerator] for one session's [random] port. */
+fun plTileGenerator(random: RandomSource): TileGenerator = activeEngine.tileGenerator(random)
 
 /**
  * EN-24 (UC-09 part 2/2 minimum): en's own [TableMorphology], from en-ru's form table — independent of
