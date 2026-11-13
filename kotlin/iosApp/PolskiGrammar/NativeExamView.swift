@@ -3,6 +3,26 @@ import AVFoundation
 import Combine
 import PolskiShared
 
+/// Keeps committed exam choices legible while the Button remains disabled to touch and VoiceOver.
+private struct ExamOptionButtonStyle: ButtonStyle {
+    let ink: Color
+    let selected: Bool
+
+    func makeBody(configuration: Configuration) -> some View {
+        configuration.label
+            .foregroundStyle(ink)
+            .padding(.horizontal, 12)
+            .padding(.vertical, 9)
+            .frame(minHeight: 44)
+            .background(Color(uiColor: .secondarySystemBackground), in: RoundedRectangle(cornerRadius: 9))
+            .overlay {
+                RoundedRectangle(cornerRadius: 9)
+                    .strokeBorder(selected ? ink : Color.secondary.opacity(0.45), lineWidth: selected ? 2 : 1)
+            }
+            .opacity(configuration.isPressed ? 0.85 : 1)
+    }
+}
+
 /// Scene-owned bridge state. Switching app tabs keeps the Kotlin answer snapshot intact.
 final class NativeExamModel: ObservableObject {
     @Published private(set) var state: Record = [:]
@@ -414,8 +434,10 @@ struct NativeExamView: View {
                         } label: {
                             Label(option, systemImage: selected.contains(option) ? "checkmark.square.fill" : "square")
                         }
+                        .buttonStyle(ExamOptionButtonStyle(
+                            ink: optionTint(option, chosen: question.string("answer"), visible: visible),
+                            selected: selected.contains(option)))
                         .disabled(committed)
-                        .tint(optionTint(option, chosen: question.string("answer"), visible: visible))
                         .accessibilityAddTraits(selected.contains(option) ? [.isSelected] : [])
                         .accessibilityIdentifier("exam-option-\(id)-\(option)")
                     }
@@ -423,9 +445,10 @@ struct NativeExamView: View {
             } else if !options.isEmpty {
                 ForEach(options, id: \.self) { option in
                     Button(option) { model.answer(id, option, module: module) }
-                        .buttonStyle(.bordered)
+                        .buttonStyle(ExamOptionButtonStyle(
+                            ink: optionTint(option, chosen: question.string("answer"), visible: visible),
+                            selected: question.string("answer") == option))
                         .disabled(committed)
-                        .tint(optionTint(option, chosen: question.string("answer"), visible: visible))
                         .accessibilityAddTraits(question.string("answer") == option ? [.isSelected] : [])
                         .accessibilityIdentifier("exam-option-\(id)-\(option)")
                 }
@@ -457,12 +480,12 @@ struct NativeExamView: View {
     }
 
     private func optionTint(_ option: String, chosen: String, visible: Record) -> Color {
-        guard !visible.string("itemId").isEmpty else { return chosen.split(separator: "|").contains(Substring(option)) ? .accentColor : .secondary }
+        guard !visible.string("itemId").isEmpty else { return .primary }
         let selected = chosen.split(separator: "|").contains(Substring(option))
         let official = visible.strings("officialExamples").contains(option)
         if visible.string("status") == "Wrong" && selected && !official { return feedbackRed }
         if official && visible.string("status") != "PendingManual" { return feedbackGreen }
-        return selected ? .accentColor : .secondary
+        return .primary
     }
 
     private var feedbackRed: Color {
@@ -647,18 +670,20 @@ struct NativeExamView: View {
         case "choose_form":
             ForEach(card.strings("options"), id: \.self) { option in
                 Button(option) { model.answer(itemId, option, module: "grammar") }
-                    .buttonStyle(.bordered)
+                    .buttonStyle(ExamOptionButtonStyle(
+                        ink: optionTint(option, chosen: card.string("answer"), visible: visible),
+                        selected: card.string("answer") == option))
                     .disabled(committed)
-                    .tint(optionTint(option, chosen: card.string("answer"), visible: visible))
                     .accessibilityAddTraits(card.string("answer") == option ? [.isSelected] : [])
                     .accessibilityIdentifier("exam-option-\(option)")
             }
         case "word_bank":
             ForEach(card.rows("bankTokens"), id: \.stringTokenId) { token in
                 Button(token.string("text")) { model.answerBankToken(itemId, token.string("tokenId")) }
-                    .buttonStyle(.bordered)
+                    .buttonStyle(ExamOptionButtonStyle(
+                        ink: optionTint(token.string("text"), chosen: card.string("answer"), visible: visible),
+                        selected: card.string("selectedBankTokenId") == token.string("tokenId")))
                     .disabled(committed)
-                    .tint(optionTint(token.string("text"), chosen: card.string("answer"), visible: visible))
                     .accessibilityLabel("\(token.string("text")), \(token.int("position"))")
                     .accessibilityAddTraits(card.string("selectedBankTokenId") == token.string("tokenId") ? [.isSelected] : [])
                     .accessibilityIdentifier("exam-bank-\(token.string("tokenId"))")
