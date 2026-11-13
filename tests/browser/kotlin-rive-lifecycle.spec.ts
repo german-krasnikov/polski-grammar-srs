@@ -42,7 +42,7 @@ test('P16 failed effect metadata loading cannot leave a permanent rating overlay
 test('P16 failed bridge loading cannot strand a rating cue', async ({ page }) => {
   await page.route('**/rive/rive-bridge.js', route => route.abort('failed'));
   await rateTrainingCard(page);
-  await expect(page.locator('#polski-rive-overlay')).toBeHidden({ timeout: 4_000 });
+  await expect(page.locator('#polski-rive-overlay')).toBeHidden({ timeout: 3_200 });
 });
 
 test('P16 a stalled bridge request has bounded overlay cleanup', async ({ page }) => {
@@ -57,7 +57,7 @@ test('P16 a stalled bridge request has bounded overlay cleanup', async ({ page }
     await continueIntroductionIfPresent(page);
     await page.getByRole('button', { name: 'Показать ответ', exact: true }).click();
     await page.getByRole('button', { name: /2 Вспомнил/ }).click();
-    await expect(page.locator('#polski-rive-overlay')).toBeHidden({ timeout: 4_000 });
+    await expect(page.locator('#polski-rive-overlay')).toBeHidden({ timeout: 3_200 });
   } finally {
     release();
   }
