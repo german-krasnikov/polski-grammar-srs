@@ -1068,3 +1068,844 @@ RECIPE {
   ]
   tags: [mixed gen past]
 }
+
+# P18 comparison: content keys only; six distinct transformations share one FSRS skill.
+RECIPE {
+  skill: degree.comparison
+  staticPool: [
+    {
+      sourceKey: degreeOldSource
+      promptKey: degreeOldPrompt
+      expectedKey: degreeOldExpected
+      explanationKey: degreeOldExplanation
+      changeFromKey: degreeOldFrom
+      changeToKey: degreeOldTo
+      changeReasonKey: degreeOldReason
+      acceptedKeys: []
+      nounId: book
+      adjectiveId: new
+      tags: [degree comparison]
+    }
+    {
+      sourceKey: degreeEasySource
+      promptKey: degreeEasyPrompt
+      expectedKey: degreeEasyExpected
+      explanationKey: degreeEasyExplanation
+      changeFromKey: degreeEasyFrom
+      changeToKey: degreeEasyTo
+      changeReasonKey: degreeEasyReason
+      acceptedKeys: []
+      nounId: book
+      adjectiveId: new
+      tags: [degree comparison]
+    }
+    {
+      sourceKey: degreeGoodSource
+      promptKey: degreeGoodPrompt
+      expectedKey: degreeGoodExpected
+      explanationKey: degreeGoodExplanation
+      changeFromKey: degreeGoodFrom
+      changeToKey: degreeGoodTo
+      changeReasonKey: degreeGoodReason
+      acceptedKeys: []
+      nounId: book
+      adjectiveId: new
+      tags: [degree comparison]
+    }
+    {
+      sourceKey: degreeAnalyticSource
+      promptKey: degreeAnalyticPrompt
+      expectedKey: degreeAnalyticExpected
+      explanationKey: degreeAnalyticExplanation
+      changeFromKey: degreeAnalyticFrom
+      changeToKey: degreeAnalyticTo
+      changeReasonKey: degreeAnalyticReason
+      acceptedKeys: []
+      nounId: book
+      adjectiveId: new
+      tags: [degree comparison]
+    }
+    {
+      sourceKey: degreeSuperlativeSource
+      promptKey: degreeSuperlativePrompt
+      expectedKey: degreeSuperlativeExpected
+      explanationKey: degreeSuperlativeExplanation
+      changeFromKey: degreeSuperlativeFrom
+      changeToKey: degreeSuperlativeTo
+      changeReasonKey: degreeSuperlativeReason
+      acceptedKeys: []
+      nounId: book
+      adjectiveId: new
+      tags: [degree comparison]
+    }
+    {
+      sourceKey: degreeCompareSource
+      promptKey: degreeComparePrompt
+      expectedKey: degreeCompareExpected
+      explanationKey: degreeCompareExplanation
+      changeFromKey: degreeCompareFrom
+      changeToKey: degreeCompareTo
+      changeReasonKey: degreeCompareReason
+      acceptedKeys: []
+      nounId: book
+      adjectiveId: new
+      tags: [degree comparison]
+    }
+  ]
+}
+
+RECIPE {
+  skill: verb.participles
+  staticPool: [
+    {
+      sourceKey: participles1Source
+      promptKey: participles1Prompt
+      expectedKey: participles1Expected
+      explanationKey: participles1Explanation
+      changeFromKey: participles1From
+      changeToKey: participles1To
+      changeReasonKey: participles1Reason
+      acceptedKeys: []
+      nounId: book
+      adjectiveId: new
+      tags: [participles]
+    }
+    {
+      sourceKey: participles2Source
+      promptKey: participles2Prompt
+      expectedKey: participles2Expected
+      explanationKey: participles2Explanation
+      changeFromKey: participles2From
+      changeToKey: participles2To
+      changeReasonKey: participles2Reason
+      acceptedKeys: []
+      nounId: book
+      adjectiveId: new
+      tags: [participles]
+    }
+    {
+      sourceKey: participles3Source
+      promptKey: participles3Prompt
+      expectedKey: participles3Expected
+      explanationKey: participles3Explanation
+      changeFromKey: participles3From
+      changeToKey: participles3To
+      changeReasonKey: participles3Reason
+      acceptedKeys: []
+      nounId: book
+      adjectiveId: new
+      tags: [participles]
+    }
+    {
+      sourceKey: participles4Source
+      promptKey: participles4Prompt
+      expectedKey: participles4Expected
+      explanationKey: participles4Explanation
+      changeFromKey: participles4From
+      changeToKey: participles4To
+      changeReasonKey: participles4Reason
+      acceptedKeys: []
+      nounId: book
+      adjectiveId: new
+      tags: [participles]
+    }
+    {
+      sourceKey: participles5Source
+      promptKey: participles5Prompt
+      expectedKey: participles5Expected
+      explanationKey: participles5Explanation
+      changeFromKey: participles5From
+      changeToKey: participles5To
+      changeReasonKey: participles5Reason
+      acceptedKeys: []
+      nounId: book
+      adjectiveId: new
+      tags: [participles]
+    }
+    {
+      sourceKey: participles6Source
+      promptKey: participles6Prompt
+      expectedKey: participles6Expected
+      explanationKey: participles6Explanation
+      changeFromKey: participles6From
+      changeToKey: participles6To
+      changeReasonKey: participles6Reason
+      acceptedKeys: []
+      nounId: book
+      adjectiveId: new
+      tags: [participles]
+    }
+  ]
+}
+
+RECIPE {
+  skill: voice.impersonal
+  staticPool: [
+    {
+      sourceKey: voice1Source
+      promptKey: voice1Prompt
+      expectedKey: voice1Expected
+      explanationKey: voice1Explanation
+      changeFromKey: voice1From
+      changeToKey: voice1To
+      changeReasonKey: voice1Reason
+      acceptedKeys: []
+      nounId: book
+      adjectiveId: new
+      tags: [voice]
+    }
+    {
+      sourceKey: voice2Source
+      promptKey: voice2Prompt
+      expectedKey: voice2Expected
+      explanationKey: voice2Explanation
+      changeFromKey: voice2From
+      changeToKey: voice2To
+      changeReasonKey: voice2Reason
+      acceptedKeys: []
+      nounId: book
+      adjectiveId: new
+      tags: [voice]
+    }
+    {
+      sourceKey: voice3Source
+      promptKey: voice3Prompt
+      expectedKey: voice3Expected
+      explanationKey: voice3Explanation
+      changeFromKey: voice3From
+      changeToKey: voice3To
+      changeReasonKey: voice3Reason
+      acceptedKeys: []
+      nounId: book
+      adjectiveId: new
+      tags: [voice]
+    }
+    {
+      sourceKey: voice4Source
+      promptKey: voice4Prompt
+      expectedKey: voice4Expected
+      explanationKey: voice4Explanation
+      changeFromKey: voice4From
+      changeToKey: voice4To
+      changeReasonKey: voice4Reason
+      acceptedKeys: []
+      nounId: book
+      adjectiveId: new
+      tags: [voice]
+    }
+    {
+      sourceKey: voice5Source
+      promptKey: voice5Prompt
+      expectedKey: voice5Expected
+      explanationKey: voice5Explanation
+      changeFromKey: voice5From
+      changeToKey: voice5To
+      changeReasonKey: voice5Reason
+      acceptedKeys: []
+      nounId: book
+      adjectiveId: new
+      tags: [voice]
+    }
+    {
+      sourceKey: voice6Source
+      promptKey: voice6Prompt
+      expectedKey: voice6Expected
+      explanationKey: voice6Explanation
+      changeFromKey: voice6From
+      changeToKey: voice6To
+      changeReasonKey: voice6Reason
+      acceptedKeys: []
+      nounId: book
+      adjectiveId: new
+      tags: [voice]
+    }
+  ]
+}
+
+RECIPE {
+  skill: wordform.nouns
+  staticPool: [
+    {
+      sourceKey: nouns1Source
+      promptKey: nouns1Prompt
+      expectedKey: nouns1Expected
+      explanationKey: nouns1Explanation
+      changeFromKey: nouns1From
+      changeToKey: nouns1To
+      changeReasonKey: nouns1Reason
+      acceptedKeys: []
+      nounId: book
+      adjectiveId: new
+      tags: [nouns]
+    }
+    {
+      sourceKey: nouns2Source
+      promptKey: nouns2Prompt
+      expectedKey: nouns2Expected
+      explanationKey: nouns2Explanation
+      changeFromKey: nouns2From
+      changeToKey: nouns2To
+      changeReasonKey: nouns2Reason
+      acceptedKeys: []
+      nounId: book
+      adjectiveId: new
+      tags: [nouns]
+    }
+    {
+      sourceKey: nouns3Source
+      promptKey: nouns3Prompt
+      expectedKey: nouns3Expected
+      explanationKey: nouns3Explanation
+      changeFromKey: nouns3From
+      changeToKey: nouns3To
+      changeReasonKey: nouns3Reason
+      acceptedKeys: []
+      nounId: book
+      adjectiveId: new
+      tags: [nouns]
+    }
+    {
+      sourceKey: nouns4Source
+      promptKey: nouns4Prompt
+      expectedKey: nouns4Expected
+      explanationKey: nouns4Explanation
+      changeFromKey: nouns4From
+      changeToKey: nouns4To
+      changeReasonKey: nouns4Reason
+      acceptedKeys: []
+      nounId: book
+      adjectiveId: new
+      tags: [nouns]
+    }
+    {
+      sourceKey: nouns5Source
+      promptKey: nouns5Prompt
+      expectedKey: nouns5Expected
+      explanationKey: nouns5Explanation
+      changeFromKey: nouns5From
+      changeToKey: nouns5To
+      changeReasonKey: nouns5Reason
+      acceptedKeys: []
+      nounId: book
+      adjectiveId: new
+      tags: [nouns]
+    }
+    {
+      sourceKey: nouns6Source
+      promptKey: nouns6Prompt
+      expectedKey: nouns6Expected
+      explanationKey: nouns6Explanation
+      changeFromKey: nouns6From
+      changeToKey: nouns6To
+      changeReasonKey: nouns6Reason
+      acceptedKeys: []
+      nounId: book
+      adjectiveId: new
+      tags: [nouns]
+    }
+  ]
+}
+
+RECIPE {
+  skill: numeral.agreement
+  staticPool: [
+    {
+      sourceKey: numerals1Source
+      promptKey: numerals1Prompt
+      expectedKey: numerals1Expected
+      explanationKey: numerals1Explanation
+      changeFromKey: numerals1From
+      changeToKey: numerals1To
+      changeReasonKey: numerals1Reason
+      acceptedKeys: []
+      nounId: book
+      adjectiveId: new
+      tags: [numerals]
+    }
+    {
+      sourceKey: numerals2Source
+      promptKey: numerals2Prompt
+      expectedKey: numerals2Expected
+      explanationKey: numerals2Explanation
+      changeFromKey: numerals2From
+      changeToKey: numerals2To
+      changeReasonKey: numerals2Reason
+      acceptedKeys: []
+      nounId: book
+      adjectiveId: new
+      tags: [numerals]
+    }
+    {
+      sourceKey: numerals3Source
+      promptKey: numerals3Prompt
+      expectedKey: numerals3Expected
+      explanationKey: numerals3Explanation
+      changeFromKey: numerals3From
+      changeToKey: numerals3To
+      changeReasonKey: numerals3Reason
+      acceptedKeys: []
+      nounId: book
+      adjectiveId: new
+      tags: [numerals]
+    }
+    {
+      sourceKey: numerals4Source
+      promptKey: numerals4Prompt
+      expectedKey: numerals4Expected
+      explanationKey: numerals4Explanation
+      changeFromKey: numerals4From
+      changeToKey: numerals4To
+      changeReasonKey: numerals4Reason
+      acceptedKeys: []
+      nounId: book
+      adjectiveId: new
+      tags: [numerals]
+    }
+    {
+      sourceKey: numerals5Source
+      promptKey: numerals5Prompt
+      expectedKey: numerals5Expected
+      explanationKey: numerals5Explanation
+      changeFromKey: numerals5From
+      changeToKey: numerals5To
+      changeReasonKey: numerals5Reason
+      acceptedKeys: []
+      nounId: book
+      adjectiveId: new
+      tags: [numerals]
+    }
+    {
+      sourceKey: numerals6Source
+      promptKey: numerals6Prompt
+      expectedKey: numerals6Expected
+      explanationKey: numerals6Explanation
+      changeFromKey: numerals6From
+      changeToKey: numerals6To
+      changeReasonKey: numerals6Reason
+      acceptedKeys: []
+      nounId: book
+      adjectiveId: new
+      tags: [numerals]
+    }
+  ]
+}
+
+RECIPE {
+  skill: wordform.adjectives
+  staticPool: [
+    {
+      sourceKey: adjectives1Source
+      promptKey: adjectives1Prompt
+      expectedKey: adjectives1Expected
+      explanationKey: adjectives1Explanation
+      changeFromKey: adjectives1From
+      changeToKey: adjectives1To
+      changeReasonKey: adjectives1Reason
+      acceptedKeys: []
+      nounId: book
+      adjectiveId: new
+      tags: [adjectives]
+    }
+    {
+      sourceKey: adjectives2Source
+      promptKey: adjectives2Prompt
+      expectedKey: adjectives2Expected
+      explanationKey: adjectives2Explanation
+      changeFromKey: adjectives2From
+      changeToKey: adjectives2To
+      changeReasonKey: adjectives2Reason
+      acceptedKeys: []
+      nounId: book
+      adjectiveId: new
+      tags: [adjectives]
+    }
+    {
+      sourceKey: adjectives3Source
+      promptKey: adjectives3Prompt
+      expectedKey: adjectives3Expected
+      explanationKey: adjectives3Explanation
+      changeFromKey: adjectives3From
+      changeToKey: adjectives3To
+      changeReasonKey: adjectives3Reason
+      acceptedKeys: []
+      nounId: book
+      adjectiveId: new
+      tags: [adjectives]
+    }
+    {
+      sourceKey: adjectives4Source
+      promptKey: adjectives4Prompt
+      expectedKey: adjectives4Expected
+      explanationKey: adjectives4Explanation
+      changeFromKey: adjectives4From
+      changeToKey: adjectives4To
+      changeReasonKey: adjectives4Reason
+      acceptedKeys: []
+      nounId: book
+      adjectiveId: new
+      tags: [adjectives]
+    }
+    {
+      sourceKey: adjectives5Source
+      promptKey: adjectives5Prompt
+      expectedKey: adjectives5Expected
+      explanationKey: adjectives5Explanation
+      changeFromKey: adjectives5From
+      changeToKey: adjectives5To
+      changeReasonKey: adjectives5Reason
+      acceptedKeys: []
+      nounId: book
+      adjectiveId: new
+      tags: [adjectives]
+    }
+    {
+      sourceKey: adjectives6Source
+      promptKey: adjectives6Prompt
+      expectedKey: adjectives6Expected
+      explanationKey: adjectives6Explanation
+      changeFromKey: adjectives6From
+      changeToKey: adjectives6To
+      changeReasonKey: adjectives6Reason
+      acceptedKeys: []
+      nounId: book
+      adjectiveId: new
+      tags: [adjectives]
+    }
+  ]
+}
+
+RECIPE {
+  skill: sentence.connectives
+  staticPool: [
+    {
+      sourceKey: connectives1Source
+      promptKey: connectives1Prompt
+      expectedKey: connectives1Expected
+      explanationKey: connectives1Explanation
+      changeFromKey: connectives1From
+      changeToKey: connectives1To
+      changeReasonKey: connectives1Reason
+      acceptedKeys: []
+      nounId: book
+      adjectiveId: new
+      tags: [connectives]
+    }
+    {
+      sourceKey: connectives2Source
+      promptKey: connectives2Prompt
+      expectedKey: connectives2Expected
+      explanationKey: connectives2Explanation
+      changeFromKey: connectives2From
+      changeToKey: connectives2To
+      changeReasonKey: connectives2Reason
+      acceptedKeys: []
+      nounId: book
+      adjectiveId: new
+      tags: [connectives]
+    }
+    {
+      sourceKey: connectives3Source
+      promptKey: connectives3Prompt
+      expectedKey: connectives3Expected
+      explanationKey: connectives3Explanation
+      changeFromKey: connectives3From
+      changeToKey: connectives3To
+      changeReasonKey: connectives3Reason
+      acceptedKeys: []
+      nounId: book
+      adjectiveId: new
+      tags: [connectives]
+    }
+    {
+      sourceKey: connectives4Source
+      promptKey: connectives4Prompt
+      expectedKey: connectives4Expected
+      explanationKey: connectives4Explanation
+      changeFromKey: connectives4From
+      changeToKey: connectives4To
+      changeReasonKey: connectives4Reason
+      acceptedKeys: []
+      nounId: book
+      adjectiveId: new
+      tags: [connectives]
+    }
+    {
+      sourceKey: connectives5Source
+      promptKey: connectives5Prompt
+      expectedKey: connectives5Expected
+      explanationKey: connectives5Explanation
+      changeFromKey: connectives5From
+      changeToKey: connectives5To
+      changeReasonKey: connectives5Reason
+      acceptedKeys: []
+      nounId: book
+      adjectiveId: new
+      tags: [connectives]
+    }
+    {
+      sourceKey: connectives6Source
+      promptKey: connectives6Prompt
+      expectedKey: connectives6Expected
+      explanationKey: connectives6Explanation
+      changeFromKey: connectives6From
+      changeToKey: connectives6To
+      changeReasonKey: connectives6Reason
+      acceptedKeys: []
+      nounId: book
+      adjectiveId: new
+      tags: [connectives]
+    }
+  ]
+}
+
+RECIPE {
+  skill: sentence.rephrase
+  staticPool: [
+    {
+      sourceKey: rephrase1Source
+      promptKey: rephrase1Prompt
+      expectedKey: rephrase1Expected
+      explanationKey: rephrase1Explanation
+      changeFromKey: rephrase1From
+      changeToKey: rephrase1To
+      changeReasonKey: rephrase1Reason
+      acceptedKeys: []
+      nounId: book
+      adjectiveId: new
+      tags: [rephrase]
+    }
+    {
+      sourceKey: rephrase2Source
+      promptKey: rephrase2Prompt
+      expectedKey: rephrase2Expected
+      explanationKey: rephrase2Explanation
+      changeFromKey: rephrase2From
+      changeToKey: rephrase2To
+      changeReasonKey: rephrase2Reason
+      acceptedKeys: []
+      nounId: book
+      adjectiveId: new
+      tags: [rephrase]
+    }
+    {
+      sourceKey: rephrase3Source
+      promptKey: rephrase3Prompt
+      expectedKey: rephrase3Expected
+      explanationKey: rephrase3Explanation
+      changeFromKey: rephrase3From
+      changeToKey: rephrase3To
+      changeReasonKey: rephrase3Reason
+      acceptedKeys: []
+      nounId: book
+      adjectiveId: new
+      tags: [rephrase]
+    }
+    {
+      sourceKey: rephrase4Source
+      promptKey: rephrase4Prompt
+      expectedKey: rephrase4Expected
+      explanationKey: rephrase4Explanation
+      changeFromKey: rephrase4From
+      changeToKey: rephrase4To
+      changeReasonKey: rephrase4Reason
+      acceptedKeys: []
+      nounId: book
+      adjectiveId: new
+      tags: [rephrase]
+    }
+    {
+      sourceKey: rephrase5Source
+      promptKey: rephrase5Prompt
+      expectedKey: rephrase5Expected
+      explanationKey: rephrase5Explanation
+      changeFromKey: rephrase5From
+      changeToKey: rephrase5To
+      changeReasonKey: rephrase5Reason
+      acceptedKeys: []
+      nounId: book
+      adjectiveId: new
+      tags: [rephrase]
+    }
+    {
+      sourceKey: rephrase6Source
+      promptKey: rephrase6Prompt
+      expectedKey: rephrase6Expected
+      explanationKey: rephrase6Explanation
+      changeFromKey: rephrase6From
+      changeToKey: rephrase6To
+      changeReasonKey: rephrase6Reason
+      acceptedKeys: []
+      nounId: book
+      adjectiveId: new
+      tags: [rephrase]
+    }
+  ]
+}
+
+RECIPE {
+  skill: case.valency
+  staticPool: [
+    {
+      sourceKey: valency1Source
+      promptKey: valency1Prompt
+      expectedKey: valency1Expected
+      explanationKey: valency1Explanation
+      changeFromKey: valency1From
+      changeToKey: valency1To
+      changeReasonKey: valency1Reason
+      acceptedKeys: []
+      nounId: book
+      adjectiveId: new
+      tags: [valency]
+    }
+    {
+      sourceKey: valency2Source
+      promptKey: valency2Prompt
+      expectedKey: valency2Expected
+      explanationKey: valency2Explanation
+      changeFromKey: valency2From
+      changeToKey: valency2To
+      changeReasonKey: valency2Reason
+      acceptedKeys: []
+      nounId: book
+      adjectiveId: new
+      tags: [valency]
+    }
+    {
+      sourceKey: valency3Source
+      promptKey: valency3Prompt
+      expectedKey: valency3Expected
+      explanationKey: valency3Explanation
+      changeFromKey: valency3From
+      changeToKey: valency3To
+      changeReasonKey: valency3Reason
+      acceptedKeys: []
+      nounId: book
+      adjectiveId: new
+      tags: [valency]
+    }
+    {
+      sourceKey: valency4Source
+      promptKey: valency4Prompt
+      expectedKey: valency4Expected
+      explanationKey: valency4Explanation
+      changeFromKey: valency4From
+      changeToKey: valency4To
+      changeReasonKey: valency4Reason
+      acceptedKeys: []
+      nounId: book
+      adjectiveId: new
+      tags: [valency]
+    }
+    {
+      sourceKey: valency5Source
+      promptKey: valency5Prompt
+      expectedKey: valency5Expected
+      explanationKey: valency5Explanation
+      changeFromKey: valency5From
+      changeToKey: valency5To
+      changeReasonKey: valency5Reason
+      acceptedKeys: []
+      nounId: book
+      adjectiveId: new
+      tags: [valency]
+    }
+    {
+      sourceKey: valency6Source
+      promptKey: valency6Prompt
+      expectedKey: valency6Expected
+      explanationKey: valency6Explanation
+      changeFromKey: valency6From
+      changeToKey: valency6To
+      changeReasonKey: valency6Reason
+      acceptedKeys: []
+      nounId: book
+      adjectiveId: new
+      tags: [valency]
+    }
+  ]
+}
+
+RECIPE {
+  skill: verb.mood
+  staticPool: [
+    {
+      sourceKey: mood1Source
+      promptKey: mood1Prompt
+      expectedKey: mood1Expected
+      explanationKey: mood1Explanation
+      changeFromKey: mood1From
+      changeToKey: mood1To
+      changeReasonKey: mood1Reason
+      acceptedKeys: []
+      nounId: book
+      adjectiveId: new
+      tags: [mood]
+    }
+    {
+      sourceKey: mood2Source
+      promptKey: mood2Prompt
+      expectedKey: mood2Expected
+      explanationKey: mood2Explanation
+      changeFromKey: mood2From
+      changeToKey: mood2To
+      changeReasonKey: mood2Reason
+      acceptedKeys: []
+      nounId: book
+      adjectiveId: new
+      tags: [mood]
+    }
+    {
+      sourceKey: mood3Source
+      promptKey: mood3Prompt
+      expectedKey: mood3Expected
+      explanationKey: mood3Explanation
+      changeFromKey: mood3From
+      changeToKey: mood3To
+      changeReasonKey: mood3Reason
+      acceptedKeys: []
+      nounId: book
+      adjectiveId: new
+      tags: [mood]
+    }
+    {
+      sourceKey: mood4Source
+      promptKey: mood4Prompt
+      expectedKey: mood4Expected
+      explanationKey: mood4Explanation
+      changeFromKey: mood4From
+      changeToKey: mood4To
+      changeReasonKey: mood4Reason
+      acceptedKeys: []
+      nounId: book
+      adjectiveId: new
+      tags: [mood]
+    }
+    {
+      sourceKey: mood5Source
+      promptKey: mood5Prompt
+      expectedKey: mood5Expected
+      explanationKey: mood5Explanation
+      changeFromKey: mood5From
+      changeToKey: mood5To
+      changeReasonKey: mood5Reason
+      acceptedKeys: []
+      nounId: book
+      adjectiveId: new
+      tags: [mood]
+    }
+    {
+      sourceKey: mood6Source
+      promptKey: mood6Prompt
+      expectedKey: mood6Expected
+      explanationKey: mood6Explanation
+      changeFromKey: mood6From
+      changeToKey: mood6To
+      changeReasonKey: mood6Reason
+      acceptedKeys: []
+      nounId: book
+      adjectiveId: new
+      tags: [mood]
+    }
+  ]
+}

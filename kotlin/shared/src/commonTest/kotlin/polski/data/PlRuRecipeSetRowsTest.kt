@@ -56,6 +56,16 @@ class PlRuRecipeSetRowsTest {
         }
     }
 
+    @Test fun aStaticPoolIsNonemptyAndExclusiveWithOtherRecipeShapes() {
+        val expected = StaticExercise("src", "pr", "ex", "expl", listOf("a1", "a2"), "from", "to", "why", "noun", "adj", listOf("t1"))
+        assertEquals(SkillRecipe("a", staticPool = listOf(expected, expected)), SkillRecipeRow("a", staticPool = listOf(static, static)).toSkillRecipe())
+        for (row in listOf(
+            SkillRecipeRow("a", staticPool = emptyList()),
+            SkillRecipeRow("a", staticOverride = static, staticPool = listOf(static)),
+            recipe().copy(staticPool = listOf(static)),
+        )) assertFailsWith<IllegalArgumentException>("$row") { row.toSkillRecipe() }
+    }
+
     @Test fun anOwnerDrawKeepsThePoolOrderAndTheLabelOfEachOwner() {
         assertEquals(OwnerDraw(listOf("your", "his"), mapOf("your" to "ownerYour", "his" to "ownerHis"), "pre", "suf"), draw.toOwnerDraw())
         assertFailsWith<IllegalArgumentException> { draw.copy(owners = draw.owners + draw.owners[0]).toOwnerDraw() }
@@ -92,7 +102,7 @@ class PlRuRecipeSetRowsTest {
     @Test fun theRealRecipeSetHasTheSixteenSkillsInOrderAndTheFiveChainSteps() {
         val set = generatedPlRuRecipes
         assertEquals(
-            listOf("case.acc.n", "case.acc.f", "case.acc.m", "case.gen.neg", "case.inst", "case.loc", "case.dat", "agreement.my", "verb.present", "verb.past", "verb.future", "aspect", "pronouns", "sentence.question", "sentence.plural", "mixed"),
+            listOf("case.acc.n", "case.acc.f", "case.acc.m", "case.gen.neg", "case.inst", "case.loc", "case.dat", "agreement.my", "verb.present", "verb.past", "verb.future", "aspect", "pronouns", "sentence.question", "sentence.plural", "mixed", "degree.comparison", "verb.participles", "voice.impersonal", "wordform.nouns", "numeral.agreement", "wordform.adjectives", "sentence.connectives", "sentence.rephrase", "case.valency", "verb.mood"),
             set.skills.keys.toList(),
         )
         assertEquals(set.skills.keys, generatedPlRuSkillSpecs.map { it.id }.toSet())

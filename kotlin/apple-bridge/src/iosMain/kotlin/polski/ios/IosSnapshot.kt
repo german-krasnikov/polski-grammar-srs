@@ -37,7 +37,7 @@ internal fun snapshot(state: AppUiState): String = buildJsonObject {
     // target case is the answer, so its form stays masked; every other row is unrelated reference
     // material and shows normally.
     val revealed = state.phase == CardPhase.Revealed
-    put("referenceRows", JsonArray(if (state.showReference && !state.introPending) state.exercise?.let { exercise -> caseRows.map { row -> buildJsonObject {
+    put("referenceRows", JsonArray(if (state.showReference && state.caseReferenceAvailable && !state.introPending) state.exercise?.let { exercise -> caseRows.map { row -> buildJsonObject {
         put("title", "${row.pl} · ${row.ru}")
         val from = nounPhrase(exercise.nounId, GramCase.NOM, exercise.number, exercise.adjectiveId, exercise.possessive)
         val isTarget = row.id.id in exercise.tags

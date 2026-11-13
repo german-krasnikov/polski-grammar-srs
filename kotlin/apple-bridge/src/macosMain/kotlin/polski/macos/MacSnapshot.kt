@@ -31,7 +31,7 @@ internal fun snapshot(state: AppUiState): String = buildJsonObject {
     put("schemaVersion", 1)
     putSharedSnapshotHeader(state, styleBlocksSnapshot(state), ::lifehackJson)
     put("exercise", exerciseJson(state))
-    put("referenceRows", JsonArray(if (state.showReference && !state.introPending) state.exercise?.let { exercise -> caseRows.map { row -> buildJsonObject {
+    put("referenceRows", JsonArray(if (state.showReference && state.caseReferenceAvailable && !state.introPending) state.exercise?.let { exercise -> caseRows.map { row -> buildJsonObject {
         put("title", "${row.pl} · ${row.ru}")
         val form = nounPhrase(exercise.nounId, row.id, exercise.number, exercise.adjectiveId, exercise.possessive)
         put("text", form)

@@ -14,7 +14,7 @@ class TrainingParityTest {
     }
     private fun factory(draws: List<Double>) = PlExerciseEngine(Draws(draws), ExerciseIdFactory { "generated" })
     @Test fun metadataAndChainLinks() {
-        assertEquals(16, skills.size)
+        assertEquals(26, skills.size)
         assertEquals(12, sentenceSeeds.size)
         for (seed in sentenceSeeds) {
             val chain = factory(listOf(0.1)).generateChain(seed)

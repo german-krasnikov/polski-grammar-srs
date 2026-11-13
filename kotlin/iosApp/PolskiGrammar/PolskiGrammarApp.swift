@@ -869,10 +869,12 @@ private struct TrainingView: View {
                 }
                 Section {
                     let introducing = state.string("phase") == "Question" && state.bool("introPending")
-                    Button(!introducing && state.bool("showReference") ? uiText(model.state, "hideTable", fallback: "Скрыть таблицу") : uiText(model.state, "tableAtHand", fallback: "Таблица под рукой")) {
-                        model.send("reference")
+                    if state.bool("caseReferenceAvailable") {
+                        Button(!introducing && state.bool("showReference") ? uiText(model.state, "hideTable", fallback: "Скрыть таблицу") : uiText(model.state, "tableAtHand", fallback: "Таблица под рукой")) {
+                            model.send("reference")
+                        }
+                        .disabled(introducing)
                     }
-                    .disabled(introducing)
                     // D4/UX4-20..22: expand/collapse animated instead of the Form's default
                     // instant row insert/remove; content is fully removed while collapsed (not
                     // just visually shrunk), so there is nothing left over for VoiceOver/Tab to

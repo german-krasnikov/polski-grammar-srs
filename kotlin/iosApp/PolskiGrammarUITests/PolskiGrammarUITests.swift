@@ -2080,4 +2080,269 @@ final class PolskiGrammarUITests: XCTestCase {
         }
         XCTAssertTrue(app.staticTexts["Единственное → множественное"].waitForExistence(timeout: 5), app.debugDescription)
     }
+
+    func testComparisonSkillHasNativeQuestionAnswerAndNoUnrelatedCaseTable() {
+        let app = XCUIApplication()
+        app.launch()
+        XCTAssertTrue(app.buttons["Тренировка"].waitForExistence(timeout: 20), app.debugDescription)
+        let firstIntroduction = app.buttons["continueIntroduction"]
+        XCTAssertTrue(firstIntroduction.waitForExistence(timeout: 5), app.debugDescription)
+        firstIntroduction.tap()
+        // Progress rows are another public path to focused training and avoid iPadOS 26's
+        // existing mode Menu automation mismatch observed in the retained first two runs.
+        app.buttons["Прогресс"].firstMatch.tap()
+        let comparison = app.buttons.matching(NSPredicate(format: "label CONTAINS %@", "Степени сравнения прилагательных")).firstMatch
+        for _ in 0..<25 { if comparison.isHittable { break }; app.swipeUp() }
+        XCTAssertTrue(comparison.isHittable, app.debugDescription)
+        comparison.tap()
+        XCTAssertTrue(app.buttons["Тренировка"].waitForExistence(timeout: 5), app.debugDescription)
+        let comparisonIntroduction = app.buttons["continueIntroduction"]
+        if comparisonIntroduction.waitForExistence(timeout: 3) { comparisonIntroduction.tap() }
+
+        let answers = [
+            "Ten dom jest stary.": "Ten dom jest starszy.",
+            "To zadanie jest łatwe.": "To zadanie jest łatwiejsze.",
+            "Ta książka jest dobra.": "Ta książka jest lepsza.",
+            "Ten film jest interesujący.": "Ten film jest bardziej interesujący.",
+            "To jest duży pokój.": "To jest największy pokój.",
+            "Ten rower jest szybki.": "Ten rower jest szybszy od tamtego roweru."
+        ]
+        let stylePicker = app.buttons["trainingStylePicker"]
+        let originalStyle = stylePicker.label.split(separator: ",").last.map { String($0).trimmingCharacters(in: .whitespaces) } ?? "Через правило"
+        func chooseStyle(_ title: String) {
+            for _ in 0..<8 { if stylePicker.isHittable { break }; app.swipeDown() }
+            XCTAssertTrue(stylePicker.isHittable, app.debugDescription)
+            if stylePicker.label.contains(title) { return }
+            stylePicker.tap()
+            let option = app.descendants(matching: .any)[title].firstMatch
+            XCTAssertTrue(option.waitForExistence(timeout: 5), app.debugDescription)
+            option.tap()
+            XCTAssertTrue(stylePicker.label.contains(title), app.debugDescription)
+        }
+        var seen = Set<String>()
+        for index in 0..<6 {
+            for _ in 0..<8 {
+                if answers.keys.contains(where: { app.staticTexts[$0].exists }) { break }
+                app.swipeDown()
+            }
+            let source = answers.keys.first { app.staticTexts[$0].exists }
+            XCTAssertNotNil(source, app.debugDescription)
+            guard let source, let expected = answers[source] else { return }
+            XCTAssertTrue(seen.insert(source).inserted, "A pool cycle must not repeat a sentence")
+            if index == 0 {
+                for title in ["Через правило", "Через ситуацию", "Через сравнение с родным", "Минимум теории"] {
+                    chooseStyle(title)
+                    XCTAssertFalse(app.staticTexts[expected].exists, "Changing style must not reveal the answer")
+                }
+                chooseStyle(originalStyle)
+            }
+            XCTAssertFalse(app.staticTexts[expected].exists, "The answer must be hidden before reveal")
+            XCTAssertFalse(app.buttons["Таблица под рукой"].exists, "Metadata must not expose a case table")
+            let reveal = app.buttons["revealAnswer"]
+            for _ in 0..<7 { if reveal.isHittable { break }; app.swipeUp() }
+            XCTAssertTrue(reveal.isHittable, app.debugDescription)
+            reveal.tap()
+            XCTAssertTrue(app.staticTexts[expected].waitForExistence(timeout: 5), app.debugDescription)
+            if index < 5 {
+                app.buttons["Прогресс"].firstMatch.tap()
+                for _ in 0..<25 { if comparison.isHittable { break }; app.swipeUp() }
+                XCTAssertTrue(comparison.isHittable, app.debugDescription)
+                comparison.tap()
+                let nextIntroduction = app.buttons["continueIntroduction"]
+                if nextIntroduction.waitForExistence(timeout: 3) { nextIntroduction.tap() }
+            }
+        }
+        XCTAssertEqual(seen.count, answers.count)
+
+        app.buttons["Прогресс"].firstMatch.tap()
+        let oldCase = app.buttons.matching(NSPredicate(format: "label CONTAINS %@", "Biernik · средний род")).firstMatch
+        for _ in 0..<25 { if oldCase.isHittable { break }; app.swipeDown() }
+        XCTAssertTrue(oldCase.isHittable, app.debugDescription)
+        oldCase.tap()
+        continueIntroductionIfPresent(app)
+        let table = app.buttons["Таблица под рукой"]
+        for _ in 0..<7 { if table.isHittable { break }; app.swipeUp() }
+        XCTAssertTrue(table.waitForExistence(timeout: 5), "Existing case skills must retain their table")
+    }
+
+    func testModeMenuOpensFromItsVisibleLabelOnIPad() {
+        let app = XCUIApplication()
+        app.launch()
+        XCTAssertTrue(app.buttons["Тренировка"].waitForExistence(timeout: 20), app.debugDescription)
+        let introduction = app.buttons["continueIntroduction"]
+        if introduction.waitForExistence(timeout: 3) { introduction.tap() }
+        let visibleLabel = app.staticTexts["Режим: Цепочка предложений"]
+        XCTAssertTrue(visibleLabel.waitForExistence(timeout: 5), app.debugDescription)
+        let labelFrame = visibleLabel.frame
+        app.coordinate(withNormalizedOffset: CGVector(dx: 0, dy: 0))
+            .withOffset(CGVector(dx: labelFrame.midX, dy: labelFrame.midY)).tap()
+        let focused = app.descendants(matching: .any)["Отдельный навык"].firstMatch
+        XCTAssertTrue(focused.waitForExistence(timeout: 5), app.debugDescription)
+        focused.tap()
+        XCTAssertTrue(app.buttons.matching(NSPredicate(format: "label BEGINSWITH %@", "Навык")).firstMatch.waitForExistence(timeout: 5), app.debugDescription)
+    }
+
+    func testNineNewCourseFamiliesHaveNativeCardsAndMatrixSummaries() {
+        let app = XCUIApplication()
+        app.launch()
+        continueIntroductionIfPresent(app)
+        let topics: [(String, [String: String])] = [
+            ("Причастия и деепричастия", [
+                "Kobieta, która czyta książkę, siedzi przy oknie.": "Kobieta czytająca książkę siedzi przy oknie.",
+                "Mężczyzna, który pracuje w sklepie, zna mojego brata.": "Mężczyzna pracujący w sklepie zna mojego brata.",
+                "List, który został napisany wczoraj, leży na stole.": "List napisany wczoraj leży na stole.",
+                "Drzwi, które zostały zamknięte rano, prowadzą do piwnicy.": "Drzwi zamknięte rano prowadzą do piwnicy.",
+                "Maria czyta gazetę i pije kawę.": "Czytając gazetę, Maria pije kawę.",
+                "Piotr słucha muzyki i sprząta pokój.": "Słuchając muzyki, Piotr sprząta pokój.",
+            ]),
+            ("Безличные формы и пассив", [
+                "Ktoś zamknął sklep o szóstej.": "Zamknięto sklep o szóstej.",
+                "Ktoś otworzył okno rano.": "Otwarto okno rano.",
+                "Ktoś przeczytał list wczoraj.": "Przeczytano list wczoraj.",
+                "Robotnicy naprawili drogę.": "Droga została naprawiona przez robotników.",
+                "Policja zatrzymała kierowcę.": "Kierowca został zatrzymany przez policję.",
+                "Nauczyciel sprawdził testy.": "Testy zostały sprawdzone przez nauczyciela.",
+            ]),
+            ("Образование существительных", [
+                "To, że czytam książki, sprawia mi przyjemność.": "Czytanie książek sprawia mi przyjemność.",
+                "To, że piszę listy, zajmuje dużo czasu.": "Pisanie listów zajmuje dużo czasu.",
+                "To, że wspólnie gotujemy, jest dla nas ważne.": "Wspólne gotowanie jest dla nas ważne.",
+                "To, że ten pokój jest czysty, ma znaczenie.": "Czystość tego pokoju ma znaczenie.",
+                "To, że ona jest młoda, nie przeszkadza jej w pracy.": "Jej młodość nie przeszkadza jej w pracy.",
+                "To, że on jest odważny, pomaga mu w pracy.": "Jego odwaga pomaga mu w pracy.",
+            ]),
+            ("Числительные и согласование", [
+                "Na stole leży jedna książka.": "Na stole leżą dwie książki.",
+                "W pokoju stoją dwa krzesła.": "W pokoju stoi pięć krzeseł.",
+                "Dwaj studenci przyszli rano.": "Pięciu studentów przyszło rano.",
+                "Mam jednego kota.": "Mam trzy koty.",
+                "Widziałem dwie kobiety.": "Widziałem pięć kobiet.",
+                "Czekam na jednego kolegę.": "Czekam na dwóch kolegów.",
+            ]),
+            ("Образование прилагательных", [
+                "To jest stół z drewna.": "To jest drewniany stół.",
+                "To jest butelka ze szkła.": "To jest szklana butelka.",
+                "To jest sweter z wełny.": "To jest wełniany sweter.",
+                "To jest plan na tydzień.": "To jest tygodniowy plan.",
+                "To jest podróż zimą.": "To jest zimowa podróż.",
+                "To jest obiad z rodziną.": "To jest rodzinny obiad.",
+            ]),
+            ("Союзы и смысловые связи", [
+                "Pada deszcz. Zostajemy w domu.": "Zostajemy w domu, ponieważ pada deszcz.",
+                "Pada deszcz. Idziemy na spacer.": "Pada deszcz, ale idziemy na spacer.",
+                "Będziesz miał czas. Przyjdź do mnie.": "Jeśli będziesz miał czas, przyjdź do mnie.",
+                "Uczę się polskiego. Chcę rozmawiać z sąsiadami.": "Uczę się polskiego, żeby rozmawiać z sąsiadami.",
+                "Jest zmęczona. Pracuje dalej.": "Chociaż jest zmęczona, pracuje dalej.",
+                "Skończę pracę. Zadzwonię do ciebie.": "Kiedy skończę pracę, zadzwonię do ciebie.",
+            ]),
+            ("Смысловое преобразование фраз", [
+                "Piotr jest wyższy od Jana.": "Jan jest niższy od Piotra.",
+                "Tylko Anna zna odpowiedź.": "Nikt oprócz Anny nie zna odpowiedzi.",
+                "Chociaż pada deszcz, idziemy na spacer.": "Mimo deszczu idziemy na spacer.",
+                "Nie mogę przyjść, bo jestem chory.": "Z powodu choroby nie mogę przyjść.",
+                "Piotr skończył pracę, a potem wrócił do domu.": "Kiedy Piotr skończył pracę, wrócił do domu.",
+                "Maria napisała list.": "List został napisany przez Marię.",
+            ]),
+            ("Управление польских глаголов", [
+                "Я жду автобус.": "Czekam na autobus.",
+                "Я слушаю музыку.": "Słucham muzyki.",
+                "Я помогаю брату.": "Pomagam bratu.",
+                "Я пользуюсь телефоном.": "Korzystam z telefonu.",
+                "Я интересуюсь историей.": "Interesuję się historią.",
+                "Я ищу ключ.": "Szukam klucza.",
+            ]),
+            ("Условное и повелительное наклонение", [
+                "Piszę list.": "Pisałbym list.",
+                "Czytam tę książkę.": "Czytałabym tę książkę.",
+                "Otwierasz okno.": "Otwórz okno.",
+                "Wychodzisz teraz.": "Nie wychodź teraz.",
+                "Idziemy do domu.": "Chodźmy do domu.",
+                "Czy możesz mi pomóc?": "Czy mógłbyś mi pomóc?",
+            ]),
+        ]
+        for (title, answers) in topics {
+            app.buttons["Прогресс"].firstMatch.tap()
+            let row = app.buttons.matching(NSPredicate(format: "label CONTAINS %@", title)).firstMatch
+            for _ in 0..<30 { if row.isHittable { break }; app.swipeUp() }
+            XCTAssertTrue(row.isHittable, "Progress row missing: \(title); \(app.debugDescription)")
+            row.tap()
+            continueIntroductionIfPresent(app)
+            for _ in 0..<8 {
+                if answers.keys.contains(where: { app.staticTexts[$0].exists }) { break }
+                app.swipeDown()
+            }
+            let source = answers.keys.first { app.staticTexts[$0].exists }
+            XCTAssertNotNil(source, "No authored source in \(title): \(app.debugDescription)")
+            guard let source, let expected = answers[source] else { return }
+            let stylePicker = app.buttons["trainingStylePicker"]
+            XCTAssertTrue(stylePicker.waitForExistence(timeout: 5), app.debugDescription)
+            if title == topics[0].0 {
+                for style in ["Через правило", "Через ситуацию", "Через сравнение с родным", "Минимум теории"] {
+                    stylePicker.tap()
+                    let option = app.descendants(matching: .any)[style].firstMatch
+                    XCTAssertTrue(option.waitForExistence(timeout: 5), app.debugDescription)
+                    option.tap()
+                    XCTAssertTrue(stylePicker.label.contains(style), app.debugDescription)
+                    XCTAssertFalse(app.staticTexts[expected].exists, "Style revealed answer early")
+                }
+            } else {
+                stylePicker.tap()
+                let option = app.descendants(matching: .any)["Через ситуацию"].firstMatch
+                XCTAssertTrue(option.waitForExistence(timeout: 5), app.debugDescription)
+                option.tap()
+                XCTAssertTrue(stylePicker.label.contains("Через ситуацию"), app.debugDescription)
+            }
+            XCTAssertFalse(app.staticTexts[expected].exists, "Answer visible before reveal")
+            XCTAssertFalse(app.buttons["Таблица под рукой"].exists, "Unexpected case table: \(title)")
+            let reveal = app.buttons["revealAnswer"]
+            for _ in 0..<8 { if reveal.isHittable { break }; app.swipeUp() }
+            XCTAssertTrue(reveal.isHittable, app.debugDescription)
+            reveal.tap()
+            XCTAssertTrue(app.staticTexts[expected].waitForExistence(timeout: 5), "Wrong answer for \(source): \(app.debugDescription)")
+            XCTAssertTrue(app.buttons.matching(NSPredicate(format: "label BEGINSWITH %@", "Лайфхак · источник:")).firstMatch.exists, "Missing sourced tip: \(title)")
+        }
+        app.buttons["Матрица"].firstMatch.tap()
+        for (title, _) in topics {
+            let summary = app.staticTexts[title]
+            for _ in 0..<35 { if summary.exists { break }; app.swipeUp() }
+            XCTAssertTrue(summary.waitForExistence(timeout: 5), "Missing Matrix summary: \(title); \(app.debugDescription)")
+        }
+    }
+
+    func testRephrasingKeepsExplicitPiotrAsActor() {
+        let app = XCUIApplication()
+        app.launch()
+        continueIntroductionIfPresent(app)
+        let source = "Piotr skończył pracę, a potem wrócił do domu."
+        let expected = "Kiedy Piotr skończył pracę, wrócił do domu."
+        for _ in 0..<6 {
+            app.buttons["Прогресс"].firstMatch.tap()
+            let row = app.buttons.matching(NSPredicate(format: "label CONTAINS %@", "Смысловое преобразование фраз")).firstMatch
+            for _ in 0..<30 { if row.isHittable { break }; app.swipeUp() }
+            XCTAssertTrue(row.isHittable, app.debugDescription)
+            row.tap()
+            continueIntroductionIfPresent(app)
+            if app.staticTexts[source].exists {
+                for _ in 0..<8 { if app.staticTexts[source].isHittable { break }; app.swipeDown() }
+                XCTAssertTrue(app.staticTexts[source].isHittable, app.debugDescription)
+                let question = XCTAttachment(screenshot: app.screenshot())
+                question.name = "rephrase-explicit-actor-question"
+                question.lifetime = .keepAlways
+                add(question)
+                let reveal = app.buttons["revealAnswer"]
+                for _ in 0..<8 { if reveal.isHittable { break }; app.swipeUp() }
+                XCTAssertTrue(reveal.isHittable, app.debugDescription)
+                reveal.tap()
+                XCTAssertTrue(app.staticTexts[expected].waitForExistence(timeout: 5), app.debugDescription)
+                for _ in 0..<8 { if app.staticTexts[expected].isHittable { break }; app.swipeUp() }
+                XCTAssertTrue(app.staticTexts[expected].isHittable, app.debugDescription)
+                let answer = XCTAttachment(screenshot: app.screenshot())
+                answer.name = "rephrase-explicit-actor-answer"
+                answer.lifetime = .keepAlways
+                add(answer)
+                return
+            }
+        }
+        XCTFail("The six-card rephrasing pool did not expose the explicit-actor sentence: \(app.debugDescription)")
+    }
 }

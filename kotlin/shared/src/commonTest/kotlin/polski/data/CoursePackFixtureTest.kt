@@ -12,7 +12,7 @@ import kotlin.test.assertEquals
  */
 class CoursePackFixtureTest {
     @Test fun skillsEqualThePinnedPreRefactorFixture() {
-        assertEquals(expectedSkills, packRegistry.active.skills)
+        assertEquals(expectedSkills, packRegistry.active.skills.take(expectedSkills.size))
     }
 }
 

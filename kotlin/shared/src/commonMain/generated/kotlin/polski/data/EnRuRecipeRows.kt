@@ -112,8 +112,14 @@ internal fun SkillRecipeRow.toSkillRecipe(): SkillRecipe {
         "tags" to tags, "includeNounGenderTag" to includeNounGenderTag, "ownerDraw" to ownerDraw, "numberOverride" to numberOverride,
     )
     if (staticOverride != null) {
+        require(staticPool == null) { "$skill: staticOverride and staticPool are exclusive" }
         require(others.values.all { it == null }) { "$skill: a static recipe writes staticOverride only, not ${others.filterValues { it != null }.keys}" }
         return SkillRecipe(skill, staticOverride = staticOverride.toStaticExercise())
+    }
+    if (staticPool != null) {
+        require(staticPool.isNotEmpty()) { "$skill: staticPool must not be empty" }
+        require(others.values.all { it == null }) { "$skill: a pooled recipe writes staticPool only, not ${others.filterValues { it != null }.keys}" }
+        return SkillRecipe(skill, staticPool = staticPool.map { it.toStaticExercise() })
     }
     val lacking = listOf("source", "expected", "explanationKey", "changes", "tags").filter { others.getValue(it) == null }
     require(lacking.isEmpty()) { "$skill: a constructed recipe lacks $lacking" }
