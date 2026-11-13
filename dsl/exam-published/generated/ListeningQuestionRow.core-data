@@ -3396,7 +3396,7 @@ LISTENING_QUESTION {
   taskRef: certyfikat-polski-B2-2024-02-listen-5
   questionType: fill_gap
   questionText: "W jaki sposób zorientowano się, że bobry zniszczyły drogę?"
-  correctAnswer: "(Na drodze) zapadł się asfalt."
+  correctAnswer: "Zapadł się asfalt."
   pointsQuarter: 4
   gradingMode: open_manual
 }
@@ -3405,7 +3405,7 @@ LISTENING_QUESTION {
   taskRef: certyfikat-polski-B2-2024-02-listen-5
   questionType: fill_gap
   questionText: "Co odkrył nadzór budowlany pod powierzchnią jezdni?"
-  correctAnswer: "Sieć korytarzy/tuneli (zbudowanych przez bobry)."
+  correctAnswer: "Sieć korytarzy."
   pointsQuarter: 4
   gradingMode: open_manual
 }

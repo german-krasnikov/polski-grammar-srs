@@ -1,0 +1,10 @@
+TEST "B2 February 2024 unlisted listening wording remains manual" PROFILE playmode
+  open exam="B2 Certyfikat 2024-02" module="listening"
+  advanceTask count=4
+  enterListening index=1 slot=1 text="Inna odpowiedź do oceny"
+  submit
+  inspectReview index=31
+  ASSERT grammar.reviewStatus == "pending"
+  ASSERT exam.score == "Подтверждено: 0 / 40"
+  ASSERT exam.scoreDetail == "Ожидает проверки: 1"
+END

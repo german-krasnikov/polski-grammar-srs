@@ -133,6 +133,14 @@ test('DSL listening PlayTest: B2 2017 unknown word awaits review', async ({ page
   await runExamPlaytest(page, resolve('dsl/exam-web/listening-b2-2017-manual.playtest'));
 });
 
+test('DSL listening PlayTest: B2 2024-02 printed key wording earns full credit', async ({ page }) => {
+  await runExamPlaytest(page, resolve('dsl/exam-web/listening-b2-2024-02-key-variants.playtest'));
+});
+
+test('DSL listening PlayTest: B2 2024-02 unlisted wording awaits review', async ({ page }) => {
+  await runExamPlaytest(page, resolve('dsl/exam-web/listening-b2-2024-02-unknown.playtest'));
+});
+
 test('DSL listening PlayTest: B2 2019 task IV loads source photographs', async ({ page }) => {
   await runExamPlaytest(page, resolve('dsl/exam-web/listening-b2-2019-image.playtest'));
 });
