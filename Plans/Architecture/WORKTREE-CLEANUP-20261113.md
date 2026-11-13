@@ -30,3 +30,10 @@ Web Rive lifecycle принят независимыми Tester/Reviewer (`56652
 ## Неактивные Xcode-кэши P18
 
 С согласованным владением runtime нативный разработчик подтвердил, что использует только P14 DerivedData. Два принятых P18 `.app` сохранены в `worktree-cleanup/native-artifacts/p18-{slice-a,slices-bd}-accepted.app`; исходные и сохранённые деревья независимо совпали по hashes всех 38 файлов каждого приложения. Manifest `p18-native-artifacts.json` записывает первоначальные пути, новые пути и tree hashes. После проверки удалены только `course-expansion/{slice-a,slices-bd}/DerivedData` (около 4,7 GB логического размера build-кэшей). `.xcresult`, логи, Main app/data backups и активный P14 cache сохранены. Исторические receipts со старым путём `.app` теперь восстанавливаются по manifest.
+
+
+## Финальный P14/P15 и P19
+
+Native HEAD `83b3f41` полностью объединён и опубликован через Main `4f51511`. После приёмки и Source equality check сохранены accepted `.app` (38files, debug dylibSHA `8aa79159…`, treeSHA `662d22fe…`) и полный JS/Wasm compatibility snapshot (46files,830494736bytes, CSSSHA `d24d7af8…`). Manifest `worktree-cleanup/p19-final-artifacts.json`; paths `native-artifacts/p14-final-accepted.app` и `snapshots/p19-final-20261113`.
+
+Проверка git status разрешила единственный untracked путь `kotlin/iosApp/build-p14/`. Удалён только этот явно проверенный owned build cache; затем чистый worktree удалён обычным git worktree remove. Remote ветка удалена с lease на `da80678d1d888f9ac02eb7514e93969a0ed55cd7`, локальная — обычным `-d` после снятия upstream. `p14-retirement-manifest.json` хранит refs/результат. Теперь локально/на GitHub только `main`, git worktree list содержит только основной checkout. Owner original backup, архив post-test данных, исходные media/PDF, bundle старого uniqueWIP, test receipts и [инцидент восстановления](SIMULATOR-RESTORE-INCIDENT-20261113.md) сохранены.
