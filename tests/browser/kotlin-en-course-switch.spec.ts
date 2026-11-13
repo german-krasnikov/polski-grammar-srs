@@ -1,3 +1,5 @@
+import { existsSync } from 'node:fs';
+import { resolve } from 'node:path';
 import { expect, test } from '@playwright/test';
 import { continueIntroductionIfPresent } from './kotlin-introduction';
 import { progressAsLegacyShape } from './polski-text';
@@ -27,8 +29,12 @@ test('matrix shows only the active target language through pl-ru → en-ru → p
     .filter((name) => name === 'composeApp.js' || name === 'originWasmComposeApp.js' || name === 'originJsComposeApp.js'));
   expect(loadedScripts).toContain('composeApp.js');
   const compatibilityRuntime = loadedScripts.filter((name) => name?.startsWith('origin'));
-  if (process.env.KOTLIN_SPIKE_BRANCH === 'wasm') {
-    expect(compatibilityRuntime).toHaveLength(1);
+  const distribution = resolve(process.env.KOTLIN_SPIKE_DIST ?? '');
+  const compatibilityDistribution = existsSync(resolve(distribution, 'originJsComposeApp.js')) &&
+    existsSync(resolve(distribution, 'originWasmComposeApp.js'));
+  if (compatibilityDistribution) {
+    expect(compatibilityRuntime).toEqual([process.env.KOTLIN_SPIKE_BRANCH === 'js'
+      ? 'originJsComposeApp.js' : 'originWasmComposeApp.js']);
   } else {
     expect(compatibilityRuntime).toHaveLength(0);
   }

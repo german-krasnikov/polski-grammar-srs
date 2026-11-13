@@ -60,6 +60,61 @@ test('manual next cancels feedback timer and preference OFF keeps choices editab
   await expect(page.getByRole('status')).toHaveCount(0);
 });
 
+test('imported OFF survives reload and an older profile defaults feedback back ON', async ({ page }) => {
+  if (process.env.KOTLIN_SPIKE_BRANCH === 'js') await forceJsCompatibilityFallback(page);
+  await page.goto('/#/settings');
+  const feedback = page.locator('#settings-exam-immediate-feedback');
+  await expect(feedback).toBeChecked();
+  await page.getByRole('button', { name: 'Импортировать настройки' }).click();
+  await page.getByLabel('Файл JSON настроек для импорта').setInputFiles({
+    name: 'feedback-off.json', mimeType: 'application/json',
+    buffer: Buffer.from('{"schemaVersion":3,"immediateExamFeedbackEnabled":false}'),
+  });
+  await page.getByRole('button', { name: 'Импортировать настройки' }).click();
+  await expect(feedback).not.toBeChecked();
+  await page.reload();
+  await expect(feedback).not.toBeChecked();
+  await page.goto('/#/exam');
+  await page.locator('.exam-card').filter({ hasText: 'B1 Certyfikat 2017' }).getByRole('button', { name: 'Начать' }).click();
+  await page.locator('.exam-module-card').filter({ hasText: 'Poprawność gramatyczna' }).getByRole('button', { name: 'Начать' }).click();
+  await page.locator('.exam-option').filter({ hasText: 'dobry teatr' }).click();
+  await page.locator('.exam-option').filter({ hasText: 'dobrego teatru' }).click();
+  await expect(page.locator('.exam-option.selected')).toContainText('dobrego teatru');
+  await expect(page.getByRole('status')).toHaveCount(0);
+
+  await page.goto('/#/settings');
+  await page.getByRole('button', { name: 'Импортировать настройки' }).click();
+  await page.getByLabel('Файл JSON настроек для импорта').setInputFiles({
+    name: 'legacy-settings.json', mimeType: 'application/json',
+    buffer: Buffer.from('{"schemaVersion":1,"appearance":"Dark"}'),
+  });
+  await page.getByRole('button', { name: 'Импортировать настройки' }).click();
+  await expect(feedback).toBeChecked();
+  await page.goto('/#/exam');
+  await page.locator('.exam-card').filter({ hasText: 'B1 Certyfikat 2017' }).getByRole('button', { name: 'Начать' }).click();
+  await page.locator('.exam-module-card').filter({ hasText: 'Poprawność gramatyczna' }).getByRole('button', { name: 'Начать' }).click();
+  await page.locator('.exam-option').filter({ hasText: 'dobry teatr' }).click();
+  await expect(page.getByRole('status')).toContainText('Ваш ответ: dobry teatr');
+  await expect(page.getByRole('status')).toContainText('dobrego teatru');
+});
+
+test('timed entry keeps early choices editable and hides the source key', async ({ page }) => {
+  if (process.env.KOTLIN_SPIKE_BRANCH === 'js') await forceJsCompatibilityFallback(page);
+  await page.goto('/#/exam');
+  await page.locator('.exam-card').filter({ hasText: 'B1 Certyfikat 2017' }).getByRole('button', { name: 'Начать' }).click();
+  await page.getByRole('button', { name: 'Полный экзамен по времени' }).click();
+  await expect(page.locator('.exam-progress').first()).toHaveText('Часть 1 / 4');
+  const first = page.locator('.exam-reading-q').first();
+  const options = first.locator('.exam-option');
+  await expect(options.nth(1)).toBeVisible();
+  await options.first().click();
+  await options.nth(1).click();
+  await expect(options.nth(1)).toHaveClass(/selected/);
+  await expect(options.first()).not.toHaveClass(/selected/);
+  await expect(first.getByRole('status')).toHaveCount(0);
+  await expect(first.locator('.exam-option.feedback-wrong, .exam-option.feedback-correct')).toHaveCount(0);
+});
+
 test('route teardown and reduced motion keep feedback semantic and cancel stale advance', async ({ page }) => {
   await page.goto('/#/settings');
   await page.locator('#settings-motion').selectOption('Reduced');

@@ -133,8 +133,12 @@ async function parent(baseUrl, evidenceDir) {
     if (before.hidden || before.progress !== '1 / 50' || before.statusCount !== 1) {
       throw new Error(`Wrong prepared state: ${JSON.stringify(before)}`);
     }
-    if (!prepared.scripts.some((script) => script.endsWith('/originWasmComposeApp.js'))) {
-      throw new Error('Prepared page did not load the frozen Wasm compatibility runtime');
+    const expectedRuntime = process.env.P14_EXPECT_RUNTIME ?? 'originWasmComposeApp.js';
+    const runtimeScripts = prepared.scripts.filter((script) => /\/(?:originJsComposeApp|originWasmComposeApp|composeApp)\.js$/.test(script));
+    const expectedScripts = expectedRuntime === 'composeApp.js'
+      ? ['composeApp.js'] : ['composeApp.js', expectedRuntime];
+    if (runtimeScripts.map((script) => script.split('/').pop()).join('|') !== expectedScripts.join('|')) {
+      throw new Error(`Prepared page loaded ${runtimeScripts.join(', ')}, expected ${expectedScripts.join(', ')}`);
     }
     const second = await send('Target.createTarget', { url: 'about:blank', newWindow: false });
     const createdAt = Date.now();
