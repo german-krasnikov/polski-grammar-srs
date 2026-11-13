@@ -80,6 +80,8 @@ textarea{display:block;resize:vertical;min-height:96px;width:100%;margin-top:16p
 .card-answer-wrap.revealing .card-back .method-feedback,.card-answer-wrap.revealing .card-back .change-list{opacity:0;transform:translateY(10px);animation:answer-part-in .4s ease-out .18s forwards}
 .card-answer-wrap.revealing .card-back .rule-focus,.card-answer-wrap.revealing .card-back .rating-label,.card-answer-wrap.revealing .card-back .method-review,.card-answer-wrap.revealing .card-back .ratings,.card-answer-wrap.revealing .card-back .vocabulary-swipe-zone{opacity:0;transform:translateY(10px);animation:answer-part-in .4s ease-out .28s forwards}
 .card-answer-wrap.revealing .ratings{pointer-events:none}
+:root[data-motion=reduced] .card-answer-wrap.revealing .ratings,:root[data-animations=off] .card-answer-wrap.revealing .ratings{pointer-events:auto}
+@media(prefers-reduced-motion:reduce){.card-answer-wrap.revealing .ratings{pointer-events:auto}}
 @keyframes answer-part-in{to{opacity:1;transform:none}}
 .card-flip{perspective:1400px;position:relative;width:100%;min-width:0;z-index:0}.card-flip-inner{position:relative;z-index:0;display:grid;grid-template-columns:minmax(0,1fr);grid-template-areas:"face";width:100%;min-width:0;transform-style:preserve-3d;will-change:transform}.card-flip-inner.flipped{transform:rotateY(180deg)}
 /* UX4-01: the panel itself (background/border/radius/shadow) lives on `.card-face` — the ONE
