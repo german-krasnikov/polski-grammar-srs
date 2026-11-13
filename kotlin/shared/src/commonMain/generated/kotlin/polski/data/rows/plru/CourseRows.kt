@@ -1,5 +1,5 @@
 // Generated from dsl/course.data-contract
-// source-sha256=8d297a43f02dd884a8988b7e3cf6d9b2864cf15bf767faa2680ef50be58bff1f
+// source-sha256=07f4d769764530f59238256147033d78917ac437e0e4dbf4fbdc62012fec4854
 // Edit the source, then run biome generate.
 
 package polski.data.rows.plru
@@ -132,6 +132,7 @@ data class SkillRow(
     val fixed: List<FeatureValueRow>,
     val lexicalFilter: LexicalFilterRow?,
     val styleContent: StyleContentRow? = null,
+    val caseReferenceAvailable: Boolean? = null,
 )
 
 data class CaseFormsRow(
@@ -660,6 +661,7 @@ data class SkillRecipeRow(
     val ownerDraw: OwnerDrawRow? = null,
     val numberOverride: String? = null,
     val staticOverride: StaticExerciseRow? = null,
+    val staticPool: List<StaticExerciseRow>? = null,
 )
 
 data class ChainStepRecipeRow(
@@ -1659,6 +1661,53 @@ private fun skillRowRowsPart0(): List<SkillRow> = listOf(
             examples = listOf("Moi bracia.", "Moje siostry."),
             why = "Главная сложность множественного числа в польском — категория «мужская личная группа» (люди мужского пола), у которой особые формы прилагательных, местоимений и глаголов; в русском такого разделения во множественном числе нет.",
         ),
+    ),
+    SkillRow(
+        id = "degree.comparison",
+        title = "Степени сравнения прилагательных",
+        group = "Przymiotniki",
+        level = SkillRowLevel.B1,
+        formula = "Форма сравнительной степени + согласование; при сравнении существительных od + Dopełniacz",
+        theory = "Сравнительная степень бывает простой (ciemny → ciemniejszy), нерегулярной (zły → gorszy) и описательной (zajęty → bardziej zajęty). Прилагательное согласуется с существительным. Превосходная степень образуется с naj- от сравнительной: mały → mniejszy → najmniejszy.",
+        hint = "Определи тип сравнения и род существительного; затем измени всё предложение.",
+        prerequisites = listOf("agreement.my"),
+        focus = FocusRow(before = "To drzewo jest wysokie.", after = "To drzewo jest wyższe."),
+        methods = MethodsRow(
+            logic = MethodRow(
+                introduction = "Определи, какая форма сравнения нужна, и проверь согласование с существительным.",
+                promptLead = "Назови форму и собери целое предложение.",
+                introduce = "Сначала найди прилагательное, затем реши, нужна простая, описательная или нерегулярная форма.",
+                retrieve = "Произнеси или напиши целое предложение, не подсматривая в ответ.",
+                feedback = "Сравни форму прилагательного, согласование и остальные слова предложения.",
+                review = "Оцени своё воспроизведение; следующий пример потребует нового выбора формы.",
+            ),
+            situations = MethodRow(
+                introduction = "Сравни предметы по качеству и сохрани естественное польское предложение.",
+                promptLead = "Представь предмет и скажи целую фразу.",
+                introduce = "Представь, как объясняешь другу различие между предметами.",
+                retrieve = "Скажи новую фразу так, чтобы собеседник понял сравнение.",
+                feedback = "Проверь, передал ли ты нужную степень и согласовал форму.",
+                review = "Оцени ответ по смыслу и форме, затем переходи к другой ситуации.",
+            ),
+        ),
+        construction = "core.sentence.degree",
+        featureFocus = null,
+        fixed = emptyList(),
+        lexicalFilter = null,
+        styleContent = StyleContentRow(
+            rule = "Для обычного сравнения используй сравнительную форму; для описательного — bardziej + прилагательное. Согласуй окончание с существительным.",
+            nativeParallel = listOf(
+                NativeParallelRow(
+                    native = "Этот мост длиннее того моста.",
+                    target = "Ten most jest dłuższy od tamtego mostu.",
+                    note = "Польское od вводит второй предмет в родительном падеже: mostu.",
+                    matches = true,
+                ),
+            ),
+            examples = listOf("Ten most jest dłuższy od tamtego mostu.", "Ta ulica jest węższa."),
+            why = "Простая форма меняет основу или окончание, а описательная добавляет bardziej. Второй предмет после od стоит в Dopełniaczu; при сравнении целых высказываний употребляется niż.",
+        ),
+        caseReferenceAvailable = false,
     ),
 )
 
@@ -3414,6 +3463,93 @@ private fun copyEntryRowRowsPart0(): List<CopyEntryRow> = listOf(
     CopyEntryRow(key = "mixedChangeTo", value = "Nie widziałeś"),
     CopyEntryRow(key = "chainPastChangeFrom", value = "Widzę"),
     CopyEntryRow(key = "chainPastChangeTo", value = "Widziałem"),
+    CopyEntryRow(key = "degreeOldSource", value = "Ten dom jest stary."),
+    CopyEntryRow(key = "degreeOldExpected", value = "Ten dom jest starszy."),
+    CopyEntryRow(
+        key = "degreeOldPrompt",
+        value = "Образуй простую сравнительную форму прилагательного; сохрани остальное предложение.",
+    ),
+    CopyEntryRow(key = "degreeOldExplanation", value = "Сравнительная степень от stary — starszy."),
+    CopyEntryRow(key = "degreeOldFrom", value = "stary"),
+    CopyEntryRow(key = "degreeOldTo", value = "starszy"),
+    CopyEntryRow(key = "degreeOldReason", value = "Сравнительная форма прилагательного stary — starszy."),
+    CopyEntryRow(key = "degreeEasySource", value = "To zadanie jest łatwe."),
+    CopyEntryRow(key = "degreeEasyExpected", value = "To zadanie jest łatwiejsze."),
+    CopyEntryRow(
+        key = "degreeEasyPrompt",
+        value = "Образуй простую сравнительную форму прилагательного; сохрани средний род.",
+    ),
+    CopyEntryRow(
+        key = "degreeEasyExplanation",
+        value = "Форма łatwiejsze согласуется с существительным среднего рода zadanie.",
+    ),
+    CopyEntryRow(key = "degreeEasyFrom", value = "łatwe"),
+    CopyEntryRow(key = "degreeEasyTo", value = "łatwiejsze"),
+    CopyEntryRow(
+        key = "degreeEasyReason",
+        value = "Сравнительная форма от łatwy — łatwiejszy; при zadanie она получает окончание -e.",
+    ),
+    CopyEntryRow(key = "degreeGoodSource", value = "Ta książka jest dobra."),
+    CopyEntryRow(key = "degreeGoodExpected", value = "Ta książka jest lepsza."),
+    CopyEntryRow(
+        key = "degreeGoodPrompt",
+        value = "Используй нерегулярную сравнительную форму прилагательного; сохрани женский род.",
+    ),
+    CopyEntryRow(
+        key = "degreeGoodExplanation",
+        value = "У dobry нерегулярная сравнительная форма lepszy; с książka нужна форма lepsza.",
+    ),
+    CopyEntryRow(key = "degreeGoodFrom", value = "dobra"),
+    CopyEntryRow(key = "degreeGoodTo", value = "lepsza"),
+    CopyEntryRow(
+        key = "degreeGoodReason",
+        value = "Dobry → lepszy — нерегулярная форма; lepsza согласуется с książka.",
+    ),
+    CopyEntryRow(key = "degreeAnalyticSource", value = "Ten film jest interesujący."),
+    CopyEntryRow(key = "degreeAnalyticExpected", value = "Ten film jest bardziej interesujący."),
+    CopyEntryRow(
+        key = "degreeAnalyticPrompt",
+        value = "Вырази сравнительную степень описательно, сохранив целое предложение.",
+    ),
+    CopyEntryRow(
+        key = "degreeAnalyticExplanation",
+        value = "Прилагательное interesujący образует сравнительную степень описательно с bardziej.",
+    ),
+    CopyEntryRow(key = "degreeAnalyticFrom", value = "interesujący"),
+    CopyEntryRow(key = "degreeAnalyticTo", value = "bardziej interesujący"),
+    CopyEntryRow(
+        key = "degreeAnalyticReason",
+        value = "Добавь bardziej перед interesujący; не образуй искусственную форму на -szy.",
+    ),
+    CopyEntryRow(key = "degreeSuperlativeSource", value = "To jest duży pokój."),
+    CopyEntryRow(key = "degreeSuperlativeExpected", value = "To jest największy pokój."),
+    CopyEntryRow(
+        key = "degreeSuperlativePrompt",
+        value = "Поставь характеристику комнаты в превосходную степень во всём предложении.",
+    ),
+    CopyEntryRow(
+        key = "degreeSuperlativeExplanation",
+        value = "У duży сравнительная форма większy, превосходная — największy.",
+    ),
+    CopyEntryRow(key = "degreeSuperlativeFrom", value = "duży"),
+    CopyEntryRow(key = "degreeSuperlativeTo", value = "największy"),
+    CopyEntryRow(
+        key = "degreeSuperlativeReason",
+        value = "Приставка naj- присоединяется к нерегулярной сравнительной форме większy.",
+    ),
+    CopyEntryRow(key = "degreeCompareSource", value = "Ten rower jest szybki."),
+    CopyEntryRow(key = "degreeCompareExpected", value = "Ten rower jest szybszy od tamtego roweru."),
+    CopyEntryRow(key = "degreeComparePrompt", value = "Сравни этот велосипед с тем, используя od и целое предложение."),
+    CopyEntryRow(
+        key = "degreeCompareExplanation",
+        value = "После od второй предмет стоит в родительном падеже: tamtego roweru.",
+    ),
+    CopyEntryRow(key = "degreeCompareFrom", value = "szybki"),
+    CopyEntryRow(key = "degreeCompareTo", value = "szybszy od tamtego roweru"),
+    CopyEntryRow(
+        key = "degreeCompareReason",
+        value = "Szybki → szybszy; после od нужен родительный падеж: tamtego roweru.",
+    ),
 )
 
 val COPY_ENTRY_ROW_ROWS: List<CopyEntryRow> = copyEntryRowRowsPart0()
@@ -3988,6 +4124,13 @@ private fun referenceRowRowsPart0(): List<ReferenceRow> = listOf(
             ),
         ),
         systemCards = listOf(
+            RefSystemCardRow(
+                id = "degree.comparison",
+                title = "Степени сравнения",
+                explanation = "Простая, нерегулярная и описательная сравнительная степень; согласование с существительным. После od — Dopełniacz.",
+                example = "Ten most jest dłuższy od tamtego mostu.",
+                steps = listOf("Выбери нужную степень", "Согласуй прилагательное", "После od проверь Dopełniacz"),
+            ),
             RefSystemCardRow(
                 id = "noun",
                 title = "Существительное",
@@ -5710,6 +5853,89 @@ private fun skillRecipeRowRowsPart0(): List<SkillRecipeRow> = listOf(
         ),
         tags = listOf("mixed", "gen", "past"),
     ),
+    SkillRecipeRow(
+        skill = "degree.comparison",
+        staticPool = listOf(
+            StaticExerciseRow(
+                sourceKey = "degreeOldSource",
+                promptKey = "degreeOldPrompt",
+                expectedKey = "degreeOldExpected",
+                explanationKey = "degreeOldExplanation",
+                acceptedKeys = emptyList(),
+                changeFromKey = "degreeOldFrom",
+                changeToKey = "degreeOldTo",
+                changeReasonKey = "degreeOldReason",
+                nounId = "book",
+                adjectiveId = "new",
+                tags = listOf("degree", "comparison"),
+            ),
+            StaticExerciseRow(
+                sourceKey = "degreeEasySource",
+                promptKey = "degreeEasyPrompt",
+                expectedKey = "degreeEasyExpected",
+                explanationKey = "degreeEasyExplanation",
+                acceptedKeys = emptyList(),
+                changeFromKey = "degreeEasyFrom",
+                changeToKey = "degreeEasyTo",
+                changeReasonKey = "degreeEasyReason",
+                nounId = "book",
+                adjectiveId = "new",
+                tags = listOf("degree", "comparison"),
+            ),
+            StaticExerciseRow(
+                sourceKey = "degreeGoodSource",
+                promptKey = "degreeGoodPrompt",
+                expectedKey = "degreeGoodExpected",
+                explanationKey = "degreeGoodExplanation",
+                acceptedKeys = emptyList(),
+                changeFromKey = "degreeGoodFrom",
+                changeToKey = "degreeGoodTo",
+                changeReasonKey = "degreeGoodReason",
+                nounId = "book",
+                adjectiveId = "new",
+                tags = listOf("degree", "comparison"),
+            ),
+            StaticExerciseRow(
+                sourceKey = "degreeAnalyticSource",
+                promptKey = "degreeAnalyticPrompt",
+                expectedKey = "degreeAnalyticExpected",
+                explanationKey = "degreeAnalyticExplanation",
+                acceptedKeys = emptyList(),
+                changeFromKey = "degreeAnalyticFrom",
+                changeToKey = "degreeAnalyticTo",
+                changeReasonKey = "degreeAnalyticReason",
+                nounId = "book",
+                adjectiveId = "new",
+                tags = listOf("degree", "comparison"),
+            ),
+            StaticExerciseRow(
+                sourceKey = "degreeSuperlativeSource",
+                promptKey = "degreeSuperlativePrompt",
+                expectedKey = "degreeSuperlativeExpected",
+                explanationKey = "degreeSuperlativeExplanation",
+                acceptedKeys = emptyList(),
+                changeFromKey = "degreeSuperlativeFrom",
+                changeToKey = "degreeSuperlativeTo",
+                changeReasonKey = "degreeSuperlativeReason",
+                nounId = "book",
+                adjectiveId = "new",
+                tags = listOf("degree", "comparison"),
+            ),
+            StaticExerciseRow(
+                sourceKey = "degreeCompareSource",
+                promptKey = "degreeComparePrompt",
+                expectedKey = "degreeCompareExpected",
+                explanationKey = "degreeCompareExplanation",
+                acceptedKeys = emptyList(),
+                changeFromKey = "degreeCompareFrom",
+                changeToKey = "degreeCompareTo",
+                changeReasonKey = "degreeCompareReason",
+                nounId = "book",
+                adjectiveId = "new",
+                tags = listOf("degree", "comparison"),
+            ),
+        ),
+    ),
 )
 
 val SKILL_RECIPE_ROW_ROWS: List<SkillRecipeRow> = skillRecipeRowRowsPart0()
@@ -6398,6 +6624,17 @@ private fun lifehackRowRowsPart0(): List<LifehackRow> = listOf(
             kind = LifehackSourceRowKind.RESEARCH,
             citation = "Swan, O. A. (2002). A Grammar of Contemporary Polish. Slavica Publishers — морфология винительного падежа множественного числа: родительная модель только для mężczyźni-класса, именительная для всех прочих, включая одушевлённых нелично.",
             url = "https://www.slavica.com/grammar-of-contemporary-polish.html",
+        ),
+        status = LifehackRowStatus.EDITORIAL,
+    ),
+    LifehackRow(
+        id = "pl-ru.degree.comparison.od-genitive",
+        skillId = "degree.comparison",
+        text = "Если сравниваешь два названных предмета через od, поставь второй в Dopełniacz: Ten most jest dłuższy od tamtego mostu. Русское «чем тот мост» не подсказывает польский падеж после od. Для сравнения целых высказываний употребляй niż.",
+        source = LifehackSourceRow(
+            kind = LifehackSourceRowKind.RESEARCH,
+            citation = "Swan, O. E. (2002). A Grammar of Contemporary Polish, §6, Common Expressions Using Comparatives and Superlatives, p. 151: comparison with od + genitive or niż; od + genitive favoured for nouns.",
+            url = "https://lektorek.org/lektorek/grammar.pdf",
         ),
         status = LifehackRowStatus.EDITORIAL,
     ),

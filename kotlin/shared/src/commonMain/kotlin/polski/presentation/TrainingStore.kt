@@ -159,7 +159,7 @@ class TrainingStore(
                 ) mutate { it.copy(error = "Неизвестное значение в таблице") }
                 else mutate { it.copy(matrixSelection = selection, error = null) }
             }
-            AppAction.ToggleReference -> mutate { it.copy(showReference = !it.showReference) }
+            AppAction.ToggleReference -> if (s.caseReferenceAvailable) mutate { it.copy(showReference = !it.showReference) }
             AppAction.OpenSkillPicker -> mutate { it.copy(showSkillPicker = !it.showSkillPicker) }
             is AppAction.StartChain -> startChain(action.seedIndex ?: s.seedIndex)
             is AppAction.SelectChainSeed -> startChain(action.index)

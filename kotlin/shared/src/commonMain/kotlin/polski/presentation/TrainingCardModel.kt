@@ -73,8 +73,8 @@ fun trainingCardModel(state: AppUiState, now: Instant? = state.now): TrainingCar
     )
     val referenceToggle = ReferenceToggle(
         label = if (!introducing && state.showReference) "Скрыть таблицу" else "Таблица под рукой",
-        enabled = !introducing,
-        expanded = state.showReference && !introducing,
+        enabled = !introducing && state.caseReferenceAvailable,
+        expanded = state.showReference && !introducing && state.caseReferenceAvailable,
     )
     val chainProgress = if (state.mode == TrainingMode.Chain) {
         ChainProgress(state.chainDisplayCount, state.chain.size, courseChainPresentation.summary)

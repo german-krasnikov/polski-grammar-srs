@@ -49,8 +49,8 @@ class CurriculumReaderTest {
     private val filteredNounIds = listOf("wife", "husband", "friendM", "son", "child") // ExerciseFactory.kt:54
 
     @Test fun coversAllSixteenPolishSkillIdsExactlyOnce() {
-        assertEquals(polishSkillIds, curriculum.map { it.id }.toSet())
-        assertEquals(polishSkillIds.size, curriculum.size)
+        assertEquals(polishSkillIds + "degree.comparison", curriculum.map { it.id }.toSet())
+        assertEquals(polishSkillIds.size + 1, curriculum.size)
     }
 
     // ExerciseFactory.kt:50-52,63-69 — Case Nom→Acc, candidates filtered by the noun's gender.

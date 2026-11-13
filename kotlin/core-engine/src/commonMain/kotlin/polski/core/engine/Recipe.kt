@@ -95,6 +95,7 @@ data class SkillRecipe(
     val ownerDraw: OwnerDraw? = null,
     val numberOverride: String? = null,
     val staticOverride: StaticExercise? = null,
+    val staticPool: List<StaticExercise> = emptyList(),
 )
 
 /**

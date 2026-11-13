@@ -60,15 +60,17 @@ internal class TrainingCardDom(
         })
         methodLabel.appendChild(methodSelect)
         val model = trainingCardModel(state)
-        options.appendChild(button(model.referenceToggle.label) {
-            dispatch(AppAction.ToggleReference)
-        }.apply {
-            disabled = state.introPending
-            setAttribute("aria-expanded", (state.showReference && !state.introPending).toString())
-        })
+        if (state.caseReferenceAvailable) {
+            options.appendChild(button(model.referenceToggle.label) {
+                dispatch(AppAction.ToggleReference)
+            }.apply {
+                disabled = !model.referenceToggle.enabled
+                setAttribute("aria-expanded", model.referenceToggle.expanded.toString())
+            })
+        }
         if (state.showSkillPicker) renderSkillPicker(main, state, dispatch)
         if (state.mode == TrainingMode.Chain) renderChainHeader(main, state, dispatch)
-        val layout = node("div", if (state.showReference && !state.introPending) "study-layout with-reference" else "study-layout")
+        val layout = node("div", if (model.referenceToggle.expanded) "study-layout with-reference" else "study-layout")
         main.appendChild(layout)
         val card = node("section", "flashcard card")
         card.setAttribute("aria-label", "Учебная карточка")
@@ -78,7 +80,7 @@ internal class TrainingCardDom(
             CardPhase.NoDue -> renderNoDue(card, state, dispatch)
             CardPhase.Question, CardPhase.Revealed -> renderCard(root, card, state, swipeRatingEnabled, justRevealed, dispatch)
         }
-        if (state.showReference && !state.introPending) {
+        if (model.referenceToggle.expanded) {
             // UX4-20/22: animates in (fade + slight rise) exactly on the render where it just
             // turned on; a routine rebuild of an already-shown panel (timer, rating, …) must not
             // replay it. Hiding stays instant, matching this panel's existing conditional-mount

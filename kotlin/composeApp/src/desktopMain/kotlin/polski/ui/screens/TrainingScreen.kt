@@ -89,8 +89,10 @@ internal fun TrainingScreen(state: AppUiState, dispatch: (AppAction) -> Unit, fo
                 val label = if (option.mode == TrainingMode.Schedule) "${option.label} · ${model.header.dueCount}" else option.label
                 TabButton(label, model.header.selected == option.mode) { dispatch(option.action) }
             }
-            OutlinedButton(onClick = { dispatch(AppAction.ToggleReference) }, enabled = model.referenceToggle.enabled) {
-                Text(model.referenceToggle.label)
+            if (state.caseReferenceAvailable) {
+                OutlinedButton(onClick = { dispatch(AppAction.ToggleReference) }, enabled = model.referenceToggle.enabled) {
+                    Text(model.referenceToggle.label)
+                }
             }
         }
         if (state.showSkillPicker) {

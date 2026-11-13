@@ -13,7 +13,7 @@ class NJ03CourseValuePilotTest {
 
     @Test fun skillCountAndFirstSkill() {
         val skills = courseValueSkills()
-        assertEquals(16, skills.size, "16 pl-ru skills")
+        assertEquals(17, skills.size, "17 pl-ru skills after P18 comparison")
         val first = skills[0]
         assertEquals("case.acc.n", first.id)
         assertEquals("Biernik · средний род", first.title)
@@ -24,12 +24,12 @@ class NJ03CourseValuePilotTest {
 
     @Test fun lastSkillAndB1Level() {
         val skills = courseValueSkills()
-        val last = skills.last()
+        val last = skills[15]
         assertEquals("sentence.plural", last.id)
         assertEquals("A2", last.level)
         val b1 = skills.filter { it.level == "B1" }
-        assertEquals(2, b1.size, "2 B1 skills: aspect and mixed")
-        assertEquals(setOf("aspect", "mixed"), b1.map { it.id }.toSet())
+        assertEquals(3, b1.size, "3 B1 skills: aspect, mixed and degree.comparison")
+        assertEquals(setOf("aspect", "mixed", "degree.comparison"), b1.map { it.id }.toSet())
     }
 
     @Test fun prerequisitesPreserved() {

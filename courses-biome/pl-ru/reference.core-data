@@ -365,6 +365,17 @@ REFERENCE {
   }
   systemCards: [
     {
+      id: degree.comparison
+      title: "Степени сравнения"
+      explanation: "Простая, нерегулярная и описательная сравнительная степень; согласование с существительным. После od — Dopełniacz."
+      example: "Ten most jest dłuższy od tamtego mostu."
+      steps: [
+        "Выбери нужную степень"
+        "Согласуй прилагательное"
+        "После od проверь Dopełniacz"
+      ]
+    }
+    {
       id: noun
       title: "Существительное"
       explanation: "Род × число × падеж"

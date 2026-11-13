@@ -1068,3 +1068,88 @@ RECIPE {
   ]
   tags: [mixed gen past]
 }
+
+# P18 comparison: content keys only; six distinct transformations share one FSRS skill.
+RECIPE {
+  skill: degree.comparison
+  staticPool: [
+    {
+      sourceKey: degreeOldSource
+      promptKey: degreeOldPrompt
+      expectedKey: degreeOldExpected
+      explanationKey: degreeOldExplanation
+      changeFromKey: degreeOldFrom
+      changeToKey: degreeOldTo
+      changeReasonKey: degreeOldReason
+      acceptedKeys: []
+      nounId: book
+      adjectiveId: new
+      tags: [degree comparison]
+    }
+    {
+      sourceKey: degreeEasySource
+      promptKey: degreeEasyPrompt
+      expectedKey: degreeEasyExpected
+      explanationKey: degreeEasyExplanation
+      changeFromKey: degreeEasyFrom
+      changeToKey: degreeEasyTo
+      changeReasonKey: degreeEasyReason
+      acceptedKeys: []
+      nounId: book
+      adjectiveId: new
+      tags: [degree comparison]
+    }
+    {
+      sourceKey: degreeGoodSource
+      promptKey: degreeGoodPrompt
+      expectedKey: degreeGoodExpected
+      explanationKey: degreeGoodExplanation
+      changeFromKey: degreeGoodFrom
+      changeToKey: degreeGoodTo
+      changeReasonKey: degreeGoodReason
+      acceptedKeys: []
+      nounId: book
+      adjectiveId: new
+      tags: [degree comparison]
+    }
+    {
+      sourceKey: degreeAnalyticSource
+      promptKey: degreeAnalyticPrompt
+      expectedKey: degreeAnalyticExpected
+      explanationKey: degreeAnalyticExplanation
+      changeFromKey: degreeAnalyticFrom
+      changeToKey: degreeAnalyticTo
+      changeReasonKey: degreeAnalyticReason
+      acceptedKeys: []
+      nounId: book
+      adjectiveId: new
+      tags: [degree comparison]
+    }
+    {
+      sourceKey: degreeSuperlativeSource
+      promptKey: degreeSuperlativePrompt
+      expectedKey: degreeSuperlativeExpected
+      explanationKey: degreeSuperlativeExplanation
+      changeFromKey: degreeSuperlativeFrom
+      changeToKey: degreeSuperlativeTo
+      changeReasonKey: degreeSuperlativeReason
+      acceptedKeys: []
+      nounId: book
+      adjectiveId: new
+      tags: [degree comparison]
+    }
+    {
+      sourceKey: degreeCompareSource
+      promptKey: degreeComparePrompt
+      expectedKey: degreeCompareExpected
+      explanationKey: degreeCompareExplanation
+      changeFromKey: degreeCompareFrom
+      changeToKey: degreeCompareTo
+      changeReasonKey: degreeCompareReason
+      acceptedKeys: []
+      nounId: book
+      adjectiveId: new
+      tags: [degree comparison]
+    }
+  ]
+}

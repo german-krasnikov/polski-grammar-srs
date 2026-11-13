@@ -1,5 +1,5 @@
 // Generated from dsl/course.data-contract, dsl/ui-copy/uicopy-oracle.core-data
-// source-sha256=8d297a43f02dd884a8988b7e3cf6d9b2864cf15bf767faa2680ef50be58bff1f
+// source-sha256=07f4d769764530f59238256147033d78917ac437e0e4dbf4fbdc62012fec4854
 // Edit the source, then run biome generate.
 
 package polski.data.oracle.uicopy
@@ -132,6 +132,7 @@ data class SkillRow(
     val fixed: List<FeatureValueRow>,
     val lexicalFilter: LexicalFilterRow?,
     val styleContent: StyleContentRow? = null,
+    val caseReferenceAvailable: Boolean? = null,
 )
 
 data class CaseFormsRow(
@@ -660,6 +661,7 @@ data class SkillRecipeRow(
     val ownerDraw: OwnerDrawRow? = null,
     val numberOverride: String? = null,
     val staticOverride: StaticExerciseRow? = null,
+    val staticPool: List<StaticExerciseRow>? = null,
 )
 
 data class ChainStepRecipeRow(

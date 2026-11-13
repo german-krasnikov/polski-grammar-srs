@@ -2080,4 +2080,105 @@ final class PolskiGrammarUITests: XCTestCase {
         }
         XCTAssertTrue(app.staticTexts["Единственное → множественное"].waitForExistence(timeout: 5), app.debugDescription)
     }
+
+    func testComparisonSkillHasNativeQuestionAnswerAndNoUnrelatedCaseTable() {
+        let app = XCUIApplication()
+        app.launch()
+        XCTAssertTrue(app.buttons["Тренировка"].waitForExistence(timeout: 20), app.debugDescription)
+        let firstIntroduction = app.buttons["continueIntroduction"]
+        XCTAssertTrue(firstIntroduction.waitForExistence(timeout: 5), app.debugDescription)
+        firstIntroduction.tap()
+        // Progress rows are another public path to focused training and avoid iPadOS 26's
+        // existing mode Menu automation mismatch observed in the retained first two runs.
+        app.buttons["Прогресс"].firstMatch.tap()
+        let comparison = app.buttons.matching(NSPredicate(format: "label CONTAINS %@", "Степени сравнения прилагательных")).firstMatch
+        for _ in 0..<25 { if comparison.isHittable { break }; app.swipeUp() }
+        XCTAssertTrue(comparison.isHittable, app.debugDescription)
+        comparison.tap()
+        XCTAssertTrue(app.buttons["Тренировка"].waitForExistence(timeout: 5), app.debugDescription)
+        let comparisonIntroduction = app.buttons["continueIntroduction"]
+        if comparisonIntroduction.waitForExistence(timeout: 3) { comparisonIntroduction.tap() }
+
+        let answers = [
+            "Ten dom jest stary.": "Ten dom jest starszy.",
+            "To zadanie jest łatwe.": "To zadanie jest łatwiejsze.",
+            "Ta książka jest dobra.": "Ta książka jest lepsza.",
+            "Ten film jest interesujący.": "Ten film jest bardziej interesujący.",
+            "To jest duży pokój.": "To jest największy pokój.",
+            "Ten rower jest szybki.": "Ten rower jest szybszy od tamtego roweru."
+        ]
+        let stylePicker = app.buttons["trainingStylePicker"]
+        let originalStyle = stylePicker.label.split(separator: ",").last.map { String($0).trimmingCharacters(in: .whitespaces) } ?? "Через правило"
+        func chooseStyle(_ title: String) {
+            for _ in 0..<8 { if stylePicker.isHittable { break }; app.swipeDown() }
+            XCTAssertTrue(stylePicker.isHittable, app.debugDescription)
+            if stylePicker.label.contains(title) { return }
+            stylePicker.tap()
+            let option = app.descendants(matching: .any)[title].firstMatch
+            XCTAssertTrue(option.waitForExistence(timeout: 5), app.debugDescription)
+            option.tap()
+            XCTAssertTrue(stylePicker.label.contains(title), app.debugDescription)
+        }
+        var seen = Set<String>()
+        for index in 0..<6 {
+            for _ in 0..<8 {
+                if answers.keys.contains(where: { app.staticTexts[$0].exists }) { break }
+                app.swipeDown()
+            }
+            let source = answers.keys.first { app.staticTexts[$0].exists }
+            XCTAssertNotNil(source, app.debugDescription)
+            guard let source, let expected = answers[source] else { return }
+            XCTAssertTrue(seen.insert(source).inserted, "A pool cycle must not repeat a sentence")
+            if index == 0 {
+                for title in ["Через правило", "Через ситуацию", "Через сравнение с родным", "Минимум теории"] {
+                    chooseStyle(title)
+                    XCTAssertFalse(app.staticTexts[expected].exists, "Changing style must not reveal the answer")
+                }
+                chooseStyle(originalStyle)
+            }
+            XCTAssertFalse(app.staticTexts[expected].exists, "The answer must be hidden before reveal")
+            XCTAssertFalse(app.buttons["Таблица под рукой"].exists, "Metadata must not expose a case table")
+            let reveal = app.buttons["revealAnswer"]
+            for _ in 0..<7 { if reveal.isHittable { break }; app.swipeUp() }
+            XCTAssertTrue(reveal.isHittable, app.debugDescription)
+            reveal.tap()
+            XCTAssertTrue(app.staticTexts[expected].waitForExistence(timeout: 5), app.debugDescription)
+            if index < 5 {
+                app.buttons["Прогресс"].firstMatch.tap()
+                for _ in 0..<25 { if comparison.isHittable { break }; app.swipeUp() }
+                XCTAssertTrue(comparison.isHittable, app.debugDescription)
+                comparison.tap()
+                let nextIntroduction = app.buttons["continueIntroduction"]
+                if nextIntroduction.waitForExistence(timeout: 3) { nextIntroduction.tap() }
+            }
+        }
+        XCTAssertEqual(seen.count, answers.count)
+
+        app.buttons["Прогресс"].firstMatch.tap()
+        let oldCase = app.buttons.matching(NSPredicate(format: "label CONTAINS %@", "Biernik · средний род")).firstMatch
+        for _ in 0..<25 { if oldCase.isHittable { break }; app.swipeDown() }
+        XCTAssertTrue(oldCase.isHittable, app.debugDescription)
+        oldCase.tap()
+        continueIntroductionIfPresent(app)
+        let table = app.buttons["Таблица под рукой"]
+        for _ in 0..<7 { if table.isHittable { break }; app.swipeUp() }
+        XCTAssertTrue(table.waitForExistence(timeout: 5), "Existing case skills must retain their table")
+    }
+
+    func testModeMenuOpensFromItsVisibleLabelOnIPad() {
+        let app = XCUIApplication()
+        app.launch()
+        XCTAssertTrue(app.buttons["Тренировка"].waitForExistence(timeout: 20), app.debugDescription)
+        let introduction = app.buttons["continueIntroduction"]
+        if introduction.waitForExistence(timeout: 3) { introduction.tap() }
+        let visibleLabel = app.staticTexts["Режим: Цепочка предложений"]
+        XCTAssertTrue(visibleLabel.waitForExistence(timeout: 5), app.debugDescription)
+        let labelFrame = visibleLabel.frame
+        app.coordinate(withNormalizedOffset: CGVector(dx: 0, dy: 0))
+            .withOffset(CGVector(dx: labelFrame.midX, dy: labelFrame.midY)).tap()
+        let focused = app.descendants(matching: .any)["Отдельный навык"].firstMatch
+        XCTAssertTrue(focused.waitForExistence(timeout: 5), app.debugDescription)
+        focused.tap()
+        XCTAssertTrue(app.buttons.matching(NSPredicate(format: "label BEGINSWITH %@", "Навык")).firstMatch.waitForExistence(timeout: 5), app.debugDescription)
+    }
 }

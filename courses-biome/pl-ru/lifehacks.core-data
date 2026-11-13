@@ -334,3 +334,15 @@ LIFEHACK {
   }
   status: editorial
 }
+
+LIFEHACK {
+  id: pl-ru.degree.comparison.od-genitive
+  skillId: degree.comparison
+  text: "Если сравниваешь два названных предмета через od, поставь второй в Dopełniacz: Ten most jest dłuższy od tamtego mostu. Русское «чем тот мост» не подсказывает польский падеж после od. Для сравнения целых высказываний употребляй niż."
+  source: {
+    kind: research
+    citation: "Swan, O. E. (2002). A Grammar of Contemporary Polish, §6, Common Expressions Using Comparatives and Superlatives, p. 151: comparison with od + genitive or niż; od + genitive favoured for nouns."
+    url: "https://lektorek.org/lektorek/grammar.pdf"
+  }
+  status: editorial
+}

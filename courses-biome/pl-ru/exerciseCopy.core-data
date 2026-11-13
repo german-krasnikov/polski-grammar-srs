@@ -153,3 +153,104 @@ COPY {key: mixedChangeFrom value: "Widzę"}
 COPY {key: mixedChangeTo value: "Nie widziałeś"}
 COPY {key: chainPastChangeFrom value: "Widzę"}
 COPY {key: chainPastChangeTo value: "Widziałem"}
+
+# P18 comparison: six authored transformations, source/operation/whole target.
+COPY {key: degreeOldSource value: "Ten dom jest stary."}
+COPY {key: degreeOldExpected value: "Ten dom jest starszy."}
+COPY {
+  key: degreeOldPrompt
+  value: "Образуй простую сравнительную форму прилагательного; сохрани остальное предложение."
+}
+COPY {
+  key: degreeOldExplanation
+  value: "Сравнительная степень от stary — starszy."
+}
+COPY {key: degreeOldFrom value: stary}
+COPY {key: degreeOldTo value: starszy}
+COPY {
+  key: degreeOldReason
+  value: "Сравнительная форма прилагательного stary — starszy."
+}
+COPY {key: degreeEasySource value: "To zadanie jest łatwe."}
+COPY {key: degreeEasyExpected value: "To zadanie jest łatwiejsze."}
+COPY {
+  key: degreeEasyPrompt
+  value: "Образуй простую сравнительную форму прилагательного; сохрани средний род."
+}
+COPY {
+  key: degreeEasyExplanation
+  value: "Форма łatwiejsze согласуется с существительным среднего рода zadanie."
+}
+COPY {key: degreeEasyFrom value: "łatwe"}
+COPY {key: degreeEasyTo value: "łatwiejsze"}
+COPY {
+  key: degreeEasyReason
+  value: "Сравнительная форма от łatwy — łatwiejszy; при zadanie она получает окончание -e."
+}
+COPY {key: degreeGoodSource value: "Ta książka jest dobra."}
+COPY {key: degreeGoodExpected value: "Ta książka jest lepsza."}
+COPY {
+  key: degreeGoodPrompt
+  value: "Используй нерегулярную сравнительную форму прилагательного; сохрани женский род."
+}
+COPY {
+  key: degreeGoodExplanation
+  value: "У dobry нерегулярная сравнительная форма lepszy; с książka нужна форма lepsza."
+}
+COPY {key: degreeGoodFrom value: dobra}
+COPY {key: degreeGoodTo value: lepsza}
+COPY {
+  key: degreeGoodReason
+  value: "Dobry → lepszy — нерегулярная форма; lepsza согласуется с książka."
+}
+COPY {key: degreeAnalyticSource value: "Ten film jest interesujący."}
+COPY {key: degreeAnalyticExpected value: "Ten film jest bardziej interesujący."}
+COPY {
+  key: degreeAnalyticPrompt
+  value: "Вырази сравнительную степень описательно, сохранив целое предложение."
+}
+COPY {
+  key: degreeAnalyticExplanation
+  value: "Прилагательное interesujący образует сравнительную степень описательно с bardziej."
+}
+COPY {key: degreeAnalyticFrom value: "interesujący"}
+COPY {key: degreeAnalyticTo value: "bardziej interesujący"}
+COPY {
+  key: degreeAnalyticReason
+  value: "Добавь bardziej перед interesujący; не образуй искусственную форму на -szy."
+}
+COPY {key: degreeSuperlativeSource value: "To jest duży pokój."}
+COPY {key: degreeSuperlativeExpected value: "To jest największy pokój."}
+COPY {
+  key: degreeSuperlativePrompt
+  value: "Поставь характеристику комнаты в превосходную степень во всём предложении."
+}
+COPY {
+  key: degreeSuperlativeExplanation
+  value: "У duży сравнительная форма większy, превосходная — największy."
+}
+COPY {key: degreeSuperlativeFrom value: "duży"}
+COPY {key: degreeSuperlativeTo value: "największy"}
+COPY {
+  key: degreeSuperlativeReason
+  value: "Приставка naj- присоединяется к нерегулярной сравнительной форме większy."
+}
+COPY {key: degreeCompareSource value: "Ten rower jest szybki."}
+COPY {
+  key: degreeCompareExpected
+  value: "Ten rower jest szybszy od tamtego roweru."
+}
+COPY {
+  key: degreeComparePrompt
+  value: "Сравни этот велосипед с тем, используя od и целое предложение."
+}
+COPY {
+  key: degreeCompareExplanation
+  value: "После od второй предмет стоит в родительном падеже: tamtego roweru."
+}
+COPY {key: degreeCompareFrom value: szybki}
+COPY {key: degreeCompareTo value: "szybszy od tamtego roweru"}
+COPY {
+  key: degreeCompareReason
+  value: "Szybki → szybszy; после od нужен родительный падеж: tamtego roweru."
+}

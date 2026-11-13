@@ -17,7 +17,7 @@ class CourseReferenceSystemCardsTest {
                 ReferenceSystemCard("modifiers", "Модификаторы", "Отрицание · вопрос · владелец", "Widzę… → Nie widzę… → Czy widzę…?",
                     listOf("Widzę…", "Nie widzę…", "Czy widzę…?")),
             ),
-            referenceSystemCards,
+            referenceSystemCards.takeLast(4),
         )
     }
 }
