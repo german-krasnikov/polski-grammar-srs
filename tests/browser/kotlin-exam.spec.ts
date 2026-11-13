@@ -18,6 +18,9 @@ test('DSL catalog PlayTest: six official mapped papers', async ({ page }) => {
 });
 
 test('DSL grammar PlayTest: B2 2020 conditional word bank', async ({ page }) => {
+  // This legacy scoring scenario intentionally reselects a bank token in one attempt.
+  await page.goto('/#/settings');
+  await page.locator('#settings-exam-immediate-feedback').uncheck();
   await runExamPlaytest(page, resolve('dsl/exam-web/grammar-word-bank-2020.playtest'));
 });
 

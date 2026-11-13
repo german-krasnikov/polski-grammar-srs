@@ -47,6 +47,7 @@ object UiCopy {
     val ExamPendingPoints: String get() = text("examPendingPoints")
     val ExamManualReview: String get() = text("examManualReview")
     val ExamImmediateFeedbackSetting: String get() = text("examImmediateFeedbackSetting")
+    val ExamCheck: String get() = text("check")
     val ExamYourAnswer: String get() = text("examYourAnswer")
     val ExamAnswerLocked: String get() = text("examAnswerLocked")
     val ExamFeedbackCorrect: String get() = text("examFeedbackCorrect")

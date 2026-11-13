@@ -3,11 +3,12 @@ COVERAGE declared-scope
 MODULE ../../kotlin/shared/src/commonMain/kotlin/polski/exam/ExamPracticeFeedback.kt
 FACT practice.mode enum=practice,timed member=mode
 FACT practice.preferenceEnabled bool member=preferenceEnabled
-FACT practice.event enum=choice member=event
+FACT practice.event enum=choice,check member=event
+FACT practice.explicitCheckRequired bool member=explicitCheckRequired
 FACT practice.validTarget bool member=validTarget
 FACT practice.answerComplete bool member=answerComplete
 FACT practice.alreadyCommitted bool member=alreadyCommitted
 FACT practice.dependenciesReady bool member=dependenciesReady
 FACT practice.gradeStatus enum=none,confirmed_full,confirmed_partial,wrong,pending_manual member=gradeStatus
 FACT practice.hasNextQuestion bool member=hasNextQuestion
-INPUT disposition practice.mode practice.preferenceEnabled practice.event practice.validTarget practice.answerComplete practice.alreadyCommitted practice.dependenciesReady practice.gradeStatus practice.hasNextQuestion
+INPUT disposition practice.mode practice.preferenceEnabled practice.event practice.explicitCheckRequired practice.validTarget practice.answerComplete practice.alreadyCommitted practice.dependenciesReady practice.gradeStatus practice.hasNextQuestion
