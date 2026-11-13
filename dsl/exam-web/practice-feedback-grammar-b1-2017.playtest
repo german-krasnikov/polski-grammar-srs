@@ -1,0 +1,25 @@
+TEST "B1 2017 first wrong grammar choice is frozen and reported beside the source key" PROFILE playmode
+  open exam="B1 Certyfikat 2017" module="grammar"
+  ASSERT practice.progress == "1 / 50"
+  pauseClock
+  chooseGrammar answer="dobry teatr"
+  ASSERT practice.feedback == "Неверно · Ваш ответ: dobry teatr · Образцы из ключа: dobrego teatru"
+  ASSERT practice.wrongOption == "A. dobry teatr"
+  ASSERT practice.correctOption == "B. dobrego teatru"
+  tapLockedGrammar answer="dobrego teatru"
+  ASSERT practice.wrongOption == "A. dobry teatr"
+  advanceClock millis=1999
+  ASSERT practice.progress == "1 / 50"
+  advanceClock millis=1
+  ASSERT practice.progress == "2 / 50"
+  ASSERT practice.feedback == ""
+  advanceClock millis=2100
+  ASSERT practice.progress == "2 / 50"
+  advance count=48
+  submit
+  ASSERT exam.score == "0%"
+  inspectReview index=1
+  ASSERT grammar.reviewStatus == "wrong"
+  ASSERT practice.reviewChosen == "Ваш ответ: dobry teatr"
+  ASSERT practice.reviewSource == "Образцы из ключа: dobrego teatru"
+END
