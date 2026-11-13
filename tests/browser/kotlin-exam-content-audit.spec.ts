@@ -1,4 +1,4 @@
-import { readFileSync } from 'node:fs';
+import { existsSync, readFileSync } from 'node:fs';
 import { resolve } from 'node:path';
 import { expect, test, type Page } from '@playwright/test';
 import { runExamPlaytest } from './exam-playtest-host';
@@ -98,6 +98,35 @@ async function inspectVisibleContent(page: Page, part: string, paper: string, so
 }
 
 for (const paper of papers) {
+  test(`${paper.routeId}: all authored writing tasks show their paper guidance`, async ({ page }) => {
+    test.setTimeout(120_000);
+    const writingTasks = sourceRows(paper.sourceDir, 'writing', 'WRITING_TASK');
+    const coverFile = existsSync(resolve(paper.sourceDir, 'modules.core-data')) ? 'modules' : 'exam-modules';
+    const cover = sourceRows(paper.sourceDir, coverFile, 'EXAM_MODULE').find(row => row.module === 'writing');
+    expect(cover?.writingGuidance?.trim(), paper.routeId).toBeTruthy();
+    await page.goto('/#/exam');
+    await page.locator('.exam-card').filter({ hasText: paper.title }).getByRole('button', { name: 'Начать' }).click();
+    await page.locator('.exam-module-card').filter({ hasText: 'IV. Pisanie' }).getByRole('button', { name: 'Начать' }).click();
+    const sets = [...new Set(writingTasks.map(task => task.setId).filter(Boolean))];
+    let seen = 0;
+    for (const [setIndex, setId] of sets.entries()) {
+      await page.getByRole('button', { name: `Набор ${setId}`, exact: true }).click();
+      const tasks = writingTasks.filter(task => task.setId === setId);
+      for (const [index, task] of tasks.entries()) {
+        await page.locator('.exam-writing-details summary').click();
+        await expect(page.locator('.exam-writing-details')).toHaveAttribute('open');
+        const expectedInstruction = `${task.instruction}\n\n${cover!.writingGuidance}`;
+        expect(normalized(await page.locator('.exam-writing-instruction').innerText()), task.taskId).toBe(normalized(expectedInstruction));
+        expect(normalized(await page.locator('.exam-writing-prompt').innerText()), task.taskId).toBe(normalized(task.promptText));
+        if (task.wordLimit) await expect(page.locator('.exam-word-limit')).toHaveText(`Limit: ${task.wordLimit} słów`);
+        seen++;
+        if (index < tasks.length - 1) await page.getByRole('button', { name: 'Dalej →' }).click();
+      }
+      if (setIndex < sets.length - 1) await page.getByRole('button', { name: 'Сменить набор' }).click();
+    }
+    expect(seen, paper.routeId).toBe(writingTasks.length);
+  });
+
   test(`${paper.routeId}: every task renders a prompt and nonempty controls`, async ({ page }) => {
     test.setTimeout(120_000);
     const grammarTests = sourceRows(paper.sourceDir, 'grammar-tests', 'GRAMMAR_TEST');
@@ -108,6 +137,9 @@ for (const paper of papers) {
     const readingPassages = sourceRows(paper.sourceDir, 'reading-passages', 'READING_PASSAGE');
     const readingQuestions = sourceRows(paper.sourceDir, 'reading-questions', 'READING_QUESTION');
     const writingTasks = sourceRows(paper.sourceDir, 'writing', 'WRITING_TASK');
+    const coverFile = existsSync(resolve(paper.sourceDir, 'modules.core-data')) ? 'modules' : 'exam-modules';
+    const writingCover = sourceRows(paper.sourceDir, coverFile, 'EXAM_MODULE').find(cover => cover.module === 'writing');
+    const writingGuidance = writingCover?.writingGuidance;
     const orderedGrammar = grammarTests.flatMap(task => grammarItems.filter(item => item.testRef === task.testId));
     await page.goto('/#/exam');
     await page.locator('.exam-card').filter({ hasText: paper.title }).getByRole('button', { name: 'Начать' }).click();
@@ -127,6 +159,11 @@ for (const paper of papers) {
           const tasks = writingTasks.filter(task => (task.setId ?? '') === setId);
           for (const [index, task] of tasks.entries()) {
             await inspectVisibleContent(page, part, paper.routeId, task.taskId);
+            await page.locator('.exam-writing-details summary').click();
+            await expect(page.locator('.exam-writing-details')).toHaveAttribute('open');
+            const expectedInstruction = writingGuidance ? `${task.instruction}\n\n${writingGuidance}` : task.instruction;
+            expect(normalized(await page.locator('.exam-writing-instruction').innerText()), `${paper.routeId}/${task.taskId}: authored writing instruction and cover guidance`)
+              .toBe(normalized(expectedInstruction));
             expect(normalized(await page.locator('.exam-writing-prompt').innerText()), `${paper.routeId}/${task.taskId}`).toBe(normalized(task.promptText));
             if (task.promptImageUrl) await expect(page.locator('.exam-writing-image')).toHaveAttribute('alt', task.promptImageAlt);
             if (index < tasks.length - 1) await page.getByRole('button', { name: 'Dalej →' }).click();

@@ -119,6 +119,12 @@ UI_COPY_CASE {
 UI_COPY_CASE {key: reading plRu: "Чтение" enRu: Reading placeholders: ""}
 UI_COPY_CASE {key: writing plRu: "Письмо" enRu: Writing placeholders: ""}
 UI_COPY_CASE {
+  key: writingInstructionsAndCriteria
+  plRu: "Инструкция и критерии"
+  enRu: "Instructions and criteria"
+  placeholders: ""
+}
+UI_COPY_CASE {
   key: selectWritingSet
   plRu: "Выберите набор"
   enRu: "Select a set"

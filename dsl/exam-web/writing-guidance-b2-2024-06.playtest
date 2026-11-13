@@ -1,0 +1,19 @@
+TEST "B2 Certyfikat 2024-06 shows official set-wide writing criteria" PROFILE playmode
+  open exam="B2 Certyfikat 2024-06" module="writing"
+  selectWritingSet set="I"
+  openWritingGuidance
+  ASSERT writing.guidance == "KRYTERIA OCENY • Wykonanie zadania (treść, forma, objętość) 0 – 10 p. • Środki językowe 0 – 16 p. • poprawność językowa 0 – 14 p. RAZEM: maksymalnie 40 p."
+  ASSERT writing.wordLimit == "Limit: 60 słów"
+  changeWritingSet
+  selectWritingSet set="III"
+  openWritingGuidance
+  ASSERT writing.guidance == "KRYTERIA OCENY • Wykonanie zadania (treść, forma, objętość) 0 – 10 p. • Środki językowe 0 – 16 p. • poprawność językowa 0 – 14 p. RAZEM: maksymalnie 40 p."
+  ASSERT writing.wordLimit == "Limit: 30 słów"
+  writeDraft text="Piszę odpowiedź."
+  nextWriting
+  writeDraft text="Druga odpowiedź."
+  submitWriting
+  ASSERT writing.reviewCount == 2
+  ASSERT writing.manualPoints == "0|40|40"
+  ASSERT writing.autoScoreVisible == false
+END

@@ -1,0 +1,19 @@
+TEST "B1 Certyfikat 2017 shows official set-wide writing criteria" PROFILE playmode
+  open exam="B1 Certyfikat 2017" module="writing"
+  selectWritingSet set="I"
+  openWritingGuidance
+  ASSERT writing.guidance == "ZASADY OCENIANIA ZADAŃ Oceniane są: • wykonanie zadania 0 – 10 p. • bogactwo językowe 0 – 10 p. • poprawność językowa 0 – 10 p. RAZEM ……../ 30 p."
+  ASSERT writing.wordLimit == "Limit: 20 słów"
+  changeWritingSet
+  selectWritingSet set="III"
+  openWritingGuidance
+  ASSERT writing.guidance == "ZASADY OCENIANIA ZADAŃ Oceniane są: • wykonanie zadania 0 – 10 p. • bogactwo językowe 0 – 10 p. • poprawność językowa 0 – 10 p. RAZEM ……../ 30 p."
+  ASSERT writing.wordLimit == "Limit: 60 słów"
+  writeDraft text="Piszę odpowiedź."
+  nextWriting
+  writeDraft text="Druga odpowiedź."
+  submitWriting
+  ASSERT writing.reviewCount == 2
+  ASSERT writing.manualPoints == "0|30|30"
+  ASSERT writing.autoScoreVisible == false
+END

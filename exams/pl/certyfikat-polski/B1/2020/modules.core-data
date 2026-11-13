@@ -30,4 +30,5 @@ EXAM_MODULE {
   order: 4
   durationSeconds: 4500
   maximumQuarter: 120
+  writingGuidance: "KRYTERIA OCENY • wykonanie zadania 0 – 10 p. • środki językowe 0 – 10 p. • poprawność językowa 0 – 10 p. RAZEM: maksymalnie 30 p."
 }

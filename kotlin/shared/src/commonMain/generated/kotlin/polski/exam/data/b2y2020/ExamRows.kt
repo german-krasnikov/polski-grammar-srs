@@ -1,5 +1,5 @@
 // Generated from dsl/exam.data-contract
-// source-sha256=c25663c7842effa836bb812b389b1c0384ddfb8c602fa15fdc03765737f8cfa6
+// source-sha256=d042fe012299c6328ebcf0e4cdbdb40b49b95886364fbfd07ef55064fbd4e415
 // Edit the source, then run biome generate.
 
 package polski.exam.data.b2y2020
@@ -206,6 +206,7 @@ data class ExamModuleRow(
     val order: Int,
     val durationSeconds: Int,
     val maximumQuarter: Int,
+    val writingGuidance: String? = null,
 )
 
 data class ListeningTaskRow(
@@ -2386,6 +2387,7 @@ private fun examModuleRowRowsPart0(): List<ExamModuleRow> = listOf(
         order = 4,
         durationSeconds = 5400,
         maximumQuarter = 160,
+        writingGuidance = "KRYTERIA OCENY • wykonanie zadania 0 – 10 p. • środki językowe 0 – 16 p. • poprawność językowa 0 – 14 p. RAZEM: maksymalnie 40 p.",
     ),
 )
 

@@ -4,7 +4,7 @@ WRITING_TASK {
   examRef: certyfikat-polski-C1-2023-11
   taskNumber: 1
   setId: I
-  instruction: "INSTRUKCJA WYKONANIA ZADAŃ W tej części egzaminu znajdują się trzy zestawy. Zestawy I i II zawierają dwa zadania: a i b; zestaw III – jedno zadanie. Należy wybrać tylko jeden zestaw i wykonać zadania (zadanie) w tym zestawie, zgodnie z poleceniami, np.: • zestaw I – dwa zadania (a i b) z zestawu I lub • zestaw II – dwa zadania (a i b) z zestawu II lub • zestaw III – jedno zadanie (a) z zestawu III KRYTERIA OCENY • Wykonanie zadania (treść, forma, objętość) 0 – 10 p. • Środki językowe 0 – 18 p. • Poprawność językowa 0 – 12 p. RAZEM: maksymalnie 40 p. PISANIE"
+  instruction: "INSTRUKCJA WYKONANIA ZADAŃ W tej części egzaminu znajdują się trzy zestawy. Zestawy I i II zawierają dwa zadania: a i b; zestaw III – jedno zadanie. Należy wybrać tylko jeden zestaw i wykonać zadania (zadanie) w tym zestawie, zgodnie z poleceniami, np.: • zestaw I – dwa zadania (a i b) z zestawu I lub • zestaw II – dwa zadania (a i b) z zestawu II lub • zestaw III – jedno zadanie (a) z zestawu III"
   promptText: "Zmienia Pani/Pan pracę ze względu na przeprowadzkę do innego miasta. Proszę napisać pożegnalny e-mail do swoich dotychczasowych współpracowników z Polski."
   wordLimit: 80
   genre: email
@@ -14,7 +14,7 @@ WRITING_TASK {
   examRef: certyfikat-polski-C1-2023-11
   taskNumber: 1
   setId: I
-  instruction: "INSTRUKCJA WYKONANIA ZADAŃ W tej części egzaminu znajdują się trzy zestawy. Zestawy I i II zawierają dwa zadania: a i b; zestaw III – jedno zadanie. Należy wybrać tylko jeden zestaw i wykonać zadania (zadanie) w tym zestawie, zgodnie z poleceniami, np.: • zestaw I – dwa zadania (a i b) z zestawu I lub • zestaw II – dwa zadania (a i b) z zestawu II lub • zestaw III – jedno zadanie (a) z zestawu III KRYTERIA OCENY • Wykonanie zadania (treść, forma, objętość) 0 – 10 p. • Środki językowe 0 – 18 p. • Poprawność językowa 0 – 12 p. RAZEM: maksymalnie 40 p. PISANIE"
+  instruction: "INSTRUKCJA WYKONANIA ZADAŃ W tej części egzaminu znajdują się trzy zestawy. Zestawy I i II zawierają dwa zadania: a i b; zestaw III – jedno zadanie. Należy wybrać tylko jeden zestaw i wykonać zadania (zadanie) w tym zestawie, zgodnie z poleceniami, np.: • zestaw I – dwa zadania (a i b) z zestawu I lub • zestaw II – dwa zadania (a i b) z zestawu II lub • zestaw III – jedno zadanie (a) z zestawu III"
   promptText: "Proszę napisać opowiadanie zaczynające się od słów: „Nigdy nie sądziłam / nie sądziłem, że zwykła pomyłka telefoniczna całkowicie odmieni moje życie…”."
   wordLimit: 320
   genre: story
@@ -24,7 +24,7 @@ WRITING_TASK {
   examRef: certyfikat-polski-C1-2023-11
   taskNumber: 2
   setId: II
-  instruction: "INSTRUKCJA WYKONANIA ZADAŃ W tej części egzaminu znajdują się trzy zestawy. Zestawy I i II zawierają dwa zadania: a i b; zestaw III – jedno zadanie. Należy wybrać tylko jeden zestaw i wykonać zadania (zadanie) w tym zestawie, zgodnie z poleceniami, np.: • zestaw I – dwa zadania (a i b) z zestawu I lub • zestaw II – dwa zadania (a i b) z zestawu II lub • zestaw III – jedno zadanie (a) z zestawu III KRYTERIA OCENY • Wykonanie zadania (treść, forma, objętość) 0 – 10 p. • Środki językowe 0 – 18 p. • Poprawność językowa 0 – 12 p. RAZEM: maksymalnie 40 p. PISANIE"
+  instruction: "INSTRUKCJA WYKONANIA ZADAŃ W tej części egzaminu znajdują się trzy zestawy. Zestawy I i II zawierają dwa zadania: a i b; zestaw III – jedno zadanie. Należy wybrać tylko jeden zestaw i wykonać zadania (zadanie) w tym zestawie, zgodnie z poleceniami, np.: • zestaw I – dwa zadania (a i b) z zestawu I lub • zestaw II – dwa zadania (a i b) z zestawu II lub • zestaw III – jedno zadanie (a) z zestawu III"
   promptText: "„Ta książka wywołuje wiele emocji”. Proszę napisać recenzję o takim tytule, którą zamieści Pani/Pan na stronie internetowej wydawnictwa."
   wordLimit: 200
   genre: review
@@ -34,7 +34,7 @@ WRITING_TASK {
   examRef: certyfikat-polski-C1-2023-11
   taskNumber: 2
   setId: II
-  instruction: "INSTRUKCJA WYKONANIA ZADAŃ W tej części egzaminu znajdują się trzy zestawy. Zestawy I i II zawierają dwa zadania: a i b; zestaw III – jedno zadanie. Należy wybrać tylko jeden zestaw i wykonać zadania (zadanie) w tym zestawie, zgodnie z poleceniami, np.: • zestaw I – dwa zadania (a i b) z zestawu I lub • zestaw II – dwa zadania (a i b) z zestawu II lub • zestaw III – jedno zadanie (a) z zestawu III KRYTERIA OCENY • Wykonanie zadania (treść, forma, objętość) 0 – 10 p. • Środki językowe 0 – 18 p. • Poprawność językowa 0 – 12 p. RAZEM: maksymalnie 40 p. PISANIE"
+  instruction: "INSTRUKCJA WYKONANIA ZADAŃ W tej części egzaminu znajdują się trzy zestawy. Zestawy I i II zawierają dwa zadania: a i b; zestaw III – jedno zadanie. Należy wybrać tylko jeden zestaw i wykonać zadania (zadanie) w tym zestawie, zgodnie z poleceniami, np.: • zestaw I – dwa zadania (a i b) z zestawu I lub • zestaw II – dwa zadania (a i b) z zestawu II lub • zestaw III – jedno zadanie (a) z zestawu III"
   promptText: "Prowadzi Pani/Pan w swojej miejscowości klub dla seniorów i potrzebuje dodatkowych funduszy na poszerzenie jego oferty. Proszę napisać w tej sprawie list do właściciela lokalnej firmy, znanego z działalności charytatywnej."
   wordLimit: 200
   genre: letter
@@ -44,7 +44,7 @@ WRITING_TASK {
   examRef: certyfikat-polski-C1-2023-11
   taskNumber: 3
   setId: III
-  instruction: "INSTRUKCJA WYKONANIA ZADAŃ W tej części egzaminu znajdują się trzy zestawy. Zestawy I i II zawierają dwa zadania: a i b; zestaw III – jedno zadanie. Należy wybrać tylko jeden zestaw i wykonać zadania (zadanie) w tym zestawie, zgodnie z poleceniami, np.: • zestaw I – dwa zadania (a i b) z zestawu I lub • zestaw II – dwa zadania (a i b) z zestawu II lub • zestaw III – jedno zadanie (a) z zestawu III KRYTERIA OCENY • Wykonanie zadania (treść, forma, objętość) 0 – 10 p. • Środki językowe 0 – 18 p. • Poprawność językowa 0 – 12 p. RAZEM: maksymalnie 40 p. PISANIE"
+  instruction: "INSTRUKCJA WYKONANIA ZADAŃ W tej części egzaminu znajdują się trzy zestawy. Zestawy I i II zawierają dwa zadania: a i b; zestaw III – jedno zadanie. Należy wybrać tylko jeden zestaw i wykonać zadania (zadanie) w tym zestawie, zgodnie z poleceniami, np.: • zestaw I – dwa zadania (a i b) z zestawu I lub • zestaw II – dwa zadania (a i b) z zestawu II lub • zestaw III – jedno zadanie (a) z zestawu III"
   promptText: "„Każdy z nas jest – lepszym lub gorszym – aktorem, każdy czasem udaje, zmyśla, mija się z prawdą” (Wojciech Pokora). Czy zgadza się Pani/Pan z tą opinią? Proszę napisać tekst argumentacyjny (rozprawkę)."
   wordLimit: 400
   genre: argument

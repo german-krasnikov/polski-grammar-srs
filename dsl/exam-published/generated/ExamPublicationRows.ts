@@ -1,5 +1,5 @@
 // Generated from dsl/exam.data-contract
-// source-sha256=c25663c7842effa836bb812b389b1c0384ddfb8c602fa15fdc03765737f8cfa6
+// source-sha256=d042fe012299c6328ebcf0e4cdbdb40b49b95886364fbfd07ef55064fbd4e415
 // Edit the source, then run biome generate.
 
 export type ExamModuleRowModule = "listening" | "reading" | "grammar" | "writing";
@@ -80,6 +80,7 @@ export interface ExamModuleRow {
   readonly order: number;
   readonly durationSeconds: number;
   readonly maximumQuarter: number;
+  readonly writingGuidance?: string;
 }
 
 export interface ListeningTaskRow {

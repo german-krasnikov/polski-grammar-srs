@@ -30,4 +30,5 @@ EXAM_MODULE {
   order: 4
   durationSeconds: 4500
   maximumQuarter: 120
+  writingGuidance: "ZASADY OCENIANIA ZADAŃ Oceniane są: • wykonanie zadania 0 – 10 p. • bogactwo językowe 0 – 10 p. • poprawność językowa 0 – 10 p. RAZEM ……../ 30 p."
 }

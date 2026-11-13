@@ -1,0 +1,17 @@
+TEST "C1 Certyfikat 2022-11 shows official set-wide writing criteria" PROFILE playmode
+  open exam="C1 Certyfikat 2022-11" module="writing"
+  selectWritingSet set="I"
+  openWritingGuidance
+  ASSERT writing.guidance == "KRYTERIA OCENY • Wykonanie zadania (treść, forma, objętość) 0 – 10 p. • Środki językowe 0 – 18 p. • poprawność językowa 0 – 12 p. RAZEM: maksymalnie 40 p."
+  ASSERT writing.wordLimit == "Limit: 100 słów"
+  changeWritingSet
+  selectWritingSet set="III"
+  openWritingGuidance
+  ASSERT writing.guidance == "KRYTERIA OCENY • Wykonanie zadania (treść, forma, objętość) 0 – 10 p. • Środki językowe 0 – 18 p. • poprawność językowa 0 – 12 p. RAZEM: maksymalnie 40 p."
+  ASSERT writing.wordLimit == "Limit: 400 słów"
+  writeDraft text="Piszę odpowiedź."
+  submitWriting
+  ASSERT writing.reviewCount == 1
+  ASSERT writing.manualPoints == "0|40|40"
+  ASSERT writing.autoScoreVisible == false
+END

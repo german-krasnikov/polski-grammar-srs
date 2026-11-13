@@ -29,6 +29,7 @@ RECORD ExamModuleRow KEY moduleId COUNT 1..
   order: int
   durationSeconds: int
   maximumQuarter: int
+  writingGuidance: string OPTIONAL
 END
 
 # Listening: one audio file per exam, each task plays a segment (startMs..endMs).
