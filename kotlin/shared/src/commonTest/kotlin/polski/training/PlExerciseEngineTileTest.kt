@@ -43,10 +43,13 @@ class PlExerciseEngineTileTest {
         )
     }
 
-    @Test fun skillWithoutTileTargetSlotsYieldsNoTileBuilderState() {
+    // Gap B Phase 1: exercises without tileTargetSlots (no construction path) can still get tiles
+    // via StaticTileBuilder when their expected string contains recognized noun/adjective forms.
+    @Test fun skillWithoutTileTargetSlotsCanStillGetTilesViaStaticFallback() {
         val exercise = factory(listOf(0.1)).generateForSkill("aspect", SentenceSeed("wife", "beautiful"))
         assertEquals(emptyList(), exercise.tileTargetSlots)
-        assertNull(tileBuilderStateFor(exercise, Draws(listOf(0.1, 0.5, 0.9))))
+        // StaticTileBuilder recognizes noun/adj forms even without an explicit tileTargetSlots opt-in.
+        assertNotNull(tileBuilderStateFor(exercise, Draws(listOf(0.1, 0.5, 0.9))))
     }
 
     @Test fun realPackEngineBuildsATileBuilderStateWhenAnExerciseOptsIn() {

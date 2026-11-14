@@ -135,7 +135,7 @@ internal fun SkillRecipeRow.toSkillRecipe(): SkillRecipe {
 
 /** Only the first step has no skill: it is the first skill of the noun's gender, resolved by the engine. */
 internal fun ChainStepRecipeRow.toChainStep() =
-    ChainStepRecipe(skill.orEmpty(), source.toTextSpec(), expected.toTextSpec(), promptKey, explanationKey, changes.map { it.toChangeSpec() }, tags, ownerOut)
+    ChainStepRecipe(skill.orEmpty(), source.toTextSpec(), expected.toTextSpec(), promptKey, explanationKey, changes.map { it.toChangeSpec() }, tags, ownerOut, tileTargetSlots.orEmpty())
 
 internal fun recipeSetOf(recipes: List<SkillRecipeRow>, chain: List<ChainStepRecipeRow>, defaults: RecipeDefaultsRow): RecipeSet {
     val firstSkills = defaults.firstSkillByGender.map { it.gender to it.skill }.toDistinctMap("firstSkillByGender")

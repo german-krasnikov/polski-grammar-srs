@@ -1,10 +1,12 @@
 package polski.presentation
 
 import polski.core.engine.RandomSource
+import polski.core.engine.StaticTileBuilder
 import polski.core.model.ScaffoldingLevel
 import polski.core.model.TileAnswer
 import polski.core.model.TileExercise
 import polski.core.model.TileSelection
+import polski.core.plMorphology
 import polski.core.plTileGenerator
 import polski.model.Exercise
 
@@ -30,12 +32,18 @@ sealed class TileAction {
 }
 
 /**
- * SB-4 blueprint §5: builds [TileBuilderState] for [exercise] via `TileGenerator.fromAnswerPhrase`
- * (`polski.core.plTileGenerator`) — the pure-data overload, so this call needs no `CoreExercise`.
- * `null` (fail-soft, AC4.3) whenever [exercise] opts out ([Exercise.tileTargetSlots] empty or
- * [Exercise.tilePhrase] absent — every skill today) or the phrase can't be located in
- * [Exercise.expected]; callers fall back to Typed/Oral the same way the rest of
- * `AnswerMode.TileBuilder` already does (see [AnswerMode]'s own KDoc) until SB-6+ wires a host UI.
+ * SB-4 blueprint §5 + Gap B Phase 1: builds [TileBuilderState] for [exercise].
+ *
+ * Primary path: `TileGenerator.fromAnswerPhrase` using the construction-realizer when
+ * [Exercise.tilePhrase] is set (constructed exercises and annotated static exercises).
+ *
+ * Fallback path (Gap B Phase 1): when [Exercise.tilePhrase] is `null` (static exercises without a
+ * `tilePhraseSpec`), tries [StaticTileBuilder.fromStaticExercise] — a word-split reverse-morphology
+ * lookup that marks known noun/adjective forms as [polski.core.model.TileSegment.Choice] without
+ * needing a construction realizer call.
+ *
+ * Returns `null` (fail-soft, AC4.3) when neither path produces tiles.
+ *
  * [scaffolding] defaults to [ScaffoldingLevel.Partial] for direct/test callers; `TrainingStore`
  * (SB-8) resolves the real value from `SkillStats.tileScaffoldingRung` instead of relying on this
  * default.
@@ -43,7 +51,18 @@ sealed class TileAction {
 fun tileBuilderStateFor(exercise: Exercise, random: RandomSource, scaffolding: ScaffoldingLevel = ScaffoldingLevel.Partial): TileBuilderState? {
     // The same slots shape CoreExercise.slots carries (PlExerciseEngine.toExercise's own mapping, reversed) — ConstructionRealizer.slotFacts needs every slot the construction names, not just noun/adjective.
     val slots = mapOf("noun" to exercise.nounId, "adjective" to exercise.adjectiveId, "owner" to exercise.possessive.id, "number" to exercise.number.id)
-    return plTileGenerator(random)
+    val fromConstruction = plTileGenerator(random)
         .fromAnswerPhrase(exercise.primarySkill, exercise.expected, slots, exercise.tileTargetSlots, exercise.tilePhrase, scaffolding)
-        ?.let { TileBuilderState(exercise = it) }
+    if (fromConstruction != null) return TileBuilderState(exercise = fromConstruction)
+
+    // Gap B Phase 1 fallback: try StaticTileBuilder when no tilePhrase was produced.
+    val fromStatic = StaticTileBuilder.fromStaticExercise(
+        expected = exercise.expected,
+        nounId = exercise.nounId,
+        adjectiveId = exercise.adjectiveId,
+        morphology = plMorphology,
+        scaffolding = scaffolding,
+        random = random,
+    )
+    return fromStatic?.let { TileBuilderState(exercise = it) }
 }

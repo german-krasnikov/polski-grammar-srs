@@ -376,6 +376,41 @@ class ExerciseGeneratorTest {
         assertFailsWith<IllegalArgumentException> { generator.generateProbeExercise("test.skill", ContentPool.Training) }
     }
 
+    // Gap A: generateChain must propagate tileTargetSlots and tilePhrase from each ChainStepRecipe.
+    @Test fun generateChainStepWithTileTargetSlotsGetsTilePhrase() {
+        val phraseSpec = PhraseSpec("test.slot-presence", mapOf("Number" to "sg", "Polarity" to "Neg"))
+        val step = ChainStepRecipe(
+            skillId = "test.skill",
+            source = TextSpec.Direct(TextValue.Literal("src")),
+            expected = TextSpec.Pattern("chain", mapOf("item" to TextValue.Phrase(phraseSpec))),
+            promptKey = "p", explanationKey = "e", changes = emptyList(), ownerOut = "my",
+            tileTargetSlots = listOf("noun"),
+        )
+        val pattern = PackPattern { key, values -> "<$key: " + values.entries.joinToString(", ") { (k, v) -> "$k=$v" } + ">" }
+        val gen = generator(emptyList(), pattern = pattern)
+        val exercises = gen.generateChain(listOf(step), mapOf("noun" to "thing", "adjective" to "unused"))
+        val ex = exercises.single()
+        assertEquals(listOf("noun"), ex.tileTargetSlots)
+        assertNotNull(ex.tilePhrase, "tilePhrase must be non-null when step has tileTargetSlots")
+        assertEquals("test.slot-presence", ex.tilePhrase!!.construction)
+        assertEquals("thing", ex.tilePhrase!!.text)
+        assertTrue(ex.expected.contains(ex.tilePhrase!!.text))
+    }
+
+    @Test fun generateChainStepWithEmptyTileTargetSlotsLeavesTilePhraseNull() {
+        val step = ChainStepRecipe(
+            skillId = "test.skill",
+            source = TextSpec.Direct(TextValue.Literal("src")),
+            expected = TextSpec.Direct(TextValue.Literal("the answer")),
+            promptKey = "p", explanationKey = "e", changes = emptyList(), ownerOut = "my",
+            // tileTargetSlots left empty (default)
+        )
+        val gen = generator(emptyList())
+        val ex = gen.generateChain(listOf(step), mapOf("noun" to "thing", "adjective" to "unused")).single()
+        assertEquals(emptyList(), ex.tileTargetSlots)
+        assertNull(ex.tilePhrase)
+    }
+
     // prefixCase == "voc" capitalizes the phrase (TextCase), breaking verbatim substring matching against expected — singlePhraseSpec must refuse it, fail-soft.
     @Test fun prefixedExpectedWithAVocativePrefixCaseIsIneligibleForTiles() {
         val prefixedPhrase = PhraseSpec("test.slot-presence", mapOf("Number" to "sg", "Polarity" to "Neg"))

@@ -118,4 +118,7 @@ data class ChainStepRecipe(
     val tags: List<String> = emptyList(),
     /** The step's *resulting* owner (`CoreExercise.slots["owner"]`) — independent of any per-[TextValue.Phrase] owner override above; the pack recipe supplies it explicitly (no engine-side default). */
     val ownerOut: String,
+    /** SB-5: same meaning as [SkillRecipe.tileTargetSlots] — the slot names of [expected]'s own construction
+     *  that a sentence-builder UI may turn into a picker tile. Empty by default (no tiles for this step). */
+    val tileTargetSlots: List<String> = emptyList(),
 )

@@ -658,6 +658,8 @@ RECORD ChainStepRecipeRow COUNT 1..
   changes: [ChangeSpecRow]
   tags: [string]
   ownerOut: ref PossessiveRow
+  # SB-5: slot names of expected's construction to turn into picker tiles; absent means no tiles for this step.
+  tileTargetSlots: [string] OPTIONAL
 END
 
 # The defaults of a pack: the unmarked owner, the verb the tense skills drill, the first skill of the chain for each gender of the noun ("default" for the

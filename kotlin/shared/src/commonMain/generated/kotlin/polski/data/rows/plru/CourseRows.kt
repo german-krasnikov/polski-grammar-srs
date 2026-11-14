@@ -1,5 +1,5 @@
 // Generated from dsl/course.data-contract
-// source-sha256=2c2099bea4e4d081c6e9b3a00d602b93e5a6eff6453aaf64eef5b0c9c0e0b98e
+// source-sha256=7220bebcd199ae6efad76859f354f5efa10917e9625367ded8d6eb83611964b2
 // Edit the source, then run biome generate.
 
 package polski.data.rows.plru
@@ -675,6 +675,7 @@ data class ChainStepRecipeRow(
     val changes: List<ChangeSpecRow>,
     val tags: List<String>,
     val ownerOut: String,
+    val tileTargetSlots: List<String>? = null,
 )
 
 data class GenderSkillRow(
@@ -7712,6 +7713,7 @@ private fun chainStepRecipeRowRowsPart0(): List<ChainStepRecipeRow> = listOf(
         ),
         tags = listOf("acc"),
         ownerOut = "my",
+        tileTargetSlots = listOf("adjective", "noun"),
     ),
     ChainStepRecipeRow(
         skill = "verb.past",
@@ -7764,6 +7766,7 @@ private fun chainStepRecipeRowRowsPart0(): List<ChainStepRecipeRow> = listOf(
         ),
         tags = listOf("past", "acc"),
         ownerOut = "my",
+        tileTargetSlots = listOf("adjective", "noun"),
     ),
     ChainStepRecipeRow(
         skill = "case.gen.neg",
@@ -7834,6 +7837,7 @@ private fun chainStepRecipeRowRowsPart0(): List<ChainStepRecipeRow> = listOf(
         ),
         tags = listOf("gen", "negation"),
         ownerOut = "my",
+        tileTargetSlots = listOf("adjective", "noun"),
     ),
     ChainStepRecipeRow(
         skill = "agreement.my",
@@ -7908,6 +7912,7 @@ private fun chainStepRecipeRowRowsPart0(): List<ChainStepRecipeRow> = listOf(
         ),
         tags = listOf("gen", "agreement"),
         ownerOut = "their",
+        tileTargetSlots = listOf("adjective", "noun"),
     ),
     ChainStepRecipeRow(
         skill = "case.loc",
@@ -7982,6 +7987,7 @@ private fun chainStepRecipeRowRowsPart0(): List<ChainStepRecipeRow> = listOf(
         ),
         tags = listOf("loc"),
         ownerOut = "their",
+        tileTargetSlots = listOf("adjective", "noun"),
     ),
 )
 

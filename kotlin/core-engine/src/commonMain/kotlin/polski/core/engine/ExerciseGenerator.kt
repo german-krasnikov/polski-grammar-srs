@@ -188,6 +188,15 @@ class ExerciseGenerator(
         return TilePhrase(phraseSpec.construction, phraseSpec.bundle, realized.text, realized.slotSpans)
     }
 
+    /** Gap A: same as [tilePhraseFor] but for a [ChainStepRecipe] step — mirrors the same
+     *  fail-soft contract (empty [ChainStepRecipe.tileTargetSlots] or no single phrase → null). */
+    private fun tilePhraseForStep(step: ChainStepRecipe, lexicalSlots: Map<String, String>): TilePhrase? {
+        if (step.tileTargetSlots.isEmpty()) return null
+        val phraseSpec = singlePhraseSpec(step.expected) ?: return null
+        val realized = realizePhrase(phraseSpec, lexicalSlots)
+        return TilePhrase(phraseSpec.construction, phraseSpec.bundle, realized.text, realized.slotSpans)
+    }
+
     private fun resolveValue(value: TextValue, lexicalSlots: Map<String, String>): String = when (value) {
         is TextValue.Copy -> copy.text(value.key)
         is TextValue.Literal -> value.value
@@ -379,6 +388,8 @@ class ExerciseGenerator(
                     "noun" to seed.getValue("noun"), "adjective" to seed.getValue("adjective"),
                     "owner" to step.ownerOut, "number" to "sg",
                 ),
+                tileTargetSlots = step.tileTargetSlots,
+                tilePhrase = tilePhraseForStep(step, lexicalSlots),
             )
         }
     }

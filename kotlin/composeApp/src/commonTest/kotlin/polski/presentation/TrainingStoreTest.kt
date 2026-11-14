@@ -633,10 +633,12 @@ class TrainingStoreTest {
     }
 
     // SB-6 blueprint §1/§6: shared-layer TileBuilder wiring. `case.acc.f` is one of the three
-    // pilot recipes opted into tiles (commit 7d50aa6); `verb.past` carries none.
+    // pilot recipes opted into tiles via tileTargetSlots (construction-based path).
+    // Gap B Phase 1: `aspect` exercises can also produce tiles via StaticTileBuilder fallback
+    // when their expected string contains recognized noun/adjective forms.
 
     @Test
-    fun chooseSkillDerivesTileBuilderOnlyForAnOptedInSkill() = runTest {
+    fun chooseSkillDerivesTileBuilderForOptedInAndStaticFallback() = runTest {
         val repo = FakeRepository(ProgressCodec.fresh(skills.map { it.id }, at, "2026-09-23", scheduler))
         val store = newStore(repo, backgroundScope)
         store.start()
@@ -646,8 +648,10 @@ class TrainingStoreTest {
         assertEquals(emptyList(), builder.placed)
         assertNull(builder.result)
 
+        // Gap B Phase 1: aspect exercises also get tiles via StaticTileBuilder when
+        // the expected string contains recognizable noun/adjective forms.
         store.dispatch(AppAction.ChooseSkill("aspect", sentenceSeeds.first()))
-        assertNull(store.state.value.tileBuilder)
+        assertNotNull(store.state.value.tileBuilder)
         store.close()
     }
 
