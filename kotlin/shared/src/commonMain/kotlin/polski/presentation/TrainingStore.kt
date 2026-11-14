@@ -28,6 +28,7 @@ import polski.data.verbs
 import polski.model.Exercise
 import polski.model.NumberGram
 import polski.model.PossessiveId
+import polski.model.seedKey
 import polski.progress.LoadResult
 import polski.progress.MigrationResult
 import polski.progress.ProgressCodec
@@ -42,6 +43,10 @@ import polski.srs.Scheduler
 import polski.training.PlExerciseEngine
 import polski.training.evaluate
 import polski.training.sentenceSeeds
+
+/** M2 blueprint: "через 2-3 задания" — the lower, more conservative bound; a placeholder in the
+ *  same spirit as [polski.progress.TilePromotionThresholds], tune during the pilot. */
+const val RETRY_DELAY = 2
 
 /**
  * Session owner. Dispatch and state collection belong to one UI thread. The supplied scope
@@ -206,6 +211,7 @@ class TrainingStore(
             is AppAction.ChooseSkill -> chooseSkill(action)
             is AppAction.SetAnswerMode -> mutate { it.copy(answerMode = action.mode) }
             is AppAction.SetStyle -> mutate { it.copy(styleId = action.styleId) }
+            AppAction.ContinuePrediction -> mutate { it.copy(predictionPending = false) }
             AppAction.ContinueIntroduction -> {
                 mutate { it.copy(introPending = false) }
                 s.exercise?.let(::addFocus)
@@ -224,8 +230,9 @@ class TrainingStore(
         AppAction.RequestReset -> s.loadStatus == LoadStatus.Ready && s.pendingEffects.none { it is UiEffect.ConfirmReset }
         is AppAction.SetAnswerMode, is AppAction.EditAnswer -> s.phase == CardPhase.Question
         AppAction.ContinueIntroduction -> s.phase == CardPhase.Question && s.introPending
+        AppAction.ContinuePrediction -> s.phase == CardPhase.Question && s.predictionPending
         is AppAction.Reveal -> s.loadStatus == LoadStatus.Ready && s.phase == CardPhase.Question &&
-            !s.introPending && s.exercise?.id == action.exerciseId &&
+            !s.introPending && !s.predictionPending && s.exercise?.id == action.exerciseId &&
             (s.answerMode != AnswerMode.TileBuilder || s.tileBuilder?.let { b ->
                 b.exercise.segments.filterIsInstance<TileSegment.Choice>().all { c -> b.placed.any { it.position == c.position } }
             } == true)
@@ -249,6 +256,7 @@ class TrainingStore(
         mutableState.value = project(state.value.copy(
             loadStatus = LoadStatus.Ready, error = null,
             introPending = needsIntroduction(state.value.exercise, complete),
+            predictionPending = predictionPendingFor(state.value.exercise, complete),
             // SB-8: the first exercise's tileBuilder was derived before any document existed
             // (the `mutableState` property initializer runs with `document == null`); recompute
             // now that the real document — and its scaffolding rung — is known.
@@ -292,6 +300,19 @@ class TrainingStore(
     private fun needsIntroduction(exercise: Exercise?, source: ProgressDocument?): Boolean =
         exercise != null && source?.progress?.stats?.get(exercise.primarySkill)?.reviews == 0
 
+    /** M7 blueprint: the same "first exposure" gate as [needsIntroduction], narrowed to skills
+     *  that actually carry an authored [polski.model.Skill.predictionQuestion] — every other skill
+     *  (the default) simply never shows a prediction step. */
+    private fun predictionPendingFor(exercise: Exercise?, source: ProgressDocument?): Boolean =
+        needsIntroduction(exercise, source) && exercise?.let { skillById(it.primarySkill).predictionQuestion != null } == true
+
+    /** M5 blueprint: reads the current [document]'s `seedErrors` for [skillId] — one helper reused
+     *  at every `exerciseEngine.generateForSkill` call site instead of six (really eight) bespoke
+     *  closures. `document` is read fresh on every invocation, never captured once, so it always
+     *  reflects whichever document is current at the moment the closure actually runs. */
+    private fun weakSeedCountFor(skillId: String): (String) -> Int =
+        { key -> document?.progress?.stats?.get(skillId)?.seedErrors?.get(key) ?: 0 }
+
     private fun startChain(index: Int) {
         if (index !in sentenceSeeds.indices) {
             mutate { it.copy(error = "Неизвестный набор слов") }
@@ -303,7 +324,8 @@ class TrainingStore(
             chain = chain, chainIndex = 0, focusedSkillId = null, showSkillPicker = false,
             exercise = chain.first(), phase = CardPhase.Question, draft = "", frozenAnswer = null,
             evaluation = null, tileBuilder = deriveTileBuilder(chain.first()),
-            introPending = needsIntroduction(chain.first(), document), error = null, daily = null,
+            introPending = needsIntroduction(chain.first(), document),
+            predictionPending = predictionPendingFor(chain.first(), document), error = null, daily = null,
         )
         addFocus(chain.first())
         refreshTime()
@@ -312,13 +334,14 @@ class TrainingStore(
     private fun startSchedule() {
         val captured = time.capture()
         val progress = document?.progress ?: return
-        val exercise = skillQueue.next(progress.cards, scheduler, captured.at)?.let { exerciseEngine.generateForSkill(it.skillId) }
+        val exercise = skillQueue.next(progress.cards, scheduler, captured.at)?.let { exerciseEngine.generateForSkill(it.skillId, weakSeedCount = weakSeedCountFor(it.skillId)) }
         mutableState.value = project(state.value.copy(
             tab = AppTab.Training, mode = TrainingMode.Schedule, focusedSkillId = null,
             showSkillPicker = false, exercise = exercise,
             phase = if (exercise == null) CardPhase.NoDue else CardPhase.Question,
             draft = "", frozenAnswer = null, evaluation = null, tileBuilder = deriveTileBuilder(exercise),
-            introPending = needsIntroduction(exercise, document), error = null, daily = null,
+            introPending = needsIntroduction(exercise, document),
+            predictionPending = predictionPendingFor(exercise, document), error = null, daily = null,
         ), document ?: return, captured)
         if (exercise != null) addFocus(exercise)
     }
@@ -330,7 +353,7 @@ class TrainingStore(
         val captured = time.capture()
         val progress = document?.progress ?: return
         val step = DailySessionPlanner.nextStep(progress, scheduler, skillQueue, skills, captured.at, completed = emptyList())
-        val exercise = step?.let { exerciseEngine.generateForSkill(it.skillId) }
+        val exercise = step?.let { exerciseEngine.generateForSkill(it.skillId, weakSeedCount = weakSeedCountFor(it.skillId)) }
         val tileBuilder = deriveTileBuilder(exercise)
         mutableState.value = project(state.value.copy(
             tab = AppTab.Training, mode = TrainingMode.Daily, focusedSkillId = null,
@@ -338,7 +361,8 @@ class TrainingStore(
             phase = if (exercise == null) CardPhase.NoDue else CardPhase.Question,
             draft = "", frozenAnswer = null, evaluation = null, tileBuilder = tileBuilder,
             answerMode = dailyAnswerMode(step, tileBuilder, state.value.answerMode),
-            introPending = needsIntroduction(exercise, document), error = null,
+            introPending = needsIntroduction(exercise, document),
+            predictionPending = predictionPendingFor(exercise, document), error = null,
             daily = DailySessionState(currentStep = step),
         ), document ?: return, captured)
         if (exercise != null) addFocus(exercise)
@@ -359,13 +383,14 @@ class TrainingStore(
         // ContinueDaily always return null. A fresh per-kind budget for the bonus round keeps the
         // same Review > New > Practice priority without that dead end (AI/decisions.md).
         val step = DailySessionPlanner.nextStep(progress, scheduler, skillQueue, skills, captured.at, completed = emptyList())
-        val exercise = step?.let { exerciseEngine.generateForSkill(it.skillId) }
+        val exercise = step?.let { exerciseEngine.generateForSkill(it.skillId, weakSeedCount = weakSeedCountFor(it.skillId)) }
         val tileBuilder = deriveTileBuilder(exercise)
         mutableState.value = project(current.copy(
             exercise = exercise, phase = if (exercise == null) CardPhase.NoDue else CardPhase.Question,
             draft = "", frozenAnswer = null, evaluation = null, tileBuilder = tileBuilder,
             answerMode = dailyAnswerMode(step, tileBuilder, current.answerMode),
             introPending = needsIntroduction(exercise, document),
+            predictionPending = predictionPendingFor(exercise, document),
             daily = daily.copy(extended = true, currentStep = step),
         ), document ?: return, captured)
         if (exercise != null) addFocus(exercise)
@@ -395,7 +420,7 @@ class TrainingStore(
         // saturated, so a bonus round keeps flowing only with a fresh per-kind budget each step.
         val completedForPlanner = if (daily.extended) emptyList() else history.map { it.kind }
         val nextStep = DailySessionPlanner.nextStep(newDocument.progress, scheduler, skillQueue, skills, at, completed = completedForPlanner)
-        val nextExercise = nextStep?.let { exerciseEngine.generateForSkill(it.skillId) }
+        val nextExercise = nextStep?.let { exerciseEngine.generateForSkill(it.skillId, weakSeedCount = weakSeedCountFor(it.skillId)) }
         return nextExercise to daily.copy(history = history, currentStep = nextStep)
     }
 
@@ -416,12 +441,13 @@ class TrainingStore(
             mutate { it.copy(error = "Неизвестные слова для навыка") }
             return
         }
-        val exercise = exerciseEngine.generateForSkill(action.skillId, action.preferredSeed)
+        val exercise = exerciseEngine.generateForSkill(action.skillId, action.preferredSeed, weakSeedCountFor(action.skillId))
         mutableState.value = state.value.copy(
             tab = AppTab.Training, mode = TrainingMode.Focused, focusedSkillId = action.skillId,
             showSkillPicker = false, exercise = exercise, phase = CardPhase.Question,
             draft = "", frozenAnswer = null, evaluation = null, tileBuilder = deriveTileBuilder(exercise),
-            introPending = needsIntroduction(exercise, document), error = null, daily = null,
+            introPending = needsIntroduction(exercise, document),
+            predictionPending = predictionPendingFor(exercise, document), error = null, daily = null,
         )
         addFocus(exercise)
         refreshTime()
@@ -487,25 +513,53 @@ class TrainingStore(
         val tileCorrect = correctness.takeIf { current.answerMode == AnswerMode.TileBuilder }
         val result = reviewReducer.recordReview(
             before, exercise.primarySkill, action.rating, correctness,
-            captured.at, captured.localDay, tileCorrect,
+            captured.at, captured.localDay, tileCorrect, seedKey(exercise),
         )
         if (result !is ReviewResult.Reviewed) {
             mutate { it.copy(error = "Неизвестный навык: ${exercise.primarySkill}") }
             return
         }
         document = result.document
+        // M2 blueprint: "через N заданий" counts elapsed tasks, not elapsed errors — every other
+        // pending ticket is decremented on every rate() call, any mode, any outcome. A reliably
+        // diagnosed error (Typed/TileBuilder only — Oral's correctness is always null, never
+        // false) outside Chain mode (scripted content, not a substitution candidate) enqueues a
+        // fresh ticket for this skill.
+        val decrementedQueue = current.retryQueue.map { it.copy(remaining = it.remaining - 1) }
+        val queueAfterError = if (correctness == false && current.mode != TrainingMode.Chain) {
+            decrementedQueue + RetryTicket(exercise.primarySkill, RETRY_DELAY)
+        } else decrementedQueue
+
         // Replace the card synchronously. The old ID can never be rated twice, even while saving.
         var nextDaily: DailySessionState? = null
-        val nextExercise = when (current.mode) {
+        val modeNextExercise = when (current.mode) {
             TrainingMode.Chain -> current.chain.getOrNull(current.chainIndex + 1)
-            TrainingMode.Focused -> exerciseEngine.generateForSkill(current.focusedSkillId ?: exercise.primarySkill)
+            TrainingMode.Focused -> (current.focusedSkillId ?: exercise.primarySkill).let { exerciseEngine.generateForSkill(it, weakSeedCount = weakSeedCountFor(it)) }
             TrainingMode.Schedule ->
-                skillQueue.next(result.document.progress.cards, scheduler, captured.at)?.let { exerciseEngine.generateForSkill(it.skillId) }
+                skillQueue.next(result.document.progress.cards, scheduler, captured.at)?.let { exerciseEngine.generateForSkill(it.skillId, weakSeedCount = weakSeedCountFor(it.skillId)) }
             TrainingMode.Daily -> {
                 val (ex, daily) = advanceDaily(current, action.rating, result.document, captured.at)
                 nextDaily = daily
                 ex
             }
+        }
+        // M2 blueprint: a matured ticket (oldest first, by queue/insertion order) is a scheduling
+        // interrupt — it REPLACES whatever the mode's own logic just chose for this one step. The
+        // displaced candidate is simply picked again next step by the mode's own unchanged logic
+        // (DailySessionPlanner re-derives purely from the document, so nothing here needs to
+        // remember it). Chain mode is never interrupted (scripted content).
+        val maturedTicket = if (current.mode != TrainingMode.Chain) queueAfterError.firstOrNull { it.remaining <= 0 } else null
+        val nextExercise = if (maturedTicket != null) {
+            exerciseEngine.generateForSkill(maturedTicket.skillId, weakSeedCount = weakSeedCountFor(maturedTicket.skillId))
+        } else modeNextExercise
+        val retryQueue = if (maturedTicket != null) queueAfterError - maturedTicket else queueAfterError
+        // M3/M2: Daily has no "Retry" DailyStepKind — tag the substituted step as Practice (the
+        // closest existing semantic: practice of an already-introduced skill), so the NEXT
+        // advanceDaily call (once this substituted card itself gets rated) classifies it the same
+        // way a Practice step always has, and dailyAnswerMode's own Practice->TileBuilder rule
+        // applies to it exactly as it would any other Practice step.
+        if (maturedTicket != null && current.mode == TrainingMode.Daily) {
+            nextDaily = nextDaily?.copy(currentStep = DailyStep(DailyStepKind.Practice, maturedTicket.skillId))
         }
         val phase = when {
             current.mode == TrainingMode.Chain && nextExercise == null -> CardPhase.ChainComplete
@@ -522,7 +576,9 @@ class TrainingStore(
             tileBuilder = tileBuilder,
             answerMode = if (current.mode == TrainingMode.Daily) dailyAnswerMode(nextDaily?.currentStep, tileBuilder, current.answerMode) else current.answerMode,
             introPending = needsIntroduction(nextExercise, result.document),
+            predictionPending = predictionPendingFor(nextExercise, result.document),
             daily = if (current.mode == TrainingMode.Daily) nextDaily else current.daily,
+            retryQueue = retryQueue, activeRetrySkillId = maturedTicket?.skillId,
         )
         mutableState.value = project(updated, result.document, captured)
         queueSave(result.document)
@@ -535,10 +591,11 @@ class TrainingStore(
         val doc = document ?: return
         val projected = project(current, doc, captured)
         if (current.mode == TrainingMode.Schedule && current.phase == CardPhase.NoDue && projected.dueCount > 0) {
-            val exercise = skillQueue.next(doc.progress.cards, scheduler, captured.at)?.let { exerciseEngine.generateForSkill(it.skillId) }
+            val exercise = skillQueue.next(doc.progress.cards, scheduler, captured.at)?.let { exerciseEngine.generateForSkill(it.skillId, weakSeedCount = weakSeedCountFor(it.skillId)) }
             mutableState.value = project(projected.copy(
                 exercise = exercise, phase = CardPhase.Question, tileBuilder = deriveTileBuilder(exercise),
                 introPending = needsIntroduction(exercise, doc),
+                predictionPending = predictionPendingFor(exercise, doc),
             ), doc, captured)
             if (exercise != null) addFocus(exercise)
         } else mutableState.value = projected
@@ -584,6 +641,7 @@ class TrainingStore(
             exercise = chain.first(), phase = CardPhase.Question, draft = "", frozenAnswer = null,
             evaluation = null, tileBuilder = deriveTileBuilder(chain.first()),
             introPending = needsIntroduction(chain.first(), fresh),
+            predictionPending = predictionPendingFor(chain.first(), fresh),
             showSkillPicker = false, error = null, daily = null,
         )
         mutableState.value = project(next, fresh, captured)

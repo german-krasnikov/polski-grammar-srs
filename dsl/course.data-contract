@@ -20,6 +20,7 @@ RECORD SkillRow KEY id COUNT 1..
   lexicalFilter: LexicalFilterRow NULLABLE
   styleContent: StyleContentRow OPTIONAL
   caseReferenceAvailable: bool OPTIONAL
+  predictionQuestion: string OPTIONAL
 END
 
 RECORD FocusRow

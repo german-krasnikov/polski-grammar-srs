@@ -2,6 +2,18 @@
 
 Новые сверху. Формат: решение → почему → где подробно.
 
+## ADR-63 · 2026-11-14 · Механики M2/M4–M7: seedKey, M2 "замена, не вставка", коллизия пилотных навыков M7 с дефолтной цепочкой
+
+Реализованы по `Plans/Architecture/LEARNING-MECHANICS-M2-M7-BLUEPRINT.md` в порядке M4 → M6 → M7 → M5 → M2.
+
+**Конвенция `seedKey`**: один формат строки `"$nounId:$adjectiveId"` для трёх механик — `polski.core.engine.seedKey(Map<String,String>)` (generator-side) и `polski.model.seedKey(Exercise)` (presentation-side), не общая зависимость, а задокументированная в обоих KDoc договорённость о формате. Используется M4 (анти-повтор), M5 (`SkillStats.seedErrors`), M2 (не отдельная логика, повторно использует M4 через тот же `generateForSkill`).
+
+**M2 "замена, не вставка"**: созревший `RetryTicket` заменяет то, что собственная логика режима уже выбрала на этот шаг (`exerciseEngine.generateForSkill(ticket.skillId, ...)` вместо `modeNextExercise`), а не вставляется дополнительным шагом. Вытеснённый кандидат ничего не теряет — `DailySessionPlanner`/`SkillQueue` выводятся заново из документа на следующем шаге той же неизменной логикой.
+
+**Коллизия, не предусмотренная блюпринтом**: пилотные навыки M7 (`case.acc.f`, `case.acc.m`, `case.gen.neg`) оказались ровно теми навыками, которые дефолтная цепочка (`sentenceSeeds[0..1]`) и большинство существующих Playwright-тестов используют как первую карточку свежего профиля. Это не ошибка выбора навыков (контраст у них самый яркий), а не предусмотренное взаимодействие двух независимо спроектированных частей одного блюпринта. Исправлено расширением общего хелпера `continueIntroductionIfPresent` (`tests/browser/kotlin-introduction.ts`) — он теперь гасит prediction-шаг перед introduction — и точечными правками в файлах с собственной локальной копией хелпера или прямыми кликами по "Перейти к заданию" (`kotlin-training.spec.ts`, `kotlin-training-tile.spec.ts`, `kotlin-training-daily.spec.ts`, `kotlin-method-cycle.spec.ts`, `kotlin-preferences-settings.spec.ts`). Новый `.spec.ts`-файл должен быть добавлен и в `playwright.kotlin.config.ts`'s `testMatch` (белый список, без автообнаружения) — иначе он молча не запускается.
+
+Подробно: план выше, свидетельства — unit-тесты `ExerciseGeneratorTest`/`ReviewReducerTest`/`ProgressCodecTest`/`TrainingCardModelTest`/`TrainingStoreTest`, Playwright `kotlin-training-prediction.spec.ts` + правки по списку выше.
+
 ## ADR-62 · 2026-11-14 · M3 "Сегодня": свежий бюджет планировщика для продолжения сессии
 
 Отклонение от `Plans/Architecture/DAILY-SESSION-BLUEPRINT.md` (`continueDaily()`/`advanceDaily()`): блюпринт предписывал передавать в `DailySessionPlanner.nextStep` полную `daily.history.map { it.kind }` и для продолжения после `CardPhase.DailyComplete`. Арифметически это всегда возвращает `null`: `planned == reviews+new+practice`, каждый вид ограничен своей же квотой, поэтому к моменту `history.size >= planned` каждый вид гарантированно исчерпал именно свою квоту — повторный вызов планировщика с той же историей никогда не находит кандидата, и кнопка "Ещё одно задание" никогда не показывала бы следующий вопрос.

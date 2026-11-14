@@ -7,7 +7,13 @@ import { installProgressReader } from './kotlin-storage';
 // dynamic counts rather than hardcoded expectations.
 
 const continueIntroductionIfPresent = async (page: Page) => {
-  await page.getByRole('button', { name: /^(Перейти к заданию|Показать ответ)$/ }).first().waitFor();
+  // M7: case.acc.f is a prediction pilot — its authored question precedes the introduction.
+  await page.getByRole('button', { name: /^(Что скажешь\? Дальше|Перейти к заданию|Показать ответ)$/ }).first().waitFor();
+  const predict = page.getByRole('button', { name: 'Что скажешь? Дальше' });
+  if (await predict.count()) {
+    await predict.click();
+    await page.getByRole('button', { name: /^(Перейти к заданию|Показать ответ)$/ }).first().waitFor();
+  }
   const next = page.getByRole('button', { name: 'Перейти к заданию' });
   if (await next.count()) await next.click();
 };

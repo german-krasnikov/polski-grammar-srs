@@ -21,6 +21,7 @@ class ExerciseGeneratorTest {
     private val morphology: Morphology = TableMorphology(
         mapOf(
             "noun:thing" to mapOf(bundle("Number" to "sg") to "thing"),
+            "noun:other" to mapOf(bundle("Number" to "sg") to "other"),
             "particle:not" to mapOf(emptyMap<FeatureKey, FeatureValue>() to "not"),
         ),
     )
@@ -42,6 +43,8 @@ class ExerciseGeneratorTest {
         recipeOverride: SkillRecipe? = null,
         pattern: PackPattern = PackPattern { _, _ -> error("not used") },
         casePrefix: CasePrefix = CasePrefix { _, _ -> error("not used") },
+        seeds: List<Map<String, String>> = listOf(mapOf("noun" to "thing", "adjective" to "unused")),
+        random: RandomSource = RandomSource { 0.0 },
     ): ExerciseGenerator {
         val recipe = SkillRecipe(
             skillId = "test.skill",
@@ -51,13 +54,20 @@ class ExerciseGeneratorTest {
         return ExerciseGenerator(
             realizer = realizer, morphology = morphology, lexemeFeatures = LexemeFeatures { emptyMap() },
             skills = mapOf(testSkill.id to testSkill), recipes = mapOf(recipe.skillId to (recipeOverride ?: recipe)),
-            seeds = listOf(mapOf("noun" to "thing", "adjective" to "unused")),
-            random = RandomSource { 0.0 }, ids = ExerciseIdFactory { "generated" },
+            seeds = seeds,
+            random = random, ids = ExerciseIdFactory { "generated" },
             copy = PackCopy { it }, pattern = pattern,
             casePrefix = casePrefix, pronouns = PronounForms { _, _ -> error("not used") },
             textCase = TextCase { it }, defaultOwnerLexeme = "unused-owner", verbLexeme = "unused-verb",
             constantSlots = constantSlots,
         )
+    }
+
+    /** Draws a fixed queue of values in order; errors loudly (not silently wraps) once exhausted —
+     *  a test that over-draws has a wrong assumption about how many random decisions happen. */
+    private class QueueRandomSource(draws: List<Double>) : RandomSource {
+        private val queue = draws.toMutableList()
+        override fun nextDouble(): Double = queue.removeFirstOrNull() ?: error("QueueRandomSource exhausted")
     }
 
     @Test fun constantSlotIsPresentOnlyInPhrasesWhoseResolvedBundleMatchesItsCondition() {
@@ -79,6 +89,66 @@ class ExerciseGeneratorTest {
         val exercise = generator.generateForSkill("test.skill")
         assertEquals("thing", exercise.source)
         assertEquals("thing", exercise.expected)
+    }
+
+    // M4: two consecutive dynamic-seed draws for the same skill must never repeat the same
+    // (noun, adjective) pair when ≥2 lexical candidates exist, even when the RandomSource would
+    // otherwise pick the same index both times.
+    @Test fun generateForSkillNeverRepeatsTheSameSeedTwiceInARowWhenMultipleCandidatesExist() {
+        val seeds = listOf(mapOf("noun" to "thing", "adjective" to "a"), mapOf("noun" to "other", "adjective" to "b"))
+        val generator = generator(emptyList(), seeds = seeds, random = QueueRandomSource(listOf(0.0, 0.0)))
+        val first = generator.generateForSkill("test.skill")
+        val second = generator.generateForSkill("test.skill")
+        kotlin.test.assertNotEquals(seedKey(first.slots), seedKey(second.slots))
+    }
+
+    // M4: a skill whose lexical filter leaves exactly one candidate must keep generating every
+    // call (no throw, no stall) — the anti-repeat filter falls back to the unfiltered pool.
+    @Test fun generateForSkillWithExactlyOneCandidateNeverStalls() {
+        val generator = generator(emptyList(), random = QueueRandomSource(listOf(0.0, 0.0, 0.0)))
+        val exercises = (1..3).map { generator.generateForSkill("test.skill") }
+        assertTrue(exercises.all { seedKey(it.slots) == "thing:unused" })
+    }
+
+    // M4: an explicit preferredSeed is never second-guessed by the anti-repeat filter, even if it
+    // equals the immediately preceding seed.
+    @Test fun preferredSeedIsReturnedEvenWhenItMatchesTheLastServedSeed() {
+        val seeds = listOf(mapOf("noun" to "thing", "adjective" to "a"), mapOf("noun" to "other", "adjective" to "b"))
+        val generator = generator(emptyList(), seeds = seeds, random = QueueRandomSource(listOf(0.0, 0.0)))
+        val first = generator.generateForSkill("test.skill", preferredSeed = mapOf("noun" to "thing", "adjective" to "a"))
+        val second = generator.generateForSkill("test.skill", preferredSeed = mapOf("noun" to "thing", "adjective" to "a"))
+        assertEquals("thing:a", seedKey(first.slots))
+        assertEquals("thing:a", seedKey(second.slots))
+    }
+
+    // M5: a weakSeedCount marking one candidate's seed as the only one with errors — a draw below
+    // 0.5 (the explore/exploit decision) must return that candidate.
+    @Test fun weakSeedCountBelowHalfPicksTheOnlyWeakCandidate() {
+        val seeds = listOf(mapOf("noun" to "thing", "adjective" to "a"), mapOf("noun" to "other", "adjective" to "b"))
+        // Draw 1 (explore/exploit): 0.0 < 0.5 -> explore. Draw 2 (pick over the weak subset, size 1): 0.0.
+        val generator = generator(emptyList(), seeds = seeds, random = QueueRandomSource(listOf(0.0, 0.0)))
+        val weakSeedCount: (String) -> Int = { key -> if (key == "other:b") 3 else 0 }
+        val exercise = generator.generateForSkill("test.skill", weakSeedCount = weakSeedCount)
+        assertEquals("other:b", seedKey(exercise.slots))
+    }
+
+    // M5: a draw at/above 0.5 falls back to uniform selection over the whole (M4-filtered) pool,
+    // ignoring weakSeedCount entirely.
+    @Test fun weakSeedCountAtOrAboveHalfFallsBackToUniformSelection() {
+        val seeds = listOf(mapOf("noun" to "thing", "adjective" to "a"), mapOf("noun" to "other", "adjective" to "b"))
+        // Draw 1 (explore/exploit): 0.5 -> exploit uniform. Draw 2 (uniform pick over 2 candidates): 0.0 -> index 0.
+        val generator = generator(emptyList(), seeds = seeds, random = QueueRandomSource(listOf(0.5, 0.0)))
+        val weakSeedCount: (String) -> Int = { key -> if (key == "other:b") 3 else 0 }
+        val exercise = generator.generateForSkill("test.skill", weakSeedCount = weakSeedCount)
+        assertEquals("thing:a", seedKey(exercise.slots))
+    }
+
+    // M5 regression guard: omitting weakSeedCount (default null) draws exactly once per call and
+    // reproduces the pre-M5 uniform behavior — same assertion shape as the M4 tests above.
+    @Test fun noWeakSeedCountReproducesUniformBehaviorWithOneDrawPerCall() {
+        val generator = generator(emptyList(), random = QueueRandomSource(listOf(0.0)))
+        val exercise = generator.generateForSkill("test.skill")
+        assertEquals("thing:unused", seedKey(exercise.slots))
     }
 
     @Test fun comparisonPracticeCyclesThroughDistinctAuthoredSentences() {

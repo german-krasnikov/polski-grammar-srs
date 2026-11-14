@@ -42,6 +42,7 @@ internal fun AndroidCardSection(section: CardSection, state: AppUiState, dispatc
                 style = MaterialTheme.typography.titleMedium, color = MaterialTheme.colorScheme.onSecondaryContainer)
         }
         is CardSection.MethodIntro -> Text(section.text)
+        is CardSection.PredictionQuestion -> Text(section.text, style = MaterialTheme.typography.titleMedium)
         is CardSection.RetrieveHint -> {
             Text(section.text)
             AndroidChoiceMenu("Ответ", state.answerMode.name,

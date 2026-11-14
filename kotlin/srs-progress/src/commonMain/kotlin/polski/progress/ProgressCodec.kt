@@ -64,6 +64,9 @@ object ProgressCodec {
                 // no streak), never invalidates the document.
                 tileScaffoldingRung = value.nonnegativeInt("tileScaffoldingRung") ?: 0,
                 tileScaffoldingStreak = value.nonnegativeInt("tileScaffoldingStreak") ?: 0,
+                // M6/M5: additive fields — absent (every pre-M6 document) defaults to null/empty.
+                independentSince = value.string("independentSince")?.takeIf(::validDay),
+                seedErrors = (value["seedErrors"] as? JsonObject)?.let(::seedErrorsOf) ?: emptyMap(),
             )
         }
         val reviewsToday = root.nonnegativeInt("reviewsToday") ?: return DecodeResult.Invalid("Invalid reviewsToday")
@@ -106,6 +109,8 @@ object ProgressCodec {
                 "mistakes" to JsonPrimitive(value.mistakes),
                 "tileScaffoldingRung" to JsonPrimitive(value.tileScaffoldingRung),
                 "tileScaffoldingStreak" to JsonPrimitive(value.tileScaffoldingStreak),
+                "independentSince" to (value.independentSince?.let(::JsonPrimitive) ?: JsonNull),
+                "seedErrors" to JsonObject(value.seedErrors.mapValues { JsonPrimitive(it.value) }),
             ))
         }
         val root = JsonObject(document.source + mapOf(
@@ -142,7 +147,7 @@ object ProgressCodec {
             ))
         })
         val stats = WireNode.WireList(p.stats.entries.map { (skillId, s) ->
-            WireNode.WireMap(listOf(
+            WireNode.WireMap(listOfNotNull(
                 "skillId"  to WireNode.WireString(skillId),
                 "reviews"  to WireNode.WireI64(s.reviews.toLong()),
                 "correct"  to WireNode.WireI64(s.correct.toLong()),
@@ -150,6 +155,8 @@ object ProgressCodec {
                 "mistakes" to WireNode.WireI64(s.mistakes.toLong()),
                 "tileScaffoldingRung"   to WireNode.WireI64(s.tileScaffoldingRung.toLong()),
                 "tileScaffoldingStreak" to WireNode.WireI64(s.tileScaffoldingStreak.toLong()),
+                s.independentSince?.let { "independentSince" to WireNode.WireString(it) },
+                "seedErrors" to WireNode.WireMap(s.seedErrors.entries.map { (key, count) -> key to WireNode.WireI64(count.toLong()) }),
             ))
         })
         val root = WireNode.WireMap(listOf(
@@ -211,6 +218,10 @@ object ProgressCodec {
                 // SB-8: additive fields — absent (every pre-SB-8 document) defaults to 0.
                 tileScaffoldingRung   = (sm["tileScaffoldingRung"] as? WireNode.WireI64)?.value?.toInt() ?: 0,
                 tileScaffoldingStreak = (sm["tileScaffoldingStreak"] as? WireNode.WireI64)?.value?.toInt() ?: 0,
+                // M6/M5: additive fields — absent (every pre-M6 document) defaults to null/empty.
+                independentSince = (sm["independentSince"] as? WireNode.WireString)?.value?.takeIf(::validDay),
+                seedErrors = (sm["seedErrors"] as? WireNode.WireMap)?.children.orEmpty()
+                    .mapNotNull { (key, node) -> (node as? WireNode.WireI64)?.value?.toInt()?.takeIf { it >= 0 }?.let { key to it } }.toMap(),
             )
         }
         return DecodeResult.Valid(
@@ -292,6 +303,12 @@ object ProgressCodec {
         ?.takeUnless { it.isString }?.intOrNull
 
     private fun JsonObject.nonnegativeInt(key: String): Int? = int(key)?.takeIf { it >= 0 }
+
+    /** M5: fail-soft per entry — a corrupt single count must not invalidate the whole document;
+     *  it is simply dropped (the same lenient spirit as every other best-effort compat path here). */
+    private fun seedErrorsOf(value: JsonObject): Map<String, Int> = value.entries
+        .mapNotNull { (key, element) -> ((element as? JsonPrimitive)?.takeUnless { it.isString }?.intOrNull)?.takeIf { it >= 0 }?.let { key to it } }
+        .toMap()
 
     private fun JsonObject.finiteNonnegativeDouble(key: String): Double? = (this[key] as? JsonPrimitive)
         ?.takeUnless { it.isString }?.doubleOrNull?.takeIf { it.isFinite() && it >= 0 }

@@ -19,6 +19,10 @@ test('first method cycle keeps the draft and stores exactly one rating', async (
   const source = page.locator('.source-sentence');
   await expect(source).toHaveText('To jest moja piękna żona.');
   const method = page.getByRole('combobox', { name: 'Подача объяснений' });
+  // M7: case.acc.f (this chain's first skill) is a prediction pilot — dismiss its authored
+  // question before the existing introduction screen.
+  await expect(page.getByRole('button', { name: 'Что скажешь? Дальше' })).toBeVisible();
+  await page.getByRole('button', { name: 'Что скажешь? Дальше' }).click();
   await expect(page.getByRole('button', { name: 'Перейти к заданию' })).toBeVisible();
   await expect(page.locator('.answer-sentence')).toHaveCount(0);
   const reference = page.getByRole('button', { name: 'Таблица под рукой' });

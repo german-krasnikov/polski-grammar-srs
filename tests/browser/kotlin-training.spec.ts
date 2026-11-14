@@ -2,7 +2,14 @@ import { expect, test, type Page } from '@playwright/test';
 import { installProgressReader } from './kotlin-storage';
 
 const continueIntroductionIfPresent = async (page: Page) => {
-  await page.getByRole('button', { name: /^(Перейти к заданию|Показать ответ)$/ }).first().waitFor();
+  // M7: case.acc.f (the first chain skill, and one of the three prediction pilots) shows its
+  // authored question before the introduction — dismiss it first if present.
+  await page.getByRole('button', { name: /^(Что скажешь\? Дальше|Перейти к заданию|Показать ответ)$/ }).first().waitFor();
+  const predict = page.getByRole('button', { name: 'Что скажешь? Дальше' });
+  if (await predict.count()) {
+    await predict.click();
+    await page.getByRole('button', { name: /^(Перейти к заданию|Показать ответ)$/ }).first().waitFor();
+  }
   const next = page.getByRole('button', { name: 'Перейти к заданию' });
   if (await next.count()) await next.click();
 };

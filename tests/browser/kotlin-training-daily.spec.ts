@@ -72,14 +72,20 @@ const fillAllTileChoices = async (page: Page) => {
  *  own Check button is named "Проверить", not "Проверить и показать ответ"). */
 const waitForAnswerSurface = (page: Page) =>
   page.locator(
-    'button:has-text("Перейти к заданию"), button:has-text("Показать ответ"), button:has-text("Проверить и показать ответ"), .tile-row',
+    'button:has-text("Что скажешь? Дальше"), button:has-text("Перейти к заданию"), button:has-text("Показать ответ"), button:has-text("Проверить и показать ответ"), .tile-row',
   ).first().waitFor();
 
 /** One Daily card, whichever `AnswerMode` the store picked for it (Oral-fallback "Показать
  *  ответ" for Review/New, forced TileBuilder "Проверить" for Practice — `dailyAnswerMode`'s own
- *  documented exception) — then rates it. */
+ *  documented exception) — then rates it. M7: a pilot skill's New step shows its prediction
+ *  question before the introduction; dismiss it first if present. */
 const answerDailyCard = async (page: Page, rating: 'again' | 'good') => {
   await waitForAnswerSurface(page);
+  const predict = page.getByRole('button', { name: 'Что скажешь? Дальше' });
+  if (await predict.count()) {
+    await predict.click();
+    await waitForAnswerSurface(page);
+  }
   const intro = page.getByRole('button', { name: 'Перейти к заданию' });
   if (await intro.count()) {
     await intro.click();
@@ -146,6 +152,9 @@ test('a seeded session reaches the completion screen after six rated steps, hone
     await expect(page.locator('[role="progressbar"]')).toHaveText(`${step} / 6`);
   }
   // Step 5: the one never-reviewed, prerequisite-satisfied skill -> New (introduction screen).
+  // M7: case.acc.f is also a prediction pilot, so its own authored question shows first.
+  await expect(page.getByRole('button', { name: 'Что скажешь? Дальше' })).toBeVisible();
+  await page.getByRole('button', { name: 'Что скажешь? Дальше' }).click();
   await expect(page.getByRole('button', { name: 'Перейти к заданию' })).toBeVisible();
   await answerDailyCard(page, 'good');
   await expect(page.locator('[role="progressbar"]')).toHaveText('5 / 6');

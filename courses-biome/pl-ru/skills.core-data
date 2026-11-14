@@ -84,6 +84,7 @@ SKILL {
     {feature: Number value: Sing}
   ]
   lexicalFilter: {slot: noun where: {gender: [f]}}
+  predictionQuestion: "Как думаешь: почему «moja siostra» в предложении «Widzę ...» превращается в «moją siostrę», а не остаётся как в именительном падеже?"
   styleContent: {
     nativeParallel: [
       {
@@ -136,6 +137,7 @@ SKILL {
     slot: noun
     where: {gender: [m-personal m-animate m-inanimate]}
   }
+  predictionQuestion: "Почему Widzę dom, но Widzę psa?"
   styleContent: {
     nativeParallel: [
       {
@@ -194,6 +196,7 @@ SKILL {
     {feature: Number value: Sing}
   ]
   lexicalFilter: null
+  predictionQuestion: "Как думаешь: почему «Nie widzę żony», а не «Nie widzę żonę» — ведь слово то же самое?"
   styleContent: {
     nativeParallel: [
       {

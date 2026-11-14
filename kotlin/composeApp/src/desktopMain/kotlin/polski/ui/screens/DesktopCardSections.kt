@@ -42,6 +42,7 @@ internal fun CardSectionView(section: CardSection, state: AppUiState, dispatch: 
             style = MaterialTheme.typography.titleLarge,
         )
         is CardSection.MethodIntro -> Text(section.text)
+        is CardSection.PredictionQuestion -> Text(section.text, style = MaterialTheme.typography.titleLarge)
         is CardSection.RetrieveHint -> {
             Text(section.text)
             Row(Modifier.fillMaxWidth().horizontalScroll(rememberScrollState()), horizontalArrangement = Arrangement.spacedBy(8.dp)) {

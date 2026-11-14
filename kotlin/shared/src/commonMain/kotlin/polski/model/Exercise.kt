@@ -34,3 +34,12 @@ data class Evaluation(
     val expected: String,
     val distance: Int,
 )
+
+/**
+ * M4/M5/M2 blueprint: the presentation-side twin of `polski.core.engine.seedKey(Map<String, String>)` —
+ * same `"$nounId:$adjectiveId"` string format, kept as a separate function (not a shared
+ * dependency) because [Exercise] and the generator's candidate map are different shapes. Used to
+ * compare an [Exercise]'s seed against `SkillStats.seedErrors` keys (M5) and against the seed of
+ * the error that enqueued an M2 retry ticket.
+ */
+fun seedKey(exercise: Exercise): String = "${exercise.nounId}:${exercise.adjectiveId}"

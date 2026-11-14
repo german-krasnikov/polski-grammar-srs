@@ -46,6 +46,9 @@ data class TrainingCardModel(
     val hotkeys: Map<HotKey, AppAction>,
     val lifehackBadge: LifehackBadge?,
     val dailyProgress: DailyProgress?,
+    /** M2 blueprint: non-null exactly when [AppUiState.activeRetrySkillId] is set — "Ещё раз:
+     *  {skill}", same rendering pattern as [lifehackBadge]. */
+    val retryBadge: String?,
 )
 
 private val modeLabel = mapOf(
@@ -87,8 +90,12 @@ private fun skillWord(count: Int): String = when {
  * to [AppUiState.now] when null, then to the due instant itself (today's existing host fallback).
  */
 fun trainingCardModel(state: AppUiState, now: Instant? = state.now): TrainingCardModel {
-    val introducing = state.phase == CardPhase.Question && state.introPending
+    // M7 blueprint: prediction always precedes the existing introduction — introducing only fires
+    // once predicting is no longer current, for the exact same Question-phase moment.
+    val predicting = state.phase == CardPhase.Question && state.predictionPending
+    val introducing = state.phase == CardPhase.Question && state.introPending && !predicting
     val clockNow = now ?: state.now
+    val retryBadge = state.activeRetrySkillId?.let { "Ещё раз: ${skillById(it).title}" }
 
     val header = TrainingHeader(
         modes = listOf(
@@ -105,9 +112,9 @@ fun trainingCardModel(state: AppUiState, now: Instant? = state.now): TrainingCar
         state.daily?.let { DailyProgress(it.history.size, it.planned, it.extended) }
     } else null
     val referenceToggle = ReferenceToggle(
-        label = if (!introducing && state.showReference) "Скрыть таблицу" else "Таблица под рукой",
-        enabled = !introducing && state.caseReferenceAvailable,
-        expanded = state.showReference && !introducing && state.caseReferenceAvailable,
+        label = if (!introducing && !predicting && state.showReference) "Скрыть таблицу" else "Таблица под рукой",
+        enabled = !introducing && !predicting && state.caseReferenceAvailable,
+        expanded = state.showReference && !introducing && !predicting && state.caseReferenceAvailable,
     )
     val chainProgress = if (state.mode == TrainingMode.Chain) {
         ChainProgress(state.chainDisplayCount, state.chain.size, courseChainPresentation.summary)
@@ -117,7 +124,7 @@ fun trainingCardModel(state: AppUiState, now: Instant? = state.now): TrainingCar
         header = header, chainProgress = chainProgress, referenceToggle = referenceToggle,
         front = emptyList(), back = emptyList(), ratingButtons = emptyList(),
         introducing = introducing, hotkeys = emptyMap(), lifehackBadge = null,
-        dailyProgress = dailyProgress,
+        dailyProgress = dailyProgress, retryBadge = retryBadge,
     )
 
     val skill = skillById(exercise.primarySkill)
@@ -133,7 +140,12 @@ fun trainingCardModel(state: AppUiState, now: Instant? = state.now): TrainingCar
     val back = mutableListOf<CardSection>()
     val sourceParts = sentenceHighlightParts(exercise.source, exercise.changes, ChangeSide.Before)
 
-    if (introducing) {
+    if (predicting) {
+        // M7 blueprint: exactly these three sections — no MethodIntro/retrieve/answer input yet.
+        front += CardSection.SourceSentence(sourceParts)
+        front += CardSection.PredictionQuestion(skill.predictionQuestion.orEmpty())
+        front += CardSection.Action("Что скажешь? Дальше", AppAction.ContinuePrediction)
+    } else if (introducing) {
         front += CardSection.SourceSentence(sourceParts)
         front += CardSection.MethodIntro(method.introduce)
         front += CardSection.Action("Перейти к заданию", AppAction.ContinueIntroduction)
@@ -172,6 +184,7 @@ fun trainingCardModel(state: AppUiState, now: Instant? = state.now): TrainingCar
 
     val hotkeys = buildMap {
         when {
+            predicting -> put(HotKey.Space, AppAction.ContinuePrediction)
             introducing -> put(HotKey.Space, AppAction.ContinueIntroduction)
             // The one a *pure* function can express: a DOM-focused host instead relies on the
             // focused textarea eating the keydown first (no mode guard) — see the design doc's
@@ -188,11 +201,12 @@ fun trainingCardModel(state: AppUiState, now: Instant? = state.now): TrainingCar
     }
 
     // Hidden once revealed (the back already shows the full LifehackSection) and during
-    // introPending (no teaser mid-introduction) — an explicit choice, not derived ad hoc.
-    val lifehackBadge = if (!introducing && state.phase == CardPhase.Question && StaticPackLifehackProvider.hasLifehacks(exercise.primarySkill)) {
+    // introPending/predictionPending (no teaser mid-introduction/prediction) — an explicit choice,
+    // not derived ad hoc.
+    val lifehackBadge = if (!introducing && !predicting && state.phase == CardPhase.Question && StaticPackLifehackProvider.hasLifehacks(exercise.primarySkill)) {
         LifehackBadge()
     } else null
 
-    return TrainingCardModel(header, chainProgress, referenceToggle, front, back, ratingButtons, introducing, hotkeys, lifehackBadge, dailyProgress)
+    return TrainingCardModel(header, chainProgress, referenceToggle, front, back, ratingButtons, introducing, hotkeys, lifehackBadge, dailyProgress, retryBadge)
 }
 

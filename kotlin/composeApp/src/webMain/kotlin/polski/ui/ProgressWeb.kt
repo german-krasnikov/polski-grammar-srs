@@ -38,6 +38,8 @@ internal fun renderProgressWeb(root: HTMLElement, state: AppUiState, dispatch: (
         actions.progressButton(UiCopy.ResetProgress, "progress-reset") { dispatch(AppAction.RequestReset) }
     }
 
+    renderAchievementsSection(root, state)
+
     val detail = root.progressAdd("section", cls = "card matrix-section")
     val scroll = detail.progressAdd("div", cls = "table-scroll")
     scroll.setAttribute("data-scroll-key", "progress-skills")
@@ -66,6 +68,32 @@ internal fun renderProgressWeb(root: HTMLElement, state: AppUiState, dispatch: (
             else -> browserFormatDate(card.card.due.toEpochMilliseconds().toDouble())
         }
         row.progressAdd("td", next)
+    }
+}
+
+/**
+ * M6 blueprint: "раньше с таблицей, теперь сам" — one entry per skill currently at
+ * `tileScaffoldingRung == 2` (SB-8's RUNG_NONE: least scaffolding help). Skills not yet there are
+ * simply absent, never a placeholder row; the whole section is likewise absent while no skill
+ * qualifies yet — a brand-new learner's Progress page shows no empty achievements card.
+ */
+private fun renderAchievementsSection(root: HTMLElement, state: AppUiState) {
+    val progress = state.progress ?: return
+    val achieved = skills.filter { progress.stats[it.id]?.tileScaffoldingRung == 2 }
+    if (achieved.isEmpty()) return
+    val section = root.progressAdd("section", cls = "card matrix-section")
+    section.setAttribute("aria-label", "Мои достижения")
+    section.progressAdd("h2", "Мои достижения")
+    achieved.forEach { skill ->
+        val stats = progress.stats.getValue(skill.id)
+        val item = section.progressAdd("div", cls = "achievement")
+        item.progressAdd("b", skill.title)
+        // independentSince can still be null for a skill that reached rung 2 before M6 shipped and
+        // hasn't been promoted again since (ReviewReducer's own sticky-while-already-None rule) —
+        // fail-soft: the streak alone is still shown, just without a date.
+        val since = stats.independentSince?.let { " · раньше с таблицей, теперь сам — с $it" }
+            ?: " · раньше с таблицей, теперь сам"
+        item.progressAdd("span", "$since · подтверждено ${stats.tileScaffoldingStreak} раз без таблицы")
     }
 }
 

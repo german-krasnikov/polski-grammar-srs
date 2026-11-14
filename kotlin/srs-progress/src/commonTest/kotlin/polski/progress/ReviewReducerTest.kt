@@ -143,6 +143,62 @@ class ReviewReducerTest {
         assertEquals(0, resultNone.progress.stats.getValue("known").tileScaffoldingStreak)
     }
 
+    // M6: promoting to rung None stamps independentSince with that review's localDay; staying at
+    // None on a later day keeps the ORIGINAL date (sticky); a wrong review that rolls None back to
+    // Partial clears it to null.
+    @Test
+    fun independentSinceIsStampedOnPromotionStaysStickyAndClearsOnDemotion() {
+        val scheduler = CountingScheduler()
+        var document = ProgressDocument(Progress(
+            cards = listOf(StoredCard("known", SrsCard(at))),
+            stats = mapOf("known" to SkillStats()),
+            lastDay = "2026-03-29",
+        ))
+        val reducer = ReviewReducer(scheduler, setOf("known"), TilePromotionThresholds(toPartial = 1, toNone = 1))
+
+        fun reviewTile(correct: Boolean, day: String) {
+            document = (reducer.recordReview(document, "known", Rating.Good, null, at, day, tileCorrect = correct) as ReviewResult.Reviewed).document
+        }
+
+        reviewTile(true, "2026-03-29") // Full -> Partial
+        assertEquals(null, document.progress.stats.getValue("known").independentSince)
+        reviewTile(true, "2026-03-30") // Partial -> None, stamps the date
+        assertEquals("2026-03-30", document.progress.stats.getValue("known").independentSince)
+        reviewTile(true, "2026-04-02") // still None on a later day: date stays the original
+        assertEquals("2026-03-30", document.progress.stats.getValue("known").independentSince)
+        reviewTile(false, "2026-04-03") // wrong at None rolls back to Partial: cleared
+        assertEquals(null, document.progress.stats.getValue("known").independentSince)
+    }
+
+    // M5: a wrong review with a given seedKey increments exactly that key's count; a correct
+    // review never decrements/clears it; an absent seedKey (old call-site shape) leaves the map
+    // untouched either way.
+    @Test
+    fun seedErrorsCountsOnlyWrongReviewsWithASeedKeyAndNeverDecrements() {
+        val scheduler = CountingScheduler()
+        var document = ProgressDocument(Progress(
+            cards = listOf(StoredCard("known", SrsCard(at))),
+            stats = mapOf("known" to SkillStats()),
+            lastDay = "2026-03-29",
+        ))
+        fun review(correct: Boolean, seedKey: String?) {
+            document = (ReviewReducer(scheduler, setOf("known")).recordReview(
+                document, "known", if (correct) Rating.Good else Rating.Again, correct, at, "2026-03-29", seedKey = seedKey,
+            ) as ReviewResult.Reviewed).document
+        }
+
+        review(false, "wife:beautiful")
+        assertEquals(mapOf("wife:beautiful" to 1), document.progress.stats.getValue("known").seedErrors)
+        review(false, "wife:beautiful")
+        assertEquals(mapOf("wife:beautiful" to 2), document.progress.stats.getValue("known").seedErrors)
+        review(true, "wife:beautiful") // correct never decrements
+        assertEquals(mapOf("wife:beautiful" to 2), document.progress.stats.getValue("known").seedErrors)
+        review(false, "husband:good") // a different seed gets its own count
+        assertEquals(mapOf("wife:beautiful" to 2, "husband:good" to 1), document.progress.stats.getValue("known").seedErrors)
+        review(false, null) // no seedKey (old call-site shape): map untouched
+        assertEquals(mapOf("wife:beautiful" to 2, "husband:good" to 1), document.progress.stats.getValue("known").seedErrors)
+    }
+
     private class CountingScheduler : Scheduler {
         var reviewCalls = 0
         override fun newCard(skillId: String, at: Instant) = StoredCard(skillId, SrsCard(at))

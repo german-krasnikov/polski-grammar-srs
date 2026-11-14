@@ -45,7 +45,7 @@ internal fun executeEffect(root: HTMLElement, state: AppUiState, effect: UiEffec
     when (effect) {
         is UiEffect.FocusReveal -> {
             if (state.exerciseId == effect.exerciseId && state.phase == CardPhase.Question && state.tab == AppTab.Training) {
-                if (state.introPending) return false
+                if (state.introPending || state.predictionPending) return false
                 val reveal = root.querySelector("#training-reveal") as? HTMLElement ?: return false
                 reveal.focus()
                 store.dispatch(AppAction.EffectAcknowledged(effect.id, EffectOutcome.Completed))

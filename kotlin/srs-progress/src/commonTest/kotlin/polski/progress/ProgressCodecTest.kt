@@ -68,7 +68,8 @@ class ProgressCodecTest {
         val golden = """{"version":1,"cards":[{"skillId":"case.acc.f","card":{"due":"2026-03-29T01:40:00.000Z",""" +
             """"stability":2.3065,"difficulty":2.11810397,"elapsed_days":0,"scheduled_days":0,"reps":1,"lapses":0,""" +
             """"learning_steps":1,"state":1,"last_review":"2026-03-29T01:30:00.000Z"}}],"stats":{"case.acc.f":""" +
-            """{"reviews":1,"correct":1,"streak":1,"mistakes":0,"tileScaffoldingRung":0,"tileScaffoldingStreak":0}},""" +
+            """{"reviews":1,"correct":1,"streak":1,"mistakes":0,"tileScaffoldingRung":0,"tileScaffoldingStreak":0,""" +
+            """"independentSince":null,"seedErrors":{}}},""" +
             """"reviewsToday":1,"lastDay":"2026-03-29","totalReviews":1}"""
         assertEquals(golden, ProgressCodec.encodeLegacyV1(document), "encodeLegacyV1 drifted from the pinned golden bytes")
         val decoded = assertIs<DecodeResult.Valid>(ProgressCodec.decode(golden)).document
@@ -87,6 +88,18 @@ class ProgressCodecTest {
         val stats = decoded.progress.stats.getValue("known")
         assertEquals(0, stats.tileScaffoldingRung)
         assertEquals(0, stats.tileScaffoldingStreak)
+    }
+
+    // M6/M5: a pre-M6 document (JSON missing independentSince/seedErrors entirely) still decodes
+    // Valid, with null/empty defaults — never Invalid just because the new fields are absent.
+    @Test
+    fun preM6DocumentWithoutIndependentSinceOrSeedErrorsDecodesValidWithDefaults() {
+        val legacy = ProgressCodec.encodeLegacyV1(ProgressCodec.fresh(listOf("known"), at, "2026-03-29", scheduler))
+        val raw = legacy.replace(""","independentSince":null,"seedErrors":{}""", "")
+        val decoded = assertIs<DecodeResult.Valid>(ProgressCodec.decode(raw)).document
+        val stats = decoded.progress.stats.getValue("known")
+        assertEquals(null, stats.independentSince)
+        assertEquals(emptyMap(), stats.seedErrors)
     }
 
     // SB-8: encodeText/decodeText round-trips non-zero scaffolding fields; a pre-SB-8 POLSKI-TEXT

@@ -25,8 +25,11 @@ val sentenceSeeds: List<SentenceSeed> get() = courseSentenceSeeds
 class PlExerciseEngine(random: RandomSource, ids: ExerciseIdFactory) {
     private val generator = plExerciseGenerator(random, ids)
 
-    fun generateForSkill(skillId: String, preferredSeed: SentenceSeed? = null): Exercise =
-        generator.generateForSkill(skillId, preferredSeed?.toSlots()).toExercise()
+    fun generateForSkill(
+        skillId: String,
+        preferredSeed: SentenceSeed? = null,
+        weakSeedCount: ((candidateSeedKey: String) -> Int)? = null,
+    ): Exercise = generator.generateForSkill(skillId, preferredSeed?.toSlots(), weakSeedCount).toExercise()
 
     fun generateChain(seed: SentenceSeed = sentenceSeeds.first()): List<Exercise> =
         generator.generateChain(plChainSteps(seed.nounId), seed.toSlots()).map { it.toExercise() }

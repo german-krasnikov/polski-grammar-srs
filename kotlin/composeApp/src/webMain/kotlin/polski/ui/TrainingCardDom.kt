@@ -111,7 +111,7 @@ internal class TrainingCardDom(
         // swipe instead of Space/arrows/digits — checked live, not just at narrow widths, per
         // UX4-11's own precedent one screen up (a resizable fine-pointer desktop window can be
         // just as narrow as a phone).
-        val action = if (state.introPending) "перейти к заданию" else "показать ответ"
+        val action = if (state.predictionPending) "продолжить" else if (state.introPending) "перейти к заданию" else "показать ответ"
         val help = if (window.matchMedia("(pointer: coarse)").matches) "Коснитесь — $action · Свайп влево/вправо — оценить"
         else "Пробел — $action · ← → или 1–2 — оценить"
         main.appendChild(node("p", "study-help", help))
@@ -265,6 +265,21 @@ internal class TrainingCardDom(
             }))
             appendChild(node("span", text = "${skill.level} · ${skill.title}"))
         })
+        // M7 blueprint: prediction always precedes introduction for a pilot skill's first exposure.
+        if (state.predictionPending && state.phase == CardPhase.Question) {
+            card.appendChild(node("div", "card-front method-predict").apply {
+                appendChild(node("span", "eyebrow", "Прежде чем узнать правило"))
+                appendChild(node("p", "source-sentence").apply {
+                    setAttribute("lang", activeTargetLangCode())
+                    appendContrastParts(this, sentenceHighlightParts(exercise.source, exercise.changes, ChangeSide.Before), "change-before")
+                })
+                appendChild(node("p", text = skill.predictionQuestion.orEmpty()))
+                appendChild(button("Что скажешь? Дальше", primary = true) {
+                    dispatch(AppAction.ContinuePrediction)
+                })
+            })
+            return
+        }
         if (state.introPending && state.phase == CardPhase.Question) {
             card.appendChild(node("div", "card-front method-introduce").apply {
                 appendChild(node("span", "eyebrow", if (state.styleId == StyleId.SituationFirst) "Сцена и намерение" else "Признаки и операция"))
@@ -285,6 +300,7 @@ internal class TrainingCardDom(
         val front = node("div", "card-front").apply {
             appendChild(node("span", "eyebrow", "Исходное предложение"))
             renderLifehackBadge(this, skill.id)
+            state.activeRetrySkillId?.let { appendChild(node("span", "retry-badge", "Ещё раз: ${skill.title}")) }
             appendChild(node("p", "source-sentence").apply {
                 setAttribute("lang", activeTargetLangCode())
                 appendContrastParts(this, sentenceHighlightParts(exercise.source, exercise.changes, ChangeSide.Before), "change-before")

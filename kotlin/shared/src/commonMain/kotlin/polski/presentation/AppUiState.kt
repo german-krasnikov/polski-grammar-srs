@@ -21,6 +21,12 @@ enum class CardPhase { Question, Revealed, ChainComplete, NoDue, DailyComplete }
 enum class MatrixSection { Map, Cases, Verbs, Pronouns, Lifehacks }
 enum class LoadStatus { Loading, Ready, MigrationAvailable, RecoveryRequired, Unavailable }
 
+/** M2 blueprint: a pending retry nudge after an error on [skillId] — [remaining] counts elapsed
+ *  tasks (any mode, any outcome), decremented on every `rate()` call; the ticket matures and gets
+ *  substituted in once it reaches 0. Session-only, same lifetime class as [DailySessionState] —
+ *  never persisted, reset on every app load. */
+data class RetryTicket(val skillId: String, val remaining: Int)
+
 /** Selection is reset on each entry to the matrix tab. */
 data class MatrixSelection(
     val section: MatrixSection = MatrixSection.Map,
@@ -44,6 +50,11 @@ data class AppUiState(
     val exercise: Exercise? = null,
     val phase: CardPhase = CardPhase.Question,
     val introPending: Boolean = false,
+    /** M7 blueprint: true exactly while this skill's own first exposure should show its authored
+     *  [polski.model.Skill.predictionQuestion] before [introPending]'s own `MethodIntro` — the
+     *  same "gated once per skill" moment [introPending] already owns, one step earlier. `false`
+     *  for every skill without a [polski.model.Skill.predictionQuestion] (the default: inactive). */
+    val predictionPending: Boolean = false,
     val answerMode: AnswerMode = AnswerMode.Oral,
     /** UC-10: a display preference, not a diagnosis — switching it never creates a review. */
     val styleId: StyleId = StyleId.RuleFirst,
@@ -72,6 +83,11 @@ data class AppUiState(
     /** M3 blueprint: session-only, `null` outside [TrainingMode.Daily] — same documented-fallback
      *  pattern as [tileBuilder]. */
     val daily: DailySessionState? = null,
+    /** M2 blueprint: pending retry nudges, oldest first. Never persisted — see [RetryTicket]. */
+    val retryQueue: List<RetryTicket> = emptyList(),
+    /** M2 blueprint: set exactly when the *current* [exercise] was served because a ticket
+     *  matured; cleared on the next `rate()`. Drives the "Ещё раз: {skill}" badge. */
+    val activeRetrySkillId: String? = null,
 ) {
     val exerciseId: String? get() = exercise?.id
     val caseReferenceAvailable: Boolean get() = exercise?.let { skillById(it.primarySkill).caseReferenceAvailable } ?: true

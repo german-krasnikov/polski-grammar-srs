@@ -1,5 +1,5 @@
 // Generated from dsl/course.data-contract, courses-biome/en-ru/uiCopy.core-data
-// source-sha256=2f8dad4084603525b9e584862776962c5c51e9affefc02cbb4e27a17ac7f120a
+// source-sha256=2c2099bea4e4d081c6e9b3a00d602b93e5a6eff6453aaf64eef5b0c9c0e0b98e
 // Edit the source, then run biome generate.
 
 package polski.data.rows.enru.uicopy
@@ -133,6 +133,7 @@ data class SkillRow(
     val lexicalFilter: LexicalFilterRow?,
     val styleContent: StyleContentRow? = null,
     val caseReferenceAvailable: Boolean? = null,
+    val predictionQuestion: String? = null,
 )
 
 data class CaseFormsRow(

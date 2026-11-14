@@ -57,6 +57,8 @@ nav{display:flex;gap:8px;margin-bottom:28px}nav button{padding:10px 18px}
 .flashcard{overflow:hidden;min-width:0}.card-meta{padding:17px 28px;border-bottom:1px solid var(--line);display:flex;gap:12px;justify-content:space-between;color:#9cacc1;font-size:.8rem}
 .card-front{padding:32px 36px 26px}.eyebrow{font-size:.75rem;letter-spacing:.12em;text-transform:uppercase;color:#8fb0cd;font-weight:600}.source-sentence{font-size:clamp(1.55rem,2.4vw,2rem);line-height:1.5;margin:18px 0 28px;font-weight:500;color:#f1f5fd}
 .lifehack-badge{display:inline-flex;align-items:center;gap:5px;margin:8px 0 0;padding:4px 10px;border-radius:999px;background:var(--button);color:var(--button-text);font-size:.75rem;font-weight:600;width:fit-content}
+.retry-badge{display:inline-flex;align-items:center;margin:8px 0 0;padding:4px 10px;border-radius:999px;background:#5a3b14;color:#ffe2b0;font-size:.75rem;font-weight:600;width:fit-content}
+:root[data-theme=light] .retry-badge{background:#ffe2b0;color:#5a3b14}
 .operation{border-left:3px solid #51b9f0;padding:2px 0 2px 18px}.operation>span{font-size:.75rem;color:var(--blue);letter-spacing:.1em;text-transform:uppercase}.operation h2{font-size:1.1rem;font-weight:500;margin:8px 0;line-height:1.6}
 .answer-area{padding:0 36px 30px}.answer-mode{display:flex;gap:8px;flex-wrap:wrap}.answer-mode button{font-size:.8rem;padding:7px 10px;border-color:transparent;background:transparent}.answer-mode button.active{background:#1c3046;border-color:#395877;color:#d5ebff}
 .muted{color:var(--muted)}.small{font-size:.8rem}.primary{background:#147caf;color:white;border-color:#369ed0;font-weight:600}.primary:hover{background:#1b8ec4;border-color:#7ccffa}.reveal-button{width:100%;padding:14px;margin-top:24px}
@@ -173,7 +175,7 @@ details{margin:16px 0;color:var(--muted);font-size:.875rem}summary{cursor:pointe
 .form-contrast-label{font-size:.75rem;font-weight:600;color:#b8c9dc}
 .contrast-sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
 .form-contrast{position:relative}
-.method-introduce{display:grid;gap:1rem}.method-introduce p{margin:0;max-width:48rem}.method-introduce button{justify-self:start}.method-retrieve,.method-feedback,.method-review{color:#b9d3df;line-height:1.55}.method-retrieve{margin:.4rem 0}.method-feedback{margin:1rem 0 0}.method-review{font-size:.875rem;margin:.2rem 0 .8rem}
+.method-introduce,.method-predict{display:grid;gap:1rem}.method-introduce p,.method-predict p{margin:0;max-width:48rem}.method-introduce button,.method-predict button{justify-self:start}.method-retrieve,.method-feedback,.method-review{color:#b9d3df;line-height:1.55}.method-retrieve{margin:.4rem 0}.method-feedback{margin:1rem 0 0}.method-review{font-size:.875rem;margin:.2rem 0 .8rem}
 
 /* All host surfaces share the document palette; contrast cues keep their underline and text labels. */
 :root[data-theme=light] .top h1,:root[data-theme=light] .source-sentence,:root[data-theme=light] .vocabulary-prompt{color:var(--text)}

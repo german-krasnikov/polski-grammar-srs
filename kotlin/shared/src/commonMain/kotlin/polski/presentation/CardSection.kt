@@ -19,6 +19,10 @@ sealed interface CardSection {
     /** Shown only while [AppUiState.introPending] — the active method's own introduction text. */
     data class MethodIntro(val text: String) : CardSection
 
+    /** M7 blueprint: shown only while [AppUiState.predictionPending] — the skill's own authored
+     *  [polski.model.Skill.predictionQuestion], always ahead of [MethodIntro] for that one skill. */
+    data class PredictionQuestion(val text: String) : CardSection
+
     /** The active method's retrieval prompt, shown while [CardPhase.Question]. */
     data class RetrieveHint(val text: String) : CardSection
 

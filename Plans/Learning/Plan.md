@@ -202,8 +202,9 @@ P1/P2 — разработка, P3/P4 — наблюдение за обучен
 
 - План и определения KPI: подготовлены.
 - Семантика KPI и дизайн сравнения: отдельно рассмотрены агентом по измерениям; замечания включены.
-- Производственный код, данные курса и fixtures: не изменялись.
-- Реализация, тесты поведения, компиляция, сборка, браузер, устройства: **NOT RUN / не выполнялись**, поскольку текущая задача — подготовить план.
+- Производственный код, данные курса и fixtures: не изменялись планом как документом; M1 и M3 реализованы ранее отдельными задачами (SB-1..SB-8, сессия "Сегодня").
+- **2026-11-14**: M4 (вариативность), M6 (прогресс навыка), M7 (предсказание перед объяснением), M5 (выбор слабых форм), M2 (retry после ошибки) реализованы по `Plans/Architecture/LEARNING-MECHANICS-M2-M7-BLUEPRINT.md` — shared Kotlin (`ExerciseGenerator.kt`, `ReviewReducer.kt`, `Progress.kt`, `ProgressCodec.kt`, `TrainingStore.kt`, `TrainingCardModel.kt`, `AppUiState.kt`, `AppAction.kt`, `CardSection.kt`) + Web UI (`ProgressWeb.kt`, `TrainingCardDom.kt`) + unit tests (`ExerciseGeneratorTest`, `ReviewReducerTest`, `ProgressCodecTest`, `TrainingCardModelTest`, `TrainingStoreTest`) + Playwright (`kotlin-training-prediction.spec.ts`, `kotlin-matrix-progress.spec.ts`). M4's train/control split (KPI T7) stays blocked on the P1 attempt journal, not solved. Численные KPI (K1-K5) по-прежнему не измерены — эта реализация строит продуктовые механики, не измерительную инфраструктуру.
+- Реализация, тесты поведения, компиляция, сборка, браузер: выполнены для M2/M4-M7 (см. выше); устройства (Android/iOS собственные экраны) — не затронуты, механики работают через общий Kotlin-слой.
 - Численный эффект на пользователях: **NOT MEASURED**.
 - Публикация, коммит и развёртывание не выполнены.
 

@@ -3,6 +3,7 @@ import { mkdirSync } from 'node:fs';
 import { waitForAnimationsSettled } from './kotlin-wait';
 import { installProgressReader } from './kotlin-storage';
 import { readPolskiText } from './polski-text';
+import { continueIntroductionIfPresent } from './kotlin-introduction';
 
 const preferencesKey = 'polski-preferences-v1';
 const progressKey = 'polski-grammar-srs-kmp-preview-v1';
@@ -58,7 +59,7 @@ test('legacy method migrates once and settings route preserves the question draf
   await page.addInitScript(() => localStorage.setItem('polski-explanation-method-v1', 'situations'));
   await page.goto('/#/training');
   await expect(page.getByRole('combobox', { name: 'Подача объяснений' })).toHaveValue('SituationFirst');
-  await page.getByRole('button', { name: 'Перейти к заданию' }).click();
+  await continueIntroductionIfPresent(page);
   await page.getByRole('button', { name: 'Напечатать ответ' }).click();
   await page.getByRole('textbox', { name: 'Ответ по-польски' }).fill('Moja próba');
   const before = await page.evaluate(key => localStorage.getItem(key), progressKey);
@@ -144,7 +145,7 @@ test('the card quick switch offers the same 4 styles and never creates a review 
   const quickSwitch = page.getByRole('combobox', { name: 'Подача объяснений' });
   const optionValues = await quickSwitch.locator('option').evaluateAll(options => options.map(option => (option as HTMLOptionElement).value));
   expect(optionValues).toEqual(['RuleFirst', 'SituationFirst', 'NativeContrast', 'MinimalTheory']);
-  await page.getByRole('button', { name: 'Перейти к заданию' }).click();
+  await continueIntroductionIfPresent(page);
   await page.getByRole('button', { name: 'Напечатать ответ' }).click();
   await page.getByRole('textbox', { name: 'Ответ по-польски' }).fill('Moja próba');
   await quickSwitch.selectOption('MinimalTheory');
@@ -251,7 +252,7 @@ test('grammar swipe is disabled until reveal and remains governed by the shared 
     window.matchMedia = query => query === '(pointer: coarse)' ? ({ matches: true } as MediaQueryList) : nativeMatchMedia(query);
   });
   await page.goto('/#/training');
-  await page.getByRole('button', { name: 'Перейти к заданию' }).click();
+  await continueIntroductionIfPresent(page);
   const card = page.getByRole('region', { name: 'Учебная карточка' });
   await expect(card.locator('.vocabulary-swipe-zone')).toHaveCount(0);
   await page.getByRole('button', { name: 'Показать ответ' }).click();
@@ -274,7 +275,7 @@ test('grammar swipe preference off leaves the revealed answer to rating buttons'
     window.matchMedia = query => query === '(pointer: coarse)' ? ({ matches: true } as MediaQueryList) : nativeMatchMedia(query);
   });
   await page.goto('/#/training');
-  await page.getByRole('button', { name: 'Перейти к заданию' }).click();
+  await continueIntroductionIfPresent(page);
   await page.getByRole('button', { name: 'Показать ответ' }).click();
   const card = page.getByRole('region', { name: 'Учебная карточка' });
   await expect(card.locator('.vocabulary-swipe-zone')).toHaveCount(0);
@@ -292,7 +293,7 @@ test('grammar real touch completes after leaving the swipe zone', async ({ page,
     window.matchMedia = query => query === '(pointer: coarse)' ? ({ matches: true } as MediaQueryList) : nativeMatchMedia(query);
   });
   await page.goto('/#/training');
-  await page.getByRole('button', { name: 'Перейти к заданию' }).click();
+  await continueIntroductionIfPresent(page);
   await page.getByRole('button', { name: 'Показать ответ' }).click();
   const zoneElement = page.getByRole('region', { name: 'Учебная карточка' }).locator('.vocabulary-swipe-zone');
   // v3/A: the answer now expands downward with a real transition (plus a short content stagger)
@@ -494,6 +495,10 @@ test('settings and theme changes retain the selected vocabulary card and typed d
 test('narrow layout keeps the next training action visible and the document within the viewport', async ({ page }) => {
   await page.setViewportSize({ width: 390, height: 844 });
   await page.goto('/#/training');
+  // M7: case.acc.f (the first chain skill) shows its prediction question first.
+  const predictButton = page.getByRole('button', { name: 'Что скажешь? Дальше' });
+  await expect(predictButton).toBeVisible();
+  await predictButton.click();
   const continueButton = page.getByRole('button', { name: 'Перейти к заданию' });
   await expect(continueButton).toBeVisible();
   const bounds = await continueButton.boundingBox();
@@ -551,7 +556,7 @@ test('capture narrow training and settings in both themes for visual review', as
   mkdirSync(directory, { recursive: true });
   await page.setViewportSize({ width: 390, height: 844 });
   await page.goto('/#/training');
-  await page.getByRole('button', { name: 'Перейти к заданию' }).click();
+  await continueIntroductionIfPresent(page);
   await expect(page.getByRole('button', { name: 'Показать ответ' })).toBeVisible();
   for (const theme of ['Dark', 'Light']) {
     await page.getByRole('button', { name: 'Настройки', exact: true }).click();

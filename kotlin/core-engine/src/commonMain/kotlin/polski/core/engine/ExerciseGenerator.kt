@@ -61,6 +61,15 @@ data class ConstantSlot(
 )
 
 /**
+ * M4/M5/M2 blueprint: one shared "which lexical seed" string, built from a generator-side
+ * candidate map (`noun`/`adjective` keys — every [ExerciseGenerator.seeds] entry has both). Used
+ * for M4's anti-repeat, M5's weak-form bias lookup, and M2's retry substitution — all three reuse
+ * this exact format rather than inventing their own. `polski.model.seedKey(Exercise)` is the
+ * presentation-side twin (same string shape, different input shape — see its own KDoc).
+ */
+fun seedKey(candidate: Map<String, String>): String = "${candidate.getValue("noun")}:${candidate.getValue("adjective")}"
+
+/**
  * UniversalCorePlan.md §5.1/§5.3/§12 UC-07: the generic replacement for `ExerciseFactory.kt`'s
  * `when(skillId)` branches. [skills] is a language's `curriculum.json` (`SkillSpec`s, UC-06);
  * [recipes] is its `exercise-recipes.json` wiring (this task, [SkillRecipe]); [seeds] is its
@@ -92,6 +101,10 @@ class ExerciseGenerator(
 ) {
     private val remainingStaticIndexes = mutableMapOf<String, MutableList<Int>>()
     private val lastStaticIndex = mutableMapOf<String, Int>()
+    /** M4: the last dynamic-seed [seedKey] served for this skill — same per-skill "last thing
+     *  shown" shape as [lastStaticIndex], but for the `pick(candidates)` path, which had no
+     *  anti-repeat before. */
+    private val lastSeedKey = mutableMapOf<String, String>()
 
     private fun <T> pick(items: List<T>): T {
         val draw = random.nextDouble()
@@ -223,11 +236,43 @@ class ExerciseGenerator(
         slots = mapOf("noun" to s.nounId, "adjective" to s.adjectiveId, "owner" to defaultOwnerLexeme, "number" to "sg"),
     )
 
-    fun generateForSkill(skillId: String, preferredSeed: Map<String, String>? = null): CoreExercise {
+    /**
+     * M4: when no [preferredSeed] is given and the candidate pool has more than one lexical
+     * choice, excludes whichever candidate matches [lastSeedKey] for this skill before drawing —
+     * so two consecutive calls never repeat the same noun+adjective pair. Falls back to the full
+     * pool when that exclusion would leave nothing to pick from (a skill with exactly one lexical
+     * candidate must still generate every time).
+     *
+     * M5: when [weakSeedCount] is non-null, draws one extra decision after that anti-repeat pool
+     * is built: `< 0.5` restricts the pick to the pool's candidates with a positive weak-seed
+     * count (falling back to the full pool when none have one), weighted toward the maximum count
+     * — the single highest-count candidate wins outright, ties broken by a further [pick] draw
+     * over just the tied subset. `>= 0.5` (or [weakSeedCount] `null`) falls through to the
+     * existing uniform [pick] over the whole pool — one [RandomSource] draw per decision, same
+     * contract every other call in this class already follows.
+     */
+    private fun pickSeed(skillId: String, candidates: List<Map<String, String>>, weakSeedCount: ((String) -> Int)?): Map<String, String> {
+        val pool = if (candidates.size > 1) {
+            candidates.filter { seedKey(it) != lastSeedKey[skillId] }.ifEmpty { candidates }
+        } else candidates
+        if (weakSeedCount == null || random.nextDouble() >= 0.5) return pick(pool)
+        val weak = pool.filter { weakSeedCount(seedKey(it)) > 0 }.ifEmpty { return pick(pool) }
+        val maxCount = weak.maxOf { weakSeedCount(seedKey(it)) }
+        return pick(weak.filter { weakSeedCount(seedKey(it)) == maxCount })
+    }
+
+    fun generateForSkill(
+        skillId: String,
+        preferredSeed: Map<String, String>? = null,
+        /** M5 blueprint: `null` (every pre-M5 call site) reproduces today's uniform behavior
+         *  exactly — no extra draw, no bias. A host opts in by passing the closure. */
+        weakSeedCount: ((candidateSeedKey: String) -> Int)? = null,
+    ): CoreExercise {
         skills[skillId] ?: error("Unknown skill $skillId")
         val recipe = recipes[skillId] ?: error("No recipe for skill $skillId")
         val candidates = candidatesFor(skills.getValue(skillId).lexicalFilter)
-        val seed = preferredSeed?.takeIf { preferred -> candidates.any { it["noun"] == preferred["noun"] } } ?: pick(candidates)
+        val seed = preferredSeed?.takeIf { preferred -> candidates.any { it["noun"] == preferred["noun"] } } ?: pickSeed(skillId, candidates, weakSeedCount)
+        lastSeedKey[skillId] = seedKey(seed)
 
         val staticOverride = recipe.staticOverride
         if (staticOverride != null) return staticExercise(skillId, staticOverride)

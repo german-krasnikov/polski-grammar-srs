@@ -31,6 +31,12 @@ class ReviewReducer(
          *  [typedCorrect] as the blueprint's own sketch shows) so every existing positional call
          *  site ending at `localDay` keeps compiling unchanged. */
         tileCorrect: Boolean? = null,
+        /** M5: the `seedKey` format (`polski.core.engine.seedKey`/`polski.model.seedKey`) of the
+         *  lexical seed this review drilled. `null` (every pre-M5 call site) leaves [SkillStats.seedErrors]
+         *  untouched. Appended last, same "positional call sites keep compiling" reasoning as
+         *  [tileCorrect]. Only ever bumps the count on a wrong answer — never reset on a later
+         *  correct one, since the point is "which forms have ever been hard." */
+        seedKey: String? = null,
     ): ReviewResult {
         if (skillId !in knownSkillIds || document.progress.cards.count { it.skillId == skillId } != 1) {
             return ReviewResult.UnknownSkill(skillId)
@@ -46,6 +52,8 @@ class ReviewReducer(
             streak = if (correct) oldStats.streak + 1 else 0,
             tileScaffoldingRung = nextRung,
             tileScaffoldingStreak = nextTileStreak,
+            independentSince = nextIndependentSince(oldStats, nextRung, localDay),
+            seedErrors = if (!correct && seedKey != null) oldStats.seedErrors + (seedKey to (oldStats.seedErrors[seedKey] ?: 0) + 1) else oldStats.seedErrors,
         )
         val next = document.progress.copy(
             cards = document.progress.cards.map { if (it.skillId == skillId) reviewed else it },
@@ -71,6 +79,16 @@ class ReviewReducer(
             RUNG_PARTIAL -> if (nextStreak >= tileThresholds.toNone) RUNG_NONE to 0 else RUNG_PARTIAL to nextStreak
             else -> RUNG_NONE to nextStreak // already hardest; keep counting, nothing to promote to
         }
+    }
+
+    /** M6: sticky only while *currently* at [RUNG_NONE] — a demotion away from it (the
+     *  [nextTileState] rollback-to-Partial path) clears the date, since the UI must never claim
+     *  "independent since <date>" for a skill that now needs a partial scaffold again. Re-reaching
+     *  [RUNG_NONE] later stamps a fresh [localDay]: a new confirmation, not a continuation. */
+    private fun nextIndependentSince(oldStats: SkillStats, nextRung: Int, localDay: String): String? = when {
+        nextRung != RUNG_NONE -> null
+        oldStats.tileScaffoldingRung == RUNG_NONE -> oldStats.independentSince
+        else -> localDay
     }
 
     private companion object {

@@ -42,7 +42,13 @@ data class Noun(val id: String, val lemma: String, val meaning: String, val gend
 data class Adjective(val id: String, val lemma: String, val meaning: String, val forms: Map<NumberGram, Map<Gender, Map<GramCase, String>>>)
 data class PastStem(val m: String, val f: String, val n: String?, val mp: String, val np: String)
 data class Verb(val id: String, val lemma: String, val meaning: String, val aspect: Aspect, val present: Map<NumberGram, Map<Person, String>>?, val pastStem: PastStem, val futureType: FutureType, val perfectivePair: String?)
-data class Skill(val id: String, val title: String, val group: String, val level: String, val formula: String, val theory: String, val hint: String, val prerequisites: List<String>, val caseReferenceAvailable: Boolean = true)
+data class Skill(
+    val id: String, val title: String, val group: String, val level: String, val formula: String,
+    val theory: String, val hint: String, val prerequisites: List<String>, val caseReferenceAvailable: Boolean = true,
+    /** M7 blueprint: an authored short question shown before this skill's own introduction text,
+     *  only once per skill — `null` (every skill but the pilot three) means M7 is simply inactive. */
+    val predictionQuestion: String? = null,
+)
 
 /**
  * UniversalCorePlan.md §1/§4.1 (UC-01): pl's closed enums stay the engine's actual grammar model

@@ -2,6 +2,7 @@ package polski.presentation
 
 import kotlin.test.Test
 import kotlin.test.assertEquals
+import kotlin.test.assertFalse
 import kotlin.test.assertNull
 import kotlin.test.assertTrue
 import kotlin.time.Instant
@@ -33,6 +34,7 @@ class TrainingCardModelTest {
         phase: CardPhase = CardPhase.Question,
         answerMode: AnswerMode = AnswerMode.Oral,
         introPending: Boolean = false,
+        predictionPending: Boolean = false,
         exercise: Exercise? = exercise(),
         mode: TrainingMode = TrainingMode.Focused,
         chain: List<Exercise> = emptyList(),
@@ -45,7 +47,7 @@ class TrainingCardModelTest {
         now: Instant? = null,
     ) = AppUiState(
         loadStatus = LoadStatus.Ready, mode = mode, chain = chain, chainIndex = chainIndex,
-        exercise = exercise, phase = phase, introPending = introPending, answerMode = answerMode,
+        exercise = exercise, phase = phase, introPending = introPending, predictionPending = predictionPending, answerMode = answerMode,
         styleId = styleId, draft = draft, frozenAnswer = frozenAnswer, evaluation = evaluation,
         intervals = intervals, now = now,
     )
@@ -66,6 +68,39 @@ class TrainingCardModelTest {
         assertEquals(emptyList(), model.back)
         assertEquals(mapOf(HotKey.Space to AppAction.ContinueIntroduction), model.hotkeys)
         assertNull(model.lifehackBadge)
+    }
+
+    // M7 blueprint: a pilot skill (`case.gen.neg` carries an authored predictionQuestion) shows the
+    // prediction question first — SourceSentence, PredictionQuestion, then the one "Дальше" action
+    // — never MethodIntro/retrieve/answer input at this moment.
+    @Test fun predictingShowsSourceAndPredictionQuestionBeforeIntroduction() {
+        val question = kotlin.test.assertNotNull(
+            polski.data.skillById("case.gen.neg").predictionQuestion, "fixture skill must carry an authored predictionQuestion",
+        )
+        val model = trainingCardModel(baseState(introPending = true, predictionPending = true))
+        assertFalse(model.introducing)
+        assertEquals(
+            listOf(
+                CardSection.SourceSentence(sentenceHighlightParts(exercise().source, exercise().changes, ChangeSide.Before)),
+                CardSection.PredictionQuestion(question),
+                CardSection.Action("Что скажешь? Дальше", AppAction.ContinuePrediction),
+            ),
+            model.front,
+        )
+        assertEquals(emptyList(), model.back)
+        assertEquals(mapOf(HotKey.Space to AppAction.ContinuePrediction), model.hotkeys)
+        assertNull(model.lifehackBadge)
+    }
+
+    // M7 blueprint regression guard: a skill without an authored predictionQuestion (every skill
+    // but the pilot three) must behave exactly as before M7 — straight to MethodIntro.
+    @Test fun aSkillWithoutAPredictionQuestionSkipsStraightToIntroduction() {
+        assertNull(polski.data.skillById("agreement.my").predictionQuestion)
+        val agreementExercise = exercise(skillId = "agreement.my")
+        val model = trainingCardModel(baseState(introPending = true, predictionPending = false, exercise = agreementExercise))
+        assertTrue(model.introducing)
+        assertTrue(model.front.any { it is CardSection.MethodIntro })
+        assertTrue(model.front.none { it is CardSection.PredictionQuestion })
     }
 
     @Test fun questionOralEndsWithRetrieveHintAndRevealActionNoAnswerInput() {

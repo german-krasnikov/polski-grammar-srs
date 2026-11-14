@@ -29,6 +29,15 @@ data class SkillStats(
      *  reset to 0 on a wrong Tile review or whenever the rung itself changes (promote/demote).
      *  Default 0, same compatibility reasoning as [tileScaffoldingRung]. */
     val tileScaffoldingStreak: Int = 0,
+    /** M6: the `localDay` this skill most recently reached [tileScaffoldingRung] ==
+     *  `RUNG_NONE` ("раньше с таблицей, теперь сам"), sticky while it stays there — a later
+     *  demotion clears it back to `null` ([ReviewReducer.recordReview]'s own doc comment has the
+     *  exact rule). Default `null`, same pre-field-compatibility reasoning as [tileScaffoldingRung]. */
+    val independentSince: String? = null,
+    /** M5: wrong-answer count per lexical seed (`polski.core.engine.seedKey`/`polski.model.seedKey`
+     *  format) for this skill — "which forms have ever been hard," never reset on a later correct
+     *  answer. Default empty map, same compatibility shape as every other field here. */
+    val seedErrors: Map<String, Int> = emptyMap(),
 )
 
 /** Retains the parsed legacy tree so unknown JSON properties survive review and export. */

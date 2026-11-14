@@ -24,6 +24,12 @@
 .table-scroll [lang=pl]{font-weight:500}
 .table-scroll .text-button{border:0;background:transparent;color:#8cd3fa;text-align:left;padding:0;text-decoration:underline;text-underline-offset:3px}
 .table-scroll .text-button:hover{color:#c2eaff;background:transparent}
+.achievement{border:1px solid #3b526b;border-radius:9px;background:#0d1b2c;padding:14px 16px;margin:0 0 10px;display:flex;flex-direction:column;gap:3px}
+.achievement b{color:#e5f6ff}
+.achievement span{font-size:.85rem;color:#adc2d8}
+:root[data-theme=light] .achievement{background:var(--surface);border-color:var(--line)}
+:root[data-theme=light] .achievement b{color:var(--text)}
+:root[data-theme=light] .achievement span{color:var(--muted)}
 .bigstats{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin:18px 0}
 .bigstats>div{display:flex;flex-direction:column;gap:4px;border:1px solid #3b526b;border-radius:9px;background:#0d1b2c;padding:18px;min-width:0}
 .bigstats b{font-size:clamp(1.45rem,3vw,2.25rem);line-height:1.2;color:#e5f6ff}

@@ -15,6 +15,9 @@ sealed interface AppAction {
     data class SetAnswerMode(val mode: AnswerMode) : AppAction
     data class SetStyle(val styleId: StyleId) : AppAction
     data object ContinueIntroduction : AppAction
+    /** M7 blueprint: dismisses [AppUiState.predictionPending]; the existing [ContinueIntroduction]
+     *  flow runs next, unchanged. */
+    data object ContinuePrediction : AppAction
     data class EditAnswer(val text: String) : AppAction
     data class Reveal(val exerciseId: String) : AppAction
     data class Rate(val exerciseId: String, val rating: Rating) : AppAction

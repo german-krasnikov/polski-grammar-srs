@@ -113,7 +113,11 @@ fun TrainingWebApp() {
                     val id = current.exerciseId ?: return@keyboard
                     if (event.code == "Space" && current.phase == CardPhase.Question) {
                         event.preventDefault()
-                        store.dispatch(if (current.introPending) AppAction.ContinueIntroduction else AppAction.Reveal(id))
+                        store.dispatch(
+                            if (current.predictionPending) AppAction.ContinuePrediction
+                            else if (current.introPending) AppAction.ContinueIntroduction
+                            else AppAction.Reveal(id),
+                        )
                     } else if (current.phase == CardPhase.Revealed) {
                         val rating = when (event.key) {
                             "1", "ArrowLeft" -> Rating.Again

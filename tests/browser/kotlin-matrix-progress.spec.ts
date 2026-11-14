@@ -109,6 +109,35 @@ test('progress survives reload, exports the current document and confirms reset'
   await expect(page.locator('.bigstats').getByText('1', { exact: true }).first()).toBeVisible();
 });
 
+// M6 blueprint: "раньше с таблицей, теперь сам" — a skill at tileScaffoldingRung 2 shows its
+// title and independentSince date in a dedicated achievements section; a skill at rung 0/1 is
+// simply absent from it.
+test('achievements section shows a skill at rung 2 with its independent-since date, never an earlier rung', async ({ page }) => {
+  const seed = {
+    version: 1,
+    cards: [
+      { skillId: 'case.acc.f', card: { due: '2026-01-10T00:00:00.000Z', stability: 3, difficulty: 2, elapsed_days: 1, scheduled_days: 1, reps: 5, lapses: 0, learning_steps: 0, state: 2 } },
+      { skillId: 'case.acc.m', card: { due: '2026-01-10T00:00:00.000Z', stability: 1, difficulty: 2, elapsed_days: 0, scheduled_days: 0, reps: 2, lapses: 0, learning_steps: 1, state: 1 } },
+    ],
+    stats: {
+      'case.acc.f': { reviews: 5, correct: 5, streak: 5, mistakes: 0, tileScaffoldingRung: 2, tileScaffoldingStreak: 3, independentSince: '2026-01-05' },
+      'case.acc.m': { reviews: 2, correct: 2, streak: 2, mistakes: 0, tileScaffoldingRung: 1, tileScaffoldingStreak: 1 },
+    },
+    reviewsToday: 0,
+    lastDay: '2026-01-10',
+    totalReviews: 7,
+  };
+  await page.addInitScript(([key, raw]) => localStorage.setItem(key, raw), [previewKey, JSON.stringify(seed)] as const);
+  await page.goto('/');
+  await page.getByRole('button', { name: 'Прогресс' }).click();
+  const achievements = page.getByRole('region', { name: 'Мои достижения' });
+  await expect(achievements).toBeVisible();
+  await expect(achievements).toContainText('Biernik · żeński');
+  await expect(achievements).toContainText('2026-01-05');
+  await expect(achievements).not.toContainText('Biernik · męski');
+  await expect(page.locator('.achievement')).toHaveCount(1);
+});
+
 test('legacy progress waits for explicit migration and keeps its exact backup', async ({ page }) => {
   await page.addInitScript(([key, raw]) => localStorage.setItem(key, raw), [legacyKey, freshReactProgress] as const);
   await page.goto('/');

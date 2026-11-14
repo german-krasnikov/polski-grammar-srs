@@ -67,6 +67,9 @@ class TrainingStoreTest {
         val store = newStore(repo, backgroundScope)
         store.start()
         val id = assertNotNull(store.state.value.exerciseId)
+        // M7: case.acc.f (the first chain skill) is a prediction pilot — dismiss it first so the
+        // rest of this test exercises introPending exactly as before M7 existed.
+        if (store.state.value.predictionPending) store.dispatch(AppAction.ContinuePrediction)
         assertTrue(store.state.value.introPending)
         assertEquals(0, store.state.value.progress?.totalReviews)
         store.dispatch(AppAction.Reveal(id))
@@ -100,6 +103,7 @@ class TrainingStoreTest {
         val store = newStore(repo, backgroundScope)
         store.start()
         val firstId = assertNotNull(store.state.value.exerciseId)
+        if (store.state.value.predictionPending) store.dispatch(AppAction.ContinuePrediction)
         store.dispatch(AppAction.ContinueIntroduction)
         val firstFocus = store.state.value.pendingEffects.filterIsInstance<UiEffect.FocusReveal>().single()
         assertEquals(firstId, firstFocus.exerciseId)
@@ -122,6 +126,8 @@ class TrainingStoreTest {
     }
 
     private fun revealAfterIntroduction(store: TrainingStore, exerciseId: String) {
+        // M7: a pilot skill's prediction step always precedes its introduction — dismiss it first.
+        if (store.state.value.predictionPending) store.dispatch(AppAction.ContinuePrediction)
         if (store.state.value.introPending) store.dispatch(AppAction.ContinueIntroduction)
         store.dispatch(AppAction.Reveal(exerciseId))
     }
@@ -468,6 +474,139 @@ class TrainingStoreTest {
         store.close()
     }
 
+    // M7 blueprint: a pilot skill's first exposure gates on predictionPending before introPending;
+    // ContinuePrediction clears only predictionPending and leaves introPending (and the exercise)
+    // untouched, and is rejected once already dismissed.
+    @Test
+    fun predictionPendingPrecedesIntroductionForAPilotSkillAndIsRejectedOnceDismissed() = runTest {
+        val repo = FakeRepository(ProgressCodec.fresh(skills.map { it.id }, at, "2026-09-23", scheduler))
+        val store = newStore(repo, backgroundScope)
+        store.start()
+        store.dispatch(AppAction.ChooseSkill("case.acc.m", sentenceSeeds.first()))
+        assertEquals("case.acc.m", store.state.value.exercise?.primarySkill)
+        assertTrue(store.state.value.predictionPending)
+        assertTrue(store.state.value.introPending)
+        val id = assertNotNull(store.state.value.exerciseId)
+
+        // Reveal is rejected while predictionPending, even once introPending alone would allow it.
+        store.dispatch(AppAction.Reveal(id))
+        assertEquals(CardPhase.Question, store.state.value.phase)
+
+        store.dispatch(AppAction.ContinuePrediction)
+        assertFalse(store.state.value.predictionPending)
+        assertTrue(store.state.value.introPending)
+        assertEquals(id, store.state.value.exerciseId)
+
+        // Idempotent: a second ContinuePrediction is rejected (accepts() guard), same style as
+        // ContinueIntroduction's own guard.
+        store.dispatch(AppAction.ContinuePrediction)
+        assertFalse(store.state.value.predictionPending)
+
+        store.dispatch(AppAction.ContinueIntroduction)
+        assertFalse(store.state.value.introPending)
+        revealAfterIntroduction(store, id)
+        assertEquals(CardPhase.Revealed, store.state.value.phase)
+        store.close()
+    }
+
+    // M7 blueprint regression guard: a skill without an authored predictionQuestion never gates on
+    // predictionPending — behaves exactly as before M7.
+    @Test
+    fun aSkillWithoutAPredictionQuestionNeverSetsPredictionPending() = runTest {
+        val repo = FakeRepository(ProgressCodec.fresh(skills.map { it.id }, at, "2026-09-23", scheduler))
+        val store = newStore(repo, backgroundScope)
+        store.start()
+        store.dispatch(AppAction.ChooseSkill("agreement.my", sentenceSeeds.first()))
+        assertFalse(store.state.value.predictionPending)
+        assertTrue(store.state.value.introPending)
+        store.close()
+    }
+
+    // M2 blueprint: a reliably diagnosed (Typed) error enqueues a retry ticket; RETRY_DELAY
+    // further ratings on an unrelated skill mature it, substituting the mode's own next pick with
+    // a fresh exercise for the errored skill (generated through the same generateForSkill path
+    // M4's anti-repeat already covers — no separate seed-difference assertion needed here per the
+    // blueprint's own note), flagged via activeRetrySkillId; the rating after that clears the flag.
+    @Test
+    fun typedErrorEnqueuesARetryTicketThatMaturesAfterRetryDelayRatings() = runTest {
+        val repo = FakeRepository(ProgressCodec.fresh(skills.map { it.id }, at, "2026-09-23", scheduler))
+        val store = newStore(repo, backgroundScope)
+        store.start()
+
+        store.dispatch(AppAction.ChooseSkill("case.acc.f", sentenceSeeds.first())) // wife/beautiful
+        if (store.state.value.predictionPending) store.dispatch(AppAction.ContinuePrediction)
+        if (store.state.value.introPending) store.dispatch(AppAction.ContinueIntroduction)
+        store.dispatch(AppAction.SetAnswerMode(AnswerMode.Typed))
+        val errorId = assertNotNull(store.state.value.exerciseId)
+        store.dispatch(AppAction.EditAnswer("wrong"))
+        store.dispatch(AppAction.Reveal(errorId))
+        store.dispatch(AppAction.Rate(errorId, Rating.Again))
+        assertEquals(listOf(RetryTicket("case.acc.f", RETRY_DELAY)), store.state.value.retryQueue)
+        assertNull(store.state.value.activeRetrySkillId)
+
+        store.dispatch(AppAction.ChooseSkill("case.acc.m"))
+        store.dispatch(AppAction.SetAnswerMode(AnswerMode.Oral))
+        repeat(RETRY_DELAY - 1) {
+            val id = assertNotNull(store.state.value.exerciseId)
+            revealAfterIntroduction(store, id)
+            store.dispatch(AppAction.Rate(id, Rating.Good))
+            // Not yet matured: still showing case.acc.m, not substituted.
+            assertEquals("case.acc.m", store.state.value.exercise?.primarySkill)
+            assertNull(store.state.value.activeRetrySkillId)
+        }
+        val lastId = assertNotNull(store.state.value.exerciseId)
+        revealAfterIntroduction(store, lastId)
+        store.dispatch(AppAction.Rate(lastId, Rating.Good)) // the RETRY_DELAY-th rating after the error
+
+        assertEquals("case.acc.f", store.state.value.exercise?.primarySkill)
+        assertEquals("case.acc.f", store.state.value.activeRetrySkillId)
+        assertEquals(emptyList(), store.state.value.retryQueue)
+        assertEquals("Ещё раз: Biernik · żeński", trainingCardModel(store.state.value).retryBadge)
+
+        val retryId = assertNotNull(store.state.value.exerciseId)
+        revealAfterIntroduction(store, retryId)
+        store.dispatch(AppAction.Rate(retryId, Rating.Good))
+        assertNull(store.state.value.activeRetrySkillId)
+        store.close()
+    }
+
+    // M2 blueprint: Oral mode has no trustworthy correctness signal — an Oral "error" (rating
+    // Again) must never enqueue a retry ticket.
+    @Test
+    fun oralRatingNeverEnqueuesARetryTicketEvenWhenRatedAgain() = runTest {
+        val repo = FakeRepository(ProgressCodec.fresh(skills.map { it.id }, at, "2026-09-23", scheduler))
+        val store = newStore(repo, backgroundScope)
+        store.start()
+        store.dispatch(AppAction.ChooseSkill("case.acc.f", sentenceSeeds.first()))
+        val id = assertNotNull(store.state.value.exerciseId)
+        revealAfterIntroduction(store, id)
+        store.dispatch(AppAction.Rate(id, Rating.Again))
+        assertEquals(emptyList(), store.state.value.retryQueue)
+        store.close()
+    }
+
+    // M2 blueprint: Chain mode is scripted content — an error there never enqueues a ticket, and
+    // even a ticket already pending from elsewhere is never a candidate while mode == Chain.
+    @Test
+    fun chainModeIsNeverInterruptedByAndNeverEnqueuesARetryTicket() = runTest {
+        val repo = FakeRepository(ProgressCodec.fresh(skills.map { it.id }, at, "2026-09-23", scheduler))
+        val store = newStore(repo, backgroundScope)
+        store.start()
+        store.dispatch(AppAction.SetAnswerMode(AnswerMode.Typed))
+        for (index in 0..3) {
+            val id = assertNotNull(store.state.value.exerciseId)
+            if (store.state.value.predictionPending) store.dispatch(AppAction.ContinuePrediction)
+            if (store.state.value.introPending) store.dispatch(AppAction.ContinueIntroduction)
+            store.dispatch(AppAction.EditAnswer("wrong"))
+            store.dispatch(AppAction.Reveal(id))
+            store.dispatch(AppAction.Rate(id, Rating.Again))
+            assertEquals(emptyList(), store.state.value.retryQueue)
+            assertNull(store.state.value.activeRetrySkillId)
+            assertEquals(TrainingMode.Chain, store.state.value.mode)
+        }
+        store.close()
+    }
+
     @Test
     fun focusEffectIsStableUntilAcknowledgedAndCloseIgnoresLateWrite() = runTest {
         val repo = FakeRepository(ProgressCodec.fresh(skills.map { it.id }, at, "2026-09-23", scheduler))
@@ -685,6 +824,7 @@ class TrainingStoreTest {
      *  [TileSegment.Choice] and [TileAction.Check] instead, same as the TileBuilder tests above. */
     private fun answerDailyStep(store: TrainingStore, rating: Rating) {
         val id = assertNotNull(store.state.value.exerciseId)
+        if (store.state.value.predictionPending) store.dispatch(AppAction.ContinuePrediction)
         if (store.state.value.introPending) store.dispatch(AppAction.ContinueIntroduction)
         val builder = store.state.value.tileBuilder
         if (store.state.value.answerMode == AnswerMode.TileBuilder && builder != null) {

@@ -1,5 +1,5 @@
 // Generated from dsl/course.data-contract
-// source-sha256=2f8dad4084603525b9e584862776962c5c51e9affefc02cbb4e27a17ac7f120a
+// source-sha256=2c2099bea4e4d081c6e9b3a00d602b93e5a6eff6453aaf64eef5b0c9c0e0b98e
 // Edit the source, then run biome generate.
 
 package polski.data.rows.plru
@@ -133,6 +133,7 @@ data class SkillRow(
     val lexicalFilter: LexicalFilterRow?,
     val styleContent: StyleContentRow? = null,
     val caseReferenceAvailable: Boolean? = null,
+    val predictionQuestion: String? = null,
 )
 
 data class CaseFormsRow(
@@ -907,6 +908,7 @@ private fun skillRowRowsPart0(): List<SkillRow> = listOf(
             examples = listOf("Mam nową książkę.", "Lubię moją siostrę."),
             why = "Прямой объект после глаголов действия (widzę, mam, lubię) обычно стоит в винительном; у женского рода на -a это всегда -ę, как и в русском -а→-у.",
         ),
+        predictionQuestion = "Как думаешь: почему «moja siostra» в предложении «Widzę ...» превращается в «moją siostrę», а не остаётся как в именительном падеже?",
     ),
     SkillRow(
         id = "case.acc.m",
@@ -965,6 +967,7 @@ private fun skillRowRowsPart0(): List<SkillRow> = listOf(
             examples = listOf("Widzę psa.", "Widzę samochód."),
             why = "Мужской род различает живое и неживое в винительном падеже — это не польская особенность, а общее славянское правило, знакомое из русского.",
         ),
+        predictionQuestion = "Почему Widzę dom, но Widzę psa?",
     ),
     SkillRow(
         id = "case.gen.neg",
@@ -1020,6 +1023,7 @@ private fun skillRowRowsPart0(): List<SkillRow> = listOf(
             examples = listOf("Nie mam czasu.", "Nie widzę żadnego problemu."),
             why = "В польском отрицание всегда переводит прямое дополнение в родительный падеж; в русском это необязательно и звучит скорее книжно.",
         ),
+        predictionQuestion = "Как думаешь: почему «Nie widzę żony», а не «Nie widzę żonę» — ведь слово то же самое?",
     ),
     SkillRow(
         id = "case.inst",
