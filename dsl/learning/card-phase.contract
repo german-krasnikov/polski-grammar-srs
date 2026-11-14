@@ -1,0 +1,9 @@
+CONTRACT learning.cardPhase
+COVERAGE declared-scope
+MODULE ../../kotlin/shared/src/commonMain/kotlin/polski/presentation/TrainingStore.kt
+FACT phase.mode enum=chain,focused,schedule,daily member=mode
+FACT phase.nextExerciseIsNull bool member=nextExerciseIsNull
+FACT phase.dailyStepIsNull bool member=dailyStepIsNull
+FACT phase.dailyHistoryAtPlanned bool member=dailyHistoryAtPlanned
+FACT phase.dailyExtended bool member=dailyExtended
+INPUT phase phase.mode phase.nextExerciseIsNull phase.dailyStepIsNull phase.dailyHistoryAtPlanned phase.dailyExtended

@@ -1,0 +1,12 @@
+# SB-8 pilot ladder (ReviewReducer.nextTileState): wrong answers demote only from `none`; correct
+# streaks promote toward `none` once they reach the tunable thresholds. `nextStreak` is already
+# `streak+1` on correct / `0` on wrong - computed natively before this decision.
+DECISION disposition DEFAULT already_hardest
+  wrongAtNone AT 10 WHEN NOT tile.correct AND tile.rung == none -> wrong_at_none
+  wrongAtFull AT 20 WHEN NOT tile.correct AND tile.rung == full -> wrong_at_full
+  wrongAtPartial AT 30 WHEN NOT tile.correct AND tile.rung == partial -> wrong_at_partial
+  promoteFullToPartial AT 40 WHEN tile.rung == full AND tile.nextStreak >= tile.toPartial -> promote_full_to_partial
+  stayFull AT 50 WHEN tile.rung == full -> stay_full
+  promotePartialToNone AT 60 WHEN tile.rung == partial AND tile.nextStreak >= tile.toNone -> promote_partial_to_none
+  stayPartial AT 70 WHEN tile.rung == partial -> stay_partial
+END

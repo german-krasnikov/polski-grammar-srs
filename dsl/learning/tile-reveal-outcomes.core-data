@@ -1,0 +1,3 @@
+DSL 1
+TILE_REVEAL_OUTCOME { disposition: limited numerator: 1 addend: 1 divisor: 3 }
+TILE_REVEAL_OUTCOME { disposition: open numerator: 1 addend: 0 divisor: 1 }

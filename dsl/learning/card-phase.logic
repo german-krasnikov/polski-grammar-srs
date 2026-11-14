@@ -1,0 +1,8 @@
+# One source for the phase ladder in TrainingStore.rate(): first match wins, same order as the
+# existing `when` (chain-complete, schedule-no-due, daily-complete, daily-no-due, else question).
+DECISION phase DEFAULT question
+  chainComplete AT 10 WHEN phase.mode == chain AND phase.nextExerciseIsNull -> chain_complete
+  scheduleNoDue AT 20 WHEN phase.mode == schedule AND phase.nextExerciseIsNull -> no_due
+  dailyComplete AT 30 WHEN phase.mode == daily AND phase.nextExerciseIsNull AND phase.dailyStepIsNull AND phase.dailyHistoryAtPlanned AND NOT phase.dailyExtended -> daily_complete
+  dailyNoDue AT 40 WHEN phase.mode == daily AND phase.nextExerciseIsNull -> no_due
+END

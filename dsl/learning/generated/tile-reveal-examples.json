@@ -1,0 +1,9 @@
+{
+  "generated": "from tile-reveal.examples by npm run logic -- examples; do not edit",
+  "provenance": "TileGenerator.fromAnswerPhrase's scaffolding -> reveal-ratio switch: Full is limited (~30% Choice), Partial/None are open (every slot).",
+  "disposition": [
+    { "id": "full", "facts": { "scaffolding": "full" }, "expected": "limited" },
+    { "id": "partial", "facts": { "scaffolding": "partial" }, "expected": "open" },
+    { "id": "none", "facts": { "scaffolding": "none" }, "expected": "open" }
+  ]
+}

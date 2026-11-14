@@ -1,0 +1,9 @@
+PROVENANCE "DailySessionPlanner.nextStep's priority/backfill ladder: Review > New > Practice, each skipped when capped OR empty of a real candidate, in which case the next kind in order gets a chance. none is the fail-soft nothing-to-do case."
+EXAMPLES kind
+  id | reviewCapped | reviewHasCandidate | newCapped | newHasCandidate | practiceCapped | practiceHasCandidate -> expected
+  all-open-review-wins | false | true | false | true | false | true -> review
+  review-capped-new-wins | true | true | false | true | false | true -> new
+  review-open-but-empty-new-capped-practice-wins | false | false | true | true | false | true -> practice
+  review-and-new-both-candidates-review-still-wins | false | true | false | true | false | false -> review
+  everything-capped-or-empty | true | true | true | true | true | true -> none
+END

@@ -4,6 +4,10 @@ plugins {
 
 kotlin {
     sourceSets {
+        commonMain {
+            // Logic/data artifacts printed by `biome generate --project dsl/biome.project` (committed, not hand-edited).
+            kotlin.srcDir("src/commonMain/generated/kotlin")
+        }
         commonMain.dependencies {
             api(libs.kotlinx.serialization.json)
         }

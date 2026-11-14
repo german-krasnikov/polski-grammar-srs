@@ -1,0 +1,14 @@
+{
+  "generated": "from tile-scaffolding.examples by npm run logic -- examples; do not edit",
+  "provenance": "ReviewReducer's nextTileState/nextIndependentSince ladder (SB-8 pilot thresholds): wrong answers demote only from none; correct streaks promote toward none once a tunable threshold is reached. nextStreak is already streak+1 on correct / 0 on wrong, computed natively before this decision.",
+  "disposition": [
+    { "id": "wrong-at-none", "facts": { "correct": false, "rung": "none", "nextStreak": 0, "toPartial": 3, "toNone": 5 }, "expected": "wrong_at_none" },
+    { "id": "wrong-at-full", "facts": { "correct": false, "rung": "full", "nextStreak": 0, "toPartial": 3, "toNone": 5 }, "expected": "wrong_at_full" },
+    { "id": "wrong-at-partial", "facts": { "correct": false, "rung": "partial", "nextStreak": 0, "toPartial": 3, "toNone": 5 }, "expected": "wrong_at_partial" },
+    { "id": "promote-full-to-partial", "facts": { "correct": true, "rung": "full", "nextStreak": 3, "toPartial": 3, "toNone": 5 }, "expected": "promote_full_to_partial" },
+    { "id": "stay-full-below-threshold", "facts": { "correct": true, "rung": "full", "nextStreak": 2, "toPartial": 3, "toNone": 5 }, "expected": "stay_full" },
+    { "id": "promote-partial-to-none", "facts": { "correct": true, "rung": "partial", "nextStreak": 5, "toPartial": 3, "toNone": 5 }, "expected": "promote_partial_to_none" },
+    { "id": "stay-partial-below-threshold", "facts": { "correct": true, "rung": "partial", "nextStreak": 4, "toPartial": 3, "toNone": 5 }, "expected": "stay_partial" },
+    { "id": "already-hardest", "facts": { "correct": true, "rung": "none", "nextStreak": 1, "toPartial": 3, "toNone": 5 }, "expected": "already_hardest" }
+  ]
+}

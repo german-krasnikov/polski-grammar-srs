@@ -1,0 +1,13 @@
+{
+  "generated": "from card-phase.examples by npm run logic -- examples; do not edit",
+  "provenance": "TrainingStore.rate()'s phase ladder: first match wins (chain-complete, schedule-no-due, daily-complete, daily-no-due, else question).",
+  "phase": [
+    { "id": "chain-complete", "facts": { "mode": "chain", "nextExerciseIsNull": true, "dailyStepIsNull": false, "dailyHistoryAtPlanned": false, "dailyExtended": false }, "expected": "chain_complete" },
+    { "id": "chain-not-complete", "facts": { "mode": "chain", "nextExerciseIsNull": false, "dailyStepIsNull": false, "dailyHistoryAtPlanned": false, "dailyExtended": false }, "expected": "question" },
+    { "id": "schedule-no-due", "facts": { "mode": "schedule", "nextExerciseIsNull": true, "dailyStepIsNull": false, "dailyHistoryAtPlanned": false, "dailyExtended": false }, "expected": "no_due" },
+    { "id": "daily-complete", "facts": { "mode": "daily", "nextExerciseIsNull": true, "dailyStepIsNull": true, "dailyHistoryAtPlanned": true, "dailyExtended": false }, "expected": "daily_complete" },
+    { "id": "daily-extended-not-complete", "facts": { "mode": "daily", "nextExerciseIsNull": true, "dailyStepIsNull": true, "dailyHistoryAtPlanned": true, "dailyExtended": true }, "expected": "no_due" },
+    { "id": "daily-history-not-at-planned", "facts": { "mode": "daily", "nextExerciseIsNull": true, "dailyStepIsNull": true, "dailyHistoryAtPlanned": false, "dailyExtended": false }, "expected": "no_due" },
+    { "id": "focused-never-no-due", "facts": { "mode": "focused", "nextExerciseIsNull": true, "dailyStepIsNull": false, "dailyHistoryAtPlanned": false, "dailyExtended": false }, "expected": "question" }
+  ]
+}

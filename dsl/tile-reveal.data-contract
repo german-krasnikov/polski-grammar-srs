@@ -1,0 +1,8 @@
+DSL 1
+# How many of the DSL-eligible slots become Choice for one scaffolding disposition: count = (size*numerator + addend) / divisor.
+RECORD TileRevealOutcomeRow KEY disposition COUNT 2
+  disposition: string
+  numerator: int
+  addend: int
+  divisor: int
+END

@@ -1,0 +1,9 @@
+CONTRACT learning.tileScaffolding
+COVERAGE declared-scope
+MODULE ../../kotlin/srs-progress/src/commonMain/kotlin/polski/progress/ReviewReducer.kt
+FACT tile.correct bool member=correct
+FACT tile.rung enum=full,partial,none member=rung
+FACT tile.nextStreak number min=0 max=2147483647 integer member=nextStreak
+FACT tile.toPartial number min=1 max=2147483647 integer member=toPartial
+FACT tile.toNone number min=1 max=2147483647 integer member=toNone
+INPUT disposition tile.correct tile.rung tile.nextStreak tile.toPartial tile.toNone

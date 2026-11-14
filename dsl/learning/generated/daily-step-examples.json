@@ -1,0 +1,11 @@
+{
+  "generated": "from daily-step.examples by npm run logic -- examples; do not edit",
+  "provenance": "DailySessionPlanner.nextStep's priority/backfill ladder: Review > New > Practice, each skipped when capped OR empty of a real candidate, in which case the next kind in order gets a chance. none is the fail-soft nothing-to-do case.",
+  "kind": [
+    { "id": "all-open-review-wins", "facts": { "reviewCapped": false, "reviewHasCandidate": true, "newCapped": false, "newHasCandidate": true, "practiceCapped": false, "practiceHasCandidate": true }, "expected": "review" },
+    { "id": "review-capped-new-wins", "facts": { "reviewCapped": true, "reviewHasCandidate": true, "newCapped": false, "newHasCandidate": true, "practiceCapped": false, "practiceHasCandidate": true }, "expected": "new" },
+    { "id": "review-open-but-empty-new-capped-practice-wins", "facts": { "reviewCapped": false, "reviewHasCandidate": false, "newCapped": true, "newHasCandidate": true, "practiceCapped": false, "practiceHasCandidate": true }, "expected": "practice" },
+    { "id": "review-and-new-both-candidates-review-still-wins", "facts": { "reviewCapped": false, "reviewHasCandidate": true, "newCapped": false, "newHasCandidate": true, "practiceCapped": false, "practiceHasCandidate": false }, "expected": "review" },
+    { "id": "everything-capped-or-empty", "facts": { "reviewCapped": true, "reviewHasCandidate": true, "newCapped": true, "newHasCandidate": true, "practiceCapped": true, "practiceHasCandidate": true }, "expected": "none" }
+  ]
+}

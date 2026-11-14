@@ -9,6 +9,8 @@ import polski.core.model.SkillSpec
 import polski.core.model.TileExercise
 import polski.core.model.TilePhrase
 import polski.core.model.TileSegment
+import polski.core.engine.policy.Policy
+import polski.core.engine.policy.data.TILE_REVEAL_OUTCOME_ROW_ROWS
 
 /**
  * SB-2 blueprint §3c/§1: decomposes one [CoreExercise]'s answer phrase ([CoreExercise.tilePhrase])
@@ -50,10 +52,10 @@ class TileGenerator(
         val focusFeature = skills[primarySkill]?.focus?.feature
 
         // Which of the DSL-eligible slots actually become Choice THIS instance (scaffolding):
-        val activeChoices = when (scaffolding) {
-            ScaffoldingLevel.Full -> tileTargetSlots.take((tileTargetSlots.size + 1) / 3) // ~30% Choice, rest Locked
-            ScaffoldingLevel.Partial, ScaffoldingLevel.None -> tileTargetSlots
-        }.toSet()
+        // tunable ratio owned by dsl/learning/tile-reveal.logic + tile-reveal-outcomes.core-data.
+        val disposition = Policy.disposition(Policy.DispositionInput(scaffolding = scaffolding.name.lowercase()))
+        val ratio = TILE_REVEAL_OUTCOME_ROW_ROWS.single { it.disposition == disposition }
+        val activeChoices = tileTargetSlots.take((tileTargetSlots.size * ratio.numerator + ratio.addend) / ratio.divisor).toSet()
 
         val segments = buildSegments(expected, offset, tilePhrase, activeChoices, facts, focusFeature, distractorCount)
         return TileExercise(segments, scaffolding)

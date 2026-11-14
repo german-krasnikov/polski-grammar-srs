@@ -1,0 +1,5 @@
+CONTRACT learning.tileReveal
+COVERAGE declared-scope
+MODULE ../../kotlin/core-engine/src/commonMain/kotlin/polski/core/engine/TileGenerator.kt
+FACT reveal.scaffolding enum=full,partial,none member=scaffolding
+INPUT disposition reveal.scaffolding

@@ -1,0 +1,11 @@
+PROVENANCE "TrainingStore.rate()'s phase ladder: first match wins (chain-complete, schedule-no-due, daily-complete, daily-no-due, else question)."
+EXAMPLES phase
+  id | mode | nextExerciseIsNull | dailyStepIsNull | dailyHistoryAtPlanned | dailyExtended -> expected
+  chain-complete | chain | true | false | false | false -> chain_complete
+  chain-not-complete | chain | false | false | false | false -> question
+  schedule-no-due | schedule | true | false | false | false -> no_due
+  daily-complete | daily | true | true | true | false -> daily_complete
+  daily-extended-not-complete | daily | true | true | true | true -> no_due
+  daily-history-not-at-planned | daily | true | true | false | false -> no_due
+  focused-never-no-due | focused | true | false | false | false -> question
+END

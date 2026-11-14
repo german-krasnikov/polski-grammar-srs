@@ -1,0 +1,9 @@
+DSL 1
+TILE_SCAFFOLDING_OUTCOME { disposition: wrong_at_none newRung: partial finalStreak: zero independentSinceAction: clear }
+TILE_SCAFFOLDING_OUTCOME { disposition: wrong_at_full newRung: full finalStreak: zero independentSinceAction: clear }
+TILE_SCAFFOLDING_OUTCOME { disposition: wrong_at_partial newRung: partial finalStreak: zero independentSinceAction: clear }
+TILE_SCAFFOLDING_OUTCOME { disposition: promote_full_to_partial newRung: partial finalStreak: zero independentSinceAction: clear }
+TILE_SCAFFOLDING_OUTCOME { disposition: stay_full newRung: full finalStreak: next independentSinceAction: clear }
+TILE_SCAFFOLDING_OUTCOME { disposition: promote_partial_to_none newRung: none finalStreak: zero independentSinceAction: stamp_fresh }
+TILE_SCAFFOLDING_OUTCOME { disposition: stay_partial newRung: partial finalStreak: next independentSinceAction: clear }
+TILE_SCAFFOLDING_OUTCOME { disposition: already_hardest newRung: none finalStreak: next independentSinceAction: keep }

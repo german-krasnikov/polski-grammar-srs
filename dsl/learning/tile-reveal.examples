@@ -1,0 +1,7 @@
+PROVENANCE "TileGenerator.fromAnswerPhrase's scaffolding -> reveal-ratio switch: Full is limited (~30% Choice), Partial/None are open (every slot)."
+EXAMPLES disposition
+  id | scaffolding -> expected
+  full | full -> limited
+  partial | partial -> open
+  none | none -> open
+END

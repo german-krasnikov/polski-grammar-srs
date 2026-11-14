@@ -1,0 +1,8 @@
+# DailySessionPlanner.nextStep's priority/backfill ladder: Review > New > Practice, each skipped when
+# capped (done >= mix cap) OR it has no real candidate this step - in which case the NEXT kind gets a
+# chance (Plans/Learning/Plan.md M3 backfill). `none` is the fail-soft "nothing to do" case.
+DECISION kind DEFAULT none
+  review AT 10 WHEN NOT step.reviewCapped AND step.reviewHasCandidate -> review
+  new AT 20 WHEN NOT step.newCapped AND step.newHasCandidate -> new
+  practice AT 30 WHEN NOT step.practiceCapped AND step.practiceHasCandidate -> practice
+END

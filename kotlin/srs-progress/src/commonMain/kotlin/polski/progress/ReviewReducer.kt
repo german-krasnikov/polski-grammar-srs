@@ -1,6 +1,10 @@
 package polski.progress
 
 import kotlin.time.Instant
+import polski.progress.policy.Policy
+import polski.progress.policy.data.TILE_SCAFFOLDING_OUTCOME_ROW_ROWS
+import polski.progress.policy.data.TileScaffoldingOutcomeRowFinalStreak
+import polski.progress.policy.data.TileScaffoldingOutcomeRowIndependentSinceAction
 import polski.srs.Rating
 import polski.srs.Scheduler
 
@@ -44,15 +48,15 @@ class ReviewReducer(
         val oldStats = document.progress.stats[skillId] ?: return ReviewResult.UnknownSkill(skillId)
         val reviewed = scheduler.review(document.progress.cards.first { it.skillId == skillId }, rating, at)
         val correct = typedCorrect ?: (rating != Rating.Again)
-        val (nextRung, nextTileStreak) = nextTileState(oldStats.tileScaffoldingRung, oldStats.tileScaffoldingStreak, tileCorrect)
+        val nextRungState = nextTileRungState(oldStats.tileScaffoldingRung, oldStats.tileScaffoldingStreak, tileCorrect, oldStats.independentSince, localDay)
         val nextStats = oldStats.copy(
             reviews = oldStats.reviews + 1,
             correct = oldStats.correct + if (correct) 1 else 0,
             mistakes = oldStats.mistakes + if (correct) 0 else 1,
             streak = if (correct) oldStats.streak + 1 else 0,
-            tileScaffoldingRung = nextRung,
-            tileScaffoldingStreak = nextTileStreak,
-            independentSince = nextIndependentSince(oldStats, nextRung, localDay),
+            tileScaffoldingRung = nextRungState.rung,
+            tileScaffoldingStreak = nextRungState.streak,
+            independentSince = nextRungState.independentSince,
             seedErrors = if (!correct && seedKey != null) oldStats.seedErrors + (seedKey to (oldStats.seedErrors[seedKey] ?: 0) + 1) else oldStats.seedErrors,
         )
         val next = document.progress.copy(
@@ -65,30 +69,42 @@ class ReviewReducer(
         return ReviewResult.Reviewed(document.copy(progress = next))
     }
 
-    /** `null` [tileCorrect] = this review wasn't TileBuilder-mode: rung/streak pass through
-     *  untouched. Wrong at rung [RUNG_NONE] rolls back to [RUNG_PARTIAL] (design doc §5: "ошибка на
-     *  None → откат к Partial"). Wrong at Full/Partial only resets the streak (stay, try again) —
-     *  the design doc is silent on this case; silence read as "no demotion below where you already
-     *  were" is the conservative choice. */
-    private fun nextTileState(rung: Int, streak: Int, tileCorrect: Boolean?): Pair<Int, Int> {
-        if (tileCorrect == null) return rung to streak
-        if (!tileCorrect) return (if (rung == RUNG_NONE) RUNG_PARTIAL else rung) to 0
-        val nextStreak = streak + 1
-        return when (rung) {
-            RUNG_FULL -> if (nextStreak >= tileThresholds.toPartial) RUNG_PARTIAL to 0 else RUNG_FULL to nextStreak
-            RUNG_PARTIAL -> if (nextStreak >= tileThresholds.toNone) RUNG_NONE to 0 else RUNG_PARTIAL to nextStreak
-            else -> RUNG_NONE to nextStreak // already hardest; keep counting, nothing to promote to
+    /** Rung/streak/independentSince after one TileBuilder review. `null` [tileCorrect] = this
+     *  review wasn't TileBuilder-mode: everything passes through untouched. Otherwise the ladder
+     *  itself (promotion/demotion thresholds, M6's "independent since" stickiness) lives in
+     *  `dsl/learning/tile-scaffolding.logic` + `tile-scaffolding-outcomes.core-data` — this
+     *  function only maps the `Int` rung constants to/from the DSL's enum tags and applies the
+     *  outcome row the Logic decision picks. */
+    private fun nextTileRungState(rung: Int, streak: Int, tileCorrect: Boolean?, oldIndependentSince: String?, localDay: String): TileRungState {
+        if (tileCorrect == null) return TileRungState(rung, streak, oldIndependentSince)
+        val nextStreak = if (tileCorrect) streak + 1 else 0
+        val disposition = Policy.disposition(Policy.DispositionInput(
+            correct = tileCorrect, rung = rungTag(rung), nextStreak = nextStreak.toDouble(),
+            toPartial = tileThresholds.toPartial.toDouble(), toNone = tileThresholds.toNone.toDouble(),
+        ))
+        val outcome = TILE_SCAFFOLDING_OUTCOME_ROW_ROWS.single { it.disposition == disposition }
+        val newRung = rungOf(outcome.newRung.tag)
+        val finalStreak = if (outcome.finalStreak == TileScaffoldingOutcomeRowFinalStreak.ZERO) 0 else nextStreak
+        val independentSince = when (outcome.independentSinceAction) {
+            TileScaffoldingOutcomeRowIndependentSinceAction.CLEAR -> null
+            TileScaffoldingOutcomeRowIndependentSinceAction.KEEP -> oldIndependentSince
+            TileScaffoldingOutcomeRowIndependentSinceAction.STAMP_FRESH -> localDay
         }
+        return TileRungState(newRung, finalStreak, independentSince)
     }
 
-    /** M6: sticky only while *currently* at [RUNG_NONE] — a demotion away from it (the
-     *  [nextTileState] rollback-to-Partial path) clears the date, since the UI must never claim
-     *  "independent since <date>" for a skill that now needs a partial scaffold again. Re-reaching
-     *  [RUNG_NONE] later stamps a fresh [localDay]: a new confirmation, not a continuation. */
-    private fun nextIndependentSince(oldStats: SkillStats, nextRung: Int, localDay: String): String? = when {
-        nextRung != RUNG_NONE -> null
-        oldStats.tileScaffoldingRung == RUNG_NONE -> oldStats.independentSince
-        else -> localDay
+    private data class TileRungState(val rung: Int, val streak: Int, val independentSince: String?)
+
+    private fun rungTag(rung: Int): String = when (rung) {
+        RUNG_FULL -> "full"
+        RUNG_PARTIAL -> "partial"
+        else -> "none"
+    }
+
+    private fun rungOf(tag: String): Int = when (tag) {
+        "full" -> RUNG_FULL
+        "partial" -> RUNG_PARTIAL
+        else -> RUNG_NONE
     }
 
     private companion object {

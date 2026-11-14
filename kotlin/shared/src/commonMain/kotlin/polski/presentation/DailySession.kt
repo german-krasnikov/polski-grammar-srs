@@ -2,6 +2,7 @@ package polski.presentation
 
 import kotlin.time.Instant
 import polski.model.Skill
+import polski.presentation.dailysteppolicy.Policy
 import polski.progress.Progress
 import polski.progress.SkillQueue
 import polski.srs.Rating
@@ -81,16 +82,25 @@ object DailySessionPlanner {
 
         val done = DailyStepKind.entries.associateWith { kind -> completed.count { it == kind } }
         val caps = mapOf(DailyStepKind.Review to mix.reviews, DailyStepKind.New to mix.new, DailyStepKind.Practice to mix.practice)
-        val order = listOf<Pair<DailyStepKind, () -> DailyStep?>>(
-            DailyStepKind.Review to ::reviewCandidate,
-            DailyStepKind.New to ::newCandidate,
-            DailyStepKind.Practice to ::practiceCandidate,
-        )
-        for ((kind, candidate) in order) {
-            if ((done[kind] ?: 0) >= (caps[kind] ?: 0)) continue
-            candidate()?.let { return it }
+        // The candidates are cheap, pure, in-memory lookups — computing all three unconditionally
+        // (instead of only the ones the old loop reached) changes eagerness, not behavior. Which
+        // kind wins is the DECISION in dsl/learning/daily-step.logic.
+        val review = reviewCandidate()
+        val new = newCandidate()
+        val practice = practiceCandidate()
+        return when (Policy.kind(Policy.KindInput(
+            reviewCapped = (done[DailyStepKind.Review] ?: 0) >= (caps[DailyStepKind.Review] ?: 0),
+            reviewHasCandidate = review != null,
+            newCapped = (done[DailyStepKind.New] ?: 0) >= (caps[DailyStepKind.New] ?: 0),
+            newHasCandidate = new != null,
+            practiceCapped = (done[DailyStepKind.Practice] ?: 0) >= (caps[DailyStepKind.Practice] ?: 0),
+            practiceHasCandidate = practice != null,
+        ))) {
+            Policy.KindValues.Review -> review
+            Policy.KindValues.New -> new
+            Policy.KindValues.Practice -> practice
+            else -> null
         }
-        return null
     }
 }
 

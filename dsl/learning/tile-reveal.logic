@@ -1,0 +1,5 @@
+# TileGenerator.fromAnswerPhrase's scaffolding -> reveal-ratio switch. Full gets the "~30% Choice, rest
+# Locked" ramp; Partial/None reveal every DSL-eligible slot as Choice.
+DECISION disposition DEFAULT open
+  limited AT 10 WHEN reveal.scaffolding == full -> limited
+END

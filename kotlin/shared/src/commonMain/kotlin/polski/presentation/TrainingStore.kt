@@ -29,6 +29,7 @@ import polski.model.Exercise
 import polski.model.NumberGram
 import polski.model.PossessiveId
 import polski.model.seedKey
+import polski.presentation.policy.Policy
 import polski.progress.AttemptEvent
 import polski.progress.AttemptKind
 import polski.progress.AttemptLogRepository
@@ -700,12 +701,16 @@ class TrainingStore(
         if (maturedTicket != null && current.mode == TrainingMode.Daily) {
             nextDaily = nextDaily?.copy(currentStep = DailyStep(DailyStepKind.Practice, maturedTicket.skillId))
         }
-        val phase = when {
-            current.mode == TrainingMode.Chain && nextExercise == null -> CardPhase.ChainComplete
-            current.mode == TrainingMode.Schedule && nextExercise == null -> CardPhase.NoDue
-            current.mode == TrainingMode.Daily && nextExercise == null && nextDaily?.currentStep == null &&
-                (nextDaily?.history?.size ?: 0) >= (nextDaily?.planned ?: 0) && nextDaily?.extended == false -> CardPhase.DailyComplete
-            current.mode == TrainingMode.Daily && nextExercise == null -> CardPhase.NoDue
+        val phase = when (Policy.phase(Policy.PhaseInput(
+            mode = current.mode.name.lowercase(),
+            nextExerciseIsNull = nextExercise == null,
+            dailyStepIsNull = nextDaily?.currentStep == null,
+            dailyHistoryAtPlanned = (nextDaily?.history?.size ?: 0) >= (nextDaily?.planned ?: 0),
+            dailyExtended = nextDaily?.extended == true,
+        ))) {
+            Policy.PhaseValues.ChainComplete -> CardPhase.ChainComplete
+            Policy.PhaseValues.NoDue -> CardPhase.NoDue
+            Policy.PhaseValues.DailyComplete -> CardPhase.DailyComplete
             else -> CardPhase.Question
         }
         val tileBuilder = deriveTileBuilder(nextExercise)

@@ -1,0 +1,7 @@
+DSL 1
+RECORD TileScaffoldingOutcomeRow KEY disposition COUNT 8
+  disposition: string
+  newRung: enum full|partial|none
+  finalStreak: enum zero|next
+  independentSinceAction: enum clear|keep|stamp_fresh
+END

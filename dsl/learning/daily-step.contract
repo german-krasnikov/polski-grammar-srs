@@ -1,0 +1,10 @@
+CONTRACT learning.dailyStepKind
+COVERAGE declared-scope
+MODULE ../../kotlin/shared/src/commonMain/kotlin/polski/presentation/DailySession.kt
+FACT step.reviewCapped bool member=reviewCapped
+FACT step.reviewHasCandidate bool member=reviewHasCandidate
+FACT step.newCapped bool member=newCapped
+FACT step.newHasCandidate bool member=newHasCandidate
+FACT step.practiceCapped bool member=practiceCapped
+FACT step.practiceHasCandidate bool member=practiceHasCandidate
+INPUT kind step.reviewCapped step.reviewHasCandidate step.newCapped step.newHasCandidate step.practiceCapped step.practiceHasCandidate

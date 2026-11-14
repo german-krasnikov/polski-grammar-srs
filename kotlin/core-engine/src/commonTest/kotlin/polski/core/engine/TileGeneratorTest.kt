@@ -1,5 +1,7 @@
 package polski.core.engine
 
+import polski.core.engine.policy.Policy
+import polski.core.engine.policy.data.TILE_REVEAL_OUTCOME_ROW_ROWS
 import polski.core.model.CoreExercise
 import polski.core.model.FeatureFocus
 import polski.core.model.FeatureKey
@@ -124,5 +126,17 @@ class TileGeneratorTest {
         val tiles = generator().fromExercise(exercise(), ScaffoldingLevel.Full)!!
         val choiceCount = tiles.segments.count { it is TileSegment.Choice }
         assertEquals((2 + 1) / 3, choiceCount) // (tileTargetSlots.size + 1) / 3, per blueprint's placeholder ratio
+    }
+
+    // dsl/learning/tile-reveal.logic + tile-reveal-outcomes.core-data (DSL-LOGIC-MIGRATION.md #4): the
+    // outcome row's (numerator, addend, divisor) must reproduce `(size+1)/3` bit-for-bit, not a generic
+    // `ceil(size/3)` — the two diverge at size=1 (0 vs 1) under integer division.
+    @Test fun fullRatioOutcomeRowReproducesTheOriginalSizePlusOneOverThreeFormulaExactly() {
+        val disposition = Policy.disposition(Policy.DispositionInput(scaffolding = "full"))
+        val ratio = TILE_REVEAL_OUTCOME_ROW_ROWS.single { it.disposition == disposition }
+        for (size in listOf(0, 1, 2, 3, 4, 5, 10)) {
+            val count = (size * ratio.numerator + ratio.addend) / ratio.divisor
+            assertEquals((size + 1) / 3, count, "size=$size")
+        }
     }
 }
