@@ -39,6 +39,16 @@ class PlExerciseEngine(random: RandomSource, ids: ExerciseIdFactory) {
 
     /** M8 blueprint: delegates verbatim to the generic engine's own lookup. */
     fun eligibleSkillsFor(nounId: String): List<String> = generator.eligibleSkillsFor(nounId)
+
+    /** Generates one [CoreExercise] per known skill using the first sentence seed, for builders
+     *  (e.g. ClozePool) that need raw core form data. Returns only exercises with tile-eligible slots. */
+    fun coreExercisesForClozePool(): List<CoreExercise> {
+        val seed = sentenceSeeds.first()
+        val slots = mapOf("noun" to seed.nounId, "adjective" to seed.adjectiveId)
+        return polski.data.skills.mapNotNull { skill ->
+            try { generator.generateForSkill(skill.id, slots) } catch (_: Exception) { null }
+        }.filter { it.tileTargetSlots.isNotEmpty() }
+    }
 }
 
 private fun SentenceSeed.toSlots(): Map<String, String> = mapOf("noun" to nounId, "adjective" to adjectiveId)

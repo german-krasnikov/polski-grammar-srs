@@ -11,8 +11,15 @@ import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import kotlinx.serialization.json.JsonObject
+import polski.cloze.ClozeGenerator
+import polski.cloze.ClozePool
+import polski.cloze.ClozeSessionState
+import polski.cloze.DefaultClozePool
+import polski.cloze.reduceClozeSession
 import polski.core.engine.RandomSource
 import polski.core.engine.evaluateTileAnswer
+import polski.core.plMorphology
+import polski.exam.officialGrammarData
 import polski.core.model.ScaffoldingLevel
 import polski.core.model.TileSegment
 import polski.core.model.TileSelection
@@ -117,6 +124,14 @@ class TrainingStore(
      *  this is the only available signal — correct-but-coarse, never fabricated. */
     private var exerciseServedAt: kotlin.time.Instant? = null
     private var lastServedExerciseId: String? = null
+
+    private val clozePool: ClozePool by lazy {
+        DefaultClozePool(
+            grammarTests = officialGrammarData.values.flatten(),
+            courseExercises = exerciseEngine.coreExercisesForClozePool(),
+            generator = ClozeGenerator(plMorphology, tileRandom),
+        )
+    }
 
     private val initialChain = exerciseEngine.generateChain()
     private val mutableState = MutableStateFlow(
@@ -269,6 +284,7 @@ class TrainingStore(
                     tab = action.tab,
                     matrixSelection = if (action.tab == AppTab.Matrix && s.tab != AppTab.Matrix) MatrixSelection() else s.matrixSelection,
                 )
+                if (action.tab == AppTab.Cloze && s.cloze == null && s.loadStatus == LoadStatus.Ready) startCloze()
             }
             is AppAction.SelectMatrixSection -> mutate { it.copy(matrixSelection = it.matrixSelection.copy(section = action.section)) }
             is AppAction.SetMatrixSelection -> {
@@ -301,12 +317,19 @@ class TrainingStore(
             is AppAction.Reveal -> reveal(action.exerciseId)
             is AppAction.Rate -> rate(action)
             is AppAction.Tile -> tile(action)
+            AppAction.StartCloze -> startCloze()
+            is AppAction.ClozeAct -> {
+                val next = reduceClozeSession(s.cloze ?: return, action.action)
+                mutate { it.copy(cloze = next) }
+            }
         }
     }
 
     private fun accepts(action: AppAction, s: AppUiState): Boolean = when (action) {
         is AppAction.StartChain, is AppAction.SelectChainSeed,
-        AppAction.StartSchedule, AppAction.StartDaily, is AppAction.ChooseSkill, is AppAction.TrainExamMistake -> s.loadStatus == LoadStatus.Ready
+        AppAction.StartSchedule, AppAction.StartDaily, is AppAction.ChooseSkill, is AppAction.TrainExamMistake,
+        AppAction.StartCloze -> s.loadStatus == LoadStatus.Ready
+        is AppAction.ClozeAct -> s.cloze != null
         AppAction.ContinueDaily -> s.loadStatus == LoadStatus.Ready && s.mode == TrainingMode.Daily && s.phase == CardPhase.DailyComplete
         AppAction.RequestReset -> s.loadStatus == LoadStatus.Ready && s.pendingEffects.none { it is UiEffect.ConfirmReset }
         is AppAction.SetAnswerMode, is AppAction.EditAnswer -> s.phase == CardPhase.Question
@@ -564,6 +587,11 @@ class TrainingStore(
         )
         addFocus(exercise)
         refreshTime()
+    }
+
+    private fun startCloze() {
+        val exercises = clozePool.draw(10, tileRandom)
+        mutate { it.copy(tab = AppTab.Cloze, cloze = ClozeSessionState(exercises)) }
     }
 
     private fun reveal(exerciseId: String) {

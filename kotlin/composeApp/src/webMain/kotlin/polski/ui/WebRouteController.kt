@@ -12,6 +12,7 @@ internal enum class WebRoute(val slug: String, val tab: AppTab?) {
     Exam("exam", null),
     /** M9 blueprint: web-only MVP screen — no `AppTab` of its own, same shape as [Exam]. */
     Mission("mission", null),
+    Cloze("cloze", AppTab.Cloze),
     Settings("settings", null);
 
     companion object {

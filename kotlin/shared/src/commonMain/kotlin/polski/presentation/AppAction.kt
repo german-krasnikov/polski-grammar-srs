@@ -1,5 +1,6 @@
 package polski.presentation
 
+import polski.cloze.ClozeSessionAction
 import polski.srs.Rating
 
 /** Semantic UI actions; browser keyboard guards are applied by the host before dispatch. */
@@ -38,4 +39,6 @@ sealed interface AppAction {
     data class ResetDecision(val effectId: Long, val confirmed: Boolean) : AppAction
     data object RefreshTime : AppAction
     data class EffectAcknowledged(val effectId: Long, val outcome: EffectOutcome) : AppAction
+    data object StartCloze : AppAction
+    data class ClozeAct(val action: ClozeSessionAction) : AppAction
 }

@@ -41,6 +41,7 @@ internal class TrainingDomRenderer(private val prewarmTimer: MatrixPrewarmTimer 
     private val vocabulary = VocabularyWebController()
     private val exam = ExamWebController()
     private val mission = MissionWebController()
+    private val cloze = ClozeWebController()
     private var navigation: WebNav? = null
     private val riveOverlay = RiveEffectOverlay()
     private val cardDom = TrainingCardDom(riveOverlay) { composing }
@@ -78,6 +79,7 @@ internal class TrainingDomRenderer(private val prewarmTimer: MatrixPrewarmTimer 
         vocabulary.close()
         exam.close()
         mission.close()
+        cloze.close()
     }
 
     /**
@@ -213,6 +215,7 @@ internal class TrainingDomRenderer(private val prewarmTimer: MatrixPrewarmTimer 
             if (route != WebRoute.Vocabulary) vocabulary.deactivate()
             if (route != WebRoute.Exam) exam.close()
             if (route != WebRoute.Mission) mission.deactivate()
+            if (route != WebRoute.Cloze) cloze.close()
             when (route) {
                 WebRoute.Training -> cardDom.renderTraining(root, content, state, preferences.value.swipeRatingEnabled, enteringChainComplete, justRevealed, justShowedReference, dispatch)
                 WebRoute.Vocabulary -> vocabulary.render(
@@ -235,6 +238,7 @@ internal class TrainingDomRenderer(private val prewarmTimer: MatrixPrewarmTimer 
                     previous = null
                     render(root, state, route, returnTo, preferences, store, navigate, dispatch)
                 }
+                WebRoute.Cloze -> renderClozeWeb(node("main", "cloze-page").also(content::appendChild), state, cloze, dispatch)
                 WebRoute.Settings -> renderSettingsWeb(node("main", "settings-page").also(content::appendChild), preferences, store, returnTo, navigate)
             }
             content.appendChild(node("footer", text = ROUTE_FOOTER_TEXT))

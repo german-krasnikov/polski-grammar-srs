@@ -102,18 +102,7 @@ class TileGenerator(
         return builders.mapIndexed { index, build -> build(index) }
     }
 
-    /** Real forms only — [MorphologyParadigm.formsOf] of the exact lexeme, never an invented string. */
-    private fun distractorsFor(fact: SlotFact, correctForm: String, count: Int): List<String> {
-        val candidates = morphology.formsOf("${fact.category}:${fact.lexeme}")
-            .filterKeys { it != fact.requiredBundle }
-            .values
-            .distinct()
-            .filter { it != correctForm } // syncretism: a form text-equal to the correct one is never a distractor
-        if (candidates.size <= count) return candidates
-        val pool = candidates.toMutableList()
-        return List(count) {
-            val index = (random.nextDouble() * pool.size).toInt().coerceIn(0, pool.size - 1)
-            pool.removeAt(index)
-        }
-    }
+    /** Real forms only — delegates to [pickDistractors] with this generator's morphology and random. */
+    private fun distractorsFor(fact: SlotFact, correctForm: String, count: Int): List<String> =
+        pickDistractors(morphology, "${fact.category}:${fact.lexeme}", correctForm, count, random)
 }
