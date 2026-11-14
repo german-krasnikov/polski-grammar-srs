@@ -8,96 +8,33 @@ import java.io.FileNotFoundException
 import java.io.InputStream
 import java.util.UUID
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.sync.Mutex
-import kotlinx.coroutines.sync.withLock
-import kotlinx.coroutines.withContext
-import kotlin.coroutines.cancellation.CancellationException
-import kotlin.time.Instant
-import polski.progress.DecodeResult
-import polski.progress.LoadResult
-import polski.progress.MigrationResult
-import polski.progress.ProgressCodec
-import polski.progress.ProgressDocument
-import polski.progress.ProgressRepository
-import polski.progress.SaveResult
+import polski.progress.BlobProgressRepository
+import polski.progress.ImportResult
+import polski.progress.ProgressBlobStore
 import polski.srs.Scheduler
 
-sealed interface ImportResult {
-    data object Imported : ImportResult
-    data class Invalid(val reason: String) : ImportResult
-    data class Unsupported(val version: Int) : ImportResult
-    data class Failed(val cause: Throwable) : ImportResult
+/** Private v1 document. AtomicFile keeps the last complete bytes across interrupted writes. */
+class AndroidProgressRepository(context: Context, scheduler: Scheduler) :
+    BlobProgressRepository(AndroidProgressBlobStore(context), scheduler, Dispatchers.IO) {
+    suspend fun importJson(raw: String): ImportResult = importRaw(raw)
 }
 
-/** Private v1 document. AtomicFile keeps the last complete bytes across interrupted writes. */
-class AndroidProgressRepository(context: Context, private val scheduler: Scheduler) : ProgressRepository {
-    private val lock = Mutex()
+private class AndroidProgressBlobStore(context: Context) : ProgressBlobStore {
     private val directory = context.applicationContext.filesDir
     private val document = AtomicFile(File(directory, "progress-v1.json"))
 
-    override suspend fun load(): LoadResult = withContext(Dispatchers.IO) {
-        lock.withLock { loadUnlocked() }
-    }
+    override fun read(): String? = readOrNull(document)
 
-    override suspend fun save(document: ProgressDocument): SaveResult = withContext(Dispatchers.IO) {
-        lock.withLock {
-            try {
-                when (val current = loadUnlocked()) {
-                    LoadResult.Missing, is LoadResult.Loaded -> Unit
-                    is LoadResult.Unavailable -> return@withLock SaveResult.WriteFailed(current.cause)
-                    else -> return@withLock SaveResult.WriteFailed(IllegalStateException("Progress requires recovery"))
-                }
-                val raw = ProgressCodec.encodeLegacyV1(document)
-                write(this@AndroidProgressRepository.document, raw)
-                check(read(this@AndroidProgressRepository.document) == raw) { "Progress read-back mismatch" }
-                SaveResult.Saved
-            } catch (error: Exception) {
-                if (error is CancellationException) throw error
-                SaveResult.WriteFailed(error)
-            }
+    override fun write(raw: String) = write(document, raw)
+
+    override fun backupThenWrite(raw: String) {
+        val old = readOrNull(document)
+        if (old != null) {
+            val backup = AtomicFile(File(directory, "backups/progress-${UUID.randomUUID()}.json"))
+            write(backup, old)
+            check(read(backup) == old) { "Import backup read-back mismatch" }
         }
-    }
-
-    suspend fun importJson(raw: String): ImportResult = withContext(Dispatchers.IO) {
-        lock.withLock {
-            when (val decoded = ProgressCodec.decode(raw)) {
-                is DecodeResult.Invalid -> return@withLock ImportResult.Invalid(decoded.reason)
-                is DecodeResult.Unsupported -> return@withLock ImportResult.Unsupported(decoded.version)
-                is DecodeResult.Valid -> Unit
-            }
-            try {
-                val old = readOrNull(document)
-                if (old != null) {
-                    val backup = AtomicFile(File(directory, "backups/progress-${UUID.randomUUID()}.json"))
-                    write(backup, old)
-                    check(read(backup) == old) { "Import backup read-back mismatch" }
-                }
-                write(document, raw)
-                check(read(document) == raw) { "Imported progress read-back mismatch" }
-                ImportResult.Imported
-            } catch (error: Exception) {
-                if (error is CancellationException) throw error
-                ImportResult.Failed(error)
-            }
-        }
-    }
-
-    override suspend fun resetConfirmed(at: Instant, localDay: String, skillIds: List<String>): SaveResult =
-        save(ProgressCodec.fresh(skillIds, at, localDay, scheduler))
-
-    override suspend fun migrateLegacy(at: Instant, localDay: String, skillIds: List<String>): MigrationResult =
-        MigrationResult.RecoveryRequired("", "Import a compatible JSON file explicitly")
-
-    private fun loadUnlocked(): LoadResult = try {
-        val raw = readOrNull(document) ?: return LoadResult.Missing
-        when (val decoded = ProgressCodec.decode(raw)) {
-            is DecodeResult.Valid -> LoadResult.Loaded(decoded.document)
-            is DecodeResult.Invalid -> LoadResult.Invalid(raw, decoded.reason)
-            is DecodeResult.Unsupported -> LoadResult.Unsupported(raw, decoded.version)
-        }
-    } catch (error: Exception) {
-        if (error is CancellationException) throw error
-        LoadResult.Unavailable(error)
+        write(document, raw)
     }
 
     private fun readOrNull(file: AtomicFile): String? = try {
@@ -106,9 +43,7 @@ class AndroidProgressRepository(context: Context, private val scheduler: Schedul
         null
     }
 
-    private fun read(file: AtomicFile): String = file.openRead().use { stream ->
-        readUtf8Limited(stream)
-    }
+    private fun read(file: AtomicFile): String = file.openRead().use { stream -> readUtf8Limited(stream) }
 
     private fun write(file: AtomicFile, raw: String) {
         file.baseFile.parentFile?.mkdirs()

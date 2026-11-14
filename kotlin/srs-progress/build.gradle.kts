@@ -10,6 +10,8 @@ kotlin {
         }
         commonMain.dependencies {
             api(libs.kotlinx.serialization.json)
+            // Mutex/withContext/Dispatchers for BlobProgressRepository (shared load/save/import control flow).
+            api("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.10.2")
         }
         commonTest {
             kotlin.srcDir("src/commonTest/generated/kotlin")

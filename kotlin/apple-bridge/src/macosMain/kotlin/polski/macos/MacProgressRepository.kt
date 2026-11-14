@@ -1,12 +1,6 @@
 package polski.macos
 
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.sync.Mutex
-import kotlinx.coroutines.sync.withLock
-import kotlinx.coroutines.withContext
 import kotlinx.cinterop.ExperimentalForeignApi
-import kotlin.coroutines.cancellation.CancellationException
-import kotlin.time.Instant
 import platform.Foundation.NSFileManager
 import platform.Foundation.NSString
 import platform.Foundation.NSUTF8StringEncoding
@@ -14,88 +8,50 @@ import platform.Foundation.NSUUID
 import platform.Foundation.stringWithContentsOfFile
 import platform.Foundation.writeToFile
 import platform.posix.rename
-import polski.progress.DecodeResult
+import kotlinx.coroutines.Dispatchers
+import polski.progress.BlobProgressRepository
+import polski.progress.ImportResult
 import polski.progress.LoadResult
-import polski.progress.MigrationResult
-import polski.progress.ProgressCodec
-import polski.progress.ProgressDocument
-import polski.progress.ProgressRepository
-import polski.progress.SaveResult
+import polski.progress.ProgressBlobStore
 import polski.srs.Scheduler
 
 /** Reads the JVM preview's versioned document in the same Application Support directory. */
 @OptIn(ExperimentalForeignApi::class)
 class MacProgressRepository(
-    private val directory: String,
-    private val scheduler: Scheduler,
-) : ProgressRepository {
-    private val lock = Mutex()
-    private val file = "$directory/progress-v1.json"
+    directory: String,
+    scheduler: Scheduler,
+) : BlobProgressRepository(MacProgressBlobStore(directory), scheduler, Dispatchers.Default) {
+    override fun recoveryMessage() = "Импортируйте совместимый JSON явно"
 
-    override suspend fun load(): LoadResult = withContext(Dispatchers.Default) {
-        lock.withLock { loadUnlocked() }
-    }
+    override fun recoveryRawForMigration(): String = recoveryRaw().orEmpty()
 
-    override suspend fun save(document: ProgressDocument): SaveResult = withContext(Dispatchers.Default) {
-        lock.withLock {
-            try {
-                when (val existing = loadUnlocked()) {
-                    LoadResult.Missing, is LoadResult.Loaded -> Unit
-                    is LoadResult.Unavailable -> return@withLock SaveResult.WriteFailed(existing.cause)
-                    else -> return@withLock SaveResult.WriteFailed(IllegalStateException("Progress requires recovery"))
-                }
-                writeVerified(file, ProgressCodec.encodeLegacyV1(document))
-                SaveResult.Saved
-            } catch (error: Throwable) {
-                if (error is CancellationException) throw error
-                SaveResult.WriteFailed(error)
-            }
-        }
-    }
+    override fun validateImportSize(raw: String): ImportResult.Invalid? =
+        if (raw.encodeToByteArray().size > 10_000_000) ImportResult.Invalid("Файл прогресса слишком большой") else null
+
+    override fun validateLoadedRaw(raw: String): LoadResult.Invalid? =
+        if (raw.encodeToByteArray().size > 10_000_000) LoadResult.Invalid(raw, "Файл прогресса слишком большой") else null
+
+    fun recoveryRaw(): String? = readStored()
 
     /** Explicit import validates first, preserves a byte-identical backup, then atomically replaces. */
-    suspend fun importJson(raw: String): String? = withContext(Dispatchers.Default) {
-        lock.withLock {
-            if (raw.encodeToByteArray().size > 10_000_000) return@withLock "Файл прогресса слишком большой"
-            when (val decoded = ProgressCodec.decode(raw)) {
-                is DecodeResult.Invalid -> return@withLock decoded.reason
-                is DecodeResult.Unsupported -> return@withLock "Неподдерживаемая версия ${decoded.version}"
-                is DecodeResult.Valid -> Unit
-            }
-            try {
-                val previous = read(file)
-                if (previous != null) {
-                    val backup = "$directory/backups/progress-${NSUUID().UUIDString}.json"
-                    writeVerified(backup, previous)
-                }
-                writeVerified(file, raw)
-                null
-            } catch (error: Throwable) {
-                if (error is CancellationException) throw error
-                error.message ?: "Не удалось импортировать прогресс"
-            }
+    suspend fun importJson(raw: String): String? = importRaw(raw).toLegacyMessage()
+}
+
+@OptIn(ExperimentalForeignApi::class)
+private class MacProgressBlobStore(private val directory: String) : ProgressBlobStore {
+    private val file = "$directory/progress-v1.json"
+
+    override fun read(): String? = read(file)
+
+    override fun write(raw: String) = writeVerified(file, raw)
+
+    override fun backupThenWrite(raw: String) {
+        val previous = read(file)
+        if (previous != null) {
+            val backup = "$directory/backups/progress-${NSUUID().UUIDString}.json"
+            writeVerified(backup, previous)
         }
-    }
-
-    fun recoveryRaw(): String? = runCatching { read(file) }.getOrNull()
-
-    override suspend fun resetConfirmed(at: Instant, localDay: String, skillIds: List<String>): SaveResult =
-        save(ProgressCodec.fresh(skillIds, at, localDay, scheduler))
-
-    override suspend fun migrateLegacy(at: Instant, localDay: String, skillIds: List<String>): MigrationResult =
-        MigrationResult.RecoveryRequired(recoveryRaw().orEmpty(), "Импортируйте совместимый JSON явно")
-
-    private fun loadUnlocked(): LoadResult = try {
-        val raw = read(file) ?: return LoadResult.Missing
-        if (raw.encodeToByteArray().size > 10_000_000) return LoadResult.Invalid(raw, "Файл прогресса слишком большой")
-        when (val decoded = ProgressCodec.decode(raw)) {
-            is DecodeResult.Valid -> LoadResult.Loaded(decoded.document)
-            is DecodeResult.Invalid -> LoadResult.Invalid(raw, decoded.reason)
-            is DecodeResult.Unsupported -> LoadResult.Unsupported(raw, decoded.version)
-        }
-    } catch (error: Throwable) {
-        if (error is CancellationException) throw error
-        LoadResult.Unavailable(error)
+        write(raw)
     }
 
     private fun read(path: String): String? {

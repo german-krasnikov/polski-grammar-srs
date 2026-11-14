@@ -2,41 +2,25 @@ package polski.ios
 
 import kotlinx.serialization.json.JsonArray
 import kotlinx.serialization.json.JsonElement
-import kotlinx.serialization.json.JsonPrimitive
 import kotlinx.serialization.json.buildJsonObject
 import kotlinx.serialization.json.put
-import polski.data.adjectives
 import polski.data.activeCoursePackOption
 import polski.data.comparisonNounIds
-import polski.data.courseAspectNoPresent
-import polski.data.courseMatrixIntroduction
 import polski.data.enPersonalPronouns
 import polski.data.enVerbs
-import polski.data.maleAccRows
 import polski.data.nounById
-import polski.data.nouns
 import polski.data.personalPronouns
 import polski.data.possessives
 import polski.data.referenceAspectRows
-import polski.data.referenceCaseTeaching
 import polski.data.referenceChainRows
-import polski.data.referencePipeline
 import polski.data.referencePronounTeaching
-import polski.data.referenceRussianSupport
-import polski.data.referenceSystemCards
 import polski.data.referenceTenseRows
 import polski.data.referenceVerbTeaching
-import polski.data.verbs
 import polski.grammar.caseRows
-import polski.model.Aspect
 import polski.model.GramCase
 import polski.model.Tense
 import polski.presentation.AppUiState
-import polski.presentation.ChangeSide
-import polski.presentation.ContrastPair
 import polski.presentation.casesFullTable
-import polski.presentation.changeHighlightParts
-import polski.presentation.choice
 import polski.presentation.comparisonTable
 import polski.presentation.contrastPairJson
 import polski.presentation.enDoSupportTable
@@ -44,6 +28,7 @@ import polski.presentation.enVerbsTable
 import polski.presentation.possessivesTable
 import polski.presentation.toViewModel
 import polski.presentation.verbsTable
+import polski.apple.putCommonMatrixFields
 import polski.core.engine.MatrixColumn
 import polski.core.engine.MatrixTableEngine
 
@@ -60,36 +45,8 @@ internal fun matrixSnapshot(state: AppUiState): JsonElement {
     val selection = state.matrixSelection
     val targetLanguage = activeCoursePackOption.target
     return buildJsonObject {
-        put("section", selection.section.name)
+        putCommonMatrixFields(state)
         put("targetLanguage", targetLanguage)
-        put("matrixIntroduction", courseMatrixIntroduction)
-        put("aspectNoPresent", courseAspectNoPresent.ios)
-        put("nounId", selection.nounId)
-        put("adjectiveId", selection.adjectiveId)
-        put("ownerId", selection.ownerId)
-        put("numberId", selection.numberId)
-        put("verbId", selection.verbId)
-        put("feminineGroup", selection.feminineGroup)
-        put("nouns", JsonArray(nouns.map { choice(it.id, "${it.lemma} — ${it.meaning}") }))
-        put("adjectives", JsonArray(adjectives.map { choice(it.id, "${it.lemma} — ${it.meaning}") }))
-        put("owners", JsonArray(possessives.map { choice(it.id.id, it.label) }))
-        put("numbers", JsonArray(listOf(choice("sg", "Единственное"), choice("pl", "Множественное"))))
-        put("verbs", JsonArray(verbs.filter { it.aspect == Aspect.IMPERFECTIVE }.map { choice(it.id, "${it.lemma} — ${it.meaning}") }))
-        put("pipelineTitle", referencePipeline.title)
-        put("pipelineSummary", referencePipeline.compactSummary)
-        put("pipelineExample", referencePipeline.compactExample)
-        put("supportTitle", referenceRussianSupport.compactTitle)
-        put("supportLines", JsonArray(referenceRussianSupport.rows.map { JsonPrimitive(it.mobileLine) }))
-        put("supportRows", JsonArray(referenceRussianSupport.rows.map { row -> buildJsonObject {
-            put("line", row.mobileLine)
-            put("comparisons", JsonArray(row.comparisons.map(::contrastPairJson)))
-        } }))
-        put("caseNote", referenceCaseTeaching.compactNote)
-        put("systemCards", JsonArray(referenceSystemCards.map { card -> buildJsonObject {
-            put("id", card.id); put("title", card.title)
-            put("explanation", card.explanation); put("example", card.example)
-            put("steps", JsonArray(card.steps.zipWithNext { from, to -> contrastPairJson(ContrastPair.generated(from, to)) }))
-        } }))
         val chainTable = MatrixTableEngine.build(
             rowAxis = referenceChainRows,
             rowHeaderLabel = "Операция",
@@ -140,19 +97,6 @@ internal fun matrixSnapshot(state: AppUiState): JsonElement {
                 }
             }))
         } }))
-        put("maleAccRows", JsonArray(maleAccRows.map { row -> buildJsonObject {
-            put("label", row.label); put("title", row.title); put("rule", row.rule)
-            put("examples", JsonArray(row.examples.map { example -> buildJsonObject {
-                put("label", "Форма в Bierniku")
-                put("from", example.from); put("to", example.to); put("change", example.sentence)
-                put("beforeParts", JsonArray(changeHighlightParts(example.from, example.to, ChangeSide.Before).map { part -> buildJsonObject {
-                    put("text", part.text); put("changed", part.isChanged)
-                } }))
-                put("afterParts", JsonArray(changeHighlightParts(example.from, example.to, ChangeSide.After).map { part -> buildJsonObject {
-                    put("text", part.text); put("changed", part.isChanged)
-                } }))
-            } }))
-        } }))
         // W3.2: cases/comparison/verbs/English verbs & do-support/possessives now read their cell
         // values and contrasts off the shared `:shared` MatrixTables.kt builders (same ones
         // MacSnapshot.kt's matrixSnapshot calls) instead of each re-running its own
@@ -167,7 +111,6 @@ internal fun matrixSnapshot(state: AppUiState): JsonElement {
             put("phrasePair", contrastPairJson(requireNotNull(phraseCell.contrast)))
             put("sentencePair", contrastPairJson(requireNotNull(sentenceCell.contrast)))
         } }))
-        put("comparisonCases", JsonArray(caseRows.map { choice(it.id.name, it.pl) }))
         val comparisonTableView = comparisonTable(selection)
         put("comparison", JsonArray(comparisonNounIds.mapIndexed { colIndex, id ->
             val noun = nounById(id)
@@ -180,12 +123,6 @@ internal fun matrixSnapshot(state: AppUiState): JsonElement {
                 }
             }
         }))
-        put("verbGenderControlLabel", referenceVerbTeaching.genderControlLabel.compact)
-        put("verbGenderOptions", JsonArray(referenceVerbTeaching.genderOptions.map { choice(it.id, it.label.compact) }))
-        put("verbFutureExplanation", referenceVerbTeaching.compactFutureExplanation)
-        put("verbTenseLabels", buildJsonObject {
-            Tense.entries.forEach { tense -> put(tense.id, referenceVerbTeaching.tenseLabels.getValue(tense).compact) }
-        })
         val verbTenses = listOf(Tense.PRESENT, Tense.PAST, Tense.FUTURE)
         val verbsTableView = verbsTable(selection)
         put("verbsRows", JsonArray(referenceVerbTeaching.subjects.mapIndexed { i, subject -> buildJsonObject {
@@ -226,17 +163,6 @@ internal fun matrixSnapshot(state: AppUiState): JsonElement {
                 }
             } }))
         }
-        put("pronounIntro", referencePronounTeaching.compactIntro)
-        put("pronounFooter", referencePronounTeaching.nativeFooter)
-        put("pronounContexts", JsonArray(referencePronounTeaching.contexts.map { context -> buildJsonObject {
-            put("id", context.id.id)
-            put("iosCue", context.cue.ios)
-        } }))
-        put("possessiveTitle", referencePronounTeaching.possessiveTitle)
-        put("possessiveCases", JsonArray(referencePronounTeaching.demo.cases.map { row -> buildJsonObject {
-            put("id", row.id.id)
-            put("iosCaption", row.ios)
-        } }))
         // The LOC context's own column keeps the raw locative form instead of `context.value`'s
         // preposition prefix — the same override Android's `androidLine` applies (CourseData.kt)
         // — so this host-specific choice lives here rather than in the shared [MatrixTables.kt]

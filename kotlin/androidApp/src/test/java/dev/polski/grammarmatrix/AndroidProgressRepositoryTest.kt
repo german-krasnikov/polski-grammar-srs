@@ -14,6 +14,7 @@ import org.junit.runner.RunWith
 import org.robolectric.RobolectricTestRunner
 import org.robolectric.RuntimeEnvironment
 import kotlin.time.Instant
+import polski.progress.ImportResult
 import polski.progress.LoadResult
 import polski.progress.ProgressCodec
 import polski.progress.SaveResult

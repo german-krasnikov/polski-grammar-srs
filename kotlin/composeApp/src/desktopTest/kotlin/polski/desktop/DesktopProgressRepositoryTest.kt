@@ -6,6 +6,7 @@ import kotlin.test.assertEquals
 import kotlin.test.assertIs
 import kotlin.test.assertTrue
 import kotlin.time.Instant
+import polski.progress.ImportResult
 import polski.progress.LoadResult
 import polski.progress.ProgressCodec
 import polski.progress.SaveResult
@@ -46,9 +47,9 @@ class DesktopProgressRepositoryTest {
             val oldRaw = ProgressCodec.encodeLegacyV1(old)
             val importedRaw = ProgressCodec.encodeLegacyV1(imported)
             assertIs<SaveResult.Saved>(repository.save(old))
-            assertIs<DesktopImportResult.Invalid>(repository.importJson("{"))
+            assertIs<ImportResult.Invalid>(repository.importJson("{"))
             assertEquals(oldRaw, Files.readString(directory.resolve("progress-v1.json")))
-            assertIs<DesktopImportResult.Imported>(repository.importJson(importedRaw))
+            assertIs<ImportResult.Imported>(repository.importJson(importedRaw))
             assertEquals(7, assertIs<LoadResult.Loaded>(repository.load()).document.progress.totalReviews)
             val backups = Files.list(directory.resolve("backups")).use { it.toList() }
             assertEquals(1, backups.size)
@@ -66,7 +67,7 @@ class DesktopProgressRepositoryTest {
             // Copied from P-fresh in tests/fixtures/kotlin-parity/progress.json.
             val raw = checkNotNull(javaClass.getResource("/react-progress-v1.json")).readText()
             val repository = DesktopProgressRepository(directory, scheduler)
-            assertIs<DesktopImportResult.Imported>(repository.importJson(raw))
+            assertIs<ImportResult.Imported>(repository.importJson(raw))
             val loaded = assertIs<LoadResult.Loaded>(repository.load()).document
             assertEquals(16, loaded.progress.cards.size)
             assertEquals(16, loaded.progress.stats.size)

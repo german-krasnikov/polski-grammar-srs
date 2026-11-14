@@ -26,6 +26,7 @@ import polski.presentation.TimeSource
 import polski.presentation.TrainingStore
 import polski.presentation.UiEffect
 import polski.progress.DecodeResult
+import polski.progress.ImportResult
 import polski.progress.ProgressCodec
 import polski.srs.FsrsScheduler
 import polski.training.PlExerciseEngine

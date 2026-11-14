@@ -88,6 +88,7 @@ import polski.presentation.TrainingMode
 import polski.presentation.TrainingStore
 import polski.presentation.UiCopy
 import polski.presentation.UiEffect
+import polski.progress.ImportResult
 import polski.srs.FsrsScheduler
 import polski.srs.Rating
 import polski.training.PlExerciseEngine
@@ -277,10 +278,10 @@ private fun DesktopSession(
                     Files.readString(file)
                 }
                 when (val result = repository.importJson(raw)) {
-                    DesktopImportResult.Imported -> onImported()
-                    is DesktopImportResult.Invalid -> notice = "Неподходящий JSON: ${result.reason}"
-                    is DesktopImportResult.Unsupported -> notice = "Неподдерживаемая версия ${result.version}"
-                    is DesktopImportResult.Failed -> notice = result.cause.message ?: "Импорт не удался"
+                    ImportResult.Imported -> onImported()
+                    is ImportResult.Invalid -> notice = "Неподходящий JSON: ${result.reason}"
+                    is ImportResult.Unsupported -> notice = "Неподдерживаемая версия ${result.version}"
+                    is ImportResult.Failed -> notice = result.cause.message ?: "Импорт не удался"
                 }
             } catch (error: Exception) {
                 notice = error.message ?: "Не удалось прочитать файл"
