@@ -188,14 +188,21 @@ fun TrainingWebApp() {
                     is AppAction.SetAnswerMode -> preferences.setAnswerMode(action.mode, store)
                     else -> {
                         store.dispatch(action)
-                        if (action is AppAction.ChooseSkill) routes.navigate(WebRoute.Training)
+                        if (action is AppAction.ChooseSkill || action is AppAction.TrainExamMistake) routes.navigate(WebRoute.Training)
                     }
                 }
             }
             renderer.render(root, state, route, routes.returnTo, preferences, store, { routes.navigate(it) }, dispatch)
             for (effect in state.pendingEffects) {
                 if (attemptedEffects.add(effect.id)) {
-                    if (!executeEffect(root, state, effect, store, routes::navigate)) attemptedEffects.remove(effect.id)
+                    // M10 blueprint: this effect's "execution" is cross-screen navigation plus
+                    // exam-controller state, which only the renderer (owner of the exam
+                    // controller) can perform — executeEffect's own pure root/state/store shape
+                    // has no access to it.
+                    if (effect is UiEffect.ExamVerificationReady) {
+                        renderer.handleExamVerificationReady(effect) { routes.navigate(it) }
+                        store.dispatch(AppAction.EffectAcknowledged(effect.id, EffectOutcome.Completed))
+                    } else if (!executeEffect(root, state, effect, store, routes::navigate)) attemptedEffects.remove(effect.id)
                 }
             }
             // Bound the set to still-pending ids; acknowledged/removed effects must not accumulate forever.

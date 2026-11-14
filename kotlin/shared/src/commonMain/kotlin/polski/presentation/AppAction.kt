@@ -12,6 +12,12 @@ sealed interface AppAction {
     data object ContinueDaily : AppAction
     data object OpenSkillPicker : AppAction
     data class ChooseSkill(val skillId: String, val preferredSeed: polski.model.SentenceSeed? = null) : AppAction
+    /** M10 blueprint: "Потренировать навык" after an exam mistake — [verificationItemId] is
+     *  whatever the exam host resolved via `polski.exam.grammar.verificationItemFor` at the
+     *  moment this was dispatched (`null` when no second linked item exists yet for [skillId]);
+     *  `TrainingStore` only carries it forward on [AppUiState.examRetryOrigin], it never computes
+     *  it itself (`TrainingStore` must not depend on `polski.exam`). */
+    data class TrainExamMistake(val examRouteId: String, val itemId: String, val skillId: String, val verificationItemId: String?) : AppAction
     data class SetAnswerMode(val mode: AnswerMode) : AppAction
     data class SetStyle(val styleId: StyleId) : AppAction
     data object ContinueIntroduction : AppAction

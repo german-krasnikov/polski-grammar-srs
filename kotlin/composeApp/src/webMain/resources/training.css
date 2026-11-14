@@ -308,4 +308,11 @@ details{margin:16px 0;color:var(--muted);font-size:.875rem}summary{cursor:pointe
    visible there too (see its own doc comment). */
 /* P3-15: `minmax(0,1fr)` (not a fixed track) is what lets a long value wrap instead of forcing the
    label column wider; `max-content` still gives the label exactly the room its longest row needs. */
+
+/* M8: automatic typed verdict + "Использовать в фразе" */
+.vocabulary-typed-verdict{font-weight:600;margin-top:8px}
+.vocabulary-typed-verdict.correct{color:var(--green)}
+.vocabulary-typed-verdict.incorrect{color:var(--before)}
+.vocabulary-use-in-phrase{display:flex;flex-direction:column;gap:8px;margin-top:16px}
+.vocabulary-use-in-phrase-button{text-align:left}
 .vocabulary-answer dl>div{grid-template-columns:max-content minmax(0,1fr);column-gap:16px}

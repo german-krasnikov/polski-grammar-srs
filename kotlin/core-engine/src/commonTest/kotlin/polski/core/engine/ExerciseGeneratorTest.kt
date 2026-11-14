@@ -2,6 +2,7 @@ package polski.core.engine
 
 import polski.core.model.FeatureKey
 import polski.core.model.FeatureValue
+import polski.core.model.LexicalFilter
 import polski.core.model.ScaffoldingLevel
 import polski.core.model.SkillSpec
 import kotlin.test.Test
@@ -150,6 +151,55 @@ class ExerciseGeneratorTest {
         val generator = generator(emptyList(), random = QueueRandomSource(listOf(0.0)))
         val exercise = generator.generateForSkill("test.skill")
         assertEquals("thing:unused", seedKey(exercise.slots))
+    }
+
+    // M8 blueprint AC2/AC3: eligibleSkillsFor must reuse the exact matchesFilter rule
+    // generateForSkill itself uses for its preferredSeed check — a gender-restricted skill admits
+    // only nouns of that gender, an explicit nounId allow-list admits only those ids, an
+    // unfiltered skill admits every noun, and a skill with no recipe is never offered even if its
+    // filter would otherwise admit the noun.
+    @Test fun eligibleSkillsForReturnsOnlySkillsWhoseFilterAdmitsThisNoun() {
+        val lexemeFeatures = LexemeFeatures { id -> if (id == "wife") mapOf(FeatureKey("Gender") to FeatureValue("f")) else mapOf(FeatureKey("Gender") to FeatureValue("m")) }
+        val femaleOnly = SkillSpec(id = "test.female", construction = "test.slot-presence", lexicalFilter = LexicalFilter("noun", mapOf("gender" to listOf("f"))))
+        val allowListed = SkillSpec(id = "test.allow", construction = "test.slot-presence", lexicalFilter = LexicalFilter("noun", mapOf("nounId" to listOf("husband"))))
+        val unfiltered = SkillSpec(id = "test.any", construction = "test.slot-presence")
+        val noRecipe = SkillSpec(id = "test.norecipe", construction = "test.slot-presence")
+        val recipe = SkillRecipe(skillId = "shared", source = TextSpec.Direct(TextValue.Literal("x")), expected = TextSpec.Direct(TextValue.Literal("x")))
+        val generator = ExerciseGenerator(
+            realizer = realizer, morphology = morphology, lexemeFeatures = lexemeFeatures,
+            skills = listOf(femaleOnly, allowListed, unfiltered, noRecipe).associateBy { it.id },
+            recipes = mapOf(femaleOnly.id to recipe, allowListed.id to recipe, unfiltered.id to recipe),
+            seeds = listOf(mapOf("noun" to "wife", "adjective" to "a"), mapOf("noun" to "husband", "adjective" to "b")),
+            random = RandomSource { 0.0 }, ids = ExerciseIdFactory { "generated" },
+            copy = PackCopy { it }, pattern = PackPattern { _, _ -> error("not used") },
+            casePrefix = CasePrefix { _, _ -> error("not used") }, pronouns = PronounForms { _, _ -> error("not used") },
+            textCase = TextCase { it }, defaultOwnerLexeme = "unused-owner", verbLexeme = "unused-verb",
+        )
+        assertEquals(listOf("test.female", "test.any"), generator.eligibleSkillsFor("wife"))
+        assertEquals(listOf("test.allow", "test.any"), generator.eligibleSkillsFor("husband"))
+        assertTrue(generator.eligibleSkillsFor("stranger").isEmpty())
+    }
+
+    // M8 blueprint AC2: every skill id eligibleSkillsFor returns for a noun must round-trip through
+    // generateForSkill with the exact same slots["noun"] back out — never a silent substitution.
+    @Test fun everyEligibleSkillRoundTripsThroughGenerateForSkillWithTheSameNoun() {
+        val lexemeFeatures = LexemeFeatures { emptyMap() }
+        val onlyHusband = SkillSpec(id = "test.husband", construction = "test.slot-presence", lexicalFilter = LexicalFilter("noun", mapOf("nounId" to listOf("husband"))))
+        val recipe = SkillRecipe(skillId = "shared", source = TextSpec.Direct(TextValue.Literal("x")), expected = TextSpec.Direct(TextValue.Literal("x")))
+        val generator = ExerciseGenerator(
+            realizer = realizer, morphology = morphology, lexemeFeatures = lexemeFeatures,
+            skills = mapOf(onlyHusband.id to onlyHusband),
+            recipes = mapOf(onlyHusband.id to recipe),
+            seeds = listOf(mapOf("noun" to "wife", "adjective" to "a"), mapOf("noun" to "husband", "adjective" to "b")),
+            random = RandomSource { 0.0 }, ids = ExerciseIdFactory { "generated" },
+            copy = PackCopy { it }, pattern = PackPattern { _, _ -> error("not used") },
+            casePrefix = CasePrefix { _, _ -> error("not used") }, pronouns = PronounForms { _, _ -> error("not used") },
+            textCase = TextCase { it }, defaultOwnerLexeme = "unused-owner", verbLexeme = "unused-verb",
+        )
+        for (skillId in generator.eligibleSkillsFor("husband")) {
+            val exercise = generator.generateForSkill(skillId, preferredSeed = mapOf("noun" to "husband", "adjective" to "zzz"))
+            assertEquals("husband", exercise.slots["noun"])
+        }
     }
 
     @Test fun comparisonPracticeCyclesThroughDistinctAuthoredSentences() {

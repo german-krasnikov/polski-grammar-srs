@@ -102,3 +102,22 @@
 .exam-option.locked { color: var(--text); }
 .exam-choice-locked { border: 1px dashed var(--outline, #444); border-radius: 8px; padding: 10px 14px; margin-bottom: 16px; }
 .exam-reading-q.practice-focused { outline: 2px solid var(--primary, #7eb6ff); outline-offset: 4px; border-radius: 6px; }
+
+/* M10: exam mistake -> targeted training */
+.exam-train-skill-btn { margin-top: 10px; }
+.exam-verification-notice { border: 1px solid var(--outline, #444); border-radius: 8px; padding: 10px 14px; margin-bottom: 16px; }
+
+/* M9: speech mini-missions */
+.mission-list { display: flex; flex-direction: column; gap: 12px; }
+.mission-card { padding: 16px; border: 1.5px solid var(--outline, #444); border-radius: 12px; display: flex; flex-direction: column; gap: 8px; }
+.mission-card-title { font-size: 1.1rem; font-weight: 600; }
+.mission-card-goal { font-size: 0.9rem; color: var(--on-surface-variant, #888); }
+.mission-situation { font-size: 1.05rem; margin-bottom: 4px; }
+.mission-prompt { color: var(--on-surface-variant, #888); margin-bottom: 14px; }
+.mission-choices { display: flex; flex-direction: column; gap: 8px; }
+.mission-choice-btn { text-align: left; }
+.mission-answer-wrap { display: flex; gap: 10px; align-items: center; margin-top: 10px; }
+.mission-result { display: flex; gap: 14px; border: 1px solid var(--outline, #444); border-radius: 8px; padding: 10px 14px; margin-bottom: 16px; }
+.mission-result-meaning.correct, .mission-result-form.correct { color: var(--green, #2e7d32); }
+.mission-result-meaning.incorrect, .mission-result-form.incorrect { color: var(--before, #c62828); }
+.mission-outcome { margin: 12px 0; }

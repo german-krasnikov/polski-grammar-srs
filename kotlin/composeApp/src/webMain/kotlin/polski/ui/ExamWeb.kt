@@ -30,6 +30,9 @@ internal enum class ExamScreen { List, Modules, Grammar, Reading, Listening, Wri
 
 internal class ExamWebController {
     var immediateFeedbackEnabled: () -> Boolean = { true }
+    /** M10 blueprint: invoked with (examRouteId, itemId, skillId) when the review screen's
+     *  "Потренировать навык" button is clicked. */
+    var onTrainSkill: ((examRouteId: String, itemId: String, skillId: String) -> Unit)? = null
     private var screen = ExamScreen.List
     private var selectedExam: ExamEntry? = null
     private var grammarCtrl: ExamGrammarController? = null
@@ -40,10 +43,44 @@ internal class ExamWebController {
     private var timedInterval: Int? = null
     private val timedRefresh: (Event) -> Unit = { refreshTimed() }
     private var root: HTMLElement? = null
+    /** M10 blueprint AC3/AC4: set by [openVerification], consumed once by [renderExamList]. */
+    private var verificationNotice: String? = null
 
     fun close() {
         stopTimed()
         screen = ExamScreen.List
+    }
+
+    /**
+     * M10 blueprint: the host's reaction to `UiEffect.ExamVerificationReady` — a non-null
+     * [verificationItemId] jumps straight into that exam's grammar review on that item; `null`
+     * (AC4's degrade case, an under-authored skill) instead shows an explicit "not enough linked
+     * questions yet" notice on the exam list, never a silent repeat of the original item.
+     */
+    fun openVerification(examRouteId: String, skillId: String, verificationItemId: String?) {
+        val entry = exams.firstOrNull { it.id == examRouteId }
+        stopTimed()
+        if (verificationItemId == null || entry == null) {
+            selectedExam = null
+            screen = ExamScreen.List
+            verificationNotice = "Для навыка «$skillId» пока не хватает связанных вопросов для проверки — скоро добавим новый вопрос."
+            // No `redraw()` here: at this moment `root` (if set at all) is whatever Exam-route
+            // container was live the LAST time this route was rendered — possibly already
+            // detached (the host navigated away to Training in between). Mutating `screen`/
+            // `verificationNotice` is enough; the host's own pending `navigate(WebRoute.Exam)`
+            // (called around this same effect) drives the real `render(container)` + `redraw()`
+            // once Compose recomposes onto a live container. Redrawing eagerly here would let
+            // `renderExamList`'s own "show once, then clear" consume `verificationNotice` against
+            // a detached node nobody ever sees, leaving nothing to show on the real redraw.
+            return
+        }
+        selectedExam = entry
+        grammarCtrl = ExamGrammarController(
+            examRouteId, onBack = { grammarCtrl?.close(); grammarCtrl = null; screen = ExamScreen.Modules; redraw() },
+            immediateFeedbackEnabled = immediateFeedbackEnabled, startAtItemId = verificationItemId,
+            onTrainSkill = { itemId, linkedSkillId -> onTrainSkill?.invoke(examRouteId, itemId, linkedSkillId) },
+        )
+        screen = ExamScreen.Grammar
     }
 
     fun render(container: HTMLElement) { root = container; redraw() }
@@ -63,6 +100,10 @@ internal class ExamWebController {
 
     private fun renderExamList(c: HTMLElement) {
         c.appendChild(node("h2", "exam-title", UiCopy.SelectExam))
+        verificationNotice?.let { notice ->
+            c.appendChild(node("p", "exam-verification-notice", notice).apply { setAttribute("role", "status") })
+            verificationNotice = null
+        }
         c.appendChild(node("div", "exam-list").apply {
             exams.forEach { exam ->
                 appendChild(node("div", "exam-card").apply {
@@ -110,7 +151,11 @@ internal class ExamWebController {
             }
             moduleRow(this, "III. Poprawność gramatyczna", exam.grammarCount, exam.grammarCount > 0) {
                 grammarCtrl?.close()
-                grammarCtrl = ExamGrammarController(exam.id, onBack = { grammarCtrl?.close(); screen = ExamScreen.Modules; redraw() }, immediateFeedbackEnabled = immediateFeedbackEnabled)
+                grammarCtrl = ExamGrammarController(
+                    exam.id, onBack = { grammarCtrl?.close(); screen = ExamScreen.Modules; redraw() },
+                    immediateFeedbackEnabled = immediateFeedbackEnabled,
+                    onTrainSkill = { itemId, skillId -> onTrainSkill?.invoke(exam.id, itemId, skillId) },
+                )
                 screen = ExamScreen.Grammar; redraw()
             }
             moduleRow(this, "IV. Pisanie", exam.writingCount, exam.writingCount > 0) {

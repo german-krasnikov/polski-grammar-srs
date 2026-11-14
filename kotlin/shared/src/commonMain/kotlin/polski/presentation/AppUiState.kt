@@ -34,7 +34,15 @@ data class RetryTicket(val skillId: String, val remaining: Int, val originAttemp
 /** P1 blueprint §P1.5: which action started the current session — a static classification of
  *  *which action* started it, minted once per session alongside [AppUiState.sessionId], never
  *  inferred later. */
-enum class SessionSource { ManualPick, DailyButton, ScheduleDue, Chain, Reset }
+enum class SessionSource { ManualPick, DailyButton, ScheduleDue, Chain, Reset, ExamMistake }
+
+/** M10 blueprint: carried on [AppUiState.examRetryOrigin] from the moment a learner follows a
+ *  "Потренировать навык" affordance after an exam mistake, until the targeted [skillId] is rated
+ *  Good once — same transient, session-only lifetime class as [RetryTicket]/[DailySessionState].
+ *  [verificationItemId] is `null` exactly when the exam host could not resolve a second linked
+ *  item for [skillId] at the moment this origin was set (an under-authored skill; AC4's degrade
+ *  case) — `TrainingStore` never computes it itself (it must not depend on `polski.exam`). */
+data class ExamRetryOrigin(val examRouteId: String, val itemId: String, val skillId: String, val verificationItemId: String?)
 
 /** Selection is reset on each entry to the matrix tab. */
 data class MatrixSelection(
@@ -107,6 +115,10 @@ data class AppUiState(
     val sessionId: String? = null,
     /** P1 blueprint §P1.5: which action started [sessionId]'s session — set once, alongside it. */
     val sessionSource: SessionSource? = null,
+    /** M10 blueprint: non-null exactly while the current Focused session was started to correct
+     *  an exam mistake — cleared once the targeted skill is rated Good, or on any other
+     *  mode-starting action. See [ExamRetryOrigin]. */
+    val examRetryOrigin: ExamRetryOrigin? = null,
 ) {
     val exerciseId: String? get() = exercise?.id
     val caseReferenceAvailable: Boolean get() = exercise?.let { skillById(it.primarySkill).caseReferenceAvailable } ?: true

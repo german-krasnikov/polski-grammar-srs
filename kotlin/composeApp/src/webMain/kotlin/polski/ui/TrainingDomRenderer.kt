@@ -7,6 +7,7 @@ import org.w3c.dom.HTMLElement
 import org.w3c.dom.HTMLTextAreaElement
 import org.w3c.dom.HTMLInputElement
 import kotlin.time.Clock
+import polski.exam.grammar.verificationItemFor
 import polski.presentation.*
 import polski.srs.Rating
 
@@ -39,6 +40,7 @@ internal class TrainingDomRenderer(private val prewarmTimer: MatrixPrewarmTimer 
     var composing = false
     private val vocabulary = VocabularyWebController()
     private val exam = ExamWebController()
+    private val mission = MissionWebController()
     private var navigation: WebNav? = null
     private val riveOverlay = RiveEffectOverlay()
     private val cardDom = TrainingCardDom(riveOverlay) { composing }
@@ -75,6 +77,17 @@ internal class TrainingDomRenderer(private val prewarmTimer: MatrixPrewarmTimer 
         riveOverlay.close()
         vocabulary.close()
         exam.close()
+        mission.close()
+    }
+
+    /**
+     * M10 blueprint AC3: the host's reaction to `UiEffect.ExamVerificationReady` — navigates back
+     * to the Exam route and has the exam controller jump straight to the verification question
+     * (or show the "not enough linked questions yet" notice, AC4).
+     */
+    fun handleExamVerificationReady(effect: UiEffect.ExamVerificationReady, navigate: (WebRoute) -> Unit) {
+        navigate(WebRoute.Exam)
+        exam.openVerification(effect.examRouteId, effect.skillId, effect.verificationItemId)
     }
 
     /** UX4-14: delegates to the Vocabulary controller for the shared keydown handler. */
@@ -178,6 +191,7 @@ internal class TrainingDomRenderer(private val prewarmTimer: MatrixPrewarmTimer 
         if (routeChanged) {
             if (routeChangedFrom == WebRoute.Training) riveOverlay.cancel()
             if (routeChangedFrom == WebRoute.Vocabulary) vocabulary.deactivate()
+            if (routeChangedFrom == WebRoute.Mission) mission.deactivate()
         }
         val app = (root.querySelector(":scope > .app") as? HTMLElement)
             ?: node("div", "app").also(root::appendChild)
@@ -198,9 +212,13 @@ internal class TrainingDomRenderer(private val prewarmTimer: MatrixPrewarmTimer 
             // route this host has since navigated away from.
             if (route != WebRoute.Vocabulary) vocabulary.deactivate()
             if (route != WebRoute.Exam) exam.close()
+            if (route != WebRoute.Mission) mission.deactivate()
             when (route) {
                 WebRoute.Training -> cardDom.renderTraining(root, content, state, preferences.value.swipeRatingEnabled, enteringChainComplete, justRevealed, justShowedReference, dispatch)
-                WebRoute.Vocabulary -> vocabulary.render(node("main", "vocabulary-page").also(content::appendChild), root, preferences.value.swipeRatingEnabled) {
+                WebRoute.Vocabulary -> vocabulary.render(
+                    node("main", "vocabulary-page").also(content::appendChild), root, preferences.value.swipeRatingEnabled,
+                    eligibleSkillsFor = store::eligibleSkillsFor, onUsePhrase = dispatch,
+                ) {
                     previous = null
                     render(root, state, route, returnTo, preferences, store, navigate, dispatch)
                 }
@@ -208,7 +226,14 @@ internal class TrainingDomRenderer(private val prewarmTimer: MatrixPrewarmTimer 
                 WebRoute.Progress -> renderProgressWeb(node("main", "progress-page").also(content::appendChild), state, dispatch)
                 WebRoute.Exam -> {
                     exam.immediateFeedbackEnabled = { preferences.value.immediateExamFeedbackEnabled }
+                    exam.onTrainSkill = { examRouteId, itemId, skillId ->
+                        dispatch(AppAction.TrainExamMistake(examRouteId, itemId, skillId, verificationItemFor(skillId, itemId)))
+                    }
                     exam.render(node("main", "exam-page").also(content::appendChild))
+                }
+                WebRoute.Mission -> mission.render(node("main", "mission-page").also(content::appendChild)) {
+                    previous = null
+                    render(root, state, route, returnTo, preferences, store, navigate, dispatch)
                 }
                 WebRoute.Settings -> renderSettingsWeb(node("main", "settings-page").also(content::appendChild), preferences, store, returnTo, navigate)
             }

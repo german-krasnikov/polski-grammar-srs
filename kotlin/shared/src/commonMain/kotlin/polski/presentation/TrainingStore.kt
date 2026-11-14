@@ -247,6 +247,11 @@ class TrainingStore(
         scope.cancel()
     }
 
+    /** M8 blueprint: one-line delegating accessor — the single source of truth for "which skills
+     *  can this noun actually be forced into" stays [polski.core.engine.ExerciseGenerator]'s own
+     *  [matchesFilter]-based lookup, never duplicated here. */
+    fun eligibleSkillsFor(nounId: String): List<String> = exerciseEngine.eligibleSkillsFor(nounId)
+
     fun dispatch(action: AppAction) {
         if (closed) return
         val s = state.value
@@ -283,6 +288,7 @@ class TrainingStore(
             AppAction.StartDaily -> startDaily()
             AppAction.ContinueDaily -> continueDaily()
             is AppAction.ChooseSkill -> chooseSkill(action)
+            is AppAction.TrainExamMistake -> trainExamMistake(action)
             is AppAction.SetAnswerMode -> mutate { it.copy(answerMode = action.mode) }
             is AppAction.SetStyle -> mutate { it.copy(styleId = action.styleId) }
             AppAction.ContinuePrediction -> mutate { it.copy(predictionPending = false) }
@@ -299,7 +305,7 @@ class TrainingStore(
 
     private fun accepts(action: AppAction, s: AppUiState): Boolean = when (action) {
         is AppAction.StartChain, is AppAction.SelectChainSeed,
-        AppAction.StartSchedule, AppAction.StartDaily, is AppAction.ChooseSkill -> s.loadStatus == LoadStatus.Ready
+        AppAction.StartSchedule, AppAction.StartDaily, is AppAction.ChooseSkill, is AppAction.TrainExamMistake -> s.loadStatus == LoadStatus.Ready
         AppAction.ContinueDaily -> s.loadStatus == LoadStatus.Ready && s.mode == TrainingMode.Daily && s.phase == CardPhase.DailyComplete
         AppAction.RequestReset -> s.loadStatus == LoadStatus.Ready && s.pendingEffects.none { it is UiEffect.ConfirmReset }
         is AppAction.SetAnswerMode, is AppAction.EditAnswer -> s.phase == CardPhase.Question
@@ -405,7 +411,7 @@ class TrainingStore(
             evaluation = null, tileBuilder = deriveTileBuilder(chain.first()),
             introPending = needsIntroduction(chain.first(), document),
             predictionPending = predictionPendingFor(chain.first(), document), error = null, daily = null,
-            sessionId = sessionIds.newId(), sessionSource = SessionSource.Chain,
+            sessionId = sessionIds.newId(), sessionSource = SessionSource.Chain, examRetryOrigin = null,
         )
         addFocus(chain.first())
         refreshTime()
@@ -422,7 +428,7 @@ class TrainingStore(
             draft = "", frozenAnswer = null, evaluation = null, tileBuilder = deriveTileBuilder(exercise),
             introPending = needsIntroduction(exercise, document),
             predictionPending = predictionPendingFor(exercise, document), error = null, daily = null,
-            sessionId = sessionIds.newId(), sessionSource = SessionSource.ScheduleDue,
+            sessionId = sessionIds.newId(), sessionSource = SessionSource.ScheduleDue, examRetryOrigin = null,
         ), document ?: return, captured)
         if (exercise != null) addFocus(exercise)
     }
@@ -445,7 +451,7 @@ class TrainingStore(
             introPending = needsIntroduction(exercise, document),
             predictionPending = predictionPendingFor(exercise, document), error = null,
             daily = DailySessionState(currentStep = step),
-            sessionId = sessionIds.newId(), sessionSource = SessionSource.DailyButton,
+            sessionId = sessionIds.newId(), sessionSource = SessionSource.DailyButton, examRetryOrigin = null,
         ), document ?: return, captured)
         if (exercise != null) addFocus(exercise)
     }
@@ -530,7 +536,30 @@ class TrainingStore(
             draft = "", frozenAnswer = null, evaluation = null, tileBuilder = deriveTileBuilder(exercise),
             introPending = needsIntroduction(exercise, document),
             predictionPending = predictionPendingFor(exercise, document), error = null, daily = null,
-            sessionId = sessionIds.newId(), sessionSource = SessionSource.ManualPick,
+            sessionId = sessionIds.newId(), sessionSource = SessionSource.ManualPick, examRetryOrigin = null,
+        )
+        addFocus(exercise)
+        refreshTime()
+    }
+
+    /** M10 blueprint: mirrors [chooseSkill] (no `preferredSeed` — unlike M8, a mistake redirects
+     *  to the skill's own normal practice, never a forced word), but stamps
+     *  [SessionSource.ExamMistake] and [AppUiState.examRetryOrigin] instead of
+     *  [SessionSource.ManualPick]. */
+    private fun trainExamMistake(action: AppAction.TrainExamMistake) {
+        if (action.skillId !in knownSkillIds) {
+            mutate { it.copy(error = "Неизвестный навык: ${action.skillId}") }
+            return
+        }
+        val exercise = exerciseEngine.generateForSkill(action.skillId, weakSeedCount = weakSeedCountFor(action.skillId), excludeProbePool = true)
+        mutableState.value = state.value.copy(
+            tab = AppTab.Training, mode = TrainingMode.Focused, focusedSkillId = action.skillId,
+            showSkillPicker = false, exercise = exercise, phase = CardPhase.Question,
+            draft = "", frozenAnswer = null, evaluation = null, tileBuilder = deriveTileBuilder(exercise),
+            introPending = needsIntroduction(exercise, document),
+            predictionPending = predictionPendingFor(exercise, document), error = null, daily = null,
+            sessionId = sessionIds.newId(), sessionSource = SessionSource.ExamMistake,
+            examRetryOrigin = ExamRetryOrigin(action.examRouteId, action.itemId, action.skillId, action.verificationItemId),
         )
         addFocus(exercise)
         refreshTime()
@@ -653,6 +682,11 @@ class TrainingStore(
         // displaced candidate is simply picked again next step by the mode's own unchanged logic
         // (DailySessionPlanner re-derives purely from the document, so nothing here needs to
         // remember it). Chain mode is never interrupted (scripted content).
+        // M10 blueprint AC3: the current exam-mistake origin clears exactly on a Good rating of
+        // the exercise it targeted — any other rating (or an origin for a different skill, e.g.
+        // the learner wandered off to another skill mid-correction) leaves it pending.
+        val clearedExamRetryOrigin = current.examRetryOrigin
+            ?.takeIf { it.skillId == exercise.primarySkill && action.rating == Rating.Good }
         val maturedTicket = if (current.mode != TrainingMode.Chain) queueAfterError.firstOrNull { it.remaining <= 0 } else null
         val nextExercise = if (maturedTicket != null) {
             exerciseEngine.generateForSkill(maturedTicket.skillId, weakSeedCount = weakSeedCountFor(maturedTicket.skillId), excludeProbePool = true)
@@ -685,10 +719,14 @@ class TrainingStore(
             daily = if (current.mode == TrainingMode.Daily) nextDaily else current.daily,
             retryQueue = retryQueue, activeRetrySkillId = maturedTicket?.skillId,
             activeRetryOriginAttemptId = maturedTicket?.originAttemptId,
+            examRetryOrigin = if (clearedExamRetryOrigin != null) null else current.examRetryOrigin,
         )
         mutableState.value = project(updated, result.document, captured)
         queueSave(result.document)
         if (nextExercise != null) addFocus(nextExercise)
+        if (clearedExamRetryOrigin != null) {
+            addEffect { UiEffect.ExamVerificationReady(it, clearedExamRetryOrigin.examRouteId, clearedExamRetryOrigin.skillId, clearedExamRetryOrigin.verificationItemId) }
+        }
     }
 
     private fun refreshTime() {
@@ -755,7 +793,7 @@ class TrainingStore(
             introPending = needsIntroduction(chain.first(), fresh),
             predictionPending = predictionPendingFor(chain.first(), fresh),
             showSkillPicker = false, error = null, daily = null,
-            sessionId = sessionIds.newId(), sessionSource = SessionSource.Reset,
+            sessionId = sessionIds.newId(), sessionSource = SessionSource.Reset, examRetryOrigin = null,
         )
         mutableState.value = project(next, fresh, captured)
         val revision = state.value.revision + 1

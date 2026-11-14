@@ -1,0 +1,14 @@
+DSL 1
+MISSION {
+  missionId: book-shop
+  title: "В книжном магазине"
+  goal: "Узнать, есть ли нужная книга, и что-нибудь купить"
+  level: A1
+  skillTag: case.acc.f
+}
+MISSION {
+  missionId: ask-way
+  title: "Jak dojść do stacji?"
+  goal: "Узнать дорогу до станции и поблагодарить"
+  level: A1
+}

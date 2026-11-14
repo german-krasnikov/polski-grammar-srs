@@ -1,0 +1,54 @@
+DSL 1
+MISSION_NODE {
+  nodeId: book-shop-ask
+  missionRef: book-shop
+  situation: "Jesteś w księgarni. Chcesz wiedzieć, czy jest książka „Pan Tadeusz”."
+  prompt: "Spytaj sprzedawcę, czy ma tę książkę."
+  isTerminal: false
+}
+MISSION_NODE {
+  nodeId: book-shop-alt
+  missionRef: book-shop
+  situation: "Sprzedawca mówi: „Niestety, nie mamy tej książki. Mamy inną — Lalka”."
+  prompt: "Zapytaj, czy mogą polecić inną książkę."
+  isTerminal: false
+}
+MISSION_NODE {
+  nodeId: book-shop-buy
+  missionRef: book-shop
+  situation: "Sprzedawca podaje książkę „Lalka”."
+  prompt: "Powiedz, że kupisz tę książkę."
+  isTerminal: true
+  outcome: goal_reached
+}
+MISSION_NODE {
+  nodeId: book-shop-leave
+  missionRef: book-shop
+  situation: "Wychodzisz z księgarni bez książki."
+  prompt: "Rozmowa się skończyła."
+  isTerminal: true
+  outcome: dead_end
+}
+MISSION_NODE {
+  nodeId: ask-way-start
+  missionRef: ask-way
+  situation: "Jesteś na ulicy i nie wiesz, jak dojść do stacji."
+  prompt: "Spytaj przechodnia o drogę."
+  isTerminal: false
+}
+MISSION_NODE {
+  nodeId: ask-way-thanks
+  missionRef: ask-way
+  situation: "Przechodzień tłumaczy drogę."
+  prompt: "Podziękuj za pomoc."
+  isTerminal: true
+  outcome: goal_reached
+}
+MISSION_NODE {
+  nodeId: ask-way-giveup
+  missionRef: ask-way
+  situation: "Nie pytasz nikogo i błądzisz dalej."
+  prompt: "Rozmowa się nie zaczęła."
+  isTerminal: true
+  outcome: dead_end
+}

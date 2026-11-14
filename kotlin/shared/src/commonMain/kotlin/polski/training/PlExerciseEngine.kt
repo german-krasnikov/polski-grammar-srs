@@ -36,6 +36,9 @@ class PlExerciseEngine(random: RandomSource, ids: ExerciseIdFactory) {
 
     fun generateChain(seed: SentenceSeed = sentenceSeeds.first()): List<Exercise> =
         generator.generateChain(plChainSteps(seed.nounId), seed.toSlots()).map { it.toExercise() }
+
+    /** M8 blueprint: delegates verbatim to the generic engine's own lookup. */
+    fun eligibleSkillsFor(nounId: String): List<String> = generator.eligibleSkillsFor(nounId)
 }
 
 private fun SentenceSeed.toSlots(): Map<String, String> = mapOf("noun" to nounId, "adjective" to adjectiveId)

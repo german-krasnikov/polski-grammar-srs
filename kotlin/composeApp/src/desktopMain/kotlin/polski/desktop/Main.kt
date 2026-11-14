@@ -247,6 +247,10 @@ private fun DesktopSession(
                     } else store.dispatch(AppAction.EffectAcknowledged(effect.id, EffectOutcome.Skipped))
                 }
                 is UiEffect.DownloadText -> store.dispatch(AppAction.EffectAcknowledged(effect.id, EffectOutcome.Skipped))
+                // M10 blueprint: web-first (no desktop exam screen exists yet in this pass) —
+                // same documented no-op-but-acknowledged shape as every other effect this host
+                // cannot act on.
+                is UiEffect.ExamVerificationReady -> store.dispatch(AppAction.EffectAcknowledged(effect.id, EffectOutcome.Skipped))
             }
         }
     }

@@ -223,6 +223,8 @@ private fun AndroidScreen(
                 is UiEffect.DownloadJson -> onExport(effect)
                 is UiEffect.DownloadText -> onExport(effect)
                 is UiEffect.ConfirmReset -> Unit
+                // M10 blueprint: web-first (no Android exam screen exists yet in this pass).
+                is UiEffect.ExamVerificationReady -> store.dispatch(AppAction.EffectAcknowledged(effect.id, EffectOutcome.Skipped))
             }
         }
     }

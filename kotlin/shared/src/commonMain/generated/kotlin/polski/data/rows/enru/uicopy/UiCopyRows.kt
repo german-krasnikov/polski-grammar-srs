@@ -847,6 +847,7 @@ val UI_COPY_ROW_ROWS: List<UiCopyRow> = listOf(
     UiCopyRow(key = "results", text = "Results"),
     UiCopyRow(key = "comingSoon", text = "Coming soon"),
     UiCopyRow(key = "exam", text = "Exam"),
+    UiCopyRow(key = "missions", text = "Missions"),
     UiCopyRow(key = "examConfirmedPoints", text = "Confirmed"),
     UiCopyRow(key = "examPendingPoints", text = "Awaiting review"),
     UiCopyRow(key = "examManualReview", text = "Needs manual review"),

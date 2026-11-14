@@ -1,0 +1,19 @@
+DSL 1
+# M10 blueprint: an author-curated side table pairing a real exam grammar item (by id) with one
+# course skill the learner can target practice on after missing that item. Kept as its own
+# contract/file deliberately — never a field on GrammarItemRow (dsl/exam.data-contract) — so the
+# certified exam content stays byte-identical and this table can be revised independently.
+#
+# itemId is a plain string, not `ref GrammarItemRow`: biome's ref/key checking only resolves
+# within one contract's own --rows universe, and GrammarItemRow belongs to the certified `exam`
+# contract (dsl/exam.data-contract), authored across many per-exam files. Every itemId here is
+# instead checked against the real, live GRAMMAR_ITEM_ROW_ROWS by
+# `polski.exam.grammar.GrammarExamSkillLinkTest` (a Kotlin-level AC1 check, not a biome one).
+# skillId is likewise a plain string, checked against `polski.data.skills` the same way.
+
+RECORD ExamSkillLinkRow KEY linkId COUNT 0..
+  linkId: string
+  itemId: string
+  skillId: string
+  note: string OPTIONAL
+END

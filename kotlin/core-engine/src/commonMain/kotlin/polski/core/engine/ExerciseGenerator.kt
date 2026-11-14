@@ -271,6 +271,20 @@ class ExerciseGenerator(
         return pick(weak.filter { weakSeedCount(seedKey(it)) == maxCount })
     }
 
+    /**
+     * M8 blueprint: which of [skills]' own skill ids a word with this [nounId] could actually be
+     * forced into via [generateForSkill]'s `preferredSeed` — reuses the exact [candidatesFor]/
+     * [matchesFilter] pool [generateForSkill] itself consults for its own match check
+     * (`candidates.any { it["noun"] == preferred["noun"] }`), so a caller never has to guess
+     * compatibility and risk a silent substitution to a different word. Excludes any skill with no
+     * [recipes] entry (an unbuildable skill id, same guard [generateForSkill] applies via `error`).
+     * Order follows [skills]' own iteration order (the curriculum's authored order) — no separate
+     * sort is introduced here.
+     */
+    fun eligibleSkillsFor(nounId: String): List<String> = skills.keys.filter { skillId ->
+        skillId in recipes && candidatesFor(skills.getValue(skillId).lexicalFilter).any { it["noun"] == nounId }
+    }
+
     fun generateForSkill(
         skillId: String,
         preferredSeed: Map<String, String>? = null,

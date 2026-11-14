@@ -35,6 +35,7 @@ UI_COPY {key: writingSet text: Set}
 UI_COPY {key: results text: Results}
 UI_COPY {key: comingSoon text: "Coming soon"}
 UI_COPY {key: exam text: Exam}
+UI_COPY {key: missions text: Missions}
 UI_COPY {key: examConfirmedPoints text: Confirmed}
 UI_COPY {key: examPendingPoints text: "Awaiting review"}
 UI_COPY {key: examManualReview text: "Needs manual review"}

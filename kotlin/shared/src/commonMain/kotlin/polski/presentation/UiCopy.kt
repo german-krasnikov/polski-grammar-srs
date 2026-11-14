@@ -30,6 +30,9 @@ object UiCopy {
     val Matches: String get() = text("matches")
     val Differs: String get() = text("differs")
     val SelectExam: String get() = text("selectExam")
+    /** M9 blueprint: pl-ru pilot only — en-ru falls back to this key's own name until missions
+     *  are authored for that pack too. */
+    val Missions: String get() = text("missions")
     val Start: String get() = text("start")
     val Next: String get() = text("next")
     val Finish: String get() = text("finish")

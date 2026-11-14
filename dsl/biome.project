@@ -1,4 +1,4 @@
-TOOLCHAIN b3fc1ec9c8b94c422e51b8cbfa5edbdf340488d4
+TOOLCHAIN 4f59276bb8527d8775eabf70bc19ad37b75b064f
 # The course data of the packs (R1): .core-data rows checked against course.data-contract and printed as Kotlin rows (kotlin/shared/src/commonMain/generated).
 # Run: node <biome> generate --project dsl/biome.project     Check: node <biome> generate --check --project dsl/biome.project
 CONTRACT course FROM course.data-contract
@@ -39,6 +39,13 @@ CONTRACT exam-assets FROM exam-assets.data-contract
 CONTRACT scheduler-expanded FROM scheduler-expanded.data-contract
 CONTRACT ending-highlight FROM ending-highlight.data-contract
 CONTRACT matrix-tables FROM matrix-tables.data-contract
+CONTRACT exam-skill-links FROM exam-skill-links.data-contract
+# M10 blueprint: author-curated exam-item -> course-skill links (pl-ru pilot). itemId/skillId are
+# plain strings (not biome `ref`s into the certified `exam` contract) — see exam-skill-links.data-contract's own header.
+GENERATE exam-skill-links-plru data --contract exam-skill-links --rows ExamSkillLinkRow {dir}/../courses-biome/pl-ru/exam-skill-links.core-data --target kt --kt-package polski.exam.grammar.data --out {dir}/../kotlin/shared/src/commonMain/generated/kotlin/polski/exam/grammar/data/ExamSkillLinkRows.kt
+CONTRACT missions FROM missions.data-contract
+# M9 blueprint: hand-authored speech mini-missions (pl-ru pilot).
+GENERATE missions-plru data --contract missions --rows MissionRow {dir}/../courses-biome/pl-ru/missions.core-data --rows MissionNodeRow {dir}/../courses-biome/pl-ru/mission-nodes.core-data --rows MissionChoiceRow {dir}/../courses-biome/pl-ru/mission-choices.core-data --target kt --kt-package polski.mission.data --out {dir}/../kotlin/shared/src/commonMain/generated/kotlin/polski/mission/data/MissionRows.kt
 # Exam data: validate and generate typed Kotlin rows from .core-data.
 # Scoring oracle (P4): test expectations as data, not hand-written assertions.
 GENERATE scoring-oracle data --contract exam --rows ScoringCaseRow {dir}/exam-scoring/scoring.core-data --rows QuarterScoringCaseRow {dir}/exam-scoring/quarter-scoring.core-data --rows WeightedScoringCaseRow {dir}/exam-scoring/weighted-scoring.core-data --rows ExamInventoryCaseRow {dir}/exam-scoring/b1-2017-inventory.core-data --rows WritingPromptCaseRow {dir}/exam-scoring/b1-2017-writing.core-data --rows QuarterFormatCaseRow {dir}/exam-scoring/quarter-format.core-data --rows AnswerEvaluationCaseRow {dir}/exam-scoring/answer-evaluation.core-data --rows AnswerEvaluationCaseRow {dir}/exam/answer-policy-public-cases.core-data --rows AnswerAttemptCaseRow {dir}/exam-scoring/answer-attempt.core-data --rows UnorderedSetCaseRow {dir}/exam-scoring/unordered-set.core-data --rows OpenItemGroupCaseRow {dir}/exam-scoring/open-item-groups.core-data --rows GrammarConstraintCaseRow {dir}/exam-scoring/word-bank-constraint.core-data --rows BankTokenCaseRow {dir}/exam-scoring/bank-tokens.core-data --rows QuestionControlCaseRow {dir}/exam-scoring/question-controls.core-data --rows ExamModuleCaseRow {dir}/exam-scoring/module-covers.core-data --rows ReadingSetCaseRow {dir}/exam-scoring/reading-sets.core-data --rows GrammarPairCaseRow {dir}/exam-scoring/c1-2024-pairs.core-data --rows NovemberListeningCaseRow {dir}/exam-scoring/c1-2022-11-listening.core-data --rows GrammarRubricCaseRow {dir}/exam-scoring/c1-2022-11-rubric.core-data --target kt --kt-package polski.exam.data.oracle --out {dir}/../kotlin/shared/src/commonTest/generated/kotlin/polski/exam/data/oracle/ScoringCaseRows.kt

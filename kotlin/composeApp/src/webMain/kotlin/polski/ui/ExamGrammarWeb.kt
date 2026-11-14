@@ -25,6 +25,14 @@ internal class ExamGrammarController(
     private val onAction: ((GrammarExamAction) -> Unit)? = null,
     private val onTimedFinish: (() -> Unit)? = null,
     private val immediateFeedbackEnabled: () -> Boolean = { true },
+    /** M10 blueprint: opens straight onto this exam item (the post-correction verification
+     *  question), instead of the first — `null`/unknown falls back to the first item exactly as
+     *  before. */
+    startAtItemId: String? = null,
+    /** M10 blueprint AC2: a review row whose item is wrong (status != ConfirmedFull) and has a
+     *  linked skill (`polski.exam.grammar.skillIdFor`) gets a "Потренировать навык" affordance —
+     *  invoked with (examId, itemId, skillId); `null` (every pre-M10 call site) hides it entirely. */
+    private val onTrainSkill: ((itemId: String, skillId: String) -> Unit)? = null,
 ) {
     private val tests = examGrammarData.getValue(examId)
     private val instructionsByItemId = tests.flatMap { test ->
@@ -36,7 +44,8 @@ internal class ExamGrammarController(
     private val selectedBankTokenByItemId = mutableMapOf<String, String>()
     private var ownState = run {
         val merged = mergeGrammarTests(examId, tests)
-        GrammarExamState(test = merged)
+        val startIndex = startAtItemId?.let { id -> merged.items.indexOfFirst { it.itemId == id } }?.takeIf { it >= 0 } ?: 0
+        GrammarExamState(test = merged, currentIndex = startIndex)
     }
     private val state get() = externalState?.invoke() ?: ownState
     private var root: HTMLElement? = null
@@ -327,6 +336,16 @@ internal class ExamGrammarController(
                                     setAttribute("lang", "pl")
                                 })
                             }
+                        })
+                    }
+                    // M10 blueprint AC2: only for a wrong+linked item, never for a correct or
+                    // unlinked one.
+                    val linkedSkillId = skillIdFor(item.itemId)
+                    if (onTrainSkill != null && evaluation.status != ExamAnswerStatus.ConfirmedFull && linkedSkillId != null) {
+                        appendChild((document.createElement("button") as HTMLButtonElement).apply {
+                            type = "button"; className = "exam-nav-btn exam-train-skill-btn"
+                            textContent = "Потренировать навык"
+                            addEventListener("click", { onTrainSkill(item.itemId, linkedSkillId) })
                         })
                     }
                 })

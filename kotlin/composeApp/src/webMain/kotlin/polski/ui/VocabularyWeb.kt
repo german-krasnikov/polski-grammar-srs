@@ -17,16 +17,22 @@ import polski.data.courseVocabularyInstructions
 import polski.data.courseVocabularyUnavailableLabel
 import polski.data.VocabularyItem
 import polski.data.frequencyItems
+import polski.data.skillById
 import polski.data.vocabularyItems
 import polski.grammar.trimJsWhitespace
+import polski.model.SentenceSeed
+import polski.presentation.AppAction
 import polski.presentation.UiCopy
 import polski.presentation.cardEffectFor
 import polski.presentation.intervalLabel
 import polski.srs.FsrsScheduler
 import polski.srs.Rating
+import polski.training.sentenceSeeds
 import polski.vocabulary.StudyDirection
 import polski.vocabulary.VocabularyCodec
 import polski.vocabulary.VocabularyDocument
+import polski.vocabulary.checkTyped
+import polski.vocabulary.lexemeId
 
 /** EnRuAcceptance-2026-09-28.md §7 item 4: one backup slot per active pack — was a single literal
  *  pl-ru key shared by every pack, so an en-ru import backup would silently overwrite pl-ru's (or
@@ -155,7 +161,15 @@ internal class VocabularyWebController {
         pendingRefresh?.invoke()
     }
 
-    fun render(root: HTMLElement, outerRoot: HTMLElement, swipeRatingEnabled: Boolean, refresh: () -> Unit) {
+    /** [eligibleSkillsFor]/[onUsePhrase] (M8 blueprint): the "Использовать в фразе" affordance —
+     *  this controller stays decoupled from `TrainingStore`'s concrete type, same shape as every
+     *  other callback it already takes. */
+    fun render(
+        root: HTMLElement, outerRoot: HTMLElement, swipeRatingEnabled: Boolean,
+        eligibleSkillsFor: (String) -> List<String> = { emptyList() },
+        onUsePhrase: (AppAction) -> Unit = {},
+        refresh: () -> Unit,
+    ) {
         pendingRefresh = refresh
         if (loadedForPackId != activeCoursePackId) reloadForActivePack()
         root.className = "vocabulary-page"
@@ -183,7 +197,7 @@ internal class VocabularyWebController {
             page.button("Сохранить исходный JSON") { download("vocabulary-recovery.json", raw) }
         }
         val layout = page.add("div", cls = "vocabulary-layout")
-        renderCard(layout.add("section", cls = "card vocabulary-card"), outerRoot, swipeRatingEnabled, languages, refresh)
+        renderCard(layout.add("section", cls = "card vocabulary-card"), outerRoot, swipeRatingEnabled, languages, eligibleSkillsFor, onUsePhrase, refresh)
         renderCatalog(layout.add("section", cls = "card vocabulary-catalog"), languages, refresh)
         page.add("p", cls = "muted small").apply {
             add("span", "Частотные ранги и counts: ")
@@ -196,7 +210,10 @@ internal class VocabularyWebController {
         }
     }
 
-    private fun renderCard(section: HTMLElement, outerRoot: HTMLElement, swipeRatingEnabled: Boolean, languages: ActivePackLanguages, refresh: () -> Unit) {
+    private fun renderCard(
+        section: HTMLElement, outerRoot: HTMLElement, swipeRatingEnabled: Boolean, languages: ActivePackLanguages,
+        eligibleSkillsFor: (String) -> List<String>, onUsePhrase: (AppAction) -> Unit, refresh: () -> Unit,
+    ) {
         section.setAttribute("aria-label", "Карточка слова")
         val id = VocabularyCodec.dueIds(document, direction, scheduler, Clock.System.now()).firstOrNull()
         val item = id?.let { VocabularyCodec.item(document, it) }
@@ -279,7 +296,7 @@ internal class VocabularyWebController {
         // purely visually; swipe/keyboard on the revealed face rates (v4/UX4-08/09/14).
         val answer = detachedElement("div", "vocabulary-answer card-back card-face")
         answer.setAttribute("aria-live", "polite")
-        renderRevealedAnswer(flip, answer, outerRoot, item, swipeRatingEnabled, languages, refresh)
+        renderRevealedAnswer(flip, answer, outerRoot, item, swipeRatingEnabled, languages, eligibleSkillsFor, onUsePhrase, refresh)
         inner.appendChild(front)
         inner.appendChild(answer)
         section.appendChild(flip)
@@ -290,7 +307,10 @@ internal class VocabularyWebController {
         flipCard.installTap(flip) { toggleFlip() }
     }
 
-    private fun renderRevealedAnswer(flip: HTMLElement, answer: HTMLElement, outerRoot: HTMLElement, item: VocabularyItem, swipeRatingEnabled: Boolean, languages: ActivePackLanguages, refresh: () -> Unit) {
+    private fun renderRevealedAnswer(
+        flip: HTMLElement, answer: HTMLElement, outerRoot: HTMLElement, item: VocabularyItem, swipeRatingEnabled: Boolean,
+        languages: ActivePackLanguages, eligibleSkillsFor: (String) -> List<String>, onUsePhrase: (AppAction) -> Unit, refresh: () -> Unit,
+    ) {
         val isNativeToTarget = direction == languages.nativeToTarget()
         answer.add("span", "Эталон · ${if (isNativeToTarget) languages.targetAdjective else languages.nativeAdjective}", "eyebrow")
         answer.add("p", if (isNativeToTarget) item.lemma else item.translation)
@@ -299,7 +319,15 @@ internal class VocabularyWebController {
         description.detail("Перевод", item.translation)
         description.detail("Форма", item.form, languages.targetLang)
         description.detail("В предложении", item.example, languages.targetLang)
-        if (typed) answer.add("p", "Твой ответ: ${draft.ifBlank { "не введён" }}. Сравни сам и выбери оценку.")
+        if (typed) {
+            // M8 blueprint AC1: an automatic verdict alongside the existing self-grading sentence
+            // (kept as the fallback label — never the only signal any more).
+            val correct = checkTyped(item, direction, languages.targetCode, languages.nativeCode, draft)
+            answer.add("p", if (correct) "Верно." else "Неверно.", if (correct) "vocabulary-typed-verdict correct" else "vocabulary-typed-verdict incorrect")
+                .setAttribute("role", "status")
+            answer.add("p", "Твой ответ: ${draft.ifBlank { "не введён" }}. Сравни сам и выбери оценку.")
+        }
+        renderUseInPhrase(answer, item, eligibleSkillsFor, onUsePhrase)
         if (swipeRatingEnabled) {
             // v4/UX4-08/09: the whole revealed face is the element that tilts/translates with the
             // finger/mouse — this label is a purely visual direction hint, not the gesture target
@@ -329,6 +357,28 @@ internal class VocabularyWebController {
         }
         ratings.button(UiCopy.Good, hint = "Воспроизвёл сам", interval = intervalLabel(preview[Rating.Good].toEpochMilliseconds(), at.toEpochMilliseconds()), cls = "rating-good") {
             riveOverlay.trigger(outerRoot, answer, cardEffectFor(Rating.Good)); rate(item.id, Rating.Good, refresh)
+        }
+    }
+
+    /**
+     * M8 blueprint: "Использовать в фразе" — only for noun vocabulary items ([lexemeId] non-null)
+     * that have a matching [polski.training.sentenceSeeds] entry (the adjective a forced-seed
+     * [SentenceSeed] needs) AND at least one [eligibleSkillsFor] result (AC3: an empty list is a
+     * valid, handled state — no affordance at all, not an error). Every offered skill id is one
+     * [eligibleSkillsFor] itself returned for this exact noun (AC2) — dispatching never risks a
+     * silent substitution to a different word.
+     */
+    private fun renderUseInPhrase(answer: HTMLElement, item: VocabularyItem, eligibleSkillsFor: (String) -> List<String>, onUsePhrase: (AppAction) -> Unit) {
+        val nounId = item.lexemeId() ?: return
+        val adjectiveId = sentenceSeeds.firstOrNull { it.nounId == nounId }?.adjectiveId ?: return
+        val skillIds = eligibleSkillsFor(nounId)
+        if (skillIds.isEmpty()) return
+        val section = answer.add("div", cls = "vocabulary-use-in-phrase")
+        section.add("p", "Использовать в фразе", "eyebrow")
+        skillIds.forEach { skillId ->
+            section.button(skillById(skillId).title, cls = "vocabulary-use-in-phrase-button") {
+                onUsePhrase(AppAction.ChooseSkill(skillId, SentenceSeed(nounId, adjectiveId)))
+            }
         }
     }
 

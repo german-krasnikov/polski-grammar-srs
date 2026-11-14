@@ -1,0 +1,50 @@
+DSL 1
+MISSION_CHOICE {
+  choiceId: book-shop-ask-yes
+  nodeRef: book-shop-ask
+  label: "Спросить про книгу"
+  expectedForm: "Czy masz książkę „Pan Tadeusz”?"
+  acceptedVariant: "Czy macie książkę „Pan Tadeusz”?"
+  meaningAdvancesGoal: true
+  nextNodeRef: book-shop-alt
+}
+MISSION_CHOICE {
+  choiceId: book-shop-ask-no
+  nodeRef: book-shop-ask
+  label: "Промолчать и уйти"
+  expectedForm: "Nie, dziękuję."
+  meaningAdvancesGoal: false
+  nextNodeRef: book-shop-leave
+}
+MISSION_CHOICE {
+  choiceId: book-shop-alt-yes
+  nodeRef: book-shop-alt
+  label: "Спросить про другую книгу"
+  expectedForm: "Czy możecie polecić inną książkę?"
+  meaningAdvancesGoal: true
+  nextNodeRef: book-shop-buy
+}
+MISSION_CHOICE {
+  choiceId: book-shop-alt-no
+  nodeRef: book-shop-alt
+  label: "Отказаться и уйти"
+  expectedForm: "Nie, dziękuję, do widzenia."
+  meaningAdvancesGoal: false
+  nextNodeRef: book-shop-leave
+}
+MISSION_CHOICE {
+  choiceId: ask-way-ask
+  nodeRef: ask-way-start
+  label: "Спросить дорогу"
+  expectedForm: "Jak dojść do stacji?"
+  meaningAdvancesGoal: true
+  nextNodeRef: ask-way-thanks
+}
+MISSION_CHOICE {
+  choiceId: ask-way-skip
+  nodeRef: ask-way-start
+  label: "Не спрашивать и идти дальше"
+  expectedForm: "Pójdę dalej sam."
+  meaningAdvancesGoal: false
+  nextNodeRef: ask-way-giveup
+}

@@ -1,0 +1,32 @@
+DSL 1
+# M9 blueprint: hand-authored branching speech scenario — a goal, a sequence of situations, and
+# per-situation reply choices with both a meaning consequence (does the reply move toward the
+# goal) and a grammar-form check (is the typed/picked reply an accepted form). Content only — no
+# generative construction/recipe involvement, unlike constructed skills.
+
+RECORD MissionRow KEY missionId COUNT 0..
+  missionId: string
+  title: string
+  goal: string
+  level: string
+  skillTag: string OPTIONAL
+END
+
+RECORD MissionNodeRow KEY nodeId COUNT 0..
+  nodeId: string
+  missionRef: ref MissionRow
+  situation: string
+  prompt: string
+  isTerminal: bool
+  outcome: enum goal_reached|dead_end|none OPTIONAL
+END
+
+RECORD MissionChoiceRow KEY choiceId COUNT 0..
+  choiceId: string
+  nodeRef: ref MissionNodeRow
+  label: string
+  expectedForm: string
+  acceptedVariant: string OPTIONAL
+  meaningAdvancesGoal: bool
+  nextNodeRef: ref MissionNodeRow OPTIONAL
+END

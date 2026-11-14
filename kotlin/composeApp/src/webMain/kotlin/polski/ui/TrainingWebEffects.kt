@@ -85,6 +85,10 @@ internal fun executeEffect(root: HTMLElement, state: AppUiState, effect: UiEffec
                 store.dispatch(AppAction.EffectAcknowledged(effect.id, EffectOutcome.Failed(error.message ?: "Экспорт не удался")))
             }
         }
+        // M10 blueprint: TrainingWebApp's own effect loop intercepts this one before it ever
+        // reaches here (only the renderer, owner of the exam controller, can act on it) — kept
+        // here only so this exhaustive `when` compiles for any other caller.
+        is UiEffect.ExamVerificationReady -> store.dispatch(AppAction.EffectAcknowledged(effect.id, EffectOutcome.Completed))
     }
     return true
 }

@@ -35,6 +35,7 @@ UI_COPY {key: writingSet text: "Набор"}
 UI_COPY {key: results text: "Результаты"}
 UI_COPY {key: comingSoon text: "Скоро"}
 UI_COPY {key: exam text: "Экзамен"}
+UI_COPY {key: missions text: "Миссии"}
 UI_COPY {key: examConfirmedPoints text: "Подтверждено"}
 UI_COPY {key: examPendingPoints text: "Ожидает проверки"}
 UI_COPY {key: examManualReview text: "Требуется ручная проверка"}

@@ -28,4 +28,8 @@ sealed interface UiEffect {
     /** NJ03 C6: text wire export replaces DownloadJson for progress. */
     data class DownloadText(override val id: Long, val filename: String, val text: String) : UiEffect
     data class ConfirmReset(override val id: Long, val prompt: String) : UiEffect
+    /** M10 blueprint: emitted once `AppUiState.examRetryOrigin` clears on a qualifying Good
+     *  rating — [verificationItemId] is `null` exactly when the exam host could not resolve a
+     *  second linked item for [skillId] (AC4's degrade case). */
+    data class ExamVerificationReady(override val id: Long, val examRouteId: String, val skillId: String, val verificationItemId: String?) : UiEffect
 }

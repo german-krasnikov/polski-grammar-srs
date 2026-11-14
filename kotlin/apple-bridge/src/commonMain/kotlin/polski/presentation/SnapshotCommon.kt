@@ -170,6 +170,12 @@ internal fun JsonObjectBuilder.putEffects(state: AppUiState) {
             is UiEffect.DownloadJson -> { put("kind", "export"); put("filename", effect.filename); put("json", effect.json) }
             is UiEffect.DownloadText -> { put("kind", "exportText"); put("filename", effect.filename); put("text", effect.text) }
             is UiEffect.ConfirmReset -> { put("kind", "reset"); put("prompt", effect.prompt) }
+            // M10 blueprint: web-first (no iOS exam screen exists yet in this pass) — surfaced
+            // only so a future iOS host can act on it; nothing here consumes it yet.
+            is UiEffect.ExamVerificationReady -> {
+                put("kind", "examVerificationReady"); put("examRouteId", effect.examRouteId)
+                put("skillId", effect.skillId); put("verificationItemId", effect.verificationItemId)
+            }
         }
     } }))
 }

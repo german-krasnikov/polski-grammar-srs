@@ -263,6 +263,41 @@ test('UX5: Enter on the focused role=button reveal target reveals the card, same
   await expect(card.locator('.card-back')).not.toHaveAttribute('aria-hidden', 'true');
 });
 
+// M8 blueprint AC1: a typed vocabulary answer now gets an automatic correct/incorrect verdict.
+test('M8: typed vocabulary answer gets an automatic correct verdict', async ({ page }) => {
+  await page.goto('/');
+  await page.getByRole('button', { name: 'Слова', exact: true }).click();
+  await page.getByRole('checkbox').first().check();
+  await page.getByRole('button', { name: 'Напечатать ответ' }).click();
+  await page.getByRole('textbox', { name: 'Ответ на карточку слова' }).fill('żona');
+  await page.getByRole('button', { name: 'Проверить' }).click();
+  await expect(page.getByRole('status').filter({ hasText: 'Верно.' })).toBeVisible();
+});
+
+test('M8: typed vocabulary answer gets an automatic incorrect verdict', async ({ page }) => {
+  await page.goto('/');
+  await page.getByRole('button', { name: 'Слова', exact: true }).click();
+  await page.getByRole('checkbox').first().check();
+  await page.getByRole('button', { name: 'Напечатать ответ' }).click();
+  await page.getByRole('textbox', { name: 'Ответ на карточку слова' }).fill('kot');
+  await page.getByRole('button', { name: 'Проверить' }).click();
+  await expect(page.getByRole('status').filter({ hasText: 'Неверно.' })).toBeVisible();
+});
+
+// M8 blueprint AC2: clicking "Использовать в фразе" opens Training already generating an
+// exercise for that exact noun, never a silently substituted word.
+test('M8: "Использовать в фразе" opens Training on the same noun', async ({ page }) => {
+  await page.goto('/');
+  await page.getByRole('button', { name: 'Слова', exact: true }).click();
+  await page.getByRole('checkbox').first().check();
+  await page.getByRole('button', { name: 'Показать ответ' }).click();
+  const phrase = page.locator('.vocabulary-use-in-phrase');
+  await expect(phrase).toBeVisible();
+  await phrase.getByRole('button').first().click();
+  await expect(page).toHaveURL(/#\/training$/);
+  await expect(page.getByRole('region', { name: 'Учебная карточка' })).toContainText('żona');
+});
+
 test('UX5: typed mode keeps its "Проверить" action; clicks inside the text field/mode buttons never flip', async ({ page }) => {
   await page.goto('/');
   await page.getByRole('button', { name: 'Слова', exact: true }).click();
