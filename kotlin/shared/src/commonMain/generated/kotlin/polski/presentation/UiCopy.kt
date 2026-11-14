@@ -1,4 +1,8 @@
-// Generated from dsl/ui-copy.declare, checked against courses-biome/pl-ru/uiCopy.core-data and courses-biome/en-ru/uiCopy.core-data, by dsl/ui-copy-accessors.mjs.
+// Generated from dsl/ui-copy.declare
+// source-sha256=1ec38eb4e4d24868eff3167617bcd8bf215d5c848f8a8594920a27ecf8b6129b
+// Edit the source, then run biome generate.
+
+// Generated from dsl/ui-copy.declare, checked against courses-biome/pl-ru/uiCopy.core-data and courses-biome/en-ru/uiCopy.core-data.
 // Edit dsl/ui-copy.declare, then run biome generate.
 package polski.presentation
 

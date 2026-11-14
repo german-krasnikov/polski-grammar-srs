@@ -1,0 +1,16 @@
+EXAMPLE a host wires the generated View contract into Compose state, with a default or a given Decisions
+  SOURCE COMPOSE_HOST Settings IN polski.generated.settings
+  EXPECT rendered.kt class SettingsComposeView : SettingsView {
+  EXPECT rendered.kt fun SettingsScreen(
+  EXPECT rendered.kt decisions: SettingsDecisions = SettingsLogicDecisions(),
+  EXPECT rendered.kt fun emit(intent: SettingsIntent) = handlers.toList().forEach { it(intent) }
+  EXPECT unrendered.kt androidx.compose.foundation
+
+EXAMPLE a given DECISIONS expression replaces the default
+  SOURCE COMPOSE_HOST Settings IN polski.generated.settings DECISIONS "SettingsDecisionsFromPrefs(prefs)"
+  EXPECT rendered.kt decisions: SettingsDecisions = SettingsDecisionsFromPrefs(prefs),
+  EXPECT unrendered.kt SettingsLogicDecisions()
+
+EXAMPLE a host without IN fails
+  SOURCE COMPOSE_HOST Settings
+  EXPECT diagnostic DECLARE_SYNTAX at 1:14

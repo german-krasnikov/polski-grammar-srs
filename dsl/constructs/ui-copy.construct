@@ -1,0 +1,43 @@
+# Project CONSTRUCT: the UiCopy accessor catalog. Replaces the hand-rolled regex parser
+# dsl/ui-copy-accessors.mjs used to be with proper DECLARE grammar (positions, UNIQUE
+# enforcement, diagnostics) and a declarative TEMPLATE instead of string concatenation.
+# KEY prints a `val` accessor over a pack's `uiCopy` map (named by its key, or AS);
+# PARTIAL means the key only has to exist in at least one named pack, not every one
+# (checked by dsl/ui-copy-coverage.mjs, not by this construct — DECLARE does no cross-file
+# lookup). FN prints a parameterized `fun` accessor (e.g. `languageName(code) = text("lang.$code")`).
+SURFACE ui-copy CODES UICOPY CONSTRUCTS CATALOG
+
+CONSTRUCT CATALOG VERSION 1 IR 1 SCOPE project
+  HEAD CATALOG <object:ident> IN <package:qname>
+  ITEM KEY <key:word UNIQUE> [AS <accessor:ident UNIQUE>] [<partial:enum(PARTIAL)>] [DOC <doc:string>]
+  ITEM FN <name:ident UNIQUE> <template:string> <param:ident> [DOC <doc:string>]
+  EXAMPLES ui-copy.examples
+  DECLARE
+  TEMPLATE kt HEADER "// Generated from dsl/ui-copy.declare, checked against courses-biome/pl-ru/uiCopy.core-data and courses-biome/en-ru/uiCopy.core-data.\n// Edit dsl/ui-copy.declare, then run biome generate."
+    package {package}
+
+    import polski.data.packRegistry
+
+    /**
+     * Pack-aware UI string catalog. Each property reads the active pack's `uiCopy` map,
+     * so switching packs changes all labels. Fallback = key name (visibly broken if a pack omits it).
+     */
+    object {object} {
+        /** Complete read-only label snapshot for the currently selected course pack. */
+        fun all(): Map<String, String> = packRegistry.active.uiCopy.toMap()
+    EACH KEY
+
+        {?doc: /** {doc} */}
+        {?accessor: val {accessor}: String get() = text("{key}")}
+        {!accessor: val {key:PascalCase}: String get() = text("{key}")}
+    END
+    EACH FN
+
+        {?doc: /** {doc} */}
+        fun {name}({param}: String): String = text("{template}")
+    END
+    }
+
+    private fun text(key: String): String = packRegistry.active.uiCopy[key] ?: key
+  END
+END

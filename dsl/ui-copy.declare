@@ -1,72 +1,69 @@
-# UiCopy.kt accessors: one line per `val Name get() = text("key")`, or `FN name template param` for a
-# parameterized `fun name(param: String) = text(template)`. dsl/ui-copy-accessors.mjs reads this file plus
-# courses-biome/pl-ru/uiCopy.core-data and courses-biome/en-ru/uiCopy.core-data and prints UiCopy.kt.
-# `# comment` lines directly above an entry (no blank line between) become its KDoc.
-#
-# Name            key                              [PARTIAL]
-# PARTIAL means the key only has to exist in at least one pack, not both.
+# UiCopy.kt accessors, read by dsl/constructs/ui-copy.construct (CATALOG). KEY <key> prints a `val` named by its
+# key (PascalCase) unless AS names it; PARTIAL means the key only has to exist in at least one of the two packs,
+# not both (checked by dsl/ui-copy-coverage.mjs against courses-biome/pl-ru/uiCopy.core-data and
+# courses-biome/en-ru/uiCopy.core-data). FN prints a parameterized `fun name(param) = text(template)`.
+CATALOG UiCopy IN polski.presentation
+  KEY again
+  KEY good
+  KEY progressTab
+  KEY settingsTab
+  KEY lifehacks
+  KEY showAnswer
+  KEY checkAndShowAnswer
+  KEY exportJson
+  KEY resetProgress
+  KEY hideTable
+  KEY tableAtHand
+  KEY allTablesAndSchema
+  KEY whenToReview
+  KEY noDueTitle
+  KEY compareAnswer
+  KEY backSideReference
+  KEY noAnswerEntered
+  KEY matches
+  KEY differs
+  KEY selectExam
+  KEY missions DOC "M9 blueprint: pl-ru pilot only — en-ru falls back to this key's own name until missions are authored for that pack too."
+  KEY start
+  KEY next
+  KEY finish
+  KEY tryAgain
+  KEY task
+  KEY grammar
+  KEY listening
+  KEY reading
+  KEY writing
+  KEY writingInstructionsAndCriteria
+  KEY selectWritingSet
+  KEY changeWritingSet
+  KEY writingSet
+  KEY results
+  KEY examConfirmedPoints
+  KEY examPendingPoints
+  KEY examManualReview
+  KEY examImmediateFeedbackSetting
+  KEY check AS ExamCheck
+  KEY examYourAnswer
+  KEY examAnswerLocked
+  KEY examFeedbackCorrect
+  KEY examFeedbackPartial
+  KEY examFeedbackWrong
+  KEY examOfficialExamples
+  KEY examTimedStart
+  KEY examTimedPart
+  KEY examTimedComplete
+  KEY examBackToModules
+  KEY examPrevious
+  KEY examAnswerPrompt
+  KEY examNativeUnavailable
+  KEY examChooseModule
+  KEY comingSoon
+  KEY exam
+  KEY cardsTab
+  KEY vocabularyTab
+  KEY matrixTab
 
-Again again
-Good good
-ProgressTab progressTab
-SettingsTab settingsTab
-Lifehacks lifehacks
-ShowAnswer showAnswer
-CheckAndShowAnswer checkAndShowAnswer
-ExportJson exportJson
-ResetProgress resetProgress
-HideTable hideTable
-TableAtHand tableAtHand
-AllTablesAndSchema allTablesAndSchema
-WhenToReview whenToReview
-NoDueTitle noDueTitle
-CompareAnswer compareAnswer
-BackSideReference backSideReference
-NoAnswerEntered noAnswerEntered
-Matches matches
-Differs differs
-SelectExam selectExam
-# M9 blueprint: pl-ru pilot only — en-ru falls back to this key's own name until missions are authored for that pack too.
-Missions missions
-Start start
-Next next
-Finish finish
-TryAgain tryAgain
-Task task
-Grammar grammar
-Listening listening
-Reading reading
-Writing writing
-WritingInstructionsAndCriteria writingInstructionsAndCriteria
-SelectWritingSet selectWritingSet
-ChangeWritingSet changeWritingSet
-WritingSet writingSet
-Results results
-ExamConfirmedPoints examConfirmedPoints
-ExamPendingPoints examPendingPoints
-ExamManualReview examManualReview
-ExamImmediateFeedbackSetting examImmediateFeedbackSetting
-ExamCheck check
-ExamYourAnswer examYourAnswer
-ExamAnswerLocked examAnswerLocked
-ExamFeedbackCorrect examFeedbackCorrect
-ExamFeedbackPartial examFeedbackPartial
-ExamFeedbackWrong examFeedbackWrong
-ExamOfficialExamples examOfficialExamples
-ExamTimedStart examTimedStart
-ExamTimedPart examTimedPart
-ExamTimedComplete examTimedComplete
-ExamBackToModules examBackToModules
-ExamPrevious examPrevious
-ExamAnswerPrompt examAnswerPrompt
-ExamNativeUnavailable examNativeUnavailable
-ExamChooseModule examChooseModule
-ComingSoon comingSoon
-Exam exam
-CardsTab cardsTab
-VocabularyTab vocabularyTab
-MatrixTab matrixTab
-
-FN languageName lang.$code code
-FN languageAdverb adverb.$code code
-FN tenseLabel tense.$tense tense
+  FN languageName "lang.$code" code
+  FN languageAdverb "adverb.$code" code
+  FN tenseLabel "tense.$tense" tense
+END

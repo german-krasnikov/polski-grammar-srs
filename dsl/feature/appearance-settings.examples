@@ -1,0 +1,19 @@
+EXAMPLE mounts_with_the_default
+  EXPECT view appearance=system; renders 1; subscriptions 1; calls none
+
+EXAMPLE choosing_dark_calls_the_port
+  DO choose(dark)
+  EXPECT view appearance=dark; renders 2; calls setAppearance(dark)
+
+EXAMPLE choosing_the_same_value_again_still_calls_the_port
+  DO choose(dark)
+  EXPECT renders 2; calls setAppearance(dark)
+  DO choose(dark)
+  EXPECT renders 2; calls setAppearance(dark), setAppearance(dark)
+
+EXAMPLE dispose_releases_everything
+  DO choose(dark)
+  DISPOSE
+  EXPECT subscriptions 0
+  STALE choose(light)
+  EXPECT renders 2; calls setAppearance(dark)

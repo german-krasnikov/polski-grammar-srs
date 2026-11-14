@@ -1,0 +1,26 @@
+EXAMPLE a key is a property named by its key, or by AS, documented, or PARTIAL; FN is a parameterized accessor
+  SOURCE CATALOG UiCopy IN polski.presentation
+  SOURCE   KEY save
+  SOURCE   KEY close AS CloseButton DOC "Closes the current dialog."
+  SOURCE   KEY missions PARTIAL
+  SOURCE   FN languageName "lang.$code" code
+  SOURCE END
+  EXPECT rendered.kt val Save: String get() = text("save")
+  EXPECT rendered.kt val CloseButton: String get() = text("close")
+  EXPECT rendered.kt /** Closes the current dialog. */
+  EXPECT rendered.kt val Missions: String get() = text("missions")
+  EXPECT rendered.kt fun languageName(code: String): String = text("lang.$code")
+  EXPECT unrendered.kt val Close:
+
+EXAMPLE a key twice is refused at the second
+  SOURCE CATALOG UiCopy IN polski.presentation
+  SOURCE   KEY save
+  SOURCE   KEY save
+  SOURCE END
+  EXPECT diagnostic DECLARE_DUPLICATE at 3:7
+
+EXAMPLE a catalog without IN fails
+  SOURCE CATALOG UiCopy
+  SOURCE   KEY save
+  SOURCE END
+  EXPECT diagnostic DECLARE_SYNTAX at 1:9

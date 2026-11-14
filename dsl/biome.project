@@ -1,4 +1,5 @@
-TOOLCHAIN 4f59276bb8527d8775eabf70bc19ad37b75b064f
+TOOLCHAIN 3da0d39d67f0eaaa19066b441ce392b346b20a13
+CONSTRUCTS constructs
 # The course data of the packs (R1): .core-data rows checked against course.data-contract and printed as Kotlin rows (kotlin/shared/src/commonMain/generated).
 # Run: node <biome> generate --project dsl/biome.project     Check: node <biome> generate --check --project dsl/biome.project
 CONTRACT course FROM course.data-contract
@@ -69,8 +70,10 @@ GENERATE exam-b2-2019 data --contract exam --rows ExamRow {dir}/../exams/pl/cert
 GENERATE course-plru-uicopy data --contract course --rows UiCopyRow {dir}/../courses-biome/pl-ru/uiCopy.core-data --target kt --kt-package polski.data.rows.plru.uicopy --out {dir}/../kotlin/shared/src/commonMain/generated/kotlin/polski/data/rows/plru/uicopy/UiCopyRows.kt
 GENERATE course-enru-uicopy data --contract course --rows UiCopyRow {dir}/../courses-biome/en-ru/uiCopy.core-data --target kt --kt-package polski.data.rows.enru.uicopy --out {dir}/../kotlin/shared/src/commonMain/generated/kotlin/polski/data/rows/enru/uicopy/UiCopyRows.kt
 GENERATE uicopy-oracle data --contract course --rows UiCopyCaseRow {dir}/ui-copy/uicopy-oracle.core-data --target kt --kt-package polski.data.oracle.uicopy --out {dir}/../kotlin/shared/src/commonTest/generated/kotlin/polski/data/oracle/uicopy/UiCopyCaseRows.kt
-# UiCopy.kt's accessors: declared once in dsl/ui-copy.declare, checked against both packs' uiCopy.core-data keys.
-GENERATE ui-copy-accessors derive {dir}/ui-copy-accessors.mjs generate OUT
+# UiCopy.kt's accessors: declared once in dsl/ui-copy.declare (CATALOG, dsl/constructs/ui-copy.construct),
+# checked against both packs' uiCopy.core-data keys by the coverage script below.
+GENERATE ui-copy render --surface ui-copy {dir}/ui-copy.declare kt {dir}/../kotlin/shared/src/commonMain/generated/kotlin/polski/presentation/UiCopy.kt
+GENERATE ui-copy-coverage script {dir}/ui-copy-coverage.mjs
 GENERATE course-plru data --contract course --rows SkillRow {dir}/../courses-biome/pl-ru/skills.core-data --rows NounRow {dir}/../courses-biome/pl-ru/nouns.core-data --rows AdjectiveRow {dir}/../courses-biome/pl-ru/adjectives.core-data --rows VerbRow {dir}/../courses-biome/pl-ru/verbs.core-data --rows PronounRow {dir}/../courses-biome/pl-ru/personalPronouns.core-data --rows PossessiveRow {dir}/../courses-biome/pl-ru/possessives.core-data --rows SeedRow {dir}/../courses-biome/pl-ru/sentenceSeeds.core-data --rows CopyEntryRow {dir}/../courses-biome/pl-ru/exerciseCopy.core-data --rows PatternEntryRow {dir}/../courses-biome/pl-ru/exercisePatterns.core-data --rows PrefixEntryRow {dir}/../courses-biome/pl-ru/caseSentencePrefixes.core-data --rows VocabularyRow {dir}/../courses-biome/pl-ru/vocabulary.core-data --rows TrainingRow {dir}/../courses-biome/pl-ru/training.core-data --rows StemAlternationRow {dir}/../courses-biome/pl-ru/stemAlternations.core-data --rows ReferenceRow {dir}/../courses-biome/pl-ru/reference.core-data --rows MorphologyRow {dir}/../courses-biome/pl-ru/morphology.core-data --rows ConstructionRow {dir}/../courses-biome/pl-ru/constructions.core-data --rows SkillRecipeRow {dir}/../courses-biome/pl-ru/recipes.core-data --rows ChainStepRecipeRow {dir}/../courses-biome/pl-ru/chainSteps.core-data --rows RecipeDefaultsRow {dir}/../courses-biome/pl-ru/recipeDefaults.core-data --rows LifehackRow {dir}/../courses-biome/pl-ru/lifehacks.core-data --target kt --kt-package polski.data.rows.plru --out {dir}/../kotlin/shared/src/commonMain/generated/kotlin/polski/data/rows/plru/CourseRows.kt
 GENERATE course-plru-frequency data --contract frequency --rows FrequencyRow {dir}/../courses-biome/pl-ru/frequency.core-data --target kt --kt-package polski.data.rows.plru.frequency --out {dir}/../kotlin/shared/src/commonMain/generated/kotlin/polski/data/rows/plru/frequency/FrequencyRows.kt
 # The form table of pl-ru is derived from the lexicon rows, not authored: the rules are in derive-forms.mjs, the printed rows are checked against forms.data-contract.
@@ -136,3 +139,9 @@ GENERATE learning-tile-scaffolding-outcomes data --contract tile-scaffolding-out
 GENERATE learning-tile-scaffolding-examples logic examples --source {dir}/learning/tile-scaffolding.examples --logic {dir}/learning/tile-scaffolding.logic --contract {dir}/learning/tile-scaffolding.contract --out {dir}/learning/generated/tile-scaffolding-examples.json
 GENERATE learning-daily-step logic generate --source {dir}/learning/daily-step.logic --contract {dir}/learning/daily-step.contract --target "kt {dir}/../kotlin/shared/src/commonMain/generated/kotlin/polski/presentation/dailysteppolicy/DailyStepPolicy.kt AS polski.presentation.dailysteppolicy"
 GENERATE learning-daily-step-examples logic examples --source {dir}/learning/daily-step.examples --logic {dir}/learning/daily-step.logic --contract {dir}/learning/daily-step.contract --out {dir}/learning/generated/daily-step-examples.json
+# COMPOSE_HOST pilot slice (Plans/DSL-CONSTRUCT-PLAN.md §2): the AppearanceSettings FEATURE (mvp) and its
+# Compose glue, shared by composeApp's Android and Desktop (JVM) targets only — the generated kt code
+# imports java.io.Closeable, unavailable on composeApp's js/wasmJs targets, so it lives in a plain
+# directory added as an extra kotlin.srcDir to androidMain and desktopMain (build.gradle.kts), not commonMain.
+GENERATE appearance-settings-feature feature generate --feature {dir}/feature/appearance-settings.feature --lang kt --kt-package polski.generated.settings.appearance --out {dir}/../kotlin/composeApp/src/jvmGenerated/kotlin --tests-out {dir}/../kotlin/composeApp/src/jvmGenerated/generatedTest/kotlin --flat
+GENERATE appearance-settings-compose-host render --surface compose-host {dir}/feature/appearance-settings.compose-host kt {dir}/../kotlin/composeApp/src/jvmGenerated/kotlin/AppearanceSettings.Compose.kt

@@ -1,6 +1,7 @@
 import org.jetbrains.compose.desktop.application.dsl.TargetFormat
 import org.gradle.api.tasks.Exec
 import org.gradle.api.tasks.JavaExec
+import org.gradle.api.tasks.testing.Test
 
 plugins {
     alias(libs.plugins.kotlin.multiplatform)
@@ -103,6 +104,10 @@ kotlin {
             implementation(kotlin("test"))
         }
         val desktopMain by getting {
+            // COMPOSE_HOST pilot slice (Plans/DSL-CONSTRUCT-PLAN.md §2): FEATURE + Compose glue generated
+            // from dsl/feature/appearance-settings.* (biome generate). Plain kotlin.srcDir, not commonMain:
+            // the generated kt imports java.io.Closeable, unavailable on the js/wasmJs targets below.
+            kotlin.srcDir("src/jvmGenerated/kotlin")
             dependencies {
                 implementation(compose.desktop.currentOs)
                 implementation(compose.material3)
@@ -111,9 +116,13 @@ kotlin {
         val desktopTest by getting {
             // Test-only, exact-path sealed legacy input; never included in application resources.
             resources.srcDir(layout.projectDirectory.dir("../../tests/fixtures/textwire"))
+            // JUnit 5 tests generated from dsl/feature/appearance-settings.examples (`biome feature generate`).
+            kotlin.srcDir("src/jvmGenerated/generatedTest/kotlin")
             dependencies {
                 implementation(kotlin("test"))
                 implementation("org.jetbrains.compose.ui:ui-test:1.12.1")
+                implementation(libs.junit.jupiter)
+                runtimeOnly(libs.junit.platform.launcher)
             }
         }
         androidMain.dependencies {
@@ -121,8 +130,14 @@ kotlin {
             // FC-16: legacy RiveAnimationView/state-machine-input API — see AndroidRiveOverlay.kt.
             implementation("app.rive:rive-android:11.12.1")
         }
+        androidMain {
+            // Same COMPOSE_HOST pilot slice as desktopMain above, shared by both JVM-like targets.
+            kotlin.srcDir("src/jvmGenerated/kotlin")
+        }
     }
 }
+
+tasks.named<Test>("desktopTest") { useJUnitPlatform() }
 
 // Web exam audio is a local, pinned input. A direct Gradle distribution must fail when
 // the vault is absent or its bytes differ from the DSL manifest.
