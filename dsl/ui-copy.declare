@@ -1,0 +1,72 @@
+# UiCopy.kt accessors: one line per `val Name get() = text("key")`, or `FN name template param` for a
+# parameterized `fun name(param: String) = text(template)`. dsl/ui-copy-accessors.mjs reads this file plus
+# courses-biome/pl-ru/uiCopy.core-data and courses-biome/en-ru/uiCopy.core-data and prints UiCopy.kt.
+# `# comment` lines directly above an entry (no blank line between) become its KDoc.
+#
+# Name            key                              [PARTIAL]
+# PARTIAL means the key only has to exist in at least one pack, not both.
+
+Again again
+Good good
+ProgressTab progressTab
+SettingsTab settingsTab
+Lifehacks lifehacks
+ShowAnswer showAnswer
+CheckAndShowAnswer checkAndShowAnswer
+ExportJson exportJson
+ResetProgress resetProgress
+HideTable hideTable
+TableAtHand tableAtHand
+AllTablesAndSchema allTablesAndSchema
+WhenToReview whenToReview
+NoDueTitle noDueTitle
+CompareAnswer compareAnswer
+BackSideReference backSideReference
+NoAnswerEntered noAnswerEntered
+Matches matches
+Differs differs
+SelectExam selectExam
+# M9 blueprint: pl-ru pilot only — en-ru falls back to this key's own name until missions are authored for that pack too.
+Missions missions
+Start start
+Next next
+Finish finish
+TryAgain tryAgain
+Task task
+Grammar grammar
+Listening listening
+Reading reading
+Writing writing
+WritingInstructionsAndCriteria writingInstructionsAndCriteria
+SelectWritingSet selectWritingSet
+ChangeWritingSet changeWritingSet
+WritingSet writingSet
+Results results
+ExamConfirmedPoints examConfirmedPoints
+ExamPendingPoints examPendingPoints
+ExamManualReview examManualReview
+ExamImmediateFeedbackSetting examImmediateFeedbackSetting
+ExamCheck check
+ExamYourAnswer examYourAnswer
+ExamAnswerLocked examAnswerLocked
+ExamFeedbackCorrect examFeedbackCorrect
+ExamFeedbackPartial examFeedbackPartial
+ExamFeedbackWrong examFeedbackWrong
+ExamOfficialExamples examOfficialExamples
+ExamTimedStart examTimedStart
+ExamTimedPart examTimedPart
+ExamTimedComplete examTimedComplete
+ExamBackToModules examBackToModules
+ExamPrevious examPrevious
+ExamAnswerPrompt examAnswerPrompt
+ExamNativeUnavailable examNativeUnavailable
+ExamChooseModule examChooseModule
+ComingSoon comingSoon
+Exam exam
+CardsTab cardsTab
+VocabularyTab vocabularyTab
+MatrixTab matrixTab
+
+FN languageName lang.$code code
+FN languageAdverb adverb.$code code
+FN tenseLabel tense.$tense tense
