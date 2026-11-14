@@ -17,18 +17,36 @@ export function registration(generated: string[], outputs: string[]) {
   };
 }
 
-/** The output file of every GENERATE step of every tracked biome.project: a derive step names it in its OUT export, a data step in --out, a logic generator in its quoted --target. */
+/** The output file of every GENERATE step of every tracked biome.project: a derive step names it in its OUT export, a data step in --out, a logic generator in its quoted --target, a render step in its trailing path, a feature --flat step in its .biome-files manifest. */
 async function stepOutputs(): Promise<string[]> {
   const outputs: string[] = [];
   for (const manifest of git('ls-files', '*biome.project')) {
     const dir = dirname(join(repo, manifest));
     for (const line of readFileSync(join(repo, manifest), 'utf8').split('\n').filter(l => l.startsWith('GENERATE '))) {
       const tokens = line.trim().split(/\s+/).map(token => token.replace('{dir}', dir));
-      const out = tokens.indexOf('--out'); // a data step without --out only checks (R1.19: the frequency list of en-ru) and prints nothing
+      const out = tokens.indexOf('--out');
       const logicTarget = tokens[2] === 'logic' && tokens[3] === 'generate'
         ? line.match(/--target\s+"kt\s+([^"]+?)\s+AS\s+[^"]+"/)?.[1].replaceAll('{dir}', dir)
         : undefined;
-      const file = tokens[2] === 'derive' ? (await import(pathToFileURL(resolve(tokens[3])).href))[tokens[5]] : out >= 0 ? tokens[out + 1] : logicTarget;
+      // render steps: GENERATE name render --surface surfaceName source lang outputFile
+      const renderOutput = tokens[2] === 'render' && tokens.length >= 7 && tokens[tokens.length - 1].endsWith('.kt')
+        ? tokens[tokens.length - 1] : undefined;
+      // feature --flat steps: output directory contains a .biome-files manifest listing each managed file
+      if (tokens[2] === 'feature' && tokens.includes('--flat') && out >= 0) {
+        const outDir = resolve(dir, tokens[out + 1]);
+        const testsOut = tokens.indexOf('--tests-out');
+        for (const d of [outDir, ...(testsOut >= 0 ? [resolve(dir, tokens[testsOut + 1])] : [])]) {
+          try {
+            const biomeFiles = readFileSync(join(d, '.biome-files'), 'utf8');
+            for (const entry of biomeFiles.split('\n').filter(Boolean)) {
+              const path = entry.split(/\s+/)[1];
+              if (path?.endsWith('.kt')) outputs.push(resolve(d, path).slice(repo.length + 1));
+            }
+          } catch { /* no .biome-files yet */ }
+        }
+        continue;
+      }
+      const file = tokens[2] === 'derive' ? (await import(pathToFileURL(resolve(tokens[3])).href))[tokens[5]] : renderOutput ?? (out >= 0 ? tokens[out + 1] : logicTarget);
       if (file) outputs.push(resolve(dir, file).slice(repo.length + 1));
     }
   }
