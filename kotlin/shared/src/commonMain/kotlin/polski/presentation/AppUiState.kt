@@ -24,8 +24,17 @@ enum class LoadStatus { Loading, Ready, MigrationAvailable, RecoveryRequired, Un
 /** M2 blueprint: a pending retry nudge after an error on [skillId] — [remaining] counts elapsed
  *  tasks (any mode, any outcome), decremented on every `rate()` call; the ticket matures and gets
  *  substituted in once it reaches 0. Session-only, same lifetime class as [DailySessionState] —
- *  never persisted, reset on every app load. */
-data class RetryTicket(val skillId: String, val remaining: Int)
+ *  never persisted, reset on every app load.
+ *
+ *  [originAttemptId] (P1 blueprint §P1.5): the erroring attempt's own `Exercise.id`, set at the
+ *  point `rate()` enqueues this ticket. Carried through to the matured substitution's own
+ *  `AttemptEvent.correctionOf` so a correction links back to the exact error it corrects. */
+data class RetryTicket(val skillId: String, val remaining: Int, val originAttemptId: String)
+
+/** P1 blueprint §P1.5: which action started the current session — a static classification of
+ *  *which action* started it, minted once per session alongside [AppUiState.sessionId], never
+ *  inferred later. */
+enum class SessionSource { ManualPick, DailyButton, ScheduleDue, Chain, Reset }
 
 /** Selection is reset on each entry to the matrix tab. */
 data class MatrixSelection(
@@ -88,6 +97,16 @@ data class AppUiState(
     /** M2 blueprint: set exactly when the *current* [exercise] was served because a ticket
      *  matured; cleared on the next `rate()`. Drives the "Ещё раз: {skill}" badge. */
     val activeRetrySkillId: String? = null,
+    /** P1 blueprint §P1.5: the [RetryTicket.originAttemptId] of the error this (matured) exercise
+     *  corrects — `null` whenever [activeRetrySkillId] is `null`. Read by `rate()` to stamp the
+     *  next `AttemptEvent.correctionOf`. */
+    val activeRetryOriginAttemptId: String? = null,
+    /** P1 blueprint §P1.5: minted once per session at each "mode start" action (`StartChain`,
+     *  `StartSchedule`, `StartDaily`, `ChooseSkill`, the post-`ResetDecision` restart, and the
+     *  first load) — `null` only before the very first of those has run. */
+    val sessionId: String? = null,
+    /** P1 blueprint §P1.5: which action started [sessionId]'s session — set once, alongside it. */
+    val sessionSource: SessionSource? = null,
 ) {
     val exerciseId: String? get() = exercise?.id
     val caseReferenceAvailable: Boolean get() = exercise?.let { skillById(it.primarySkill).caseReferenceAvailable } ?: true

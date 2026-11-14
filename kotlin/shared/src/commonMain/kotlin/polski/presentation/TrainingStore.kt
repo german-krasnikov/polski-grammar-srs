@@ -29,8 +29,14 @@ import polski.model.Exercise
 import polski.model.NumberGram
 import polski.model.PossessiveId
 import polski.model.seedKey
+import polski.progress.AttemptEvent
+import polski.progress.AttemptKind
+import polski.progress.AttemptLogRepository
+import polski.progress.AttemptLogSaveResult
+import polski.progress.CorrectnessBasis
 import polski.progress.LoadResult
 import polski.progress.MigrationResult
+import polski.progress.NoopAttemptLogRepository
 import polski.progress.ProgressCodec
 import polski.progress.ProgressDocument
 import polski.progress.ProgressRepository
@@ -41,12 +47,26 @@ import polski.progress.SkillQueue
 import polski.srs.Rating
 import polski.srs.Scheduler
 import polski.training.PlExerciseEngine
+import polski.training.RUBRIC_VERSION
 import polski.training.evaluate
 import polski.training.sentenceSeeds
 
 /** M2 blueprint: "через 2-3 задания" — the lower, more conservative bound; a placeholder in the
  *  same spirit as [polski.progress.TilePromotionThresholds], tune during the pilot. */
 const val RETRY_DELAY = 2
+
+/** P1 blueprint §P1.5: same shape as `polski.core.engine.ExerciseIdFactory` — injected into
+ *  [TrainingStore] the same way `exerciseEngine`/`time` already are, not hand-rolled inline. */
+fun interface SessionIdFactory { fun newId(): String }
+
+/** Default used by every call site that has not yet wired a real identity source — a per-store
+ *  monotonic counter is enough to make every session within one store instance distinct; it is
+ *  not meant to be globally unique across store instances (same spirit as every other default
+ *  [polski.core.engine.ExerciseIdFactory] a host builds inline). */
+private fun defaultSessionIdFactory(): SessionIdFactory {
+    var next = 0L
+    return SessionIdFactory { "session-${++next}" }
+}
 
 /**
  * Session owner. Dispatch and state collection belong to one UI thread. The supplied scope
@@ -68,6 +88,14 @@ class TrainingStore(
      *  mirrors the `RandomSource { Random.nextDouble() }` pattern each host already builds for
      *  [polski.training.PlExerciseEngine]. */
     private val tileRandom: RandomSource = RandomSource { kotlin.random.Random.nextDouble() },
+    /** P1 blueprint §P1.1: own storage key, own schema, read/written independently of
+     *  [ProgressDocument] — defaulted to [NoopAttemptLogRepository] so every existing call site
+     *  (Desktop/Android/iOS, not wired to a real journal in this pass) keeps compiling unchanged;
+     *  Web wires [polski.platform.WebAttemptLogRepository] explicitly. */
+    private val attemptLog: AttemptLogRepository = NoopAttemptLogRepository,
+    /** P1 blueprint §P1.5: defaulted the same way [tileRandom] is — every existing call site keeps
+     *  compiling unchanged with a store-local counter. */
+    private val sessionIds: SessionIdFactory = defaultSessionIdFactory(),
 ) {
     private val scope = CoroutineScope(ownerScope.coroutineContext + SupervisorJob(ownerScope.coroutineContext[Job]))
     private val writes = Channel<Write>(Channel.UNLIMITED)
@@ -82,6 +110,12 @@ class TrainingStore(
     private var nextEffectId = 0L
     private var started = false
     private var closed = false
+    /** P1 blueprint §P1.6: wall-clock-since-served for the *currently* served [AppUiState.exercise]
+     *  — reset by [project] whenever the exercise actually changes (never on a mere periodic
+     *  `RefreshTime` re-projection of the same card). Until a host wires a visibility listener,
+     *  this is the only available signal — correct-but-coarse, never fabricated. */
+    private var exerciseServedAt: kotlin.time.Instant? = null
+    private var lastServedExerciseId: String? = null
 
     private val initialChain = exerciseEngine.generateChain()
     private val mutableState = MutableStateFlow(
@@ -113,20 +147,60 @@ class TrainingStore(
         else -> ScaffoldingLevel.None
     }
 
+    /** P1 blueprint §P1.2 (AC2 "shown reference marks aid without a click"): [current.showReference]
+     *  already persists for the whole card once toggled ([AppAction.ToggleReference]) — "opened at
+     *  any point before Reveal" is exactly what this reads, no new click-tracking needed. For
+     *  TileBuilder, Full/Partial scaffolding rungs *are* the opened reference (pre-filled/guided
+     *  tiles); only [ScaffoldingLevel.None] counts as unaided. [source] is the document whose
+     *  `tileScaffoldingRung` was actually in effect when this exercise was served — the caller's
+     *  pre-review document, not the one this review just produced. */
+    private fun helpShownFor(current: AppUiState, source: ProgressDocument?): Boolean {
+        val exercise = current.exercise ?: return false
+        return when (current.answerMode) {
+            AnswerMode.Typed, AnswerMode.Oral -> current.showReference && current.caseReferenceAvailable
+            AnswerMode.TileBuilder -> {
+                val rung = source?.progress?.stats?.get(exercise.primarySkill)?.tileScaffoldingRung ?: 0
+                scaffoldingLevelFor(rung) != ScaffoldingLevel.None
+            }
+        }
+    }
+
+    /** P1 blueprint §P1.2 (AC3 traceability): [CorrectnessBasis.Evaluated] whenever a real
+     *  [polski.training.evaluate]/tile match ran (`current.evaluation`/`tileBuilder?.result`
+     *  non-null); [CorrectnessBasis.SelfReported] for [AnswerMode.Oral], which has no automatic
+     *  grading. [CorrectnessBasis.Ambiguous] is declared on the enum but never produced by this
+     *  wiring — reserved for a future free-text diagnosis path (M8) that does not exist yet. */
+    private fun correctnessBasisFor(current: AppUiState): CorrectnessBasis =
+        if (current.evaluation != null || current.tileBuilder?.result != null) CorrectnessBasis.Evaluated
+        else CorrectnessBasis.SelfReported
+
     init {
         scope.launch {
             for (write in writes) {
-                val result = try {
-                    when (write) {
-                        is Write.Save -> repository.save(write.document)
-                        is Write.Reset -> repository.resetConfirmed(write.at, write.localDay, knownSkillIds)
+                when (write) {
+                    is Write.Save -> {
+                        val result = try { repository.save(write.document) } catch (cancelled: CancellationException) {
+                            throw cancelled
+                        } catch (error: Throwable) { SaveResult.WriteFailed(error) }
+                        if (!closed) completeWrite(write.revision, result)
                     }
-                } catch (cancelled: CancellationException) {
-                    throw cancelled
-                } catch (error: Throwable) {
-                    SaveResult.WriteFailed(error)
+                    is Write.Reset -> {
+                        val result = try { repository.resetConfirmed(write.at, write.localDay, knownSkillIds) } catch (cancelled: CancellationException) {
+                            throw cancelled
+                        } catch (error: Throwable) { SaveResult.WriteFailed(error) }
+                        if (!closed) completeWrite(write.revision, result)
+                    }
+                    // P1 blueprint "Failure isolation": fire-and-forget relative to the UI, same
+                    // Write channel as Save/Reset but never gated on AppUiState.revision — a
+                    // journal write failure must never block or roll back the review that already
+                    // succeeded via ReviewReducer.
+                    is Write.LogAttempt -> {
+                        val result = try { attemptLog.append(write.event) } catch (cancelled: CancellationException) {
+                            throw cancelled
+                        } catch (error: Throwable) { AttemptLogSaveResult.WriteFailed(error) }
+                        if (!closed) completeAttemptWrite(result)
+                    }
                 }
-                if (!closed) completeWrite(write.revision, result)
             }
         }
     }
@@ -261,6 +335,11 @@ class TrainingStore(
             // (the `mutableState` property initializer runs with `document == null`); recompute
             // now that the real document — and its scaffolding rung — is known.
             tileBuilder = deriveTileBuilder(state.value.exercise, complete),
+            // P1 blueprint §P1.5: the first load's own session, minted once — a later
+            // requestMigration()'s own install() call (same session, not a new "mode start"
+            // action) must not mint a second one.
+            sessionId = state.value.sessionId ?: sessionIds.newId(),
+            sessionSource = state.value.sessionSource ?: SessionSource.Chain,
         ), complete, captured)
         if (complete != source) queueSave(complete)
     }
@@ -326,6 +405,7 @@ class TrainingStore(
             evaluation = null, tileBuilder = deriveTileBuilder(chain.first()),
             introPending = needsIntroduction(chain.first(), document),
             predictionPending = predictionPendingFor(chain.first(), document), error = null, daily = null,
+            sessionId = sessionIds.newId(), sessionSource = SessionSource.Chain,
         )
         addFocus(chain.first())
         refreshTime()
@@ -334,7 +414,7 @@ class TrainingStore(
     private fun startSchedule() {
         val captured = time.capture()
         val progress = document?.progress ?: return
-        val exercise = skillQueue.next(progress.cards, scheduler, captured.at)?.let { exerciseEngine.generateForSkill(it.skillId, weakSeedCount = weakSeedCountFor(it.skillId)) }
+        val exercise = skillQueue.next(progress.cards, scheduler, captured.at)?.let { exerciseEngine.generateForSkill(it.skillId, weakSeedCount = weakSeedCountFor(it.skillId), excludeProbePool = true) }
         mutableState.value = project(state.value.copy(
             tab = AppTab.Training, mode = TrainingMode.Schedule, focusedSkillId = null,
             showSkillPicker = false, exercise = exercise,
@@ -342,6 +422,7 @@ class TrainingStore(
             draft = "", frozenAnswer = null, evaluation = null, tileBuilder = deriveTileBuilder(exercise),
             introPending = needsIntroduction(exercise, document),
             predictionPending = predictionPendingFor(exercise, document), error = null, daily = null,
+            sessionId = sessionIds.newId(), sessionSource = SessionSource.ScheduleDue,
         ), document ?: return, captured)
         if (exercise != null) addFocus(exercise)
     }
@@ -353,7 +434,7 @@ class TrainingStore(
         val captured = time.capture()
         val progress = document?.progress ?: return
         val step = DailySessionPlanner.nextStep(progress, scheduler, skillQueue, skills, captured.at, completed = emptyList())
-        val exercise = step?.let { exerciseEngine.generateForSkill(it.skillId, weakSeedCount = weakSeedCountFor(it.skillId)) }
+        val exercise = step?.let { exerciseEngine.generateForSkill(it.skillId, weakSeedCount = weakSeedCountFor(it.skillId), excludeProbePool = true) }
         val tileBuilder = deriveTileBuilder(exercise)
         mutableState.value = project(state.value.copy(
             tab = AppTab.Training, mode = TrainingMode.Daily, focusedSkillId = null,
@@ -364,6 +445,7 @@ class TrainingStore(
             introPending = needsIntroduction(exercise, document),
             predictionPending = predictionPendingFor(exercise, document), error = null,
             daily = DailySessionState(currentStep = step),
+            sessionId = sessionIds.newId(), sessionSource = SessionSource.DailyButton,
         ), document ?: return, captured)
         if (exercise != null) addFocus(exercise)
     }
@@ -383,7 +465,7 @@ class TrainingStore(
         // ContinueDaily always return null. A fresh per-kind budget for the bonus round keeps the
         // same Review > New > Practice priority without that dead end (AI/decisions.md).
         val step = DailySessionPlanner.nextStep(progress, scheduler, skillQueue, skills, captured.at, completed = emptyList())
-        val exercise = step?.let { exerciseEngine.generateForSkill(it.skillId, weakSeedCount = weakSeedCountFor(it.skillId)) }
+        val exercise = step?.let { exerciseEngine.generateForSkill(it.skillId, weakSeedCount = weakSeedCountFor(it.skillId), excludeProbePool = true) }
         val tileBuilder = deriveTileBuilder(exercise)
         mutableState.value = project(current.copy(
             exercise = exercise, phase = if (exercise == null) CardPhase.NoDue else CardPhase.Question,
@@ -420,7 +502,7 @@ class TrainingStore(
         // saturated, so a bonus round keeps flowing only with a fresh per-kind budget each step.
         val completedForPlanner = if (daily.extended) emptyList() else history.map { it.kind }
         val nextStep = DailySessionPlanner.nextStep(newDocument.progress, scheduler, skillQueue, skills, at, completed = completedForPlanner)
-        val nextExercise = nextStep?.let { exerciseEngine.generateForSkill(it.skillId, weakSeedCount = weakSeedCountFor(it.skillId)) }
+        val nextExercise = nextStep?.let { exerciseEngine.generateForSkill(it.skillId, weakSeedCount = weakSeedCountFor(it.skillId), excludeProbePool = true) }
         return nextExercise to daily.copy(history = history, currentStep = nextStep)
     }
 
@@ -441,13 +523,14 @@ class TrainingStore(
             mutate { it.copy(error = "Неизвестные слова для навыка") }
             return
         }
-        val exercise = exerciseEngine.generateForSkill(action.skillId, action.preferredSeed, weakSeedCountFor(action.skillId))
+        val exercise = exerciseEngine.generateForSkill(action.skillId, action.preferredSeed, weakSeedCountFor(action.skillId), excludeProbePool = true)
         mutableState.value = state.value.copy(
             tab = AppTab.Training, mode = TrainingMode.Focused, focusedSkillId = action.skillId,
             showSkillPicker = false, exercise = exercise, phase = CardPhase.Question,
             draft = "", frozenAnswer = null, evaluation = null, tileBuilder = deriveTileBuilder(exercise),
             introPending = needsIntroduction(exercise, document),
             predictionPending = predictionPendingFor(exercise, document), error = null, daily = null,
+            sessionId = sessionIds.newId(), sessionSource = SessionSource.ManualPick,
         )
         addFocus(exercise)
         refreshTime()
@@ -505,6 +588,9 @@ class TrainingStore(
         val exercise = current.exercise ?: return
         val before = document ?: return
         val captured = time.capture()
+        // P1 blueprint §P1.6: elapsed since this exercise was actually served (project()'s own
+        // bookkeeping), captured before project() resets the accumulator for whatever comes next.
+        val activeMillis = (captured.at - (exerciseServedAt ?: captured.at)).inWholeMilliseconds.coerceAtLeast(0L)
         val correctness = when (current.answerMode) {
             AnswerMode.Typed -> current.evaluation?.correct
             AnswerMode.TileBuilder -> current.tileBuilder?.result?.correct
@@ -520,6 +606,25 @@ class TrainingStore(
             return
         }
         document = result.document
+        // P1 blueprint §P1.1/§P1.5: this exercise is a Retry exactly when it was served because an
+        // M2 ticket matured (activeRetrySkillId set by the PREVIOUS rate() call, cleared by this
+        // one below) — every other attempt is Practice (Probe is not wired into TrainingStore in
+        // this pass). Exactly one append per successful rate(), the same 1:1 guard as
+        // recordReview above, so AC1/AC4 hold by construction.
+        val isRetry = current.activeRetrySkillId == exercise.primarySkill
+        val attemptEvent = AttemptEvent(
+            attemptId = exercise.id, sessionId = current.sessionId ?: "unknown",
+            skillId = exercise.primarySkill, seedKey = seedKey(exercise),
+            kind = if (isRetry) AttemptKind.Retry else AttemptKind.Practice,
+            at = captured.at.toString(), localDay = captured.localDay, activeMillis = activeMillis,
+            answerMode = current.answerMode.name, helpShown = helpShownFor(current, before),
+            disclosed = current.phase == CardPhase.Revealed, correct = correctness,
+            correctnessBasis = correctnessBasisFor(current), selfRating = action.rating.name,
+            correctionOf = if (isRetry) current.activeRetryOriginAttemptId else null,
+            sessionKind = current.mode.name, sessionSource = (current.sessionSource ?: SessionSource.Chain).name,
+            rubricVersion = RUBRIC_VERSION,
+        )
+        writes.trySend(Write.LogAttempt(attemptEvent))
         // M2 blueprint: "через N заданий" counts elapsed tasks, not elapsed errors — every other
         // pending ticket is decremented on every rate() call, any mode, any outcome. A reliably
         // diagnosed error (Typed/TileBuilder only — Oral's correctness is always null, never
@@ -527,16 +632,16 @@ class TrainingStore(
         // fresh ticket for this skill.
         val decrementedQueue = current.retryQueue.map { it.copy(remaining = it.remaining - 1) }
         val queueAfterError = if (correctness == false && current.mode != TrainingMode.Chain) {
-            decrementedQueue + RetryTicket(exercise.primarySkill, RETRY_DELAY)
+            decrementedQueue + RetryTicket(exercise.primarySkill, RETRY_DELAY, exercise.id)
         } else decrementedQueue
 
         // Replace the card synchronously. The old ID can never be rated twice, even while saving.
         var nextDaily: DailySessionState? = null
         val modeNextExercise = when (current.mode) {
             TrainingMode.Chain -> current.chain.getOrNull(current.chainIndex + 1)
-            TrainingMode.Focused -> (current.focusedSkillId ?: exercise.primarySkill).let { exerciseEngine.generateForSkill(it, weakSeedCount = weakSeedCountFor(it)) }
+            TrainingMode.Focused -> (current.focusedSkillId ?: exercise.primarySkill).let { exerciseEngine.generateForSkill(it, weakSeedCount = weakSeedCountFor(it), excludeProbePool = true) }
             TrainingMode.Schedule ->
-                skillQueue.next(result.document.progress.cards, scheduler, captured.at)?.let { exerciseEngine.generateForSkill(it.skillId, weakSeedCount = weakSeedCountFor(it.skillId)) }
+                skillQueue.next(result.document.progress.cards, scheduler, captured.at)?.let { exerciseEngine.generateForSkill(it.skillId, weakSeedCount = weakSeedCountFor(it.skillId), excludeProbePool = true) }
             TrainingMode.Daily -> {
                 val (ex, daily) = advanceDaily(current, action.rating, result.document, captured.at)
                 nextDaily = daily
@@ -550,7 +655,7 @@ class TrainingStore(
         // remember it). Chain mode is never interrupted (scripted content).
         val maturedTicket = if (current.mode != TrainingMode.Chain) queueAfterError.firstOrNull { it.remaining <= 0 } else null
         val nextExercise = if (maturedTicket != null) {
-            exerciseEngine.generateForSkill(maturedTicket.skillId, weakSeedCount = weakSeedCountFor(maturedTicket.skillId))
+            exerciseEngine.generateForSkill(maturedTicket.skillId, weakSeedCount = weakSeedCountFor(maturedTicket.skillId), excludeProbePool = true)
         } else modeNextExercise
         val retryQueue = if (maturedTicket != null) queueAfterError - maturedTicket else queueAfterError
         // M3/M2: Daily has no "Retry" DailyStepKind — tag the substituted step as Practice (the
@@ -579,6 +684,7 @@ class TrainingStore(
             predictionPending = predictionPendingFor(nextExercise, result.document),
             daily = if (current.mode == TrainingMode.Daily) nextDaily else current.daily,
             retryQueue = retryQueue, activeRetrySkillId = maturedTicket?.skillId,
+            activeRetryOriginAttemptId = maturedTicket?.originAttemptId,
         )
         mutableState.value = project(updated, result.document, captured)
         queueSave(result.document)
@@ -591,7 +697,7 @@ class TrainingStore(
         val doc = document ?: return
         val projected = project(current, doc, captured)
         if (current.mode == TrainingMode.Schedule && current.phase == CardPhase.NoDue && projected.dueCount > 0) {
-            val exercise = skillQueue.next(doc.progress.cards, scheduler, captured.at)?.let { exerciseEngine.generateForSkill(it.skillId, weakSeedCount = weakSeedCountFor(it.skillId)) }
+            val exercise = skillQueue.next(doc.progress.cards, scheduler, captured.at)?.let { exerciseEngine.generateForSkill(it.skillId, weakSeedCount = weakSeedCountFor(it.skillId), excludeProbePool = true) }
             mutableState.value = project(projected.copy(
                 exercise = exercise, phase = CardPhase.Question, tileBuilder = deriveTileBuilder(exercise),
                 introPending = needsIntroduction(exercise, doc),
@@ -602,6 +708,12 @@ class TrainingStore(
     }
 
     private fun project(base: AppUiState, doc: ProgressDocument, captured: TimeCapture): AppUiState {
+        // P1 blueprint §P1.6: reset the "served at" accumulator exactly when the exercise actually
+        // changes — never on a mere periodic RefreshTime re-projection of the same card.
+        if (base.exercise?.id != lastServedExerciseId) {
+            exerciseServedAt = captured.at
+            lastServedExerciseId = base.exercise?.id
+        }
         val cards = doc.progress.cards
         val due = skillQueue.due(cards, scheduler, captured.at).size
         val next = skillQueue.nextDueAt(cards, captured.at)
@@ -643,6 +755,7 @@ class TrainingStore(
             introPending = needsIntroduction(chain.first(), fresh),
             predictionPending = predictionPendingFor(chain.first(), fresh),
             showSkillPicker = false, error = null, daily = null,
+            sessionId = sessionIds.newId(), sessionSource = SessionSource.Reset,
         )
         mutableState.value = project(next, fresh, captured)
         val revision = state.value.revision + 1
@@ -694,13 +807,23 @@ class TrainingStore(
         }
     }
 
+    /** P1 blueprint "Failure isolation": a distinct, non-blocking error — the review/FSRS state
+     *  this write corresponds to has already been applied and saved regardless of this result. */
+    private fun completeAttemptWrite(result: AttemptLogSaveResult) {
+        if (result is AttemptLogSaveResult.WriteFailed) {
+            mutate { it.copy(error = "Не удалось сохранить запись попытки.") }
+        }
+    }
+
     private inline fun mutate(change: (AppUiState) -> AppUiState) {
         mutableState.value = change(mutableState.value)
     }
 
     private sealed interface Write {
-        val revision: Long
-        data class Save(override val revision: Long, val document: ProgressDocument) : Write
-        data class Reset(override val revision: Long, val at: kotlin.time.Instant, val localDay: String) : Write
+        data class Save(val revision: Long, val document: ProgressDocument) : Write
+        data class Reset(val revision: Long, val at: kotlin.time.Instant, val localDay: String) : Write
+        /** P1 blueprint: no `revision` — attempts are never gated on [AppUiState.revision]/
+         *  [AppUiState.savedRevision], which track the [ProgressDocument] save pipeline only. */
+        data class LogAttempt(val event: AttemptEvent) : Write
     }
 }

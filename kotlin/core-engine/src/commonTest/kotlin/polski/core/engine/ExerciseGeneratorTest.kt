@@ -6,6 +6,7 @@ import polski.core.model.ScaffoldingLevel
 import polski.core.model.SkillSpec
 import kotlin.test.Test
 import kotlin.test.assertEquals
+import kotlin.test.assertFailsWith
 import kotlin.test.assertNotNull
 import kotlin.test.assertNull
 import kotlin.test.assertTrue
@@ -245,6 +246,84 @@ class ExerciseGeneratorTest {
         assertEquals("test.slot-presence", tilePhrase.construction)
         assertEquals("thing", tilePhrase.text)
         assertTrue(exercise.expected.indexOf(tilePhrase.text) >= 0)
+    }
+
+    // P1 blueprint §P1.3 (AC6): poolOf is a pure function of (skillId, seedKey) — same inputs,
+    // same pool, every time, no RandomSource involved.
+    @Test fun poolOfIsDeterministicAndStableAcrossRepeatedCalls() {
+        val seed = mapOf("noun" to "thing", "adjective" to "a")
+        val first = poolOf("test.skill", seed)
+        repeat(10) { assertEquals(first, poolOf("test.skill", seed)) }
+    }
+
+    @Test fun poolOfPartitionsBySeedContentNotByExerciseId() {
+        // A different skillId or a different seed can land in a different pool; the same
+        // (skillId, seed) pair never does, regardless of how many freshly-minted exercise IDs
+        // were issued in between — the partition key is content, not `ExerciseIdFactory.newId()`.
+        val seedA = mapOf("noun" to "thing", "adjective" to "a")
+        val seedB = mapOf("noun" to "other", "adjective" to "a")
+        assertEquals(poolOf("test.skill", seedA), poolOf("test.skill", seedA))
+        // Not every (skillId, seed) need differ, but the function must not depend on call order/count.
+        repeat(5) { poolOf("test.skill", seedB) }
+        assertEquals(poolOf("test.skill", seedA), poolOf("test.skill", seedA))
+    }
+
+    // M4: two consecutive dynamic-seed draws for the same skill must never repeat the same
+    @Test fun generateForSkillNeverServesAHeldOutProbeSeed() {
+        // Brute-force over a large adjective range (noun fixed to a morphology-known id) to find
+        // a concrete Training seed and a concrete non-Training (probe) seed for this test's skill
+        // — grounded in poolOf's real partition, not an assumption about which id lands where.
+        val candidates = (0 until 500).map { i -> mapOf("noun" to "thing", "adjective" to "a$i") }
+        val trainingSeed = candidates.first { poolOf("test.skill", it) == ContentPool.Training }
+        val probeSeed = candidates.first { poolOf("test.skill", it) != ContentPool.Training }
+        val seeds = listOf(trainingSeed, probeSeed)
+        val generator = generator(emptyList(), seeds = seeds, random = RandomSource { kotlin.random.Random.nextDouble() })
+        repeat(50) {
+            val exercise = generator.generateForSkill("test.skill", excludeProbePool = true)
+            assertEquals(seedKey(trainingSeed), seedKey(exercise.slots), "a probe seed must never surface as an ordinary exercise")
+        }
+    }
+
+    // Regression guard: excludeProbePool defaults to false, reproducing the exact pre-P1 uniform
+    // pool (byte-parity with TrainingParityTest's pinned React-oracle fixture) — a probe seed CAN
+    // be drawn unless a host explicitly opts in.
+    @Test fun generateForSkillWithoutExcludeProbePoolCanStillDrawAProbeSeed() {
+        val candidates = (0 until 500).map { i -> mapOf("noun" to "thing", "adjective" to "a$i") }
+        val probeSeed = candidates.first { poolOf("test.skill", it) != ContentPool.Training }
+        val generator = generator(emptyList(), seeds = listOf(probeSeed), random = QueueRandomSource(listOf(0.0)))
+        val exercise = generator.generateForSkill("test.skill")
+        assertEquals(seedKey(probeSeed), seedKey(exercise.slots))
+    }
+
+    @Test fun generateForSkillFallsBackToTheFullPoolWhenEveryCandidateIsAProbeSeed() {
+        // Fail-soft: a skill whose entire candidate pool happens to hash into a probe bucket must
+        // still generate every time, not stall — same shape as M4's own anti-repeat fallback.
+        val candidates = (0 until 500).map { i -> mapOf("noun" to "thing", "adjective" to "a$i") }
+        val onlyProbeSeed = candidates.first { poolOf("test.skill", it) != ContentPool.Training }
+        val generator = generator(emptyList(), seeds = listOf(onlyProbeSeed), random = QueueRandomSource(listOf(0.0, 0.0)))
+        val exercise = generator.generateForSkill("test.skill", excludeProbePool = true)
+        assertEquals(seedKey(onlyProbeSeed), seedKey(exercise.slots))
+    }
+
+    @Test fun generateProbeExerciseOnlyDrawsFromItsRequestedWindow() {
+        val candidates = (0 until 500).map { i -> mapOf("noun" to "thing", "adjective" to "a$i") }
+        val byPool = ContentPool.entries.associateWith { pool -> candidates.filter { poolOf("test.skill", it) == pool } }
+        val seeds = (byPool[ContentPool.Training].orEmpty().take(2) +
+            byPool[ContentPool.ProbeD7].orEmpty().take(2) + byPool[ContentPool.ProbeD30].orEmpty().take(2))
+        val generator = generator(emptyList(), seeds = seeds, random = RandomSource { kotlin.random.Random.nextDouble() })
+        repeat(30) {
+            val exercise = generator.generateProbeExercise("test.skill", ContentPool.ProbeD7)
+            assertEquals(ContentPool.ProbeD7, poolOf("test.skill", exercise.slots))
+        }
+        repeat(30) {
+            val exercise = generator.generateProbeExercise("test.skill", ContentPool.ProbeD30)
+            assertEquals(ContentPool.ProbeD30, poolOf("test.skill", exercise.slots))
+        }
+    }
+
+    @Test fun generateProbeExerciseRejectsTheTrainingWindow() {
+        val generator = generator(emptyList())
+        assertFailsWith<IllegalArgumentException> { generator.generateProbeExercise("test.skill", ContentPool.Training) }
     }
 
     // prefixCase == "voc" capitalizes the phrase (TextCase), breaking verbatim substring matching against expected — singlePhraseSpec must refuse it, fail-soft.

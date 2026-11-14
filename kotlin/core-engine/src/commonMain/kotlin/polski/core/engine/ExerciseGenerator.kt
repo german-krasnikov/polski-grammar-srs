@@ -135,6 +135,16 @@ class ExerciseGenerator(
     private fun candidatesFor(filter: LexicalFilter?): List<Map<String, String>> =
         if (filter == null) seeds else seeds.filter { matchesFilter(it, filter) }
 
+    /** P1 blueprint §P1.3 (AC6): every *normal* practice/schedule/daily pick excludes held-out
+     *  probe seeds before the existing M4 anti-repeat filter — a probe seed must never surface as
+     *  an ordinary exercise. Falls back to the unfiltered pool when excluding probe seeds would
+     *  leave nothing to pick from (same fail-soft shape as [pickSeed]'s own anti-repeat fallback;
+     *  needed for a skill whose entire candidate pool happens to hash into a probe bucket). */
+    private fun trainingCandidatesFor(skillId: String, filter: LexicalFilter?): List<Map<String, String>> {
+        val all = candidatesFor(filter)
+        return all.filter { poolOf(skillId, it) == ContentPool.Training }.ifEmpty { all }
+    }
+
     private fun bundleOf(features: Map<String, String>): Map<FeatureKey, FeatureValue> =
         features.entries.associate { (key, value) -> FeatureKey(key) to FeatureValue(value) }
 
@@ -267,13 +277,40 @@ class ExerciseGenerator(
         /** M5 blueprint: `null` (every pre-M5 call site) reproduces today's uniform behavior
          *  exactly — no extra draw, no bias. A host opts in by passing the closure. */
         weakSeedCount: ((candidateSeedKey: String) -> Int)? = null,
+        /** P1 blueprint §P1.3 (AC6): `false` (every pre-P1 call site, including
+         *  `TrainingParityTest`'s own pinned React-oracle fixture) reproduces today's exact
+         *  candidate pool and is therefore a no-op for byte-parity — a host opts in by passing
+         *  `true` for every *normal* (non-probe) pick, same opt-in shape as [weakSeedCount]. */
+        excludeProbePool: Boolean = false,
     ): CoreExercise {
         skills[skillId] ?: error("Unknown skill $skillId")
         val recipe = recipes[skillId] ?: error("No recipe for skill $skillId")
-        val candidates = candidatesFor(skills.getValue(skillId).lexicalFilter)
+        val filter = skills.getValue(skillId).lexicalFilter
+        val candidates = if (excludeProbePool) trainingCandidatesFor(skillId, filter) else candidatesFor(filter)
         val seed = preferredSeed?.takeIf { preferred -> candidates.any { it["noun"] == preferred["noun"] } } ?: pickSeed(skillId, candidates, weakSeedCount)
         lastSeedKey[skillId] = seedKey(seed)
+        return buildExercise(skillId, recipe, seed)
+    }
 
+    /** P1 blueprint §P1.3: same realization pipeline as [generateForSkill], but picks uniformly
+     *  (no M4 anti-repeat, no M5 weak-form bias — a probe is not supposed to be adapted) from the
+     *  held-out [window] pool instead of [ContentPool.Training]. Scoped to the dynamic-seed path
+     *  only: a skill whose recipe is `staticOverride`/`staticPool`-driven has no seed pool for
+     *  [poolOf] to partition, so it is not a probe candidate under this blueprint. */
+    fun generateProbeExercise(skillId: String, window: ContentPool): CoreExercise {
+        require(window != ContentPool.Training) { "generateProbeExercise needs a probe window, not Training" }
+        skills[skillId] ?: error("Unknown skill $skillId")
+        val recipe = recipes[skillId] ?: error("No recipe for skill $skillId")
+        require(recipe.staticOverride == null && recipe.staticPool.isEmpty()) {
+            "Skill $skillId has no seed-based pool to probe"
+        }
+        val candidates = candidatesFor(skills.getValue(skillId).lexicalFilter).filter { poolOf(skillId, it) == window }
+        require(candidates.isNotEmpty()) { "No $window candidates for skill $skillId" }
+        val seed = pick(candidates)
+        return buildExercise(skillId, recipe, seed)
+    }
+
+    private fun buildExercise(skillId: String, recipe: SkillRecipe, seed: Map<String, String>): CoreExercise {
         val staticOverride = recipe.staticOverride
         if (staticOverride != null) return staticExercise(skillId, staticOverride)
         if (recipe.staticPool.isNotEmpty()) {

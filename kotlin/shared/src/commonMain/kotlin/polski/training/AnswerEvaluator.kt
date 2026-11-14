@@ -4,6 +4,13 @@ import polski.grammar.normalize
 import polski.model.Evaluation
 import polski.model.Exercise
 
+/** P1 blueprint §P1.4: which version of [evaluate]'s normalize/match rule judged a given attempt.
+ *  Bumped only when the rule itself changes in a way that could change a verdict for existing
+ *  accepted-variant data — not on every unrelated edit to this file. A single global int, not a
+ *  per-skill table: the matching algorithm is shared across every skill (`evaluate()` takes no
+ *  skill-specific rule set). */
+const val RUBRIC_VERSION = 1
+
 /** Compares normalized primary and accepted answers; distance uses UTF-16 code units. */
 fun evaluate(answer: String, exercise: Exercise): Evaluation {
     val normalized = normalize(answer)

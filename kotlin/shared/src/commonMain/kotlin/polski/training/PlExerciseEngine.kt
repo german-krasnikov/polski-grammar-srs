@@ -29,7 +29,10 @@ class PlExerciseEngine(random: RandomSource, ids: ExerciseIdFactory) {
         skillId: String,
         preferredSeed: SentenceSeed? = null,
         weakSeedCount: ((candidateSeedKey: String) -> Int)? = null,
-    ): Exercise = generator.generateForSkill(skillId, preferredSeed?.toSlots(), weakSeedCount).toExercise()
+        /** P1 blueprint §P1.3 (AC6): `false` by default, same opt-in shape as [weakSeedCount] —
+         *  `TrainingStore` passes `true` for every normal (non-probe) pick. */
+        excludeProbePool: Boolean = false,
+    ): Exercise = generator.generateForSkill(skillId, preferredSeed?.toSlots(), weakSeedCount, excludeProbePool).toExercise()
 
     fun generateChain(seed: SentenceSeed = sentenceSeeds.first()): List<Exercise> =
         generator.generateChain(plChainSteps(seed.nounId), seed.toSlots()).map { it.toExercise() }

@@ -17,7 +17,10 @@ class BrowserLocalDayProvider : LocalDayProvider {
     override fun localDay(at: Instant): String = browserLocalDay(at.toEpochMilliseconds().toDouble())
 }
 
-private class BrowserKeyValueStore : RawKeyValueStore {
+/** `internal`, not `private`: P1 blueprint reuses this exact adapter for
+ *  [WebAttemptLogRepository]'s own key — one `RawKeyValueStore` per browser origin, not per
+ *  document kind. */
+internal class BrowserKeyValueStore : RawKeyValueStore {
     override fun get(key: String): String? = window.localStorage.getItem(key)
     override fun put(key: String, value: String) { window.localStorage.setItem(key, value) }
 }

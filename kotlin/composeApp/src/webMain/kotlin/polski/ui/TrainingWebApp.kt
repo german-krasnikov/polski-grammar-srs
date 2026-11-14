@@ -23,6 +23,7 @@ import kotlin.random.Random
 import kotlin.time.Clock
 import polski.data.activeCoursePackId
 import polski.platform.BrowserLocalDayProvider
+import polski.platform.WebAttemptLogRepository
 import polski.platform.WebProgressRepository
 import polski.platform.WebAppearance
 import polski.preferences.PreferredAnswerMode
@@ -60,6 +61,7 @@ fun TrainingWebApp() {
             scope,
             StyleId(preferences.value.styleId.name),
             if (preferences.value.answerMode == PreferredAnswerMode.Typed) AnswerMode.Typed else AnswerMode.Oral,
+            attemptLog = WebAttemptLogRepository(),
         )
     }
     val state by store.state.collectAsState()

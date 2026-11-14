@@ -541,7 +541,7 @@ class TrainingStoreTest {
         store.dispatch(AppAction.EditAnswer("wrong"))
         store.dispatch(AppAction.Reveal(errorId))
         store.dispatch(AppAction.Rate(errorId, Rating.Again))
-        assertEquals(listOf(RetryTicket("case.acc.f", RETRY_DELAY)), store.state.value.retryQueue)
+        assertEquals(listOf(RetryTicket("case.acc.f", RETRY_DELAY, errorId)), store.state.value.retryQueue)
         assertNull(store.state.value.activeRetrySkillId)
 
         store.dispatch(AppAction.ChooseSkill("case.acc.m"))
