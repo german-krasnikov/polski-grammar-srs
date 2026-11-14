@@ -41,6 +41,7 @@ import polski.presentation.dailySummaryText
 import polski.presentation.trainingCardModel
 import polski.srs.Rating
 import polski.training.sentenceSeeds
+import polski.ui.Collapsible
 
 @Composable
 internal fun AndroidTrainingScreen(
@@ -79,7 +80,7 @@ internal fun AndroidTrainingScreen(
         ) { selected ->
             model.header.modes.firstOrNull { it.mode.name == selected }?.action?.let(dispatch)
         }
-        AndroidCollapsible(visible = state.showSkillPicker, reduceMotion = reduceMotion) {
+        Collapsible(visible = state.showSkillPicker, reduceMotion = reduceMotion) {
             AndroidChoiceMenu("Выбрать навык", "", polski.data.skills.map { it.id to it.title }) {
                 dispatch(AppAction.ChooseSkill(it))
             }
@@ -215,7 +216,7 @@ internal fun AndroidTrainingScreen(
             modifier = Modifier.fillMaxWidth()) {
             Text(model.referenceToggle.label)
         }
-        AndroidCollapsible(visible = model.referenceToggle.expanded, reduceMotion = reduceMotion) {
+        Collapsible(visible = model.referenceToggle.expanded, reduceMotion = reduceMotion) {
             AndroidCaseReference(state, dispatch)
         }
     }

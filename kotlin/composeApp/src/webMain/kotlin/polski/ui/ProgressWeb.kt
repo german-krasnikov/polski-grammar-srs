@@ -3,12 +3,14 @@ package polski.ui
 import kotlin.math.floor
 import kotlinx.browser.document
 import org.w3c.dom.HTMLElement
+import polski.data.skillById
 import polski.data.skills
 import polski.platform.browserFormatDate
 import polski.presentation.AppAction
 import polski.presentation.AppUiState
 import polski.presentation.LoadStatus
 import polski.presentation.UiCopy
+import polski.presentation.achievedSkills
 
 /** Current, in-memory progress view. Storage errors never hide its export action. */
 internal fun renderProgressWeb(root: HTMLElement, state: AppUiState, dispatch: (AppAction) -> Unit) {
@@ -79,21 +81,20 @@ internal fun renderProgressWeb(root: HTMLElement, state: AppUiState, dispatch: (
  */
 private fun renderAchievementsSection(root: HTMLElement, state: AppUiState) {
     val progress = state.progress ?: return
-    val achieved = skills.filter { progress.stats[it.id]?.tileScaffoldingRung == 2 }
+    val achieved = achievedSkills(skills, progress.stats)
     if (achieved.isEmpty()) return
     val section = root.progressAdd("section", cls = "card matrix-section")
     section.setAttribute("aria-label", "Мои достижения")
     section.progressAdd("h2", "Мои достижения")
-    achieved.forEach { skill ->
-        val stats = progress.stats.getValue(skill.id)
+    achieved.forEach { achievement ->
         val item = section.progressAdd("div", cls = "achievement")
-        item.progressAdd("b", skill.title)
+        item.progressAdd("b", skillById(achievement.skillId).title)
         // independentSince can still be null for a skill that reached rung 2 before M6 shipped and
         // hasn't been promoted again since (ReviewReducer's own sticky-while-already-None rule) —
         // fail-soft: the streak alone is still shown, just without a date.
-        val since = stats.independentSince?.let { " · раньше с таблицей, теперь сам — с $it" }
+        val since = achievement.independentSince?.let { " · раньше с таблицей, теперь сам — с $it" }
             ?: " · раньше с таблицей, теперь сам"
-        item.progressAdd("span", "$since · подтверждено ${stats.tileScaffoldingStreak} раз без таблицы")
+        item.progressAdd("span", "$since · подтверждено ${achievement.streak} раз без таблицы")
     }
 }
 

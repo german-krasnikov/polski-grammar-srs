@@ -24,6 +24,7 @@ import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import polski.presentation.Block
+import polski.ui.Collapsible
 
 /**
  * UC-10/S2 (`Plans/Kotlin/StylesBlueprint.md`§6): renders a [Block] list exactly in the order
@@ -185,7 +186,7 @@ private fun AndroidExamplesBlock(block: Block.Examples) {
 }
 
 /**
- * Collapsed-by-default disclosure. [reduceMotion] only drops [AndroidCollapsible]'s expand
+ * Collapsed-by-default disclosure. [reduceMotion] only drops [Collapsible]'s expand
  * animation (same contract as the reference-table toggle) — the toggle itself, and the
  * `stateDescription` a screen reader announces, work identically either way. [block.parts]
  * (S4/E7) highlights [Block.WhyOnDemand.text] the same way as [AndroidFormulaBlock].
@@ -205,7 +206,7 @@ private fun AndroidWhyOnDemandBlock(block: Block.WhyOnDemand, reduceMotion: Bool
             Text(if (expanded) "▾" else "▸", color = MaterialTheme.colorScheme.primary)
             Text(label, style = MaterialTheme.typography.labelLarge, color = MaterialTheme.colorScheme.primary)
         }
-        AndroidCollapsible(visible = expanded, reduceMotion = reduceMotion) {
+        Collapsible(visible = expanded, reduceMotion = reduceMotion) {
             AndroidEmphasisText(
                 block.parts, before = false, style = MaterialTheme.typography.bodyMedium,
                 modifier = Modifier.padding(top = 6.dp),

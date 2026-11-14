@@ -360,9 +360,3 @@ internal class ExamGrammarController(
         })
     }
 }
-
-private fun navBtn(label: String, primary: Boolean = false, onClick: () -> Unit) =
-    (document.createElement("button") as HTMLButtonElement).apply {
-        type = "button"; className = if (primary) "exam-nav-btn primary" else "exam-nav-btn"
-        textContent = label; addEventListener("click", { onClick() })
-    }

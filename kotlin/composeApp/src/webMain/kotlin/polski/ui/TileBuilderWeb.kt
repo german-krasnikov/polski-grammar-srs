@@ -7,6 +7,8 @@ import polski.presentation.AppAction
 import polski.presentation.TileAction
 import polski.presentation.TileBuilderState
 import polski.presentation.UiCopy
+import polski.presentation.tileBuilderCanCheck
+import polski.presentation.togglePanel
 
 /**
  * SB-6 blueprint §2: renders one [TileBuilderState] card — the tile row, its single inline
@@ -70,9 +72,10 @@ internal fun renderTileBuilderSection(
     }
 
     fun togglePicker(choice: TileSegment.Choice) {
-        val opening = currentOpenPicker != choice.position
+        val next = togglePanel(currentOpenPicker, choice.position)
+        val opening = next != null
         choiceButtons.values.forEach { it.setAttribute("aria-expanded", "false") }
-        currentOpenPicker = if (opening) choice.position else null
+        currentOpenPicker = next
         onTogglePicker(currentOpenPicker)
         if (opening) {
             renderPickerCandidates(choice)
@@ -82,8 +85,9 @@ internal fun renderTileBuilderSection(
     }
 
     fun toggleError(position: Int) {
-        val opening = currentOpenError != position
-        currentOpenError = if (opening) position else null
+        val next = togglePanel(currentOpenError, position)
+        val opening = next != null
+        currentOpenError = next
         onToggleError(currentOpenError)
         errorButtons.forEach { (pos, btn) -> btn.setAttribute("aria-expanded", (pos == currentOpenError).toString()) }
         if (opening) {
@@ -146,6 +150,6 @@ internal fun renderTileBuilderSection(
         dispatch(AppAction.Tile(exerciseId, TileAction.Check))
     }
     checkButton.className += " reveal-button"
-    checkButton.disabled = choices.any { c -> builder.placed.none { it.position == c.position } }
+    checkButton.disabled = !tileBuilderCanCheck(segments, builder.placed)
     return checkButton
 }

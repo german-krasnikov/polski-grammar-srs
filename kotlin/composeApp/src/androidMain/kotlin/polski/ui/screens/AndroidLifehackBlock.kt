@@ -29,6 +29,7 @@ import polski.presentation.Lifehack
 import polski.presentation.LifehackGroup
 import polski.presentation.LifehackStatus
 import polski.presentation.StaticPackLifehackProvider
+import polski.ui.Collapsible
 
 /**
  * EN-21 android (`Plans/Kotlin/EnRuPackPlan.md` §4.3), mirroring `LifehackWeb.kt`'s
@@ -36,7 +37,7 @@ import polski.presentation.StaticPackLifehackProvider
  * same way in every style, so it composes as its own block *after* the resolved style's Back-phase
  * blocks ([AndroidBlockList]'s `backBlocks`), never inside them. Empty list -> nothing composed at
  * all (no empty frame). One collapsible entry per [Lifehack] (a skill can have more than one),
- * collapsed by default, sharing [AndroidCollapsible]'s reduced-motion contract with
+ * collapsed by default, sharing [Collapsible]'s reduced-motion contract with
  * [AndroidWhyOnDemandBlock]. The attribution line is the toggle row's own visible text, so it is
  * both what a sighted user sees and what TalkBack announces as the row's name whether collapsed or
  * expanded — the citation (and source link) only appear once expanded.
@@ -92,7 +93,7 @@ private fun AndroidOneLifehack(hack: Lifehack, reduceMotion: Boolean) {
             Text(if (expanded) "▾" else "▸", color = MaterialTheme.colorScheme.primary)
             Text(caption, style = MaterialTheme.typography.labelLarge, color = MaterialTheme.colorScheme.primary)
         }
-        AndroidCollapsible(visible = expanded, reduceMotion = reduceMotion) {
+        Collapsible(visible = expanded, reduceMotion = reduceMotion) {
             Surface(
                 shape = RoundedCornerShape(14.dp), color = MaterialTheme.colorScheme.surfaceContainerHigh,
                 modifier = Modifier.fillMaxWidth(),
@@ -166,7 +167,7 @@ private fun AndroidLifehackGroupCard(group: LifehackGroup, reduceMotion: Boolean
                 )
                 Text("${group.lifehacks.size}", style = MaterialTheme.typography.labelLarge, color = MaterialTheme.colorScheme.onSurfaceVariant)
             }
-            AndroidCollapsible(visible = expanded, reduceMotion = reduceMotion) {
+            Collapsible(visible = expanded, reduceMotion = reduceMotion) {
                 Column(verticalArrangement = Arrangement.spacedBy(10.dp)) {
                     group.lifehacks.forEach { hack -> AndroidOneLifehack(hack, reduceMotion) }
                 }
