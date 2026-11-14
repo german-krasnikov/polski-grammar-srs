@@ -25,6 +25,7 @@ import polski.presentation.CardPhase
 import polski.presentation.CardSection
 import polski.presentation.ContrastPair
 import polski.presentation.UiCopy
+import polski.presentation.tileBuilderCanCheck
 import polski.ui.ContrastPairText
 import polski.ui.ContrastPairTextMasked
 
@@ -45,9 +46,23 @@ internal fun AndroidCardSection(section: CardSection, state: AppUiState, dispatc
         is CardSection.PredictionQuestion -> Text(section.text, style = MaterialTheme.typography.titleMedium)
         is CardSection.RetrieveHint -> {
             Text(section.text)
-            AndroidChoiceMenu("Ответ", state.answerMode.name,
-                listOf(AnswerMode.Oral.name to "Вслух / про себя", AnswerMode.Typed.name to "Напечатать"),
-            ) { dispatch(AppAction.SetAnswerMode(AnswerMode.valueOf(it))) }
+            val modes = buildList {
+                add(AnswerMode.Oral.name to "Вслух / про себя")
+                add(AnswerMode.Typed.name to "Напечатать")
+                if (state.tileBuilder != null) add(AnswerMode.TileBuilder.name to "Собрать из слов")
+            }
+            AndroidChoiceMenu("Ответ", state.answerMode.name, modes) {
+                dispatch(AppAction.SetAnswerMode(AnswerMode.valueOf(it)))
+            }
+            if (state.answerMode == AnswerMode.TileBuilder) {
+                state.tileBuilder?.let { builder ->
+                    AndroidTileBuilderSection(
+                        exerciseId = state.exercise?.id ?: "",
+                        builder = builder,
+                        dispatch = dispatch,
+                    )
+                }
+            }
         }
         is CardSection.AnswerInput -> OutlinedTextField(
             value = state.draft,
@@ -56,11 +71,19 @@ internal fun AndroidCardSection(section: CardSection, state: AppUiState, dispatc
             modifier = Modifier.fillMaxWidth(),
             minLines = 2,
         )
-        is CardSection.Action -> Button(
-            onClick = { dispatch(section.action) },
-            modifier = Modifier.fillMaxWidth().focusRequester(focusReveal),
-            shape = RoundedCornerShape(16.dp),
-        ) { Text(section.label, modifier = Modifier.padding(vertical = 7.dp)) }
+        is CardSection.Action -> {
+            // SB-9: disable reveal when TileBuilder mode has unfilled choices.
+            val enabled = state.tileBuilder?.let { b ->
+                state.answerMode != AnswerMode.TileBuilder ||
+                    tileBuilderCanCheck(b.exercise.segments, b.placed)
+            } ?: true
+            Button(
+                onClick = { dispatch(section.action) },
+                enabled = enabled,
+                modifier = Modifier.fillMaxWidth().focusRequester(focusReveal),
+                shape = RoundedCornerShape(16.dp),
+            ) { Text(section.label, modifier = Modifier.padding(vertical = 7.dp)) }
+        }
         is CardSection.Expected -> {
             Text("Эталон", style = MaterialTheme.typography.labelLarge)
             AndroidEmphasisText(section.parts, before = false, style = MaterialTheme.typography.titleLarge, fontWeight = FontWeight.SemiBold)

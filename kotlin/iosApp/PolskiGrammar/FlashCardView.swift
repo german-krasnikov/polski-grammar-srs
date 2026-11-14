@@ -109,11 +109,18 @@ struct FlashCardView<RevealButton: View>: View {
 
     @ViewBuilder private var answerControls: some View {
         if !introPending {
+            let tileData = state.record("tileBuilder")
+            let tileAvailable = tileData.bool("available")
+            let isTileMode = state.string("answerMode") == "TileBuilder"
             VStack(alignment: .leading, spacing: 12) {
                 Text(card.string("methodRetrieve"))
                 Picker(uiText(state, "answerModeTitle", fallback: "Ответ"), selection: Binding(get: { state.string("answerMode") }, set: { model.send("answerMode", $0) })) {
                     Text(uiText(state, "oralOrSilentMode", fallback: "Вслух / про себя")).tag("Oral")
                     Text(uiText(state, "typedMode", fallback: "Напечатать")).tag("Typed")
+                    // SB-10: only offer tile mode when the shared store can build tiles for this exercise.
+                    if tileAvailable {
+                        Text(uiText(state, "tileBuilderMode", fallback: "Собрать из слов")).tag("TileBuilder")
+                    }
                 }
                 if state.string("answerMode") == "Typed" {
                     TextField(uiText(state, "polishAnswer", fallback: "Ответ по-польски"), text: Binding(get: { localDraft }, set: {
@@ -124,11 +131,32 @@ struct FlashCardView<RevealButton: View>: View {
                         .focused(answerFocused)
                         .accessibilityLabel(uiText(state, "polishAnswer", fallback: "Ответ по-польски"))
                         .accessibilityIdentifier("typedAnswer")
+                } else if isTileMode && tileAvailable {
+                    // SB-10: tile row + inline picker
+                    TileBuilderQuestionView(
+                        model: model,
+                        tile: tileData,
+                        exerciseId: card.string("id")
+                    )
                 } else {
                     Text(uiText(state, "oralInstruction", fallback: "Произнеси целое предложение, затем покажи ответ.")).foregroundStyle(.secondary)
                 }
-                if state.string("answerMode") != "Typed" || !answerFocused.wrappedValue {
-                    revealButton(state.string("answerMode") == "Typed" ? uiText(state, "checkAnswer", fallback: "Проверить ответ") : uiText(state, "showAnswer", fallback: "Показать ответ"), true)
+                // SB-10: in tile mode, show a dedicated "Проверить" button disabled until all tiles
+                // are placed (`canCheck` mirrors `tileBuilderCanCheck` from the shared store guard).
+                if isTileMode && tileAvailable {
+                    Button(uiText(state, "checkTiles", fallback: "Проверить")) { model.send("reveal") }
+                        .buttonStyle(.borderedProminent)
+                        .controlSize(.large)
+                        .frame(maxWidth: .infinity)
+                        .disabled(!tileData.bool("canCheck"))
+                        .accessibilityIdentifier("tileCheck")
+                } else if state.string("answerMode") != "Typed" || !answerFocused.wrappedValue {
+                    revealButton(
+                        state.string("answerMode") == "Typed"
+                            ? uiText(state, "checkAnswer", fallback: "Проверить ответ")
+                            : uiText(state, "showAnswer", fallback: "Показать ответ"),
+                        true
+                    )
                 }
             }
         }
@@ -143,7 +171,18 @@ struct FlashCardView<RevealButton: View>: View {
         // own doc — so it is read from `styleBlocks.lifehacks` (a sibling of `front`/`back` set by
         // `IosSnapshot.kt`'s `lifehacksSnapshot`), not from `blocks` above.
         let lifehacks = state.record("styleBlocks").rows("lifehacks")
+        let tileData = state.record("tileBuilder")
+        let isTileMode = state.string("answerMode") == "TileBuilder"
         VStack(alignment: .leading, spacing: 12) {
+            // SB-10: tile result row + banner before Expected (Revealed phase).
+            if isTileMode && tileData.bool("available") && tileData["result"] != nil && !(tileData["result"] is NSNull) {
+                TileBuilderRevealView(
+                    model: model,
+                    tile: tileData,
+                    exerciseId: card.string("id"),
+                    reduceMotion: reduceMotion
+                )
+            }
             VStack(alignment: .leading, spacing: 12) {
                 Text(uiText(state, "modelAnswer", fallback: "Эталон")).font(.caption).foregroundStyle(.secondary)
                 emphasizedText(card.rows("expectedParts"), role: .after, accessibilityLabel: card.string("expected"))

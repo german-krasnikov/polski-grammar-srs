@@ -4,6 +4,7 @@ import kotlinx.serialization.json.JsonArray
 import kotlinx.serialization.json.JsonElement
 import kotlinx.serialization.json.JsonNull
 import kotlinx.serialization.json.JsonObject
+import kotlinx.serialization.json.JsonPrimitive
 import kotlinx.serialization.json.buildJsonObject
 import kotlinx.serialization.json.put
 import polski.data.presentationBySkillId
@@ -12,6 +13,7 @@ import polski.data.styleContentBySkillId
 import polski.grammar.caseRows
 import polski.grammar.nounPhrase
 import polski.model.GramCase
+import polski.core.model.TileSegment
 import polski.presentation.AppUiState
 import polski.presentation.CardPhase
 import polski.presentation.ContrastPair
@@ -29,6 +31,7 @@ import polski.presentation.lifehackObjectJson
 import polski.presentation.putEffects
 import polski.presentation.putProgressFields
 import polski.presentation.putSharedSnapshotHeader
+import polski.presentation.tileBuilderCanCheck
 
 internal fun snapshot(state: AppUiState): String = buildJsonObject {
     putSharedSnapshotHeader(state, styleBlocksSnapshot(state), ::lifehackJson)
@@ -51,6 +54,7 @@ internal fun snapshot(state: AppUiState): String = buildJsonObject {
             put("pair", pairSnapshot(ContrastPair.generated(from, form)))
         }
     } } } ?: emptyList() else emptyList()))
+    put("tileBuilder", tileBuilderSnapshot(state))
     put("matrix", matrixSnapshot(state))
     putProgressFields(state)
     putEffects(state)
@@ -96,6 +100,44 @@ private fun lifehacksSnapshot(skillId: String): JsonElement = lifehacksJsonFor(S
 private fun lifehackJson(hack: Lifehack): JsonObject = lifehackObjectJson(hack, "statusLabel")
 
 private fun lifehacksJsonFor(hacks: List<Lifehack>): JsonArray = JsonArray(hacks.map(::lifehackJson))
+
+/**
+ * SB-10: serialises [AppUiState.tileBuilder] for SwiftUI. When unavailable emits
+ * `{available:false}` so Swift always has the key; when present includes segments, placed,
+ * canCheck, result and errorExplanation using the same JSON shapes as other snapshot sections.
+ */
+private fun tileBuilderSnapshot(state: AppUiState): JsonElement {
+    val builder = state.tileBuilder ?: return buildJsonObject { put("available", false) }
+    val segments = builder.exercise.segments.sortedBy { it.position }
+    return buildJsonObject {
+        put("available", true)
+        put("canCheck", tileBuilderCanCheck(segments, builder.placed))
+        put("segments", JsonArray(segments.map { seg -> buildJsonObject {
+            put("position", seg.position)
+            when (seg) {
+                is TileSegment.Locked -> { put("type", "locked"); put("text", seg.text) }
+                is TileSegment.Choice -> {
+                    put("type", "choice")
+                    put("correctForm", seg.correctForm)
+                    put("alternatives", JsonArray(seg.alternatives.map(::JsonPrimitive)))
+                    val placedForm = builder.placed.firstOrNull { it.position == seg.position }?.selectedForm
+                    put("placedForm", placedForm?.let(::JsonPrimitive) ?: JsonNull)
+                }
+            }
+        } }))
+        builder.result?.let { result ->
+            put("result", buildJsonObject {
+                put("correct", result.correct)
+                put("errors", JsonArray(result.errors.map { err -> buildJsonObject {
+                    put("position", err.position)
+                    put("selected", err.selected)
+                    put("expected", err.expected)
+                } }))
+            })
+        } ?: put("result", JsonNull)
+        put("errorExplanation", builder.errorExplanation?.let(::blocksToJson) ?: JsonNull)
+    }
+}
 
 /** Emphasis contract §5: what the target row's "Стало" shows before reveal — never the answer. */
 private const val referenceMaskPlaceholder = "?"

@@ -27,6 +27,7 @@ import androidx.compose.ui.unit.dp
 import polski.data.courseChainPresentation
 import polski.data.nounLemma
 import polski.data.skillById
+import polski.presentation.AnswerMode
 import polski.presentation.AppAction
 import polski.presentation.AppUiState
 import polski.presentation.CardEffect
@@ -177,6 +178,12 @@ internal fun AndroidTrainingScreen(
                                     AndroidAnswerReveal(exercise.id, reduceMotion, onRate = ::rate) {
                                         AndroidStaggeredReveal(0, reduceMotion) {
                                             Column(verticalArrangement = Arrangement.spacedBy(18.dp)) {
+                                                // SB-9: tile result row + banner before Expected
+                                                if (state.answerMode == AnswerMode.TileBuilder) {
+                                                    state.tileBuilder?.let { builder ->
+                                                        AndroidTileBuilderResult(exercise.id, builder, reduceMotion, dispatch)
+                                                    }
+                                                }
                                                 for (section in model.back) when (section) {
                                                     is CardSection.Expected, is CardSection.EvaluationFeedback ->
                                                         AndroidCardSection(section, state, dispatch, focusReveal, reduceMotion)

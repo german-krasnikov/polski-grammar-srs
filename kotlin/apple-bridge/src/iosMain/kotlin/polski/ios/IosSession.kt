@@ -19,6 +19,7 @@ import polski.presentation.AppTab
 import polski.presentation.EffectOutcome
 import polski.presentation.StyleId
 import polski.presentation.StyleRegistry
+import polski.presentation.TileAction
 import polski.presentation.legacyStyleWireValue
 import polski.presentation.MatrixSection
 import polski.presentation.TimeCapture
@@ -109,6 +110,19 @@ class IosSession(private val defaults: NSUserDefaults = NSUserDefaults.standardU
             "export" -> AppAction.RequestExport
             "reset" -> AppAction.RequestReset
             "refresh" -> AppAction.RefreshTime
+            // SB-10: tile builder commands — exerciseId taken from current state (matches store guard).
+            "tilePlace" -> store.state.value.exercise?.id?.let { id ->
+                val parts = value.split(":", limit = 2)
+                val position = parts.getOrNull(0)?.toIntOrNull()
+                val form = parts.getOrNull(1)
+                if (position != null && form != null) AppAction.Tile(id, TileAction.Place(position, form)) else null
+            }
+            "tileCheck" -> store.state.value.exercise?.id?.let { id ->
+                AppAction.Tile(id, TileAction.Check)
+            }
+            "tileTapError" -> store.state.value.exercise?.id?.let { id ->
+                value.toIntOrNull()?.let { position -> AppAction.Tile(id, TileAction.TapError(position)) }
+            }
             else -> null
         } ?: return
         val rateAction = action as? AppAction.Rate
