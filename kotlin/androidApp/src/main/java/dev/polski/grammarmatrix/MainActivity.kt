@@ -74,6 +74,7 @@ import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import polski.presentation.AppAction
 import polski.preferences.Appearance
+import polski.generated.settings.appearance.*
 import polski.presentation.AppTab
 import polski.presentation.CardPhase
 import polski.presentation.EffectOutcome
@@ -356,19 +357,31 @@ private fun AndroidSettingsScreen(
             onSelect = { dispatch(AppAction.SetStyle(it)) },
         )
         Text("Оформление", style = MaterialTheme.typography.titleMedium)
-        SingleChoiceSegmentedButtonRow(modifier = Modifier.fillMaxWidth()) {
-            Appearance.entries.forEachIndexed { index, appearance ->
-                SegmentedButton(
-                    selected = session.preferences.appearance == appearance,
-                    onClick = { session.setAppearance(appearance) },
-                    shape = SegmentedButtonDefaults.itemShape(index, Appearance.entries.size),
-                    enabled = session.preferencesError == null,
-                ) {
-                    Text(when (appearance) {
-                        Appearance.System -> "Система"
-                        Appearance.Light -> "Светлая"
-                        Appearance.Dark -> "Тёмная"
+        AppearanceSettingsScreen(
+            ports = object : AppearanceSettingsPorts {
+                override fun setAppearance(appearance: AppearanceSettingsAppearance) {
+                    session.setAppearance(when (appearance) {
+                        AppearanceSettingsAppearance.System -> Appearance.System
+                        AppearanceSettingsAppearance.Light -> Appearance.Light
+                        AppearanceSettingsAppearance.Dark -> Appearance.Dark
                     })
+                }
+            },
+        ) { model, emit ->
+            SingleChoiceSegmentedButtonRow(modifier = Modifier.fillMaxWidth()) {
+                AppearanceSettingsAppearance.entries.forEachIndexed { index, value ->
+                    SegmentedButton(
+                        selected = model.appearance == value,
+                        onClick = { emit(AppearanceSettingsIntent.Choose(value)) },
+                        shape = SegmentedButtonDefaults.itemShape(index, AppearanceSettingsAppearance.entries.size),
+                        enabled = session.preferencesError == null,
+                    ) {
+                        Text(when (value) {
+                            AppearanceSettingsAppearance.System -> "Система"
+                            AppearanceSettingsAppearance.Light -> "Светлая"
+                            AppearanceSettingsAppearance.Dark -> "Тёмная"
+                        })
+                    }
                 }
             }
         }
