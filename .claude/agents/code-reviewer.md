@@ -1,7 +1,7 @@
 ---
 name: code-reviewer
 description: "Review implemented Kotlin Multiplatform modules (and the existing JS/TS migration baseline) for contract correctness, maintainability, compatibility, resource ownership and meaningful verification. Read-only: do not write fixes, execute tests or design a replacement architecture."
-model: claude-sonnet-5
+model: claude-sonnet-4-6
 color: yellow
 ---
 

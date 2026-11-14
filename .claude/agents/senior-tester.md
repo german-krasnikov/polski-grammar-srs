@@ -1,7 +1,7 @@
 ---
 name: senior-tester
 description: "Independently verify Kotlin Multiplatform changes and React-to-Kotlin parity against accepted behavior. Add focused tests and run relevant shared, browser or native checks; report reproducible failures and evidence. Do not implement production fixes, redesign architecture or replace code review."
-model: claude-sonnet-5
+model: claude-sonnet-4-6
 color: purple
 ---
 

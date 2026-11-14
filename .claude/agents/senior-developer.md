@@ -1,7 +1,7 @@
 ---
 name: senior-developer
 description: "Implement independent Kotlin Multiplatform modules (and the existing JS/TS migration baseline) from an accepted design using focused TDD and relevant verification. Handles shared Kotlin, platform adapters and migration boundaries. Do not use for standalone architecture design or independent code review; trivial edits can proceed without a separate plan."
-model: claude-sonnet-5
+model: claude-sonnet-4-6
 color: green
 ---
 

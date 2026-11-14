@@ -8,4 +8,4 @@
 
 Используй настроенные роли из `.claude/agents/` и workflow из `.claude/skills/workflow/SKILL.md`. Загружай только нужные навыки из таблицы в `AGENTS.md`; не подменяй их JavaScript/TypeScript-инструкциями из исходного проекта.
 
-Модель агентов Claude остаётся `claude-sonnet-5`. Отдельные конфигурации `.codex/agents/` и выбор GPT-6 Sol относятся только к Codex; навыки общие для обоих клиентов.
+Модель агентов Claude остаётся `claude-sonnet-4-6`. Отдельные конфигурации `.codex/agents/` и выбор GPT-6 Sol относятся только к Codex; навыки общие для обоих клиентов.

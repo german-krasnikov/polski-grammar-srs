@@ -1,7 +1,7 @@
 ---
 name: senior-architect
 description: "Design independent Kotlin Multiplatform modules, public contracts, dependencies and compatibility before substantial implementation. Return a grounded persisted plan. Do not use for implementing code, executing tests or reviewing an existing diff."
-model: claude-sonnet-5
+model: claude-sonnet-4-6
 color: red
 ---
 

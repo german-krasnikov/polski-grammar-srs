@@ -399,20 +399,26 @@ class TrainingStore(
     private fun weakSeedCountFor(skillId: String): (String) -> Int =
         { key -> document?.progress?.stats?.get(skillId)?.seedErrors?.get(key) ?: 0 }
 
+    private fun AppUiState.enterSession(mode: TrainingMode, sessionSource: SessionSource): AppUiState = copy(
+        tab = AppTab.Training, mode = mode, phase = CardPhase.Question, draft = "",
+        sessionId = sessionIds.newId(), sessionSource = sessionSource,
+    )
+
+    private fun AppUiState.resetCard(): AppUiState = copy(phase = CardPhase.Question, draft = "")
+
     private fun startChain(index: Int) {
         if (index !in sentenceSeeds.indices) {
             mutate { it.copy(error = "Неизвестный набор слов") }
             return
         }
         val chain = exerciseEngine.generateChain(sentenceSeeds[index]).toList()
-        mutableState.value = state.value.copy(
-            tab = AppTab.Training, mode = TrainingMode.Chain, seedIndex = index,
-            chain = chain, chainIndex = 0, focusedSkillId = null, showSkillPicker = false,
-            exercise = chain.first(), phase = CardPhase.Question, draft = "", frozenAnswer = null,
-            evaluation = null, tileBuilder = deriveTileBuilder(chain.first()),
+        mutableState.value = state.value.enterSession(TrainingMode.Chain, SessionSource.Chain).copy(
+            seedIndex = index, chain = chain, chainIndex = 0, focusedSkillId = null, showSkillPicker = false,
+            exercise = chain.first(), frozenAnswer = null, evaluation = null,
+            tileBuilder = deriveTileBuilder(chain.first()),
             introPending = needsIntroduction(chain.first(), document),
             predictionPending = predictionPendingFor(chain.first(), document), error = null, daily = null,
-            sessionId = sessionIds.newId(), sessionSource = SessionSource.Chain, examRetryOrigin = null,
+            examRetryOrigin = null,
         )
         addFocus(chain.first())
         refreshTime()
@@ -422,14 +428,13 @@ class TrainingStore(
         val captured = time.capture()
         val progress = document?.progress ?: return
         val exercise = skillQueue.next(progress.cards, scheduler, captured.at)?.let { exerciseEngine.generateForSkill(it.skillId, weakSeedCount = weakSeedCountFor(it.skillId), excludeProbePool = true) }
-        mutableState.value = project(state.value.copy(
-            tab = AppTab.Training, mode = TrainingMode.Schedule, focusedSkillId = null,
-            showSkillPicker = false, exercise = exercise,
+        mutableState.value = project(state.value.enterSession(TrainingMode.Schedule, SessionSource.ScheduleDue).copy(
+            focusedSkillId = null, showSkillPicker = false, exercise = exercise,
             phase = if (exercise == null) CardPhase.NoDue else CardPhase.Question,
-            draft = "", frozenAnswer = null, evaluation = null, tileBuilder = deriveTileBuilder(exercise),
+            frozenAnswer = null, evaluation = null, tileBuilder = deriveTileBuilder(exercise),
             introPending = needsIntroduction(exercise, document),
             predictionPending = predictionPendingFor(exercise, document), error = null, daily = null,
-            sessionId = sessionIds.newId(), sessionSource = SessionSource.ScheduleDue, examRetryOrigin = null,
+            examRetryOrigin = null,
         ), document ?: return, captured)
         if (exercise != null) addFocus(exercise)
     }
@@ -443,16 +448,14 @@ class TrainingStore(
         val step = DailySessionPlanner.nextStep(progress, scheduler, skillQueue, skills, captured.at, completed = emptyList())
         val exercise = step?.let { exerciseEngine.generateForSkill(it.skillId, weakSeedCount = weakSeedCountFor(it.skillId), excludeProbePool = true) }
         val tileBuilder = deriveTileBuilder(exercise)
-        mutableState.value = project(state.value.copy(
-            tab = AppTab.Training, mode = TrainingMode.Daily, focusedSkillId = null,
-            showSkillPicker = false, exercise = exercise,
+        mutableState.value = project(state.value.enterSession(TrainingMode.Daily, SessionSource.DailyButton).copy(
+            focusedSkillId = null, showSkillPicker = false, exercise = exercise,
             phase = if (exercise == null) CardPhase.NoDue else CardPhase.Question,
-            draft = "", frozenAnswer = null, evaluation = null, tileBuilder = tileBuilder,
+            frozenAnswer = null, evaluation = null, tileBuilder = tileBuilder,
             answerMode = dailyAnswerMode(step, tileBuilder, state.value.answerMode),
             introPending = needsIntroduction(exercise, document),
             predictionPending = predictionPendingFor(exercise, document), error = null,
-            daily = DailySessionState(currentStep = step),
-            sessionId = sessionIds.newId(), sessionSource = SessionSource.DailyButton, examRetryOrigin = null,
+            daily = DailySessionState(currentStep = step), examRetryOrigin = null,
         ), document ?: return, captured)
         if (exercise != null) addFocus(exercise)
     }
@@ -474,9 +477,9 @@ class TrainingStore(
         val step = DailySessionPlanner.nextStep(progress, scheduler, skillQueue, skills, captured.at, completed = emptyList())
         val exercise = step?.let { exerciseEngine.generateForSkill(it.skillId, weakSeedCount = weakSeedCountFor(it.skillId), excludeProbePool = true) }
         val tileBuilder = deriveTileBuilder(exercise)
-        mutableState.value = project(current.copy(
+        mutableState.value = project(current.resetCard().copy(
             exercise = exercise, phase = if (exercise == null) CardPhase.NoDue else CardPhase.Question,
-            draft = "", frozenAnswer = null, evaluation = null, tileBuilder = tileBuilder,
+            frozenAnswer = null, evaluation = null, tileBuilder = tileBuilder,
             answerMode = dailyAnswerMode(step, tileBuilder, current.answerMode),
             introPending = needsIntroduction(exercise, document),
             predictionPending = predictionPendingFor(exercise, document),
@@ -531,13 +534,12 @@ class TrainingStore(
             return
         }
         val exercise = exerciseEngine.generateForSkill(action.skillId, action.preferredSeed, weakSeedCountFor(action.skillId), excludeProbePool = true)
-        mutableState.value = state.value.copy(
-            tab = AppTab.Training, mode = TrainingMode.Focused, focusedSkillId = action.skillId,
-            showSkillPicker = false, exercise = exercise, phase = CardPhase.Question,
-            draft = "", frozenAnswer = null, evaluation = null, tileBuilder = deriveTileBuilder(exercise),
+        mutableState.value = state.value.enterSession(TrainingMode.Focused, SessionSource.ManualPick).copy(
+            focusedSkillId = action.skillId, showSkillPicker = false, exercise = exercise,
+            frozenAnswer = null, evaluation = null, tileBuilder = deriveTileBuilder(exercise),
             introPending = needsIntroduction(exercise, document),
             predictionPending = predictionPendingFor(exercise, document), error = null, daily = null,
-            sessionId = sessionIds.newId(), sessionSource = SessionSource.ManualPick, examRetryOrigin = null,
+            examRetryOrigin = null,
         )
         addFocus(exercise)
         refreshTime()
@@ -553,13 +555,11 @@ class TrainingStore(
             return
         }
         val exercise = exerciseEngine.generateForSkill(action.skillId, weakSeedCount = weakSeedCountFor(action.skillId), excludeProbePool = true)
-        mutableState.value = state.value.copy(
-            tab = AppTab.Training, mode = TrainingMode.Focused, focusedSkillId = action.skillId,
-            showSkillPicker = false, exercise = exercise, phase = CardPhase.Question,
-            draft = "", frozenAnswer = null, evaluation = null, tileBuilder = deriveTileBuilder(exercise),
+        mutableState.value = state.value.enterSession(TrainingMode.Focused, SessionSource.ExamMistake).copy(
+            focusedSkillId = action.skillId, showSkillPicker = false, exercise = exercise,
+            frozenAnswer = null, evaluation = null, tileBuilder = deriveTileBuilder(exercise),
             introPending = needsIntroduction(exercise, document),
             predictionPending = predictionPendingFor(exercise, document), error = null, daily = null,
-            sessionId = sessionIds.newId(), sessionSource = SessionSource.ExamMistake,
             examRetryOrigin = ExamRetryOrigin(action.examRouteId, action.itemId, action.skillId, action.verificationItemId),
         )
         addFocus(exercise)
@@ -790,15 +790,13 @@ class TrainingStore(
         document = fresh
         recoveryRaw = null
         val chain = exerciseEngine.generateChain().toList()
-        val next = state.value.copy(
-            loadStatus = LoadStatus.Ready, tab = AppTab.Training, mode = TrainingMode.Chain,
-            seedIndex = 0, chain = chain, chainIndex = 0, focusedSkillId = null,
-            exercise = chain.first(), phase = CardPhase.Question, draft = "", frozenAnswer = null,
-            evaluation = null, tileBuilder = deriveTileBuilder(chain.first()),
+        val next = state.value.enterSession(TrainingMode.Chain, SessionSource.Reset).copy(
+            loadStatus = LoadStatus.Ready, seedIndex = 0, chain = chain, chainIndex = 0,
+            focusedSkillId = null, exercise = chain.first(), frozenAnswer = null, evaluation = null,
+            tileBuilder = deriveTileBuilder(chain.first()),
             introPending = needsIntroduction(chain.first(), fresh),
             predictionPending = predictionPendingFor(chain.first(), fresh),
-            showSkillPicker = false, error = null, daily = null,
-            sessionId = sessionIds.newId(), sessionSource = SessionSource.Reset, examRetryOrigin = null,
+            showSkillPicker = false, error = null, daily = null, examRetryOrigin = null,
         )
         mutableState.value = project(next, fresh, captured)
         val revision = state.value.revision + 1
