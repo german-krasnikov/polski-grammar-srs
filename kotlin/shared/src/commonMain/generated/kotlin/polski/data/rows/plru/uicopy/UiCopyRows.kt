@@ -1046,4 +1046,6 @@ val UI_COPY_ROW_ROWS: List<UiCopyRow> = listOf(
     UiCopyRow(key = "examFeedbackWrong", text = "Неверно"),
     UiCopyRow(key = "examFeedbackPartial", text = "Частично верно"),
     UiCopyRow(key = "examAnswerLocked", text = "Ответ зафиксирован"),
+    UiCopyRow(key = "tileBuilderMode", text = "Собрать из слов"),
+    UiCopyRow(key = "checkTiles", text = "Проверить"),
 )

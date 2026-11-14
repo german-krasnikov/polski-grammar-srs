@@ -1,5 +1,5 @@
 // Generated from dsl/ui-copy.declare
-// source-sha256=1ec38eb4e4d24868eff3167617bcd8bf215d5c848f8a8594920a27ecf8b6129b
+// source-sha256=dc5f8eb9aa4838a3b5bfea97c4b314c9ea75325478d0a470277b2f8cb7daf22b
 // Edit the source, then run biome generate.
 
 // Generated from dsl/ui-copy.declare, checked against courses-biome/pl-ru/uiCopy.core-data and courses-biome/en-ru/uiCopy.core-data.
@@ -134,6 +134,10 @@ object UiCopy {
     val VocabularyTab: String get() = text("vocabularyTab")
 
     val MatrixTab: String get() = text("matrixTab")
+
+    val TileBuilderMode: String get() = text("tileBuilderMode")
+
+    val CheckTiles: String get() = text("checkTiles")
 
     fun languageName(code: String): String = text("lang.$code")
 

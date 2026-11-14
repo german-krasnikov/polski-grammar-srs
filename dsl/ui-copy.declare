@@ -62,6 +62,8 @@ CATALOG UiCopy IN polski.presentation
   KEY cardsTab
   KEY vocabularyTab
   KEY matrixTab
+  KEY tileBuilderMode
+  KEY checkTiles
 
   FN languageName "lang.$code" code
   FN languageAdverb "adverb.$code" code

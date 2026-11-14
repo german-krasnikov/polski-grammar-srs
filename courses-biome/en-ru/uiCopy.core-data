@@ -263,3 +263,5 @@ UI_COPY {key: examFeedbackCorrect text: Correct}
 UI_COPY {key: examFeedbackWrong text: Incorrect}
 UI_COPY {key: examFeedbackPartial text: "Partly correct"}
 UI_COPY {key: examAnswerLocked text: "Answer locked"}
+UI_COPY {key: tileBuilderMode text: "Build from words"}
+UI_COPY {key: checkTiles text: Check}
