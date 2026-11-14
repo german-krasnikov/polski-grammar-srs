@@ -568,3 +568,10 @@ UI_COPY_CASE {
   enRu: "Answer locked"
   placeholders: ""
 }
+UI_COPY_CASE {
+  key: tileBuilderMode
+  plRu: "Собрать из слов"
+  enRu: "Build from words"
+  placeholders: ""
+}
+UI_COPY_CASE {key: checkTiles plRu: "Проверить" enRu: Check placeholders: ""}
