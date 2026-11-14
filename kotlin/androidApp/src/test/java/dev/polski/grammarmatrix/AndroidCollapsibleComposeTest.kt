@@ -15,7 +15,7 @@ import org.junit.Test
 import org.junit.runner.RunWith
 import org.robolectric.RobolectricTestRunner
 import org.robolectric.annotation.GraphicsMode
-import polski.ui.screens.AndroidCollapsible
+import polski.ui.Collapsible
 
 /**
  * D4 (`Plans/Kotlin/Lane-android.md`): panel show/hide (the training screen's "Таблица под
@@ -27,7 +27,7 @@ import polski.ui.screens.AndroidCollapsible
  */
 @RunWith(RobolectricTestRunner::class)
 @GraphicsMode(GraphicsMode.Mode.NATIVE)
-class AndroidCollapsibleComposeTest {
+class CollapsibleComposeTest {
     @get:Rule val composeRule = createComposeRule()
 
     @Test fun contentAppearsOnceTheExpandAnimationSettles() {
@@ -36,7 +36,7 @@ class AndroidCollapsibleComposeTest {
             var visible by remember { mutableStateOf(false) }
             MaterialTheme {
                 Button(onClick = { visible = true }) { Text("SHOW") }
-                AndroidCollapsible(visible = visible, reduceMotion = false) { Text("PANEL-CONTENT") }
+                Collapsible(visible = visible, reduceMotion = false) { Text("PANEL-CONTENT") }
             }
         }
         composeRule.onNodeWithText("PANEL-CONTENT").assertDoesNotExist()
@@ -52,7 +52,7 @@ class AndroidCollapsibleComposeTest {
             var visible by remember { mutableStateOf(true) }
             MaterialTheme {
                 Button(onClick = { visible = false }) { Text("HIDE") }
-                AndroidCollapsible(visible = visible, reduceMotion = false) { Text("PANEL-CONTENT") }
+                Collapsible(visible = visible, reduceMotion = false) { Text("PANEL-CONTENT") }
             }
         }
         composeRule.mainClock.advanceTimeBy(1_000)
@@ -69,7 +69,7 @@ class AndroidCollapsibleComposeTest {
             var visible by remember { mutableStateOf(false) }
             MaterialTheme {
                 Button(onClick = { visible = true }) { Text("SHOW") }
-                AndroidCollapsible(visible = visible, reduceMotion = true) { Text("PANEL-CONTENT") }
+                Collapsible(visible = visible, reduceMotion = true) { Text("PANEL-CONTENT") }
             }
         }
         composeRule.onNodeWithText("SHOW").performClick()
