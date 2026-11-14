@@ -9,16 +9,143 @@ import kotlinx.serialization.json.Json
 import kotlinx.serialization.json.jsonArray
 import kotlinx.serialization.json.jsonObject
 import kotlinx.serialization.json.jsonPrimitive
+import kotlinx.serialization.json.JsonNull
 import platform.CoreFoundation.CFRunLoopRunInMode
 import platform.CoreFoundation.kCFRunLoopDefaultMode
 import platform.Foundation.NSUserDefaults
 import polski.data.selectActiveCoursePack
+import polski.cloze.ClozeSessionState
+import polski.presentation.AppUiState
 
 /**
  * M10: a store built for a fresh scene must start from the answerMode (and explanationMethod)
  * already persisted in defaults, the same way both preferences are re-applied after import.
  */
 class IosSessionTest {
+    @OptIn(kotlinx.cinterop.ExperimentalForeignApi::class)
+    @Test
+    fun tileBuilderCheckExposesWrongChoiceAndErrorExplanation() {
+        val suite = "polski-ios-tile-feedback-${Random.nextLong()}"
+        val defaults = assertNotNull(NSUserDefaults(suiteName = suite))
+        defaults.removePersistentDomainForName(suite)
+        val session = IosSession(defaults)
+        try {
+            fun state() = Json.parseToJsonElement(session.currentSnapshot()).jsonObject
+            repeat(200) {
+                if (state().getValue("loadStatus").jsonPrimitive.content == "Ready") return@repeat
+                CFRunLoopRunInMode(kCFRunLoopDefaultMode, 0.02, true)
+            }
+            assertEquals("Ready", state().getValue("loadStatus").jsonPrimitive.content)
+            session.dispatch("continueIntroduction")
+            session.dispatch("answerMode", "TileBuilder")
+            assertEquals("TileBuilder", state().getValue("answerMode").jsonPrimitive.content)
+            val choices = state().getValue("tileBuilder").jsonObject.getValue("segments").jsonArray
+                .map { it.jsonObject }.filter { it.getValue("type").jsonPrimitive.content == "choice" }
+            assertTrue(choices.isNotEmpty())
+            for ((index, choice) in choices.withIndex()) {
+                val form = if (index == 0) choice.getValue("alternatives").jsonArray.first().jsonPrimitive.content
+                    else choice.getValue("correctForm").jsonPrimitive.content
+                session.dispatch("tilePlace", "${choice.getValue("position").jsonPrimitive.content}:$form")
+            }
+            assertEquals("true", state().getValue("tileBuilder").jsonObject.getValue("canCheck").jsonPrimitive.content)
+            session.dispatch("tileCheck")
+            val revealed = state()
+            assertEquals("Revealed", revealed.getValue("phase").jsonPrimitive.content)
+            assertEquals("TileBuilder", revealed.getValue("answerMode").jsonPrimitive.content)
+            assertTrue(revealed.getValue("tileBuilder").jsonObject.getValue("result") != JsonNull,
+                "Tile result absent after Check: ${revealed.getValue("tileBuilder")}")
+            val result = revealed.getValue("tileBuilder").jsonObject.getValue("result").jsonObject
+            assertEquals("false", result.getValue("correct").jsonPrimitive.content)
+            val errors = result.getValue("errors").jsonArray
+            assertTrue(errors.isNotEmpty())
+            session.dispatch("tileTapError", errors.first().jsonObject.getValue("position").jsonPrimitive.content)
+            assertTrue(revealed.getValue("tileBuilder").jsonObject.getValue("errorExplanation") == JsonNull)
+            assertTrue(state().getValue("tileBuilder").jsonObject.getValue("errorExplanation").jsonArray.isNotEmpty())
+
+            val beforeRating = state()
+            val beforeReviews = beforeRating.getValue("totalReviews").jsonPrimitive.content.toInt()
+            val beforeRevision = beforeRating.getValue("revision").jsonPrimitive.content.toInt()
+            session.dispatch("rate", "Good")
+            val afterRating = state()
+            assertEquals(beforeReviews + 1, afterRating.getValue("totalReviews").jsonPrimitive.content.toInt())
+            assertEquals(beforeRevision + 1, afterRating.getValue("revision").jsonPrimitive.content.toInt())
+            session.dispatch("rate", "Good")
+            val afterDuplicate = state()
+            assertEquals(afterRating.getValue("totalReviews"), afterDuplicate.getValue("totalReviews"))
+            assertEquals(afterRating.getValue("revision"), afterDuplicate.getValue("revision"))
+        } finally {
+            session.close()
+            defaults.removePersistentDomainForName(suite)
+        }
+    }
+
+    @OptIn(kotlinx.cinterop.ExperimentalForeignApi::class)
+    @Test
+    fun clozeBridgeUsesCurrentExerciseAndLeavesProgressUntouched() {
+        val suite = "polski-ios-cloze-${Random.nextLong()}"
+        val defaults = assertNotNull(NSUserDefaults(suiteName = suite))
+        defaults.removePersistentDomainForName(suite)
+        val session = IosSession(defaults)
+        try {
+            fun state() = Json.parseToJsonElement(session.currentSnapshot()).jsonObject
+            session.dispatch("clozeNext")
+            assertTrue(state()["cloze"] == JsonNull || state()["cloze"] == null)
+            repeat(200) {
+                if (state().getValue("loadStatus").jsonPrimitive.content == "Ready") return@repeat
+                CFRunLoopRunInMode(kCFRunLoopDefaultMode, 0.02, true)
+            }
+            assertEquals("Ready", state().getValue("loadStatus").jsonPrimitive.content)
+            val beforeRevision = state().getValue("revision")
+            val beforeSavedRevision = state().getValue("savedRevision")
+            session.dispatch("tab", "Cloze")
+            val first = state().getValue("cloze").jsonObject
+            val current = first.getValue("current").jsonObject
+            val id = current.getValue("id").jsonPrimitive.content
+            val options = current.getValue("options").jsonArray.map { it.jsonPrimitive.content }
+            assertEquals(3, options.size)
+            assertTrue("correctForm" !in current)
+            assertEquals(0, first.getValue("currentIndex").jsonPrimitive.content.toInt())
+            session.dispatch("tab", "Training")
+            session.dispatch("tab", "Cloze")
+            assertEquals(id, state().getValue("cloze").jsonObject.getValue("current").jsonObject.getValue("id").jsonPrimitive.content)
+            session.chooseCloze("stale", options[0])
+            session.chooseCloze(id, "not an option")
+            assertEquals(JsonNull, state().getValue("cloze").jsonObject.getValue("current").jsonObject.getValue("selectedForm"))
+            session.chooseCloze(id, options[0])
+            val answered = state().getValue("cloze").jsonObject.getValue("current").jsonObject
+            assertEquals(options[0], answered.getValue("selectedForm").jsonPrimitive.content)
+            assertTrue(answered.getValue("correctForm").jsonPrimitive.content in options)
+            session.chooseCloze(id, options[1])
+            assertEquals(options[0], state().getValue("cloze").jsonObject.getValue("current").jsonObject.getValue("selectedForm").jsonPrimitive.content)
+            session.dispatch("clozePrevious")
+            assertEquals("0", state().getValue("cloze").jsonObject.getValue("currentIndex").jsonPrimitive.content)
+            session.dispatch("clozeNext")
+            assertEquals("1", state().getValue("cloze").jsonObject.getValue("currentIndex").jsonPrimitive.content)
+            session.chooseCloze(id, options[1])
+            assertEquals(JsonNull, state().getValue("cloze").jsonObject.getValue("current").jsonObject.getValue("selectedForm"))
+            session.dispatch("clozeRestart")
+            val restarted = state().getValue("cloze").jsonObject
+            assertEquals("0", restarted.getValue("currentIndex").jsonPrimitive.content)
+            assertEquals(JsonNull, restarted.getValue("current").jsonObject.getValue("selectedForm"))
+            repeat(restarted.getValue("total").jsonPrimitive.content.toInt() + 2) { session.dispatch("clozeNext") }
+            val last = state().getValue("cloze").jsonObject
+            assertEquals(last.getValue("total").jsonPrimitive.content.toInt() - 1,
+                last.getValue("currentIndex").jsonPrimitive.content.toInt())
+            assertEquals(beforeRevision, state().getValue("revision"))
+            assertEquals(beforeSavedRevision, state().getValue("savedRevision"))
+        } finally {
+            session.close()
+            defaults.removePersistentDomainForName(suite)
+        }
+    }
+
+    @Test
+    fun emptyClozeSessionHasNullCurrent() {
+        val cloze = Json.parseToJsonElement(snapshot(AppUiState(cloze = ClozeSessionState(emptyList()))))
+            .jsonObject.getValue("cloze").jsonObject
+        assertEquals("0", cloze.getValue("total").jsonPrimitive.content)
+        assertEquals(JsonNull, cloze.getValue("current"))
+    }
     @Test
     fun lifehackSnapshotKeepsIosStatusLabel() {
         val suite = "polski-ios-lifehack-wire-${Random.nextLong()}"
@@ -85,6 +212,22 @@ class IosSessionTest {
             val snapshot = Json.parseToJsonElement(session.currentSnapshot()).jsonObject
             assertEquals("Typed", snapshot.getValue("answerMode").jsonPrimitive.content)
             assertEquals("Situations", snapshot.getValue("explanationMethod").jsonPrimitive.content)
+            session.close()
+        } finally {
+            defaults.removePersistentDomainForName(suite)
+        }
+    }
+
+    @Test
+    fun newSessionRestoresTileBuilderAnswerMode() {
+        val suite = "polski-ios-tile-mode-${Random.nextLong()}"
+        val defaults = assertNotNull(NSUserDefaults(suiteName = suite))
+        defaults.removePersistentDomainForName(suite)
+        try {
+            defaults.setObject("TileBuilder", forKey = "answerMode")
+            val session = IosSession(defaults)
+            assertEquals("TileBuilder", Json.parseToJsonElement(session.currentSnapshot())
+                .jsonObject.getValue("answerMode").jsonPrimitive.content)
             session.close()
         } finally {
             defaults.removePersistentDomainForName(suite)

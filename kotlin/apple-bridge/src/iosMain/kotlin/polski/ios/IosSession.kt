@@ -14,6 +14,7 @@ import platform.Foundation.NSDateFormatter
 import platform.Foundation.NSLocale
 import platform.Foundation.NSUserDefaults
 import polski.presentation.AnswerMode
+import polski.cloze.ClozeSessionAction
 import polski.presentation.AppAction
 import polski.presentation.AppTab
 import polski.presentation.EffectOutcome
@@ -110,6 +111,9 @@ class IosSession(private val defaults: NSUserDefaults = NSUserDefaults.standardU
             "export" -> AppAction.RequestExport
             "reset" -> AppAction.RequestReset
             "refresh" -> AppAction.RefreshTime
+            "clozeRestart" -> AppAction.ClozeAct(ClozeSessionAction.Restart)
+            "clozePrevious" -> AppAction.ClozeAct(ClozeSessionAction.Previous)
+            "clozeNext" -> AppAction.ClozeAct(ClozeSessionAction.Next)
             // SB-10: tile builder commands — exerciseId taken from current state (matches store guard).
             "tilePlace" -> store.state.value.exercise?.id?.let { id ->
                 val parts = value.split(":", limit = 2)
@@ -133,6 +137,16 @@ class IosSession(private val defaults: NSUserDefaults = NSUserDefaults.standardU
         if (rateAction != null && store.state.value.exerciseId != rateAction.exerciseId) {
             onEffect?.invoke(cardEffectFor(rateAction.rating).name)
         }
+    }
+
+    /** Accepts only a still-current, unanswered exercise and one of its offered forms. */
+    fun chooseCloze(exerciseId: String, form: String) {
+        if (closed) return
+        rebuildIfCourseSwitched()
+        val cloze = store.state.value.cloze ?: return
+        val current = cloze.exercises.getOrNull(cloze.currentIndex) ?: return
+        if (current.id != exerciseId || form !in current.options || exerciseId in cloze.answers) return
+        store.dispatch(AppAction.ClozeAct(ClozeSessionAction.Choose(exerciseId, form)))
     }
 
     fun acknowledgeEffect(id: Long, outcome: String) {
@@ -211,6 +225,6 @@ class IosSession(private val defaults: NSUserDefaults = NSUserDefaults.standardU
         // last stored its style before S1 (no migration write — ADR-6, iOS storage is pre-release).
         defaults.stringForKey("styleId")?.let { name -> StyleRegistry.recipes.keys.firstOrNull { it.value == name } }
             ?: legacyStyleWireValue(defaults.stringForKey("explanationMethod") ?: "") ?: StyleId.RuleFirst,
-        if (defaults.stringForKey("answerMode") == "Typed") AnswerMode.Typed else AnswerMode.Oral,
+        AnswerMode.entries.firstOrNull { it.name == defaults.stringForKey("answerMode") } ?: AnswerMode.Oral,
     )
 }

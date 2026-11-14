@@ -55,6 +55,7 @@ internal fun snapshot(state: AppUiState): String = buildJsonObject {
         }
     } } } ?: emptyList() else emptyList()))
     put("tileBuilder", tileBuilderSnapshot(state))
+    put("cloze", clozeSnapshot(state))
     put("matrix", matrixSnapshot(state))
     putProgressFields(state)
     putEffects(state)
@@ -84,6 +85,24 @@ private fun styleBlocksSnapshot(state: AppUiState): JsonElement {
         put("front", blocksToJson(StyleComposer.compose(effective, StylePhase.Front, exercise, skill, focus, content)))
         put("back", blocksToJson(StyleComposer.compose(effective, StylePhase.Back, exercise, skill, focus, content)))
         put("lifehacks", lifehacksSnapshot(exercise.primarySkill))
+    }
+}
+
+/** Serialises the existing transient Cloze session without drawing or storing another exercise. */
+private fun clozeSnapshot(state: AppUiState): JsonElement {
+    val cloze = state.cloze ?: return JsonNull
+    val current = cloze.exercises.getOrNull(cloze.currentIndex)
+    return buildJsonObject {
+        put("currentIndex", cloze.currentIndex)
+        put("total", cloze.exercises.size)
+        put("current", current?.let { exercise -> buildJsonObject {
+            put("id", exercise.id)
+            put("displaySentence", exercise.displaySentence)
+            put("options", JsonArray(exercise.options.map(::JsonPrimitive)))
+            val selected = cloze.answers[exercise.id]
+            put("selectedForm", selected?.let(::JsonPrimitive) ?: JsonNull)
+            if (selected != null) put("correctForm", exercise.correctForm)
+        } } ?: JsonNull)
     }
 }
 
@@ -125,7 +144,8 @@ private fun tileBuilderSnapshot(state: AppUiState): JsonElement {
                 }
             }
         } }))
-        builder.result?.let { result ->
+        val result = builder.result
+        if (result != null) {
             put("result", buildJsonObject {
                 put("correct", result.correct)
                 put("errors", JsonArray(result.errors.map { err -> buildJsonObject {
@@ -134,7 +154,9 @@ private fun tileBuilderSnapshot(state: AppUiState): JsonElement {
                     put("expected", err.expected)
                 } }))
             })
-        } ?: put("result", JsonNull)
+        } else {
+            put("result", JsonNull)
+        }
         put("errorExplanation", builder.errorExplanation?.let(::blocksToJson) ?: JsonNull)
     }
 }

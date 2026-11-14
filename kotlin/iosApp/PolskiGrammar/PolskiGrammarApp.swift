@@ -307,6 +307,7 @@ final class AppModel: ObservableObject {
     }
 
     func send(_ command: String, _ value: String = "") { session.dispatch(command: command, value: value) }
+    func chooseCloze(id: String, form: String) { session.chooseCloze(exerciseId: id, form: form) }
     func sendVocabulary(_ command: String, _ value: String = "") {
         vocabulary.dispatch(command: command, value: value)
     }
@@ -489,7 +490,7 @@ struct PolskiGrammarApp: App {
     // below, strictly before the switch's own body re-renders with the new `tab`, so the
     // transition this drives is always keyed by the switch that is actually happening.
     @State private var pagingEdge: Edge = .trailing
-    private let tabOrder = ["Training", "Matrix", "Progress", "Vocabulary", "Exam"]
+    private let tabOrder = ["Training", "Cloze", "Matrix", "Progress", "Vocabulary", "Exam"]
     private var readyExamFeedbackPreference: Bool? {
         guard model.preferences.string("status") == "Ready" else { return nil }
         return model.preferences.bool("immediateExamFeedbackEnabled", default: true)
@@ -497,6 +498,7 @@ struct PolskiGrammarApp: App {
     private var selectedTab: String { examTabSelected ? "Exam" : model.state.string("tab") }
     private var tabBarItems: [TabBarItem] { [
         TabBarItem(tag: "Training", title: uiText(model.state, "trainingTab", fallback: "Тренировка"), icon: "square.stack"),
+        TabBarItem(tag: "Cloze", title: "Подстановка", icon: "text.insert"),
         TabBarItem(tag: "Matrix", title: uiText(model.state, "matrixNavTitle", fallback: "Матрица"), icon: "tablecells"),
         TabBarItem(tag: "Progress", title: uiText(model.state, "uiProgressTab", fallback: "Прогресс"), icon: "chart.bar"),
         TabBarItem(tag: "Vocabulary", title: uiText(model.state, "vocabularyTab", fallback: "Слова"), icon: "character.book.closed"),
@@ -598,6 +600,8 @@ struct PolskiGrammarApp: App {
             NavigationStack { TrainingView(model: model).toolbar { settingsToolbar } }
         case "Matrix":
             NavigationStack { MatrixView(model: model).toolbar { settingsToolbar } }
+        case "Cloze":
+            NavigationStack { ClozeView(model: model).toolbar { settingsToolbar } }
         case "Progress":
             NavigationStack { ProgressView(model: model, importing: $importing).toolbar { settingsToolbar } }
         case "Exam":
@@ -717,6 +721,7 @@ private struct IosSettingsView: View {
                     )) {
                         Text(uiText(model.state, "oralMode", fallback: "Вслух")).tag("Oral")
                         Text(uiText(model.state, "typedMode", fallback: "Напечатать")).tag("Typed")
+                        Text(uiText(model.state, "tileBuilderMode", fallback: "Собрать из слов")).tag("TileBuilder")
                     }
                     // Distinct from the training screen's own "Ответ" picker (FlashCardView),
                     // which stays mounted under this sheet and shares the same label — a

@@ -194,6 +194,23 @@ The installed iPad Simulator app now includes 16 source-exact original MP3s and 
 
 Full four-part timed completion and extra-large text/landscape cases pass. A natural 40-minute Listening deadline was observed advancing to Reading; its interrupted long XCTest is NOT COMPLETED. Genuine window resizing remains NOT VERIFIED: system window gestures did not narrow the measured frame. The acceptance test remains preserved on `work/exam-dsl-native-pilot-20261108` at `a332681`. [Deadline and resize evidence](../Architecture/IOS-FULL-EXAM-INDEPENDENT-EVIDENCE.md). P11 remains open; physical iPad remains owner-deferred.
 
+### 2026-11-14: native recent training modes
+
+The SwiftUI tab bar now opens **Подстановка** from the existing shared Cloze session. The iOS bridge sends guarded choices and serialises only the current question; the view displays the Polish sentence, three forms, text and colour feedback, manual navigation, restart, and a cancellable 1.5-second advance. Settings now offers **Собрать из слов** and restores its existing `TileBuilder` wire value after relaunch. These adapters do not rate cards or change FSRS progress. [Accepted scope and remaining device criteria](IosRecentModes.md).
+
+Independent simulator acceptance found native adapter gaps: opening Cloze before the shared store finished loading left an empty screen, TileBuilder's Check button sent the generic Reveal command, and bridge JSON replaced a computed tile result with `null`. The view now starts Cloze after `Ready`; Check sends the shared tile action, and the snapshot retains its result. Focused independent UI reruns and device checks are tracked in [developer evidence](IosRecentModes-Developer.md) and the tester handoff.
+
+| Check | Result |
+| --- | --- |
+| Focused `:apple-bridge:iosSimulatorArm64Test` Cloze/TileBuilder bridge cases and `:shared:iosSimulatorArm64Test` preference codec case | **PASS** on iOS Simulator; see [developer evidence](IosRecentModes-Developer.md) |
+| Xcode iPad Simulator app build | **PASS**; see developer evidence |
+| Xcode iPad Simulator focused SwiftUI UI cases | **PASS** — Cloze tab/answer/navigation/return and TileBuilder settings relaunch; see developer evidence |
+| Signed physical iPad app and XCTest runner build | **PASS** — ARM64 compilation/link/signing completed with the existing team; `/tmp/polski-ipad-recent-modes-device.log` |
+| Physical iPad selected read-only smoke, installation and launch | **NOT VERIFIED** — Xcode preflight requires unlocking `iPad (5)` before starting `testRecentModesReadOnlyDeviceSmoke`; no physical progress reset or rating |
+| VoiceOver, large Dynamic Type and iPad window resize | **NOT RUN** for this change |
+
+Independent review: **APPROVED** for the corrected native adapters and focused evidence, including TileBuilder feedback and exactly one review per rating. [Independent test report](IosRecentModes-Tester.md) records the observed failures, fixes, passing reruns and remaining checks. The two older rating-effect tests remain **FAIL** as described in the developer report; selected passes do not imply a green full suite.
+
 ### 2026-11-12: P11 Simulator acceptance closed
 
 The published sixteen-paper app passed the remaining five focused installed cases: genuine iPadOS Left/Zoom resize 834→412→834 pt while retaining the Polish answer and Submit, source matching, Reading fragments, duplicate word-bank IDs and exact image alt. Independent Reviewer APPROVED. [Full evidence](../Architecture/P11-WINDOW-AND-CONTROLS-ACCEPTANCE-20261112.md). Earlier failed harness attempts and incomplete natural-deadline XCTest remain recorded separately; physical iPad is still owner-deferred. P13–P19 feedback/content improvements are new scope rather than evidence of this older contract.

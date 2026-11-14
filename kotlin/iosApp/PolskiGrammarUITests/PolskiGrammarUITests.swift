@@ -2,6 +2,150 @@ import XCTest
 import UIKit
 
 final class PolskiGrammarUITests: XCTestCase {
+    func testRecentModesReadOnlyDeviceSmoke() {
+        let app = XCUIApplication()
+        app.launch()
+        let cloze = app.buttons["Подстановка"]
+        XCTAssertTrue(cloze.waitForExistence(timeout: 20), app.debugDescription)
+        cloze.tap()
+        XCTAssertTrue(app.staticTexts["clozeSentence"].waitForExistence(timeout: 15), app.debugDescription)
+        XCTAssertEqual(app.buttons.matching(NSPredicate(format: "identifier BEGINSWITH %@", "clozeOption-")).count, 3)
+        let capture = XCTAttachment(screenshot: app.screenshot())
+        capture.name = "native-cloze-device-smoke"
+        capture.lifetime = .keepAlways
+        add(capture)
+        app.buttons["openSettings"].tap()
+        let mode = app.descendants(matching: .any)["settingsAnswerModePicker"].firstMatch
+        for _ in 0..<8 { if mode.isHittable { break }; app.swipeUp() }
+        XCTAssertTrue(mode.isHittable, app.debugDescription)
+        mode.tap()
+        XCTAssertTrue(app.buttons["Собрать из слов"].waitForExistence(timeout: 5), app.debugDescription)
+    }
+
+    func testClozeAnsweredQuestionAutomaticallyAdvancesOnce() {
+        let app = XCUIApplication()
+        app.launch()
+        app.buttons["Подстановка"].tap()
+        let position = app.staticTexts["clozePosition"]
+        XCTAssertTrue(position.waitForExistence(timeout: 15), app.debugDescription)
+        XCTAssertTrue(position.label.contains("1 из"), position.label)
+        let firstSentence = app.staticTexts["clozeSentence"].label
+        let options = app.buttons.matching(NSPredicate(format: "identifier BEGINSWITH %@", "clozeOption-"))
+        XCTAssertEqual(options.count, 3, app.debugDescription)
+        options.element(boundBy: 0).tap()
+        XCTAssertTrue(app.staticTexts["clozeResult"].waitForExistence(timeout: 5), app.debugDescription)
+        let advanced = XCTNSPredicateExpectation(
+            predicate: NSPredicate(format: "label CONTAINS %@", "2 из"), object: position)
+        XCTAssertEqual(XCTWaiter.wait(for: [advanced], timeout: 5), .completed, app.debugDescription)
+        XCTAssertNotEqual(app.staticTexts["clozeSentence"].label, firstSentence)
+        XCTAssertFalse(app.staticTexts["clozeResult"].exists)
+        let skipped = XCTNSPredicateExpectation(
+            predicate: NSPredicate(format: "label CONTAINS %@", "3 из"), object: position)
+        skipped.isInverted = true
+        XCTAssertEqual(XCTWaiter.wait(for: [skipped], timeout: 2), .completed)
+        XCTAssertTrue(position.label.contains("2 из"), position.label)
+    }
+
+    func testTileBuilderWrongChoiceShowsResultAndErrorRule() {
+        let app = XCUIApplication()
+        app.launch()
+        continueIntroductionIfPresent(app)
+        app.buttons["openSettings"].tap()
+        let mode = app.descendants(matching: .any)["settingsAnswerModePicker"].firstMatch
+        for _ in 0..<8 { if mode.isHittable { break }; app.swipeUp() }
+        XCTAssertTrue(mode.isHittable, app.debugDescription)
+        mode.tap()
+        app.buttons["Собрать из слов"].tap()
+        app.buttons["Готово"].tap()
+        let check = app.buttons["tileCheck"]
+        XCTAssertTrue(check.waitForExistence(timeout: 5), app.debugDescription)
+        XCTAssertFalse(check.isEnabled, "An incomplete sentence must not be checked")
+
+        let candidate = app.buttons.matching(NSPredicate(format: "label ENDSWITH %@", " — выбрать"))
+        XCTAssertGreaterThan(candidate.count, 1, app.debugDescription)
+        candidate.element(boundBy: 1).tap() // First alternative is deliberately wrong.
+        for _ in 0..<12 {
+            if check.isEnabled { break }
+            if candidate.firstMatch.waitForExistence(timeout: 2) { candidate.firstMatch.tap() }
+        }
+        XCTAssertTrue(check.isEnabled, app.debugDescription)
+        check.tap()
+        let result = app.staticTexts["tileBuilderResult"]
+        XCTAssertTrue(result.waitForExistence(timeout: 5), app.debugDescription)
+        XCTAssertEqual(result.label, "Сравни свой ответ с эталоном")
+        let errorTile = app.buttons.matching(NSPredicate(format: "label CONTAINS %@", "неверно, нажми для правила")).firstMatch
+        XCTAssertTrue(errorTile.waitForExistence(timeout: 5), app.debugDescription)
+        errorTile.tap()
+        let rule = app.staticTexts["tileBuilderErrorRule"]
+        XCTAssertTrue(rule.waitForExistence(timeout: 5), app.debugDescription)
+        XCTAssertFalse(rule.label.isEmpty)
+        let capture = XCTAttachment(screenshot: app.screenshot())
+        capture.name = "tile-builder-error-and-rule-ipad"
+        capture.lifetime = .keepAlways
+        add(capture)
+    }
+
+    func testClozeNativeAnswerNavigationAndTabCancellation() {
+        let app = XCUIApplication()
+        app.launch()
+        let cloze = app.buttons["Подстановка"]
+        XCTAssertTrue(cloze.waitForExistence(timeout: 20), app.debugDescription)
+        cloze.tap()
+        let sentence = app.staticTexts["clozeSentence"]
+        XCTAssertTrue(sentence.waitForExistence(timeout: 15), app.debugDescription)
+        let original = sentence.label
+        let options = app.buttons.matching(NSPredicate(format: "identifier BEGINSWITH %@", "clozeOption-"))
+        XCTAssertEqual(options.count, 3, app.debugDescription)
+        options.element(boundBy: 0).tap()
+        let result = app.staticTexts["clozeResult"]
+        app.buttons["Матрица"].tap()
+        XCTAssertTrue(app.navigationBars["Матрица"].waitForExistence(timeout: 5))
+        sleep(2)
+        cloze.tap()
+        XCTAssertEqual(sentence.label, original)
+        XCTAssertTrue(app.staticTexts["clozePosition"].label.contains("1 из"), app.debugDescription)
+        XCTAssertTrue(result.exists, app.debugDescription)
+
+        // Returning to the answered question must keep it locked and must not rearm the timer.
+        if result.label.hasPrefix("Верно") {
+            app.buttons["clozeRestart"].tap()
+            options.element(boundBy: 1).tap()
+            XCTAssertTrue(result.waitForExistence(timeout: 5), app.debugDescription)
+        }
+        XCTAssertTrue(result.label.hasPrefix("Неверно"), result.label)
+        XCTAssertTrue(result.label.contains("Правильная форма:"), result.label)
+        XCTAssertFalse(options.element(boundBy: 0).isEnabled)
+        app.buttons["clozeNext"].tap()
+        XCTAssertTrue(app.staticTexts["clozePosition"].label.contains("2 из"), app.debugDescription)
+        app.buttons["clozePrevious"].tap()
+        XCTAssertEqual(sentence.label, original)
+        XCTAssertFalse(options.element(boundBy: 0).isEnabled)
+        app.buttons["clozeRestart"].tap()
+        XCTAssertEqual(sentence.label, original)
+        XCTAssertFalse(result.exists)
+    }
+
+    func testTileBuilderCanBeSelectedInSettingsAndRestored() {
+        let app = XCUIApplication()
+        app.launch()
+        XCTAssertTrue(app.buttons["openSettings"].waitForExistence(timeout: 20))
+        app.buttons["openSettings"].tap()
+        let mode = app.descendants(matching: .any)["settingsAnswerModePicker"].firstMatch
+        for _ in 0..<8 { if mode.isHittable { break }; app.swipeUp() }
+        XCTAssertTrue(mode.isHittable, app.debugDescription)
+        mode.tap()
+        app.buttons["Собрать из слов"].tap()
+        app.buttons["Готово"].tap()
+        app.terminate()
+        app.launch()
+        app.buttons["openSettings"].tap()
+        for _ in 0..<8 { if mode.isHittable { break }; app.swipeUp() }
+        XCTAssertTrue(mode.label.contains("Собрать из слов"), mode.label)
+        mode.tap()
+        app.buttons["Вслух"].tap()
+        app.buttons["Готово"].tap()
+    }
+
     func testOfficialB12017GrammarUsesSharedNativeExam() {
         let app = XCUIApplication()
         app.launch()

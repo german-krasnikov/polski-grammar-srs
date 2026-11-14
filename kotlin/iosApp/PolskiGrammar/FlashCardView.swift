@@ -144,7 +144,7 @@ struct FlashCardView<RevealButton: View>: View {
                 // SB-10: in tile mode, show a dedicated "Проверить" button disabled until all tiles
                 // are placed (`canCheck` mirrors `tileBuilderCanCheck` from the shared store guard).
                 if isTileMode && tileAvailable {
-                    Button(uiText(state, "checkTiles", fallback: "Проверить")) { model.send("reveal") }
+                    Button(uiText(state, "checkTiles", fallback: "Проверить")) { model.send("tileCheck") }
                         .buttonStyle(.borderedProminent)
                         .controlSize(.large)
                         .frame(maxWidth: .infinity)

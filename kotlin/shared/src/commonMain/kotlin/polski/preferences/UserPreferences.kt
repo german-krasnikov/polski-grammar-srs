@@ -4,7 +4,7 @@ import polski.data.packRegistry
 
 /** UC-10: a display preference, not a diagnosis — задания, FSRS и оценки одинаковы во всех стилях. */
 enum class PreferredStyle { RuleFirst, SituationFirst, NativeContrast, MinimalTheory }
-enum class PreferredAnswerMode { Oral, Typed }
+enum class PreferredAnswerMode { Oral, Typed, TileBuilder }
 enum class Appearance { System, Light, Dark }
 enum class Motion { System, Reduced }
 

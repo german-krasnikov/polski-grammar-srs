@@ -10,6 +10,12 @@ import polski.textwire.WireNode
 import polski.textwire.DecodeResult
 
 class UserPreferencesCodecTest {
+    @Test fun tileBuilderModeRoundTripsWithoutChangingLegacyDefaults() {
+        val selected = UserPreferencesV2(answerMode = PreferredAnswerMode.TileBuilder)
+        assertEquals(selected, assertIs<PreferencesDecode.Loaded>(UserPreferencesCodec.decode(UserPreferencesCodec.encode(selected))).value)
+        assertEquals(PreferredAnswerMode.Oral,
+            assertIs<PreferencesDecode.Loaded>(UserPreferencesCodec.decode("{\"schemaVersion\":1}")).value.answerMode)
+    }
     @Test fun immediateFeedbackDefaultsOnAndExplicitOffSurvivesBothWireFormats() {
         assertTrue(UserPreferencesV2().immediateExamFeedbackEnabled)
         for (version in 1..4) {
