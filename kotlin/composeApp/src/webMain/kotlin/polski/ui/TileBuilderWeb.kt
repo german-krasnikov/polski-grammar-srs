@@ -56,32 +56,53 @@ internal fun renderTileBuilderSection(
     val choiceButtons = mutableMapOf<Int, HTMLButtonElement>()
     val errorButtons = mutableMapOf<Int, HTMLButtonElement>()
 
+    fun nextUnfilledChoice(afterPosition: Int): TileSegment.Choice? =
+        choices.filter { it.position > afterPosition }
+            .firstOrNull { c -> builder.placed.none { it.position == c.position } }
+            ?: choices.firstOrNull { c -> builder.placed.none { it.position == c.position } }
+
+    var doOpenPicker: ((TileSegment.Choice) -> Unit)? = null
+
     fun renderPickerCandidates(choice: TileSegment.Choice) {
         panelInner.textContent = ""
-        // SB-6 blueprint §2.1: the shared state's own order — generated once by TileGenerator,
-        // never reshuffled here, so re-renders of the same open picker never reorder under a tap.
         (listOf(choice.correctForm) + choice.alternatives).forEach { form ->
             panelInner.appendChild(button(form, extraClass = "tile tile-option") {
                 dispatch(AppAction.Tile(exerciseId, TileAction.Place(choice.position, form)))
-                currentOpenPicker = null
-                onTogglePicker(null)
-                choiceButtons[choice.position]?.setAttribute("aria-expanded", "false")
-                applyCollapsible(panel, expanded = false, isToggleEvent = true)
+                choiceButtons[choice.position]?.let { btn ->
+                    btn.textContent = form
+                    btn.classList.remove("tile-empty")
+                    btn.setAttribute("aria-expanded", "false")
+                }
+                val next = nextUnfilledChoice(choice.position)
+                if (next != null) {
+                    doOpenPicker?.invoke(next)
+                } else {
+                    currentOpenPicker = null
+                    onTogglePicker(null)
+                    applyCollapsible(panel, expanded = false, isToggleEvent = true)
+                }
             })
         }
     }
 
-    fun togglePicker(choice: TileSegment.Choice) {
-        val next = togglePanel(currentOpenPicker, choice.position)
-        val opening = next != null
+    doOpenPicker = { choice ->
         choiceButtons.values.forEach { it.setAttribute("aria-expanded", "false") }
-        currentOpenPicker = next
+        currentOpenPicker = choice.position
         onTogglePicker(currentOpenPicker)
-        if (opening) {
-            renderPickerCandidates(choice)
-            choiceButtons[choice.position]?.setAttribute("aria-expanded", "true")
+        renderPickerCandidates(choice)
+        choiceButtons[choice.position]?.setAttribute("aria-expanded", "true")
+        applyCollapsible(panel, expanded = true, isToggleEvent = true)
+    }
+
+    fun togglePicker(choice: TileSegment.Choice) {
+        if (currentOpenPicker == choice.position) {
+            choiceButtons[choice.position]?.setAttribute("aria-expanded", "false")
+            currentOpenPicker = null
+            onTogglePicker(null)
+            applyCollapsible(panel, expanded = false, isToggleEvent = true)
+        } else {
+            doOpenPicker?.invoke(choice)
         }
-        applyCollapsible(panel, expanded = opening, isToggleEvent = true)
     }
 
     fun toggleError(position: Int) {
@@ -131,8 +152,13 @@ internal fun renderTileBuilderSection(
     }
 
     if (result == null) {
+        val autoOpen = if (currentOpenPicker == null) nextUnfilledChoice(-1) else null
+        if (autoOpen != null) { currentOpenPicker = autoOpen.position; onTogglePicker(autoOpen.position) }
         val openChoice = choices.firstOrNull { it.position == currentOpenPicker }
-        if (openChoice != null) renderPickerCandidates(openChoice)
+        if (openChoice != null) {
+            renderPickerCandidates(openChoice)
+            choiceButtons[openChoice.position]?.setAttribute("aria-expanded", "true")
+        }
         applyCollapsible(panel, expanded = openChoice != null, isToggleEvent = false)
     } else {
         val explanationOpen = currentOpenError != null && builder.errorExplanation != null
