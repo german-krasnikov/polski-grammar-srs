@@ -119,6 +119,7 @@ internal class ClozeWebController {
             feedbackTimer = window.setTimeout({
                 feedbackTimer = null
                 dispatch(AppAction.ClozeAct(ClozeSessionAction.Next))
+                null
             }, CLOZE_FEEDBACK_DELAY_MS)
         }
     }
