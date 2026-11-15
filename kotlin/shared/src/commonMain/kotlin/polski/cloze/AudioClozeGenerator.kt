@@ -12,8 +12,14 @@ class AudioClozeGenerator(private val random: RandomSource) {
         if (sentences.isEmpty()) return emptyList()
         val allWords = sentences.flatMap { tokenize(it) }
             .filter { isContentWord(it) }.map { it.lowercase() }.distinct()
+        val totalChars = sentences.sumOf { it.length }
+        val taskDuration = task.endMs - task.startMs
+        var charOffset = 0
         return sentences.mapIndexedNotNull { sentIdx, sentence ->
-            buildExercise(examRouteId, task, audioUrl, sentence, sentIdx, allWords)
+            val sentStartMs = task.startMs + charOffset.toLong() * taskDuration / totalChars
+            charOffset += sentence.length
+            val sentEndMs = task.startMs + charOffset.toLong() * taskDuration / totalChars
+            buildExercise(examRouteId, task, audioUrl, sentence, sentIdx, allWords, sentStartMs, sentEndMs)
         }
     }
 
@@ -27,6 +33,8 @@ class AudioClozeGenerator(private val random: RandomSource) {
         sentence: String,
         sentenceIndex: Int,
         wordPool: List<String>,
+        sentStartMs: Long,
+        sentEndMs: Long,
     ): AudioClozeExercise? {
         val tokens = tokenize(sentence)
         val candidates = tokens.withIndex().filter { (_, w) -> isContentWord(w) && w.length >= 3 }.toList()
@@ -45,8 +53,8 @@ class AudioClozeGenerator(private val random: RandomSource) {
             correctForm = gapWord,
             options = options,
             audioUrl = audioUrl,
-            startMs = task.startMs,
-            endMs = task.endMs,
+            startMs = sentStartMs,
+            endMs = sentEndMs,
             source = AudioClozeSource.ListeningTranscript(examRouteId, task.id),
             gapLexemeKey = "transcript:${task.id}:$gapWord",
         )

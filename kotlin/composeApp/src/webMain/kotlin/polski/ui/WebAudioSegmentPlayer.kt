@@ -30,6 +30,7 @@ internal class WebAudioSegmentPlayer {
     private var playInFlight = false
     private var replaySeekPending = false
     private var playbackError: String? = null
+    var onSegmentEnded: (() -> Unit)? = null
 
     /** Creates (or reuses) the audio element for [segment]. Disposes any element with a
      *  different URL. Seeks to the segment start. */
@@ -62,6 +63,9 @@ internal class WebAudioSegmentPlayer {
                         cancelPlayback()
                         pause()
                         currentTime = currentSegmentEnd
+                        updateWidget()
+                        onSegmentEnded?.invoke()
+                        return@addEventListener
                     }
                     updateWidget()
                 })

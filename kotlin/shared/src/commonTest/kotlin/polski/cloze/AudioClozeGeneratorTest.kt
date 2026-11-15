@@ -49,8 +49,9 @@ class AudioClozeGeneratorTest {
         assertEquals(3, ex.options.size)
         assertEquals(3, ex.options.distinct().size)
         assertEquals("audio.mp3", ex.audioUrl)
-        assertEquals(1000L, ex.startMs)
-        assertEquals(5000L, ex.endMs)
+        assertTrue(ex.startMs >= 1000L, "Sentence start should be >= task start")
+        assertTrue(ex.endMs <= 5000L, "Sentence end should be <= task end")
+        assertTrue(ex.endMs - ex.startMs < 5000L - 1000L, "Sentence segment should be shorter than full task")
         assertTrue(ex.source is AudioClozeSource.ListeningTranscript)
     }
 

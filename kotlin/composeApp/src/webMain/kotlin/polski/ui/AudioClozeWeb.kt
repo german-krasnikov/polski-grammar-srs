@@ -80,8 +80,8 @@ internal class AudioClozeWebController {
         // Audio player
         c.appendChild(player.buildWidget())
 
-        // Replay after wrong answer
-        if (answered != null && answered != exercise.correctForm) {
+        // Replay after any answer
+        if (answered != null) {
             c.appendChild(navBtn("Переслушать") {
                 dispatch(AppAction.AudioClozeAct(AudioClozeSessionAction.RecordReplay(exercise.id)))
                 player.seekTo(segment)
@@ -151,15 +151,20 @@ internal class AudioClozeWebController {
         dispatch: (AppAction) -> Unit,
     ) {
         dispatch(AppAction.AudioClozeAct(AudioClozeSessionAction.Choose(exercise.id, chosen)))
-        // Auto-advance only after correct answer, and only when not on the last item
-        if (chosen == exercise.correctForm && state.currentIndex < state.exercises.lastIndex) {
-            cancelTimer()
-            feedbackTimer = window.setTimeout({
-                feedbackTimer = null
-                dispatch(AppAction.AudioClozeAct(AudioClozeSessionAction.Next))
-                null
-            }, AUDIO_CLOZE_FEEDBACK_DELAY_MS)
+        val segment = AudioSegment(exercise.audioUrl, exercise.startMs, exercise.endMs)
+        player.onSegmentEnded = {
+            player.onSegmentEnded = null
+            if (chosen == exercise.correctForm && state.currentIndex < state.exercises.lastIndex) {
+                cancelTimer()
+                feedbackTimer = window.setTimeout({
+                    feedbackTimer = null
+                    dispatch(AppAction.AudioClozeAct(AudioClozeSessionAction.Next))
+                    null
+                }, AUDIO_CLOZE_FEEDBACK_DELAY_MS)
+            }
         }
+        player.seekTo(segment)
+        player.startPlaybackIfRequested()
     }
 
     private fun buildOptionClass(opt: String, answered: String?, exercise: AudioClozeExercise): String {
@@ -196,17 +201,19 @@ private fun renderExamPicker(container: HTMLElement, dispatch: (AppAction) -> Un
     container.appendChild(node("h2", "exam-title", "Аудирование: заполни пропуск"))
     container.appendChild(node("p", "notice", "Слушайте аудио и заполняйте пропуски в тексте"))
 
-    container.appendChild(navBtn("Все экзамены", primary = true) {
+    val withTranscripts = officialListeningData
+        .filter { (_, exam) -> exam.tasks.any { it.transcript != null } }
+        .keys
+    container.appendChild(navBtn("Все экзамены (${withTranscripts.size})", primary = true) {
         dispatch(AppAction.StartAudioCloze())
     })
 
-    val examsWithTranscripts = officialListeningData
-        .filter { (_, exam) -> exam.tasks.any { it.transcript != null } }
-        .keys.sorted()
-    if (examsWithTranscripts.isEmpty()) return
+    val allExams = officialListeningData.keys.sorted()
+    if (allExams.isEmpty()) return
 
-    val grouped = examsWithTranscripts.groupBy { routeId ->
+    val grouped = allExams.groupBy { routeId ->
         when {
+            routeId.startsWith("a2") -> "A2"
             routeId.startsWith("b1") -> "B1"
             routeId.startsWith("b2") -> "B2"
             routeId.startsWith("c1") -> "C1"
@@ -217,8 +224,15 @@ private fun renderExamPicker(container: HTMLElement, dispatch: (AppAction) -> Un
         container.appendChild(node("h3", "exam-title", level))
         container.appendChild(node("div", "exam-options").apply {
             routes.forEach { routeId ->
-                appendChild(navBtn(routeId) {
-                    dispatch(AppAction.StartAudioCloze(examRouteId = routeId))
+                val hasTranscript = routeId in withTranscripts
+                appendChild((document.createElement("button") as HTMLButtonElement).apply {
+                    type = "button"
+                    className = if (hasTranscript) "exam-option" else "exam-option locked"
+                    textContent = if (hasTranscript) routeId else "$routeId (нет транскрипции)"
+                    disabled = !hasTranscript
+                    if (hasTranscript) addEventListener("click", {
+                        dispatch(AppAction.StartAudioCloze(examRouteId = routeId))
+                    })
                 })
             }
         })
