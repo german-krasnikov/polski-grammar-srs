@@ -298,7 +298,7 @@ class TrainingStore(
                     matrixSelection = if (action.tab == AppTab.Matrix && s.tab != AppTab.Matrix) MatrixSelection() else s.matrixSelection,
                 )
                 if (action.tab == AppTab.Cloze && s.cloze == null && s.loadStatus == LoadStatus.Ready) startCloze()
-                if (action.tab == AppTab.AudioCloze && s.audioCloze == null && s.loadStatus == LoadStatus.Ready) startAudioCloze(10)
+                // Audio cloze session is started explicitly via StartAudioCloze (exam picker on web, LaunchedEffect on Android, IosSession on iOS)
             }
             is AppAction.SelectMatrixSection -> mutate { it.copy(matrixSelection = it.matrixSelection.copy(section = action.section)) }
             is AppAction.SetMatrixSelection -> {
@@ -336,7 +336,7 @@ class TrainingStore(
                 val next = reduceClozeSession(s.cloze ?: return, action.action)
                 mutate { it.copy(cloze = next) }
             }
-            is AppAction.StartAudioCloze -> startAudioCloze(action.limit)
+            is AppAction.StartAudioCloze -> startAudioCloze(action.limit, action.examRouteId)
             is AppAction.AudioClozeAct -> {
                 val next = reduceAudioClozeSession(s.audioCloze ?: return, action.action)
                 mutate { it.copy(audioCloze = next) }
@@ -615,8 +615,9 @@ class TrainingStore(
         mutate { it.copy(tab = AppTab.Cloze, cloze = ClozeSessionState(exercises)) }
     }
 
-    private fun startAudioCloze(limit: Int) {
-        val exercises = audioClozePool.draw(limit, tileRandom)
+    private fun startAudioCloze(limit: Int, examRouteId: String? = null) {
+        val pool = audioClozePool as? DefaultAudioClozePool
+        val exercises = pool?.drawFrom(examRouteId, limit, tileRandom) ?: audioClozePool.draw(limit, tileRandom)
         mutate { it.copy(tab = AppTab.AudioCloze, audioCloze = AudioClozeSessionState(exercises)) }
     }
 

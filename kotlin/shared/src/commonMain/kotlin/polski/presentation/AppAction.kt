@@ -42,6 +42,6 @@ sealed interface AppAction {
     data class EffectAcknowledged(val effectId: Long, val outcome: EffectOutcome) : AppAction
     data object StartCloze : AppAction
     data class ClozeAct(val action: ClozeSessionAction) : AppAction
-    data class StartAudioCloze(val limit: Int = 10) : AppAction
+    data class StartAudioCloze(val limit: Int = 10, val examRouteId: String? = null) : AppAction
     data class AudioClozeAct(val action: AudioClozeSessionAction) : AppAction
 }

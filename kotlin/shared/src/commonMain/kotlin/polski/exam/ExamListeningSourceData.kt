@@ -36,6 +36,7 @@ val officialListeningData: Map<String, ListeningExam> by lazy {
                     },
                     task.segmentStartMs.toLong(), task.segmentEndMs.toLong(),
                     task.promptImageUrl, task.promptImageAlt,
+                    task.transcript,
                 )
             },
             paperTasks.firstOrNull()?.audioUrl ?: "",

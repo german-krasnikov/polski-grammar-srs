@@ -5,6 +5,7 @@ import polski.exam.*
 data class ListeningTask(
     val id: String, val instruction: String, val questions: List<ListeningQuestion>,
     val startMs: Long = 0, val endMs: Long = 0, val promptImageUrl: String? = null, val promptImageAlt: String? = null,
+    val transcript: String? = null,
 )
 data class ListeningQuestion(
     val id: String, val type: QuestionType, val questionText: String, val options: List<String>,

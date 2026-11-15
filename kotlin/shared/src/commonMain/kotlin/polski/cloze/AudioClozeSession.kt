@@ -5,6 +5,7 @@ data class AudioClozeSessionState(
     val currentIndex: Int = 0,
     val answers: Map<String, String> = emptyMap(),
     val replayCount: Map<String, Int> = emptyMap(),
+    val selectedExamRouteId: String? = null,
 )
 
 sealed interface AudioClozeSessionAction {
@@ -13,6 +14,7 @@ sealed interface AudioClozeSessionAction {
     data object Next : AudioClozeSessionAction
     data object Previous : AudioClozeSessionAction
     data object Restart : AudioClozeSessionAction
+    data class SelectExam(val examRouteId: String?) : AudioClozeSessionAction
 }
 
 fun reduceAudioClozeSession(
@@ -31,4 +33,5 @@ fun reduceAudioClozeSession(
         if (state.currentIndex <= 0) state
         else state.copy(currentIndex = state.currentIndex - 1)
     AudioClozeSessionAction.Restart -> state.copy(currentIndex = 0, answers = emptyMap(), replayCount = emptyMap())
+    is AudioClozeSessionAction.SelectExam -> state.copy(selectedExamRouteId = action.examRouteId)
 }

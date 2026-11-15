@@ -21,4 +21,5 @@ data class AudioClozeExercise(
 sealed interface AudioClozeSource {
     data class ListeningQuestion(val examRouteId: String, val taskId: String, val questionId: String) : AudioClozeSource
     data class ListeningTranscript(val examRouteId: String, val taskId: String) : AudioClozeSource
+    data class Custom(val sourceId: String, val label: String) : AudioClozeSource
 }

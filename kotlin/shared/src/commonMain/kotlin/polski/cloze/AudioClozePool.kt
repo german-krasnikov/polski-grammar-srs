@@ -8,21 +8,27 @@ fun interface AudioClozePool {
 }
 
 class DefaultAudioClozePool(
-    listeningExams: Map<String, ListeningExam>,
-    generator: AudioClozeGenerator,
+    private val listeningExams: Map<String, ListeningExam>,
+    private val generator: AudioClozeGenerator,
 ) : AudioClozePool {
-    private val candidates: List<AudioClozeExercise> by lazy {
-        listeningExams.flatMap { (routeId, exam) -> generator.fromExam(routeId, exam) }
-            .distinctBy { it.id }
+    private val allCandidates: Map<String, List<AudioClozeExercise>> by lazy {
+        listeningExams.mapValues { (routeId, exam) -> generator.fromExam(routeId, exam) }
+            .filterValues { it.isNotEmpty() }
     }
 
-    override fun draw(limit: Int, random: RandomSource): List<AudioClozeExercise> {
-        if (candidates.isEmpty()) return emptyList()
-        val pool = candidates.toMutableList()
-        for (i in pool.lastIndex downTo 1) {
+    fun availableExams(): List<String> = allCandidates.keys.toList()
+
+    override fun draw(limit: Int, random: RandomSource): List<AudioClozeExercise> = drawFrom(null, limit, random)
+
+    fun drawFrom(examRouteId: String?, limit: Int, random: RandomSource): List<AudioClozeExercise> {
+        val pool = if (examRouteId != null) allCandidates[examRouteId].orEmpty()
+        else allCandidates.values.flatten()
+        if (pool.isEmpty()) return emptyList()
+        val mutable = pool.toMutableList()
+        for (i in mutable.lastIndex downTo 1) {
             val j = (random.nextDouble() * (i + 1)).toInt().coerceIn(0, i)
-            val tmp = pool[i]; pool[i] = pool[j]; pool[j] = tmp
+            val tmp = mutable[i]; mutable[i] = mutable[j]; mutable[j] = tmp
         }
-        return pool.take(limit)
+        return mutable.distinctBy { it.id }.take(limit)
     }
 }

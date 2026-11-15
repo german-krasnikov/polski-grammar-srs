@@ -9,8 +9,10 @@ import polski.audio.AudioSegment
 import polski.cloze.AudioClozeExercise
 import polski.cloze.AudioClozeSessionAction
 import polski.cloze.AudioClozeSessionState
+import polski.exam.officialListeningData
 import polski.presentation.AppAction
 import polski.presentation.AppUiState
+import polski.presentation.LoadStatus
 
 private const val AUDIO_CLOZE_FEEDBACK_DELAY_MS = 1_500
 
@@ -171,7 +173,7 @@ internal class AudioClozeWebController {
     }
 }
 
-/** Renders the audio cloze route content — auto-dispatches [AppAction.StartAudioCloze] when session is null. */
+/** Renders the audio cloze route content — shows an exam picker when session is null. */
 internal fun renderAudioClozeWeb(
     container: HTMLElement,
     state: AppUiState,
@@ -180,9 +182,45 @@ internal fun renderAudioClozeWeb(
 ) {
     val session = state.audioCloze
     if (session == null) {
-        dispatch(AppAction.StartAudioCloze())
-        container.appendChild(node("p", text = "Загрузка…"))
+        if (state.loadStatus != LoadStatus.Ready) {
+            container.appendChild(node("p", text = "Загрузка…"))
+        } else {
+            renderExamPicker(container, dispatch)
+        }
         return
     }
     audioCloze.render(container, session, dispatch)
+}
+
+private fun renderExamPicker(container: HTMLElement, dispatch: (AppAction) -> Unit) {
+    container.appendChild(node("h2", "exam-title", "Аудирование: заполни пропуск"))
+    container.appendChild(node("p", "notice", "Слушайте аудио и заполняйте пропуски в тексте"))
+
+    container.appendChild(navBtn("Все экзамены", primary = true) {
+        dispatch(AppAction.StartAudioCloze())
+    })
+
+    val examsWithTranscripts = officialListeningData
+        .filter { (_, exam) -> exam.tasks.any { it.transcript != null } }
+        .keys.sorted()
+    if (examsWithTranscripts.isEmpty()) return
+
+    val grouped = examsWithTranscripts.groupBy { routeId ->
+        when {
+            routeId.startsWith("b1") -> "B1"
+            routeId.startsWith("b2") -> "B2"
+            routeId.startsWith("c1") -> "C1"
+            else -> "Другие"
+        }
+    }
+    for ((level, routes) in grouped) {
+        container.appendChild(node("h3", "exam-title", level))
+        container.appendChild(node("div", "exam-options").apply {
+            routes.forEach { routeId ->
+                appendChild(navBtn(routeId) {
+                    dispatch(AppAction.StartAudioCloze(examRouteId = routeId))
+                })
+            }
+        })
+    }
 }
