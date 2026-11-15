@@ -1,5 +1,6 @@
 package polski.presentation
 
+import polski.cloze.AudioClozeSessionAction
 import polski.cloze.ClozeSessionAction
 import polski.srs.Rating
 
@@ -41,4 +42,6 @@ sealed interface AppAction {
     data class EffectAcknowledged(val effectId: Long, val outcome: EffectOutcome) : AppAction
     data object StartCloze : AppAction
     data class ClozeAct(val action: ClozeSessionAction) : AppAction
+    data class StartAudioCloze(val limit: Int = 10) : AppAction
+    data class AudioClozeAct(val action: AudioClozeSessionAction) : AppAction
 }

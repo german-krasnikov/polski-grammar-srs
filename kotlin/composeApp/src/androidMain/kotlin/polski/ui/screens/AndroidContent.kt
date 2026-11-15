@@ -37,12 +37,13 @@ fun AndroidContent(
         state.loadStatus != LoadStatus.Ready -> AndroidRecoveryScreen(state, dispatch)
         state.tab == AppTab.Training -> AndroidTrainingScreen(state, dispatch, focusReveal, formatDate, swipeRatingEnabled, reduceMotion)
         state.tab == AppTab.Matrix -> AndroidMatrixScreen(state, dispatch, reduceMotion)
+        state.tab == AppTab.AudioCloze -> AndroidAudioClozeScreen(state, dispatch)
         else -> AndroidProgressScreen(state, formatDate, dispatch)
     }
 }
 
 /** The bottom nav's left-to-right order (`AppNavigationBar`) — used only to pick a slide direction. */
-private val tabNavOrder = listOf(AppTab.Training, AppTab.Matrix, AppTab.Progress, AppTab.Vocabulary)
+private val tabNavOrder = listOf(AppTab.Training, AppTab.Matrix, AppTab.Progress, AppTab.Vocabulary, AppTab.AudioCloze)
 
 private val tabSlideEasing = CubicBezierEasing(0.2f, 0f, 0f, 1f)
 

@@ -24,12 +24,13 @@ internal class WebNav(app: HTMLElement, navigate: (WebRoute) -> Unit) {
         WebRoute.Exam to UiCopy.Exam,
         WebRoute.Mission to UiCopy.Missions,
         WebRoute.Cloze to "Подстановка",
+        WebRoute.AudioCloze to "Аудирование",
         WebRoute.Settings to UiCopy.SettingsTab,
     )
     // P2-10: "Таблицы и схема" wraps onto two lines inside the mobile nav's fixed-height buttons;
     // a shorter label swaps in there via CSS (`.nav-label-short`/`.nav-label-full`) while
     // `aria-label` keeps carrying the full name on every viewport.
-    private val shortLabels = mapOf(WebRoute.Matrix to "Таблицы")
+    private val shortLabels = mapOf(WebRoute.Matrix to "Таблицы", WebRoute.AudioCloze to "Аудио")
     private val buttons = destinations.associate { (route, label) ->
         route to (document.createElement("button") as HTMLButtonElement).apply {
             type = "button"

@@ -10,6 +10,9 @@ import kotlinx.serialization.json.put
 import polski.data.presentationBySkillId
 import polski.data.skillById
 import polski.data.styleContentBySkillId
+import polski.cloze.AudioClozeGenerator
+import polski.core.engine.RandomSource
+import polski.exam.officialListeningData
 import polski.grammar.caseRows
 import polski.grammar.nounPhrase
 import polski.model.GramCase
@@ -56,6 +59,8 @@ internal fun snapshot(state: AppUiState): String = buildJsonObject {
     } } } ?: emptyList() else emptyList()))
     put("tileBuilder", tileBuilderSnapshot(state))
     put("cloze", clozeSnapshot(state))
+    put("audioCloze", audioClozeSnapshot(state))
+    put("audioClozeAvailable", audioClozeAvailable())
     put("matrix", matrixSnapshot(state))
     putProgressFields(state)
     putEffects(state)
@@ -158,6 +163,47 @@ private fun tileBuilderSnapshot(state: AppUiState): JsonElement {
             put("result", JsonNull)
         }
         put("errorExplanation", builder.errorExplanation?.let(::blocksToJson) ?: JsonNull)
+    }
+}
+
+private fun audioClozeSnapshot(state: AppUiState): JsonElement {
+    val session = state.audioCloze ?: return JsonNull
+    val current = session.exercises.getOrNull(session.currentIndex)
+    return buildJsonObject {
+        put("currentIndex", session.currentIndex)
+        put("total", session.exercises.size)
+        put("current", current?.let { ex -> buildJsonObject {
+            put("id", ex.id)
+            put("displaySentence", ex.displaySentence)
+            put("options", JsonArray(ex.options.map(::JsonPrimitive)))
+            val selected = session.answers[ex.id]
+            put("selectedForm", selected?.let(::JsonPrimitive) ?: JsonNull)
+            if (selected != null) put("correctForm", ex.correctForm)
+            put("audioUrl", ex.audioUrl)
+            put("startMs", ex.startMs)
+            put("endMs", ex.endMs)
+            put("replayCount", session.replayCount[ex.id] ?: 0)
+        }} ?: JsonNull)
+        if (session.answers.size == session.exercises.size) {
+            put("results", JsonArray(session.exercises.map { ex -> buildJsonObject {
+                put("id", ex.id)
+                put("displaySentence", ex.displaySentence)
+                put("correctForm", ex.correctForm)
+                put("chosen", session.answers[ex.id]?.let(::JsonPrimitive) ?: JsonNull)
+                put("replayCount", session.replayCount[ex.id] ?: 0)
+            }}))
+        } else {
+            put("results", JsonNull)
+        }
+    }
+}
+
+private fun audioClozeAvailable(): Boolean {
+    val generator = AudioClozeGenerator(object : RandomSource {
+        override fun nextDouble(): Double = 0.5
+    })
+    return officialListeningData.any { (routeId, exam) ->
+        generator.fromExam(routeId, exam).isNotEmpty()
     }
 }
 

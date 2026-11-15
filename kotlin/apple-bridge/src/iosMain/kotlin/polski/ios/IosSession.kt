@@ -14,6 +14,7 @@ import platform.Foundation.NSDateFormatter
 import platform.Foundation.NSLocale
 import platform.Foundation.NSUserDefaults
 import polski.presentation.AnswerMode
+import polski.cloze.AudioClozeSessionAction
 import polski.cloze.ClozeSessionAction
 import polski.presentation.AppAction
 import polski.presentation.AppTab
@@ -147,6 +148,45 @@ class IosSession(private val defaults: NSUserDefaults = NSUserDefaults.standardU
         val current = cloze.exercises.getOrNull(cloze.currentIndex) ?: return
         if (current.id != exerciseId || form !in current.options || exerciseId in cloze.answers) return
         store.dispatch(AppAction.ClozeAct(ClozeSessionAction.Choose(exerciseId, form)))
+    }
+
+    fun startAudioCloze(limit: Int = 10) {
+        if (closed) return
+        rebuildIfCourseSwitched()
+        store.dispatch(AppAction.StartAudioCloze(limit))
+    }
+
+    fun chooseAudioCloze(exerciseId: String, form: String) {
+        if (closed) return
+        rebuildIfCourseSwitched()
+        val session = store.state.value.audioCloze ?: return
+        val current = session.exercises.getOrNull(session.currentIndex) ?: return
+        if (current.id != exerciseId || form !in current.options || exerciseId in session.answers) return
+        store.dispatch(AppAction.AudioClozeAct(AudioClozeSessionAction.Choose(exerciseId, form)))
+    }
+
+    fun audioClozeNext() {
+        if (closed) return
+        rebuildIfCourseSwitched()
+        store.dispatch(AppAction.AudioClozeAct(AudioClozeSessionAction.Next))
+    }
+
+    fun audioClozePrev() {
+        if (closed) return
+        rebuildIfCourseSwitched()
+        store.dispatch(AppAction.AudioClozeAct(AudioClozeSessionAction.Previous))
+    }
+
+    fun audioClozeRestart() {
+        if (closed) return
+        rebuildIfCourseSwitched()
+        store.dispatch(AppAction.AudioClozeAct(AudioClozeSessionAction.Restart))
+    }
+
+    fun audioClozeReplay(exerciseId: String) {
+        if (closed) return
+        rebuildIfCourseSwitched()
+        store.dispatch(AppAction.AudioClozeAct(AudioClozeSessionAction.RecordReplay(exerciseId)))
     }
 
     fun acknowledgeEffect(id: Long, outcome: String) {

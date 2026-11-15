@@ -11,11 +11,17 @@ import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import kotlinx.serialization.json.JsonObject
+import polski.cloze.AudioClozeGenerator
+import polski.cloze.AudioClozePool
+import polski.cloze.AudioClozeSessionState
 import polski.cloze.ClozeGenerator
 import polski.cloze.ClozePool
 import polski.cloze.ClozeSessionState
+import polski.cloze.DefaultAudioClozePool
 import polski.cloze.DefaultClozePool
+import polski.cloze.reduceAudioClozeSession
 import polski.cloze.reduceClozeSession
+import polski.exam.officialListeningData
 import polski.core.engine.RandomSource
 import polski.core.engine.evaluateTileAnswer
 import polski.core.plMorphology
@@ -130,6 +136,13 @@ class TrainingStore(
             grammarTests = officialGrammarData.values.flatten(),
             courseExercises = exerciseEngine.coreExercisesForClozePool(),
             generator = ClozeGenerator(plMorphology, tileRandom),
+        )
+    }
+
+    private val audioClozePool: AudioClozePool by lazy {
+        DefaultAudioClozePool(
+            listeningExams = officialListeningData,
+            generator = AudioClozeGenerator(tileRandom),
         )
     }
 
@@ -285,6 +298,7 @@ class TrainingStore(
                     matrixSelection = if (action.tab == AppTab.Matrix && s.tab != AppTab.Matrix) MatrixSelection() else s.matrixSelection,
                 )
                 if (action.tab == AppTab.Cloze && s.cloze == null && s.loadStatus == LoadStatus.Ready) startCloze()
+                if (action.tab == AppTab.AudioCloze && s.audioCloze == null && s.loadStatus == LoadStatus.Ready) startAudioCloze(10)
             }
             is AppAction.SelectMatrixSection -> mutate { it.copy(matrixSelection = it.matrixSelection.copy(section = action.section)) }
             is AppAction.SetMatrixSelection -> {
@@ -322,6 +336,11 @@ class TrainingStore(
                 val next = reduceClozeSession(s.cloze ?: return, action.action)
                 mutate { it.copy(cloze = next) }
             }
+            is AppAction.StartAudioCloze -> startAudioCloze(action.limit)
+            is AppAction.AudioClozeAct -> {
+                val next = reduceAudioClozeSession(s.audioCloze ?: return, action.action)
+                mutate { it.copy(audioCloze = next) }
+            }
         }
     }
 
@@ -330,6 +349,8 @@ class TrainingStore(
         AppAction.StartSchedule, AppAction.StartDaily, is AppAction.ChooseSkill, is AppAction.TrainExamMistake,
         AppAction.StartCloze -> s.loadStatus == LoadStatus.Ready
         is AppAction.ClozeAct -> s.cloze != null
+        is AppAction.StartAudioCloze -> s.loadStatus == LoadStatus.Ready
+        is AppAction.AudioClozeAct -> s.audioCloze != null
         AppAction.ContinueDaily -> s.loadStatus == LoadStatus.Ready && s.mode == TrainingMode.Daily && s.phase == CardPhase.DailyComplete
         AppAction.RequestReset -> s.loadStatus == LoadStatus.Ready && s.pendingEffects.none { it is UiEffect.ConfirmReset }
         is AppAction.SetAnswerMode, is AppAction.EditAnswer -> s.phase == CardPhase.Question
@@ -592,6 +613,11 @@ class TrainingStore(
     private fun startCloze() {
         val exercises = clozePool.draw(10, tileRandom)
         mutate { it.copy(tab = AppTab.Cloze, cloze = ClozeSessionState(exercises)) }
+    }
+
+    private fun startAudioCloze(limit: Int) {
+        val exercises = audioClozePool.draw(limit, tileRandom)
+        mutate { it.copy(tab = AppTab.AudioCloze, audioCloze = AudioClozeSessionState(exercises)) }
     }
 
     private fun reveal(exerciseId: String) {

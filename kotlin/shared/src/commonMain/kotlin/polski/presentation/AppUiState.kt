@@ -1,6 +1,7 @@
 package polski.presentation
 
 import kotlin.time.Instant
+import polski.cloze.AudioClozeSessionState
 import polski.cloze.ClozeSessionState
 import polski.model.Evaluation
 import polski.model.Exercise
@@ -9,7 +10,7 @@ import polski.progress.Progress
 import polski.srs.SchedulePreview
 
 enum class TrainingMode { Chain, Schedule, Focused, Daily }
-enum class AppTab { Training, Vocabulary, Matrix, Progress, Cloze }
+enum class AppTab { Training, Vocabulary, Matrix, Progress, Cloze, AudioCloze }
 // SB-4 blueprint §5: TileBuilder is additive — every existing `state.answerMode == AnswerMode.Typed`/
 // `== AnswerMode.Oral` check in TrainingCardModel.kt/TrainingStore.kt (no exhaustive `when` over
 // this enum exists today) leaves TileBuilder to fall through exactly like Oral (no draft input,
@@ -122,6 +123,8 @@ data class AppUiState(
     val examRetryOrigin: ExamRetryOrigin? = null,
     /** Cloze tab session state; null outside the Cloze tab or before first StartCloze. */
     val cloze: ClozeSessionState? = null,
+    /** AudioCloze tab session state; null outside the AudioCloze tab or before first StartAudioCloze. */
+    val audioCloze: AudioClozeSessionState? = null,
 ) {
     val exerciseId: String? get() = exercise?.id
     val caseReferenceAvailable: Boolean get() = exercise?.let { skillById(it.primarySkill).caseReferenceAvailable } ?: true

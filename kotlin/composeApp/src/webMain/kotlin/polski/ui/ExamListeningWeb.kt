@@ -2,10 +2,10 @@ package polski.ui
 
 import kotlinx.browser.document
 import kotlinx.browser.window
-import org.w3c.dom.HTMLAudioElement
 import org.w3c.dom.HTMLButtonElement
 import org.w3c.dom.HTMLElement
 import org.w3c.dom.HTMLInputElement
+import polski.audio.AudioSegment
 import polski.exam.listening.*
 import polski.exam.formatQuarterPoints
 import polski.exam.QuestionType
@@ -36,21 +36,12 @@ internal class ExamListeningController(
     private val setInputValues = mutableMapOf<String, MutableList<String>>()
     private val submitted get() = state.submitted
     private var root: HTMLElement? = null
-    private var audioElement: HTMLAudioElement? = null
-    private var playButton: HTMLButtonElement? = null
-    private var timeLabel: HTMLElement? = null
-    private var progressFill: HTMLElement? = null
-    private var mediaError: HTMLElement? = null
+    private val player = WebAudioSegmentPlayer()
     private var renderedTaskIdx = -1
-    private var playRequested = false
-    private var playRequestId = 0
-    private var playInFlight = false
-    private var replaySeekPending = false
-    private var playbackError: String? = null
     private var feedback = PracticeFeedbackState()
     private var autoAdvanceTimer: Int? = null
     private val onVisibilityChange: (Event) -> Unit = {
-        if (browserDocumentHidden()) { cancelFeedbackTimer(); updateCurrentRows() }
+        if (browserDocumentHidden()) { player.cancelPlayback(); cancelFeedbackTimer(); updateCurrentRows() }
     }
     private fun practiceEnabled() = externalState == null && onTimedFinish == null && immediateFeedbackEnabled()
     private fun cancelFeedbackTimer() {
@@ -59,7 +50,7 @@ internal class ExamListeningController(
         feedback = clearPracticeFeedback(feedback)
     }
 
-    fun render(container: HTMLElement) { root = container; document.removeEventListener("visibilitychange", onVisibilityChange); document.addEventListener("visibilitychange", onVisibilityChange); setupAudio(); redraw() }
+    fun render(container: HTMLElement) { root = container; document.removeEventListener("visibilitychange", onVisibilityChange); document.addEventListener("visibilitychange", onVisibilityChange); redraw() }
 
     private fun onDraftInput(questionId: String) {
         if (practiceEnabled() && feedback.visible?.itemId != questionId && autoAdvanceTimer != null) {
@@ -72,7 +63,8 @@ internal class ExamListeningController(
     fun close() {
         cancelFeedbackTimer()
         document.removeEventListener("visibilitychange", onVisibilityChange)
-        disposeAudio()
+        player.dispose()
+        renderedTaskIdx = -1
         root = null
     }
 
@@ -121,165 +113,9 @@ internal class ExamListeningController(
 
     private fun updateCurrentRows() { exam.tasks.getOrNull(currentTaskIdx)?.questions?.forEach { updateQuestionRow(it.id) } }
 
-    private fun disposeAudio() {
-        cancelPlayback()
-        audioElement?.let { audio ->
-            audio.pause()
-            audio.removeAttribute("src")
-            audio.load()
-            audio.remove()
-        }
-        audioElement = null
-        playButton = null
-        timeLabel = null
-        progressFill = null
-        mediaError = null
-        renderedTaskIdx = -1
-    }
-
-    private var currentSegmentStart = 0.0
-    private var currentSegmentEnd = 0.0
-
-    private fun cancelPlayback() {
-        playRequested = false
-        replaySeekPending = false
-        playInFlight = false
-        playRequestId++
-    }
-
-    private fun startPlayback(audio: HTMLAudioElement) {
-        if (!playRequested || playInFlight || audio.seeking || audioElement !== audio) return
-        val requestId = playRequestId
-        playInFlight = true
-        audio.play().then<JsAny?>({
-            if (requestId == playRequestId) {
-                playInFlight = false
-                updatePlayer()
-            }
-            null
-        }, {
-            if (requestId == playRequestId && playRequested) {
-                playInFlight = false
-                playRequested = false
-                playbackError = "Не удалось воспроизвести аудиозапись"
-                updatePlayer()
-            }
-            null
-        })
-    }
-
-    private fun setupAudio() {
-        if (audioElement != null || exam.audioUrl.isBlank()) return
-        audioElement = (document.createElement("audio") as HTMLAudioElement).apply {
-            src = exam.audioUrl; className = "exam-audio-hidden"
-            setAttribute("preload", "auto")
-            hidden = true
-            addEventListener("loadedmetadata", {
-                if (!playRequested) currentTime = currentSegmentStart
-                updatePlayer()
-            })
-            addEventListener("seeked", {
-                if (replaySeekPending) replaySeekPending = false
-                if (playRequested) startPlayback(this)
-                updatePlayer()
-            })
-            addEventListener("seeking", { updatePlayer() })
-            addEventListener("play", { updatePlayer() })
-            addEventListener("pause", { updatePlayer() })
-            addEventListener("timeupdate", {
-                if (!replaySeekPending && currentSegmentEnd > 0 && currentTime >= currentSegmentEnd) {
-                    cancelPlayback()
-                    pause()
-                    currentTime = currentSegmentEnd
-                }
-                updatePlayer()
-            })
-            addEventListener("ended", { updatePlayer() })
-            addEventListener("error", { updatePlayer() })
-        }
-    }
-
-    private fun seekToTask(task: ListeningTask) {
-        val audio = audioElement ?: return
-        cancelPlayback()
-        audio.pause()
-        playbackError = null
-        currentSegmentStart = task.startMs / 1000.0
-        currentSegmentEnd = if (task.endMs > 0) task.endMs / 1000.0 else audio.duration
-        if (audio.readyState >= 1) audio.currentTime = currentSegmentStart
-    }
-
-    private fun updatePlayer() {
-        val audio = audioElement ?: return
-        val duration = (currentSegmentEnd - currentSegmentStart).coerceAtLeast(0.0)
-        val elapsed = (audio.currentTime - currentSegmentStart).coerceIn(0.0, duration)
-        progressFill?.style?.setProperty("width", "${if (duration > 0) (elapsed / duration * 100).toInt() else 0}%")
-        timeLabel?.textContent = "${formatTime(elapsed)} / ${formatTime(duration)}"
-        playButton?.textContent = if (audio.paused) "▶" else "⏸"
-        val unavailable = audio.error != null
-        // A click during a seek records play intent; seeked starts playback. Some engines
-        // report seeking during the last UI event at the segment end, so disabling here can
-        // strand an otherwise ready replay button after the seek has completed.
-        playButton?.disabled = unavailable || audio.readyState < 1
-        mediaError?.textContent = if (unavailable) "Аудиозапись недоступна" else playbackError.orEmpty()
-    }
-
-    private fun buildCustomPlayer(task: ListeningTask): HTMLElement {
-        val audio = audioElement ?: return node("div")
-        val segDuration = currentSegmentEnd - currentSegmentStart
-        val container = node("div", "exam-custom-player")
-        val playBtn = (document.createElement("button") as HTMLButtonElement).apply {
-            type = "button"; className = "player-play-btn"; textContent = if (audio.paused) "▶" else "⏸"
-        }
-        val playerTime = node("span", "player-time", "0:00 / ${formatTime(segDuration)}")
-        val error = node("span", "player-error").apply { setAttribute("role", "status") }
-        val progressWrap = node("div", "player-progress-wrap")
-        val progressBar = node("div", "player-progress-bar")
-        val fill = node("div", "player-progress-fill")
-        progressBar.appendChild(fill)
-        progressWrap.appendChild(progressBar)
-
-        playBtn.addEventListener("click", {
-            if (playRequested || !audio.paused) {
-                cancelPlayback()
-                audio.pause()
-            } else {
-                playRequested = true
-                playRequestId++
-                playbackError = null
-                if (currentSegmentEnd > 0 && audio.currentTime >= currentSegmentEnd) {
-                    replaySeekPending = true
-                    audio.currentTime = currentSegmentStart
-                } else startPlayback(audio)
-            }
-            updatePlayer()
-        })
-        progressWrap.addEventListener("click", { e ->
-            val rect = progressBar.getBoundingClientRect()
-            val pct = ((e as org.w3c.dom.events.MouseEvent).clientX - rect.left) / rect.width
-            audio.currentTime = currentSegmentStart + pct * segDuration
-        })
-        container.appendChild(playBtn)
-        container.appendChild(progressWrap)
-        container.appendChild(playerTime)
-        container.appendChild(error)
-        playButton = playBtn
-        timeLabel = playerTime
-        progressFill = fill
-        mediaError = error
-        updatePlayer()
-        return container
-    }
-
-    private fun formatTime(sec: Double): String {
-        val m = (sec / 60).toInt(); val s = (sec % 60).toInt()
-        return "$m:${s.toString().padStart(2, '0')}"
-    }
-
     private fun redraw() {
         val c = root ?: return; c.innerHTML = ""
-        audioElement?.let { c.appendChild(it) }
-        if (submitted) { cancelPlayback(); audioElement?.pause(); renderResult(c) }
+        if (submitted) { player.cancelPlayback(); renderResult(c) }
         else if (exam.tasks.isEmpty()) renderEmpty(c)
         else renderTask(c)
     }
@@ -303,12 +139,12 @@ internal class ExamListeningController(
             })
         }
         // Custom audio player — shows only the segment, not full track
-        if (audioElement != null) {
+        if (exam.audioUrl.isNotBlank()) {
             if (renderedTaskIdx != currentTaskIdx) {
-                seekToTask(task)
+                player.setup(AudioSegment(exam.audioUrl, task.startMs, task.endMs))
                 renderedTaskIdx = currentTaskIdx
             }
-            c.appendChild(buildCustomPlayer(task))
+            c.appendChild(player.buildWidget())
         }
         // Questions
         c.appendChild(node("div", "exam-listening-questions").apply {
@@ -447,7 +283,7 @@ internal class ExamListeningController(
             appendChild(navBtn("← К модулям") { onBack() })
             appendChild(node("span", "exam-nav-spacer"))
             appendChild(navBtn(UiCopy.TryAgain, true) {
-                cancelFeedbackTimer(); feedback = PracticeFeedbackState(); disposeAudio(); ownState = ListeningExamState(exam); setInputValues.clear(); setupAudio(); redraw()
+                cancelFeedbackTimer(); feedback = PracticeFeedbackState(); player.dispose(); renderedTaskIdx = -1; ownState = ListeningExamState(exam); setInputValues.clear(); redraw()
             })
         })
     }

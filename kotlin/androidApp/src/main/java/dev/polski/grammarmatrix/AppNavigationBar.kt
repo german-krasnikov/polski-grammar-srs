@@ -33,6 +33,12 @@ internal fun AppNavigationBar(selected: AppTab, onSelect: (AppTab) -> Unit) {
             icon = { Text("Aa") },
             label = { Text("Слова") },
         )
+        NavigationBarItem(
+            selected = selected == AppTab.AudioCloze,
+            onClick = { onSelect(AppTab.AudioCloze) },
+            icon = { Text("🎧") },
+            label = { Text("Аудио") },
+        )
     }
 }
 
@@ -56,6 +62,12 @@ internal fun AppNavigationRail(selected: AppTab, onSelect: (AppTab) -> Unit) {
             onClick = { onSelect(AppTab.Vocabulary) },
             icon = { Text("Aa") },
             label = { Text("Слова") },
+        )
+        NavigationRailItem(
+            selected = selected == AppTab.AudioCloze,
+            onClick = { onSelect(AppTab.AudioCloze) },
+            icon = { Text("🎧") },
+            label = { Text("Аудио") },
         )
     }
 }
