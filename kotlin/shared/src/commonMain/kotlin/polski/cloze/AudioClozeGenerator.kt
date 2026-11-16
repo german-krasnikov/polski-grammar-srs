@@ -12,13 +12,15 @@ class AudioClozeGenerator(private val random: RandomSource) {
         if (sentences.isEmpty()) return emptyList()
         val allWords = sentences.flatMap { tokenize(it) }
             .filter { isContentWord(it) }.map { it.lowercase() }.distinct()
+        val aligned = TranscriptTimings.data[task.id]
         val totalChars = sentences.sumOf { it.length }
         val taskDuration = task.endMs - task.startMs
         var charOffset = 0
         return sentences.mapIndexedNotNull { sentIdx, sentence ->
-            val sentStartMs = task.startMs + charOffset.toLong() * taskDuration / totalChars
+            val timing = aligned?.getOrNull(sentIdx)
+            val sentStartMs = timing?.first ?: (task.startMs + charOffset.toLong() * taskDuration / totalChars)
             charOffset += sentence.length
-            val sentEndMs = task.startMs + charOffset.toLong() * taskDuration / totalChars
+            val sentEndMs = timing?.second ?: (task.startMs + charOffset.toLong() * taskDuration / totalChars)
             buildExercise(examRouteId, task, audioUrl, sentence, sentIdx, allWords, sentStartMs, sentEndMs)
         }
     }
