@@ -286,3 +286,4 @@ UI_COPY {key: letterTemplatePicker text: "Тип письма:"}
 UI_COPY {key: letterTemplateMistakes text: "Типичные ошибки"}
 UI_COPY {key: letterTemplateModelLetter text: "Образец письма"}
 UI_COPY {key: letterTemplateNeedsReview text: "⚠ не проверено"}
+UI_COPY {key: letterTemplatesBrowser text: "Шаблоны писем"}

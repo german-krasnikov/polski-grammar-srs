@@ -1,5 +1,5 @@
 // Generated from dsl/letter-template.data-contract
-// source-sha256=00d79bcaa6f4a8caab400dc76ecf156a2325298117f335ee8cc4077913efbe1e
+// source-sha256=a29f214da8543053b63f827332ac1a0dc45ac3fddd87e8ae349cea71f67a8aec
 // Edit the source, then run biome generate.
 
 package polski.data.rows.plru.lettertemplate
@@ -40,6 +40,7 @@ data class LetterTemplateRow(
     val templateId: String,
     val letterType: LetterTemplateRowLetterType,
     val register: LetterRegister,
+    val titleNative: String,
 )
 
 data class LetterSectionRow(
@@ -94,31 +95,37 @@ private fun letterTemplateRowRowsPart0(): List<LetterTemplateRow> = listOf(
         templateId = "complaint",
         letterType = LetterTemplateRowLetterType.COMPLAINT,
         register = LetterRegister.FORMAL,
+        titleNative = "Жалоба (reklamacja)",
     ),
     LetterTemplateRow(
         templateId = "request",
         letterType = LetterTemplateRowLetterType.REQUEST,
         register = LetterRegister.FORMAL,
+        titleNative = "Просьба (prośba)",
     ),
     LetterTemplateRow(
         templateId = "inquiry",
         letterType = LetterTemplateRowLetterType.INQUIRY,
         register = LetterRegister.FORMAL,
+        titleNative = "Запрос информации (zapytanie)",
     ),
     LetterTemplateRow(
         templateId = "formal-email",
         letterType = LetterTemplateRowLetterType.FORMAL_EMAIL,
         register = LetterRegister.FORMAL,
+        titleNative = "Официальный e-mail",
     ),
     LetterTemplateRow(
         templateId = "informal-email",
         letterType = LetterTemplateRowLetterType.INFORMAL_LETTER,
         register = LetterRegister.INFORMAL,
+        titleNative = "Письмо другу (list / e-mail)",
     ),
     LetterTemplateRow(
         templateId = "application",
         letterType = LetterTemplateRowLetterType.APPLICATION,
         register = LetterRegister.FORMAL,
+        titleNative = "Заявление (podanie)",
     ),
 )
 

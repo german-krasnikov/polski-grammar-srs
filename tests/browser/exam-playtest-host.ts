@@ -104,6 +104,8 @@ export async function runExamPlaytest(page: Page, sourceFile: string) {
         'writing.templateVisible': !!document.querySelector('.exam-writing-template'),
         'writing.templateTypes': [...document.querySelectorAll<HTMLButtonElement>('.exam-template-type-btn')].map(btn => btn.getAttribute('data-template-type')).join('|'),
         'writing.templateSections': [...document.querySelectorAll<HTMLElement>('.exam-writing-template[open] .exam-template-section')].map(s => s.getAttribute('data-section-key')).join('|'),
+        'writing.templateModelLetter': document.querySelector('.exam-template-model-text')?.textContent ?? '',
+        'writing.templateTitles': [...document.querySelectorAll<HTMLButtonElement>('.exam-template-type-btn')].map(btn => btn.textContent ?? '').join('|'),
         'writing.reviewDrafts': [...document.querySelectorAll('.exam-writing-draft')].map(node => node.textContent).join('|'),
         'writing.manualAssessment': document.querySelector('.exam-writing-done')?.textContent ?? '',
         'writing.manualPoints': (document.querySelector('.exam-writing-manual')?.textContent?.match(/\d+(?:[.,]\d+)?/g) ?? []).join('|'),
@@ -349,6 +351,10 @@ export async function runExamPlaytest(page: Page, sourceFile: string) {
     await page.getByRole('button', { name: `Набор ${String(args.set)}`, exact: true }).click();
   });
   action('openWritingGuidance', [], async () => { await page.locator('.exam-writing-details summary').click(); });
+  action('openTemplatesBrowser', [], async () => {
+    await page.getByRole('button', { name: 'Шаблоны писем' }).click();
+    await expect(page.locator('.exam-writing-template[open]')).toBeVisible();
+  });
   action('openLetterTemplate', [], async () => { await page.locator('.exam-writing-template > summary').click(); });
   action('selectLetterTemplate', string('type'), async args => {
     await page.locator(`.exam-template-type-btn[data-template-type="${String(args.type)}"]`).click();
@@ -418,6 +424,8 @@ export async function runExamPlaytest(page: Page, sourceFile: string) {
     'writing.reviewDrafts': 'string', 'writing.manualAssessment': 'string', 'writing.autoScoreVisible': 'bool',
     'writing.manualPoints': 'string',
     'writing.templateVisible': 'bool', 'writing.templateTypes': 'string', 'writing.templateSections': 'string',
+    'writing.templateModelLetter': 'string',
+    'writing.templateTitles': 'string',
     'media.playing': 'bool', 'media.position': 'number', 'media.elapsed': 'number',
     'media.durationLabel': 'string', 'media.taskLabel': 'string', 'media.selected': 'string',
     'media.notRewound': 'bool', 'media.closed': 'bool', 'media.unavailable': 'bool',

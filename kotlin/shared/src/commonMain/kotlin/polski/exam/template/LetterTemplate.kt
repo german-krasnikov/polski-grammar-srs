@@ -48,6 +48,7 @@ data class LetterTemplate(
     val id: String,
     val letterType: LetterType,
     val register: LetterRegister,
+    val titleNative: String,
     val sections: List<LetterSection>,
     val mistakes: List<LetterMistake>,
     val modelLetter: ModelLetter?,

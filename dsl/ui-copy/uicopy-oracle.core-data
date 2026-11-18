@@ -684,3 +684,9 @@ UI_COPY_CASE {
   enRu: "⚠ unverified"
   placeholders: ""
 }
+UI_COPY_CASE {
+  key: letterTemplatesBrowser
+  plRu: "Шаблоны писем"
+  enRu: "Letter templates"
+  placeholders: ""
+}

@@ -12,6 +12,8 @@ import polski.exam.listening.ListeningExamAction
 import polski.exam.reading.ReadingExamAction
 import polski.exam.writing.WritingExamAction
 import polski.exam.session.*
+import polski.data.activeCoursePackId
+import polski.exam.template.StaticLetterTemplateProvider
 import polski.presentation.UiCopy
 import kotlin.time.Clock
 
@@ -26,7 +28,7 @@ internal data class ExamEntry(
 
 private val exams = ExamCatalog.entries.map { ExamEntry(it.routeId, it.displayTitle, it.level, it.year.toString()) }
 
-internal enum class ExamScreen { List, Modules, Grammar, Reading, Listening, Writing, Timed }
+internal enum class ExamScreen { List, Modules, Grammar, Reading, Listening, Writing, Timed, Templates }
 
 internal class ExamWebController {
     var immediateFeedbackEnabled: () -> Boolean = { true }
@@ -95,6 +97,7 @@ internal class ExamWebController {
             ExamScreen.Listening -> listeningCtrl?.render(c)
             ExamScreen.Writing -> writingCtrl?.render(c)
             ExamScreen.Timed -> renderTimed(c)
+            ExamScreen.Templates -> renderTemplatesBrowser(c)
         }
     }
 
@@ -103,6 +106,9 @@ internal class ExamWebController {
         verificationNotice?.let { notice ->
             c.appendChild(node("p", "exam-verification-notice", notice).apply { setAttribute("role", "status") })
             verificationNotice = null
+        }
+        if (StaticLetterTemplateProvider.forPack(activeCoursePackId).all().isNotEmpty()) {
+            c.appendChild(navBtn(UiCopy.LetterTemplatesBrowser) { screen = ExamScreen.Templates; redraw() })
         }
         c.appendChild(node("div", "exam-list").apply {
             exams.forEach { exam ->
@@ -126,6 +132,14 @@ internal class ExamWebController {
                 })
             }
         })
+    }
+
+    private fun renderTemplatesBrowser(c: HTMLElement) {
+        val all = StaticLetterTemplateProvider.forPack(activeCoursePackId).all()
+        c.appendChild(node("h2", "exam-title", UiCopy.LetterTemplatesBrowser))
+        renderLetterTemplatePanel(c, all) { null }
+        c.querySelector(".exam-writing-template")?.setAttribute("open", "")
+        c.appendChild(navBtn("← ${UiCopy.SelectExam}") { screen = ExamScreen.List; redraw() })
     }
 
     private fun selectExam(exam: ExamEntry) { selectedExam = exam; screen = ExamScreen.Modules; redraw() }

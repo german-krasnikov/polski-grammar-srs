@@ -1157,4 +1157,5 @@ val UI_COPY_CASE_ROW_ROWS: List<UiCopyCaseRow> = listOf(
     ),
     UiCopyCaseRow(key = "letterTemplateModelLetter", plRu = "Образец письма", enRu = "Model letter", placeholders = ""),
     UiCopyCaseRow(key = "letterTemplateNeedsReview", plRu = "⚠ не проверено", enRu = "⚠ unverified", placeholders = ""),
+    UiCopyCaseRow(key = "letterTemplatesBrowser", plRu = "Шаблоны писем", enRu = "Letter templates", placeholders = ""),
 )

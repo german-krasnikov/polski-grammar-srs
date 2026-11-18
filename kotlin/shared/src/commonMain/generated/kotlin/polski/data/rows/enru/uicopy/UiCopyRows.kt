@@ -1063,4 +1063,5 @@ val UI_COPY_ROW_ROWS: List<UiCopyRow> = listOf(
     UiCopyRow(key = "letterTemplateMistakes", text = "Common mistakes"),
     UiCopyRow(key = "letterTemplateModelLetter", text = "Model letter"),
     UiCopyRow(key = "letterTemplateNeedsReview", text = "⚠ unverified"),
+    UiCopyRow(key = "letterTemplatesBrowser", text = "Letter templates"),
 )

@@ -1066,4 +1066,5 @@ val UI_COPY_ROW_ROWS: List<UiCopyRow> = listOf(
     UiCopyRow(key = "letterTemplateMistakes", text = "Типичные ошибки"),
     UiCopyRow(key = "letterTemplateModelLetter", text = "Образец письма"),
     UiCopyRow(key = "letterTemplateNeedsReview", text = "⚠ не проверено"),
+    UiCopyRow(key = "letterTemplatesBrowser", text = "Шаблоны писем"),
 )

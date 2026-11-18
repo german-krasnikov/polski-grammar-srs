@@ -51,6 +51,7 @@ private fun buildPlRuLetterTemplates(): LetterTemplateModel {
             id = t.templateId,
             letterType = t.letterType,
             register = t.register,
+            titleNative = t.titleNative,
             sections = sectionsByTemplate[t.templateId].orEmpty(),
             mistakes = mistakesByTemplate[t.templateId].orEmpty().map { m ->
                 LetterMistake(

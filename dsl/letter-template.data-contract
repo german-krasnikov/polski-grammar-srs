@@ -10,6 +10,7 @@ RECORD LetterTemplateRow KEY templateId COUNT 1..
   templateId: string
   letterType: enum complaint|request|inquiry|application|apology|invitation|formal_email|informal_letter
   register: LetterRegister
+  titleNative: string
 END
 
 RECORD LetterSectionRow KEY sectionId COUNT 1..

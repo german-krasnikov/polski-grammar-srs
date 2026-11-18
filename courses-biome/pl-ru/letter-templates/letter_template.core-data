@@ -1,19 +1,37 @@
 DSL 1
-LETTER_TEMPLATE {templateId: complaint letterType: complaint register: formal}
-LETTER_TEMPLATE {templateId: request letterType: request register: formal}
-LETTER_TEMPLATE {templateId: inquiry letterType: inquiry register: formal}
+LETTER_TEMPLATE {
+  templateId: complaint
+  letterType: complaint
+  register: formal
+  titleNative: "Жалоба (reklamacja)"
+}
+LETTER_TEMPLATE {
+  templateId: request
+  letterType: request
+  register: formal
+  titleNative: "Просьба (prośba)"
+}
+LETTER_TEMPLATE {
+  templateId: inquiry
+  letterType: inquiry
+  register: formal
+  titleNative: "Запрос информации (zapytanie)"
+}
 LETTER_TEMPLATE {
   templateId: formal-email
   letterType: formal_email
   register: formal
+  titleNative: "Официальный e-mail"
 }
 LETTER_TEMPLATE {
   templateId: informal-email
   letterType: informal_letter
   register: informal
+  titleNative: "Письмо другу (list / e-mail)"
 }
 LETTER_TEMPLATE {
   templateId: application
   letterType: application
   register: formal
+  titleNative: "Заявление (podanie)"
 }

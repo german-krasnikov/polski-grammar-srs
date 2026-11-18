@@ -1,0 +1,9 @@
+TEST "Letter templates standalone browser lists templates with sections and model letter" PROFILE playmode
+  openCatalog
+  openTemplatesBrowser
+  ASSERT writing.templateTypes == "complaint|request|inquiry|formal_email|informal_letter|application"
+  ASSERT writing.templateTitles != ""
+  selectLetterTemplate type="formal_email"
+  ASSERT writing.templateSections == "salutation|opening|body|request|closing|signoff"
+  ASSERT writing.templateModelLetter != ""
+END

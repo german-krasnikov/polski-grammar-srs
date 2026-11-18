@@ -32,8 +32,8 @@ internal fun renderLetterTemplatePanel(
                 row.appendChild((document.createElement("button") as HTMLButtonElement).apply {
                     type = "button"
                     className = "exam-template-type-btn" + if (tpl === selected) " selected" else ""
-                    textContent = tpl.letterType.tag
-                    setAttribute("data-template-type", tpl.id)
+                    textContent = tpl.titleNative
+                    setAttribute("data-template-type", tpl.letterType.tag)
                     addEventListener("click", { selected = tpl; renderBody() })
                 })
             }

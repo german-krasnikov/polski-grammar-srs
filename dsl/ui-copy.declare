@@ -83,6 +83,7 @@ CATALOG UiCopy IN polski.presentation
   KEY letterTemplateMistakes
   KEY letterTemplateModelLetter
   KEY letterTemplateNeedsReview
+  KEY letterTemplatesBrowser
 
   FN languageName "lang.$code" code
   FN languageAdverb "adverb.$code" code
