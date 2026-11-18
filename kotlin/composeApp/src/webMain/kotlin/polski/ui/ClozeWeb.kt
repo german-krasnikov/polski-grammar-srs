@@ -8,6 +8,9 @@ import polski.cloze.ClozeExercise
 import polski.cloze.ClozeSessionAction
 import polski.cloze.ClozeSessionState
 import polski.presentation.AppAction
+import polski.presentation.AppUiState
+import polski.presentation.ClozeSubMode
+import polski.presentation.UiCopy
 
 private const val CLOZE_FEEDBACK_DELAY_MS = 1_500
 
@@ -135,18 +138,50 @@ internal class ClozeWebController {
     }
 }
 
-/** Renders the cloze route content — auto-dispatches StartCloze when cloze is null. */
+/** Renders the cloze route content with sub-mode switcher. */
 internal fun renderClozeWeb(
     container: HTMLElement,
-    state: polski.presentation.AppUiState,
+    state: AppUiState,
     cloze: ClozeWebController,
+    errorHunt: ErrorHuntWebController,
     dispatch: (AppAction) -> Unit,
 ) {
-    val session = state.cloze
-    if (session == null) {
-        dispatch(AppAction.StartCloze)
-        container.appendChild(node("p", text = "Загрузка…"))
-        return
+    // Sub-mode switcher (Подстановка / Найди ошибку)
+    container.appendChild(node("div", "eh-switcher").apply {
+        listOf(
+            ClozeSubMode.Fill to UiCopy.ClozeTab,
+            ClozeSubMode.ErrorHunt to UiCopy.ErrorHunt,
+        ).forEach { (mode, label) ->
+            appendChild((document.createElement("button") as HTMLButtonElement).apply {
+                type = "button"
+                className = "eh-switcher-btn" + if (state.clozeSubMode == mode) " active" else ""
+                textContent = label
+                addEventListener("click", {
+                    if (state.clozeSubMode != mode) dispatch(AppAction.SetClozeSubMode(mode))
+                })
+            })
+        }
+    })
+
+    // Both ClozeWebController and ErrorHuntWebController clear innerHTML on render,
+    // so give them a dedicated sub-container so they don't wipe the switcher above.
+    val content = node("div")
+    container.appendChild(content)
+
+    when (state.clozeSubMode) {
+        ClozeSubMode.Fill -> {
+            errorHunt.close()
+            val session = state.cloze
+            if (session == null) {
+                dispatch(AppAction.StartCloze)
+                content.appendChild(node("p", text = UiCopy.Loading))
+            } else {
+                cloze.render(content, session, dispatch)
+            }
+        }
+        ClozeSubMode.ErrorHunt -> {
+            cloze.close()
+            renderErrorHuntWeb(content, state, errorHunt, dispatch)
+        }
     }
-    cloze.render(container, session, dispatch)
 }

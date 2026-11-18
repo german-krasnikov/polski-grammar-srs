@@ -49,6 +49,16 @@ class PlExerciseEngine(random: RandomSource, ids: ExerciseIdFactory) {
             try { generator.generateForSkill(skill.id, slots) } catch (_: Exception) { null }
         }.filter { it.tileTargetSlots.isNotEmpty() }
     }
+
+    /** Like [coreExercisesForClozePool] but generates over ALL sentence seeds, deduplicated by id.
+     *  Provides a larger, more varied candidate pool for [polski.cloze.ErrorHuntPool]. */
+    fun coreExercisesForErrorHuntPool(): List<CoreExercise> =
+        sentenceSeeds.flatMap { seed ->
+            val slots = mapOf("noun" to seed.nounId, "adjective" to seed.adjectiveId)
+            polski.data.skills.mapNotNull { skill ->
+                try { generator.generateForSkill(skill.id, slots) } catch (_: Exception) { null }
+            }.filter { it.tileTargetSlots.isNotEmpty() }
+        }.distinctBy { it.id }
 }
 
 private fun SentenceSeed.toSlots(): Map<String, String> = mapOf("noun" to nounId, "adjective" to adjectiveId)

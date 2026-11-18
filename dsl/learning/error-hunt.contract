@@ -1,0 +1,13 @@
+CONTRACT learning.errorHunt
+COVERAGE declared-scope
+MODULE ../../kotlin/shared/src/commonMain/kotlin/polski/cloze/ErrorHuntSession.kt
+FACT hunt.tapIsError bool member=tapIsError
+FACT hunt.missCount number min=0 max=2147483647 integer member=missCount
+FACT hunt.found bool member=found
+FACT hunt.answerCorrect bool member=answerCorrect
+FACT hunt.distractorEqualsCorrect bool member=distractorEqualsCorrect
+FACT hunt.distractorInAccepted bool member=distractorInAccepted
+INPUT tapOutcome hunt.tapIsError
+INPUT shouldReveal hunt.missCount hunt.found
+INPUT scoreClass hunt.found hunt.missCount hunt.answerCorrect
+INPUT distractorValid hunt.distractorEqualsCorrect hunt.distractorInAccepted

@@ -1,0 +1,34 @@
+PROVENANCE "ErrorHunt reducer decisions: tap outcome, reveal threshold (2 misses), score class and distractor validity."
+EXAMPLES tapOutcome
+  id | tapIsError -> expected
+  tap-error-word | true -> hit
+  tap-correct-word | false -> miss
+END
+
+EXAMPLES shouldReveal
+  id | missCount | found -> expected
+  zero-misses-not-found | 0 | false -> hidden
+  one-miss-not-found | 1 | false -> hidden
+  two-misses-not-found | 2 | false -> revealed
+  three-misses | 3 | false -> revealed
+  found-zero-misses | 0 | true -> revealed
+  found-one-miss | 1 | true -> revealed
+END
+
+EXAMPLES scoreClass
+  id | found | missCount | answerCorrect -> expected
+  perfect | true | 0 | true -> perfect
+  found-late-one | true | 1 | true -> found_late
+  found-late-two | true | 2 | true -> found_late
+  revealed-correct | false | 2 | true -> revealed_correct
+  wrong-form-found | true | 0 | false -> wrong_form
+  wrong-form-revealed | false | 2 | false -> wrong_form
+END
+
+EXAMPLES distractorValid
+  id | distractorEqualsCorrect | distractorInAccepted -> expected
+  valid-different-form | false | false -> valid
+  equals-correct | true | false -> invalid
+  in-accepted | false | true -> invalid
+  both-true | true | true -> invalid
+END

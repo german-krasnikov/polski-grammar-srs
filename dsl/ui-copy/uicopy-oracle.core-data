@@ -575,3 +575,118 @@ UI_COPY_CASE {
   placeholders: ""
 }
 UI_COPY_CASE {key: checkTiles plRu: "Проверить" enRu: Check placeholders: ""}
+UI_COPY_CASE {
+  key: errorHunt
+  plRu: "Найди ошибку"
+  enRu: "Find the Error"
+  placeholders: ""
+}
+UI_COPY_CASE {
+  key: errorHuntPrompt
+  plRu: "Нажми на ошибочное слово"
+  enRu: "Tap the wrong word"
+  placeholders: ""
+}
+UI_COPY_CASE {
+  key: errorHuntWordCorrect
+  plRu: "Это слово верное"
+  enRu: "This word is correct"
+  placeholders: ""
+}
+UI_COPY_CASE {
+  key: errorHuntFound
+  plRu: "Ошибка найдена"
+  enRu: "Error found"
+  placeholders: ""
+}
+UI_COPY_CASE {
+  key: errorHuntSummary
+  plRu: "Результат"
+  enRu: Results
+  placeholders: ""
+}
+UI_COPY_CASE {
+  key: errorHuntNoTasks
+  plRu: "Нет доступных заданий."
+  enRu: "No exercises available."
+  placeholders: ""
+}
+UI_COPY_CASE {
+  key: errorHuntRestart
+  plRu: "Заново"
+  enRu: Restart
+  placeholders: ""
+}
+UI_COPY_CASE {
+  key: errorHuntScorePerfect
+  plRu: "Всё верно с первого раза"
+  enRu: "All correct on first try"
+  placeholders: ""
+}
+UI_COPY_CASE {
+  key: errorHuntScoreFoundLate
+  plRu: "Найдено не с первого раза"
+  enRu: "Found after wrong taps"
+  placeholders: ""
+}
+UI_COPY_CASE {
+  key: errorHuntScoreRevealedCorrect
+  plRu: "Правильный ответ показан"
+  enRu: "Correct answer revealed"
+  placeholders: ""
+}
+UI_COPY_CASE {
+  key: errorHuntScoreWrongForm
+  plRu: "Неверная форма"
+  enRu: "Wrong form"
+  placeholders: ""
+}
+UI_COPY_CASE {
+  key: errorHuntCorrectAnswer
+  plRu: "правильный ответ"
+  enRu: "correct answer"
+  placeholders: ""
+}
+UI_COPY_CASE {key: loading plRu: "Загружаем…" enRu: "Loading…" placeholders: ""}
+UI_COPY_CASE {
+  key: clozeTab
+  plRu: "Подстановка"
+  enRu: "Fill in"
+  placeholders: ""
+}
+UI_COPY_CASE {
+  key: letterTemplateToggle
+  plRu: "Шаблон"
+  enRu: Template
+  placeholders: ""
+}
+UI_COPY_CASE {
+  key: letterTemplatePicker
+  plRu: "Тип письма:"
+  enRu: "Letter type:"
+  placeholders: ""
+}
+UI_COPY_CASE {
+  key: letterTemplateMistakes
+  plRu: "Типичные ошибки"
+  enRu: "Common mistakes"
+  placeholders: ""
+}
+UI_COPY_CASE {
+  key: letterTemplateModelLetter
+  plRu: "Образец письма"
+  enRu: "Model letter"
+  placeholders: ""
+}
+UI_COPY_CASE {
+  key: letterTemplateNeedsReview
+  plRu: "⚠ не проверено"
+  enRu: "⚠ unverified"
+  placeholders: ""
+}
+UI_COPY_CASE {
+  key: letterTemplatesBrowser
+  plRu: "Шаблоны писем"
+  enRu: "Letter templates"
+  placeholders: ""
+}

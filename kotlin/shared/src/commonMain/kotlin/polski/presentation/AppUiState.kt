@@ -3,6 +3,7 @@ package polski.presentation
 import kotlin.time.Instant
 import polski.cloze.AudioClozeSessionState
 import polski.cloze.ClozeSessionState
+import polski.cloze.ErrorHuntSessionState
 import polski.model.Evaluation
 import polski.model.Exercise
 import polski.data.skillById
@@ -10,6 +11,7 @@ import polski.progress.Progress
 import polski.srs.SchedulePreview
 
 enum class TrainingMode { Chain, Schedule, Focused, Daily }
+enum class ClozeSubMode { Fill, ErrorHunt }
 enum class AppTab { Training, Vocabulary, Matrix, Progress, Cloze, AudioCloze }
 // SB-4 blueprint §5: TileBuilder is additive — every existing `state.answerMode == AnswerMode.Typed`/
 // `== AnswerMode.Oral` check in TrainingCardModel.kt/TrainingStore.kt (no exhaustive `when` over
@@ -125,6 +127,10 @@ data class AppUiState(
     val cloze: ClozeSessionState? = null,
     /** AudioCloze tab session state; null outside the AudioCloze tab or before first StartAudioCloze. */
     val audioCloze: AudioClozeSessionState? = null,
+    /** Active sub-mode of the Cloze tab; Fill is the default. */
+    val clozeSubMode: ClozeSubMode = ClozeSubMode.Fill,
+    /** Error Hunt session state; null before first StartErrorHunt. Coexists with [cloze]. */
+    val errorHunt: ErrorHuntSessionState? = null,
 ) {
     val exerciseId: String? get() = exercise?.id
     val caseReferenceAvailable: Boolean get() = exercise?.let { skillById(it.primarySkill).caseReferenceAvailable } ?: true

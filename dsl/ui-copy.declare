@@ -64,6 +64,26 @@ CATALOG UiCopy IN polski.presentation
   KEY matrixTab
   KEY tileBuilderMode
   KEY checkTiles
+  KEY errorHunt
+  KEY errorHuntPrompt
+  KEY errorHuntWordCorrect
+  KEY errorHuntFound
+  KEY errorHuntSummary
+  KEY errorHuntNoTasks
+  KEY errorHuntRestart
+  KEY errorHuntScorePerfect
+  KEY errorHuntScoreFoundLate
+  KEY errorHuntScoreRevealedCorrect
+  KEY errorHuntScoreWrongForm
+  KEY errorHuntCorrectAnswer
+  KEY loading
+  KEY clozeTab
+  KEY letterTemplateToggle
+  KEY letterTemplatePicker
+  KEY letterTemplateMistakes
+  KEY letterTemplateModelLetter
+  KEY letterTemplateNeedsReview
+  KEY letterTemplatesBrowser
 
   FN languageName "lang.$code" code
   FN languageAdverb "adverb.$code" code

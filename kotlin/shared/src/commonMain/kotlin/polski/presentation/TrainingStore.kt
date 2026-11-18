@@ -19,8 +19,13 @@ import polski.cloze.ClozePool
 import polski.cloze.ClozeSessionState
 import polski.cloze.DefaultAudioClozePool
 import polski.cloze.DefaultClozePool
+import polski.cloze.DefaultErrorHuntPool
+import polski.cloze.ErrorHuntGenerator
+import polski.cloze.ErrorHuntPool
+import polski.cloze.ErrorHuntSessionState
 import polski.cloze.reduceAudioClozeSession
 import polski.cloze.reduceClozeSession
+import polski.cloze.reduceErrorHuntSession
 import polski.exam.officialListeningData
 import polski.core.engine.RandomSource
 import polski.core.engine.evaluateTileAnswer
@@ -143,6 +148,14 @@ class TrainingStore(
         DefaultAudioClozePool(
             listeningExams = officialListeningData,
             generator = AudioClozeGenerator(tileRandom),
+        )
+    }
+
+    private val errorHuntPool: ErrorHuntPool by lazy {
+        DefaultErrorHuntPool(
+            courseExercises = exerciseEngine.coreExercisesForErrorHuntPool(),
+            generator = ErrorHuntGenerator(plMorphology, tileRandom,
+                theoryFor = { id -> skills.firstOrNull { it.id == id }?.theory?.takeIf { it.isNotBlank() } }),
         )
     }
 
@@ -297,7 +310,10 @@ class TrainingStore(
                     tab = action.tab,
                     matrixSelection = if (action.tab == AppTab.Matrix && s.tab != AppTab.Matrix) MatrixSelection() else s.matrixSelection,
                 )
-                if (action.tab == AppTab.Cloze && s.cloze == null && s.loadStatus == LoadStatus.Ready) startCloze()
+                if (action.tab == AppTab.Cloze && s.loadStatus == LoadStatus.Ready) {
+                    if (s.clozeSubMode == ClozeSubMode.Fill && s.cloze == null) startCloze()
+                    if (s.clozeSubMode == ClozeSubMode.ErrorHunt && s.errorHunt == null) startErrorHunt()
+                }
                 // Audio cloze session is started explicitly via StartAudioCloze (exam picker on web, LaunchedEffect on Android, IosSession on iOS)
             }
             is AppAction.SelectMatrixSection -> mutate { it.copy(matrixSelection = it.matrixSelection.copy(section = action.section)) }
@@ -341,6 +357,16 @@ class TrainingStore(
                 val next = reduceAudioClozeSession(s.audioCloze ?: return, action.action)
                 mutate { it.copy(audioCloze = next) }
             }
+            is AppAction.SetClozeSubMode -> {
+                mutate { it.copy(clozeSubMode = action.mode) }
+                if (action.mode == ClozeSubMode.ErrorHunt && s.errorHunt == null) startErrorHunt()
+                if (action.mode == ClozeSubMode.Fill && s.cloze == null && s.loadStatus == LoadStatus.Ready) startCloze()
+            }
+            AppAction.StartErrorHunt -> startErrorHunt()
+            is AppAction.ErrorHuntAct -> {
+                val next = reduceErrorHuntSession(s.errorHunt ?: return, action.action)
+                mutate { it.copy(errorHunt = next) }
+            }
         }
     }
 
@@ -351,6 +377,9 @@ class TrainingStore(
         is AppAction.ClozeAct -> s.cloze != null
         is AppAction.StartAudioCloze -> s.loadStatus == LoadStatus.Ready
         is AppAction.AudioClozeAct -> s.audioCloze != null
+        is AppAction.SetClozeSubMode -> s.loadStatus == LoadStatus.Ready
+        AppAction.StartErrorHunt -> s.loadStatus == LoadStatus.Ready
+        is AppAction.ErrorHuntAct -> s.errorHunt != null
         AppAction.ContinueDaily -> s.loadStatus == LoadStatus.Ready && s.mode == TrainingMode.Daily && s.phase == CardPhase.DailyComplete
         AppAction.RequestReset -> s.loadStatus == LoadStatus.Ready && s.pendingEffects.none { it is UiEffect.ConfirmReset }
         is AppAction.SetAnswerMode, is AppAction.EditAnswer -> s.phase == CardPhase.Question
@@ -613,6 +642,11 @@ class TrainingStore(
     private fun startCloze() {
         val exercises = clozePool.draw(10, tileRandom)
         mutate { it.copy(tab = AppTab.Cloze, cloze = ClozeSessionState(exercises)) }
+    }
+
+    private fun startErrorHunt() {
+        val exercises = errorHuntPool.draw(10, tileRandom)
+        mutate { it.copy(errorHunt = ErrorHuntSessionState(exercises)) }
     }
 
     private fun startAudioCloze(limit: Int, examRouteId: String? = null) {

@@ -1,0 +1,63 @@
+DSL 1
+# Letter/email templates: section structure, phrase banks, mistakes and model letters.
+# Target-language phrases and native-language notes are pair data (courses-biome/<pair>/).
+# Task->template links are authored per real WritingTaskRow id (LetterTaskLinkRow).
+
+ENUM LetterRegister formal|semi_formal|informal
+ENUM LetterVerificationStatus verified|needs_review|inferred
+
+RECORD LetterTemplateRow KEY templateId COUNT 1..
+  templateId: string
+  letterType: enum complaint|request|inquiry|application|apology|invitation|formal_email|informal_letter
+  register: LetterRegister
+  titleNative: string
+END
+
+RECORD LetterSectionRow KEY sectionId COUNT 1..
+  sectionId: string
+  templateRef: ref LetterTemplateRow
+  order: int
+  sectionKey: enum salutation|opening|body|request|closing|signoff
+  labelNative: string
+  noteNative: string OPTIONAL
+END
+
+RECORD LetterPhraseRow KEY phraseId COUNT 1..
+  phraseId: string
+  sectionRef: ref LetterSectionRow
+  targetText: string
+  nativeNote: string OPTIONAL
+  register: LetterRegister
+  isPreferred: bool OPTIONAL
+  mistakeNote: string OPTIONAL
+  sourceNote: string OPTIONAL
+  verificationStatus: LetterVerificationStatus
+END
+
+RECORD LetterMistakeRow KEY mistakeId COUNT 0..
+  mistakeId: string
+  templateRef: ref LetterTemplateRow
+  wrongForm: string
+  correctForm: string
+  ruleNative: string
+  sourceNote: string OPTIONAL
+  verificationStatus: LetterVerificationStatus
+END
+
+RECORD ModelLetterRow KEY letterId COUNT 0..
+  letterId: string
+  templateRef: ref LetterTemplateRow
+  titleNative: string
+  fullText: string
+  annotationNative: string OPTIONAL
+  sourceNote: string OPTIONAL
+  verificationStatus: LetterVerificationStatus
+END
+
+# Per-task links: one row per (WritingTaskRow id, LetterTemplateRow id) pair.
+# taskRef is a plain string (not ref) to avoid a cross-contract dependency.
+RECORD LetterTaskLinkRow KEY linkId COUNT 0..
+  linkId: string
+  taskRef: string
+  templateRef: ref LetterTemplateRow
+END

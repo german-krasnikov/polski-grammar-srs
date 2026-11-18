@@ -1,0 +1,30 @@
+{
+  "generated": "from error-hunt.examples by npm run logic -- examples; do not edit",
+  "provenance": "ErrorHunt reducer decisions: tap outcome, reveal threshold (2 misses), score class and distractor validity.",
+  "tapOutcome": [
+    { "id": "tap-error-word", "facts": { "tapIsError": true }, "expected": "hit" },
+    { "id": "tap-correct-word", "facts": { "tapIsError": false }, "expected": "miss" }
+  ],
+  "shouldReveal": [
+    { "id": "zero-misses-not-found", "facts": { "missCount": 0, "found": false }, "expected": "hidden" },
+    { "id": "one-miss-not-found", "facts": { "missCount": 1, "found": false }, "expected": "hidden" },
+    { "id": "two-misses-not-found", "facts": { "missCount": 2, "found": false }, "expected": "revealed" },
+    { "id": "three-misses", "facts": { "missCount": 3, "found": false }, "expected": "revealed" },
+    { "id": "found-zero-misses", "facts": { "missCount": 0, "found": true }, "expected": "revealed" },
+    { "id": "found-one-miss", "facts": { "missCount": 1, "found": true }, "expected": "revealed" }
+  ],
+  "scoreClass": [
+    { "id": "perfect", "facts": { "found": true, "missCount": 0, "answerCorrect": true }, "expected": "perfect" },
+    { "id": "found-late-one", "facts": { "found": true, "missCount": 1, "answerCorrect": true }, "expected": "found_late" },
+    { "id": "found-late-two", "facts": { "found": true, "missCount": 2, "answerCorrect": true }, "expected": "found_late" },
+    { "id": "revealed-correct", "facts": { "found": false, "missCount": 2, "answerCorrect": true }, "expected": "revealed_correct" },
+    { "id": "wrong-form-found", "facts": { "found": true, "missCount": 0, "answerCorrect": false }, "expected": "wrong_form" },
+    { "id": "wrong-form-revealed", "facts": { "found": false, "missCount": 2, "answerCorrect": false }, "expected": "wrong_form" }
+  ],
+  "distractorValid": [
+    { "id": "valid-different-form", "facts": { "distractorEqualsCorrect": false, "distractorInAccepted": false }, "expected": "valid" },
+    { "id": "equals-correct", "facts": { "distractorEqualsCorrect": true, "distractorInAccepted": false }, "expected": "invalid" },
+    { "id": "in-accepted", "facts": { "distractorEqualsCorrect": false, "distractorInAccepted": true }, "expected": "invalid" },
+    { "id": "both-true", "facts": { "distractorEqualsCorrect": true, "distractorInAccepted": true }, "expected": "invalid" }
+  ]
+}

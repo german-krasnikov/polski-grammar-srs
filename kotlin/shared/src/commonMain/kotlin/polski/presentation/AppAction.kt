@@ -2,6 +2,7 @@ package polski.presentation
 
 import polski.cloze.AudioClozeSessionAction
 import polski.cloze.ClozeSessionAction
+import polski.cloze.ErrorHuntAction
 import polski.srs.Rating
 
 /** Semantic UI actions; browser keyboard guards are applied by the host before dispatch. */
@@ -44,4 +45,7 @@ sealed interface AppAction {
     data class ClozeAct(val action: ClozeSessionAction) : AppAction
     data class StartAudioCloze(val limit: Int = 10, val examRouteId: String? = null) : AppAction
     data class AudioClozeAct(val action: AudioClozeSessionAction) : AppAction
+    data class SetClozeSubMode(val mode: ClozeSubMode) : AppAction
+    data object StartErrorHunt : AppAction
+    data class ErrorHuntAct(val action: ErrorHuntAction) : AppAction
 }

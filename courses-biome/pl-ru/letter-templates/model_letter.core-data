@@ -1,0 +1,55 @@
+DSL 1
+MODEL_LETTER {
+  letterId: complaint-model
+  templateRef: complaint
+  titleNative: "Жалоба в турбюро (B2, 2024-02)"
+  fullText: "Szanowni Państwo,\n\nzwracam się do Państwa ze skargą na jednodniową wycieczkę po Krakowie, którą zamówiłam w Państwa biurze na 14 września dla moich gości z Hiszpanii.\n\nProgram wycieczki nie był zgodny z ofertą. Zamiast zwiedzania Wawelu i Kazimierza mieliśmy tylko krótki spacer po Rynku. Przewodnik spóźnił się prawie o godzinę, a potem mówił bardzo niewyraźnie i nie odpowiadał na pytania. Obiad, który był wliczony w cenę, okazał się zimny i bardzo skromny. Moi goście byli rozczarowani, a ja czułam się bardzo niezręcznie.\n\nProszę o zwrot części kosztów wycieczki oraz o wyjaśnienie, dlaczego program został zmieniony bez uprzedzenia. Liczę na szybką odpowiedź.\n\nZ poważaniem\nOlga Smirnowa"
+  annotationNative: "Обращение с запятой → текст с маленькой буквы. Факты по порядку, затем требование и ожидание ответа. «Z poważaniem» без запятой, подпись новой строкой."
+  sourceNote: "Задание: ExamBin/pl/B2/2024-02/arkusz.pdf s. 25 (zestaw II b). Текст написан автором черновика; нужна проверка носителем."
+  verificationStatus: inferred
+}
+MODEL_LETTER {
+  letterId: request-model
+  templateRef: request
+  titleNative: "Просьба о спонсорской помощи (B2, 2022-02)"
+  fullText: "Szanowny Panie Dyrektorze,\n\nzwracam się do Pana z uprzejmą prośbą o wsparcie finansowe dla Fundacji „Aktywni Seniorzy”, w której pracuję jako koordynator projektów.\n\nW czerwcu planujemy zorganizować pięciodniowy wyjazd w Bieszczady dla dwudziestu naszych podopiecznych. Dla wielu z nich będzie to pierwsza od lat okazja, żeby wyjechać z domu i poznać nowych ludzi. Niestety, fundacja nie dysponuje wystarczającymi środkami. Koszt całego wyjazdu wynosi około 20 000 złotych, a zebraliśmy dopiero połowę tej kwoty.\n\nWiemy, że Pana bank chętnie wspiera lokalne inicjatywy społeczne. Bardzo prosimy o dofinansowanie transportu lub noclegów. W zamian umieścimy logo banku na naszych materiałach.\n\nZ góry dziękuję za rozpatrzenie mojej prośby. W razie pytań jestem do dyspozycji pod numerem 600 123 456.\n\nZ wyrazami szacunku\nIgor Pietrow"
+  annotationNative: "Обращение по должности. Кто пишет → цель → почему нужна помощь → почему именно этот банк → конкретная просьба. «Pana bank» — с большой буквы из вежливости."
+  sourceNote: "Задание: ExamBin/pl/B2/2022-02/arkusz.pdf s. 25 (zestaw II b). Текст написан автором черновика; нужна проверка носителем."
+  verificationStatus: inferred
+}
+MODEL_LETTER {
+  letterId: inquiry-model
+  templateRef: inquiry
+  titleNative: "Запрос о курсе польского"
+  fullText: "Szanowni Państwo,\n\npiszę w sprawie kursu przygotowującego do egzaminu certyfikatowego z języka polskiego na poziomie B2. Zainteresowała mnie Państwa oferta zamieszczona na portalu „Polski dla cudzoziemców”.\n\nChciałabym zapytać o kilka szczegółów. Kiedy rozpoczyna się najbliższy kurs i ile trwa? Czy zajęcia odbywają się również w weekendy? W tygodniu pracuję do godziny 17.00, dlatego wieczorne lub sobotnie lekcje byłyby dla mnie najwygodniejsze. Interesuje mnie także, ile osób liczy grupa i czy cena obejmuje podręczniki.\n\nUprzejmie proszę o przesłanie szczegółowej oferty oraz cennika na mój adres e-mail. Z góry dziękuję za odpowiedź.\n\nZ poważaniem\nNatalia Orłowa"
+  annotationNative: "Повод → откуда узнала → конкретные вопросы → просьба прислать предложение. «Chciałabym zapytać» — без «się»."
+  sourceNote: "Тип задания не встречается в B1/B2 из exams/; текст написан автором черновика; нужна проверка носителем."
+  verificationStatus: inferred
+}
+MODEL_LETTER {
+  letterId: formal-email-model
+  templateRef: formal-email
+  titleNative: "E-mail: перенос даты экзамена"
+  fullText: "Temat: Prośba o zmianę terminu egzaminu ustnego\n\nSzanowna Pani,\n\nzwracam się z uprzejmą prośbą o zmianę terminu mojego egzaminu ustnego, który jest zaplanowany na 20 listopada. Niestety, tego dnia muszę wyjechać w podróż służbową, czego nie mogłem wcześniej przewidzieć.\n\nCzy byłaby możliwość przesunięcia egzaminu na przyszły tydzień? Mogę przyjść każdego dnia po godzinie 15.00. W załączniku przesyłam zaświadczenie od pracodawcy. Mój numer zgłoszenia to 1234/2026.\n\nProszę o potwierdzenie otrzymania tej wiadomości. Przepraszam za kłopot i z góry dziękuję za pomoc.\n\nZ wyrazami szacunku\nIgor Pietrow"
+  annotationNative: "Тема письма → обращение с запятой → просьба в первом предложении → причина и детали → вложение → подтверждение получения. Без «Witam» и «Pozdrawiam»."
+  sourceNote: "Сценарий авторский (официальный e-mail встречается в C1/2023-04); нужна проверка носителем."
+  verificationStatus: inferred
+}
+MODEL_LETTER {
+  letterId: informal-email-model
+  templateRef: informal-email
+  titleNative: "E-mail подруге: курсы вождения (B2, 2024-06)"
+  fullText: "Cześć, Kasiu!\n\nDzięki za wiadomość i zdjęcia z gór – wyglądasz na bardzo szczęśliwą! Muszę Ci coś opowiedzieć: od miesiąca chodzę na kurs prawa jazdy.\n\nNa początku było naprawdę trudno. Na pierwszej lekcji tak się stresowałam, że dwa razy zgasł mi silnik na skrzyżowaniu, a kierowcy za mną zaczęli trąbić. Mój instruktor jest jednak bardzo cierpliwy i zawsze wszystko spokojnie tłumaczy. Teraz idzie mi coraz lepiej. Najtrudniejsze jest dla mnie parkowanie równoległe, ale ćwiczę je prawie codziennie. Egzamin mam w przyszłym miesiącu i trochę się boję.\n\nA co u Ciebie? Daj znać, jak Ci idzie w nowej pracy. Może spotkamy się w przyszły weekend? Wtedy opowiem Ci więcej.\n\nŚciskam\nMasza"
+  annotationNative: "«Cześć, Kasiu!» — запятая и звательный падеж; после «!» — большая буква. Живой рассказ, вопросы другу, «Ściskam» без запятой."
+  sourceNote: "Задание: B2/2024-06 (exams/pl/certyfikat-polski/B2/2024-06/writing.core-data). Текст написан автором черновика; нужна проверка носителем."
+  verificationStatus: inferred
+}
+MODEL_LETTER {
+  letterId: application-model
+  templateRef: application
+  titleNative: "Мотивационное письмо: Dom Seniora (B2, 2024-02)"
+  fullText: "Szanowni Państwo,\n\nw odpowiedzi na ogłoszenie zamieszczone na portalu praca.pl chciałabym ubiegać się o stanowisko opiekunki osób starszych w Państwa „Domu Seniora”.\n\nOd trzech lat pracuję jako opiekunka w prywatnym domu opieki w Gdańsku. Pomagam podopiecznym w codziennych czynnościach, podaję leki i organizuję dla nich spacery oraz zajęcia plastyczne. Mam certyfikat ukończenia kursu pierwszej pomocy. Jestem osobą cierpliwą, odpowiedzialną i komunikatywną, a praca z ludźmi daje mi dużo satysfakcji. Dobrze znam język polski w mowie i piśmie, mówię także po rosyjsku i po angielsku.\n\nUważam, że moje doświadczenie pozwoli mi dobrze wykonywać tę pracę. Chętnie przyjdę na rozmowę kwalifikacyjną w dogodnym dla Państwa terminie. W załączeniu przesyłam swoje CV.\n\nZ poważaniem\nSwietłana Pawłowa"
+  annotationNative: "Источник вакансии и должность → опыт → качества и языки → готовность к собеседованию → CV во вложении. «Jako opiekunka» — именительный падеж."
+  sourceNote: "Задание: ExamBin/pl/B2/2024-02/arkusz.pdf s. 25 (zestaw II a). Текст написан автором черновика; нужна проверка носителем."
+  verificationStatus: inferred
+}
