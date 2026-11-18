@@ -42,27 +42,17 @@ class ClozeGenerator(
      * Builds displaySentence by replacing the slot's surface span in exercise.expected with "___".
      */
     fun fromCoreExercise(exercise: CoreExercise): ClozeExercise? {
-        val phrase = exercise.tilePhrase ?: return null
-        if (exercise.tileTargetSlots.isEmpty()) return null
-        val offset = exercise.expected.indexOf(phrase.text)
-        if (offset < 0) return null
-        val slotName = exercise.tileTargetSlots.firstOrNull { it in phrase.slotSpans } ?: return null
-        val span = phrase.slotSpans[slotName] ?: return null
-        val absStart = span.first + offset
-        val absEnd = span.last + 1 + offset
-        val correctForm = exercise.expected.substring(absStart, absEnd)
-        val lexeme = exercise.slots[slotName] ?: return null
-        val lexemeKey = "$slotName:$lexeme"
-        val distractors = pickDistractors(morphology, lexemeKey, correctForm, 2, random)
+        val slot = extractSlot(exercise) ?: return null
+        val distractors = pickDistractors(morphology, slot.lexemeKey, slot.correctForm, 2, random)
         if (distractors.size < 2) return null
-        val displaySentence = exercise.expected.substring(0, absStart) + "___" + exercise.expected.substring(absEnd)
+        val displaySentence = exercise.expected.substring(0, slot.absStart) + "___" + exercise.expected.substring(slot.absEnd)
         return ClozeExercise(
             id = "course:${exercise.id}",
             displaySentence = displaySentence,
-            correctForm = correctForm,
-            options = shuffled(listOf(correctForm) + distractors),
+            correctForm = slot.correctForm,
+            options = shuffled(listOf(slot.correctForm) + distractors),
             source = ClozeSource.CourseExercise(exercise.id, exercise.primarySkill),
-            gapLexemeKey = lexemeKey,
+            gapLexemeKey = slot.lexemeKey,
         )
     }
 
