@@ -170,4 +170,44 @@ class ErrorHuntSessionTest {
         assertEquals(1, summary["perfect"])
         assertNull(summary["found_late"])
     }
+
+    // Edge case: Restart must preserve exercise list (order unchanged) while clearing progress.
+    @Test fun restartPreservesExercisesList() {
+        val s = state(ex, ex2)
+        val s1 = reduceErrorHuntSession(s, ErrorHuntAction.TapToken("hunt-1", 0)) // miss
+        val s2 = reduceErrorHuntSession(s1, ErrorHuntAction.Next)
+        val restarted = reduceErrorHuntSession(s2, ErrorHuntAction.Restart)
+        assertEquals(listOf(ex, ex2), restarted.exercises)
+        assertEquals(0, restarted.currentIndex)
+    }
+
+    // Edge case: error token WITH trailing punctuation — index-based tap is punctuation-agnostic.
+    @Test fun trailingPunctuationOnErrorToken() {
+        // "kolegę." has trailing punctuation; errorTokenIndex=2 points directly to it.
+        val punctEx = ErrorHuntExercise(
+            id = "punct-1",
+            tokens = listOf("Piszę", "do", "kolegi."),
+            errorTokenIndex = 2,       // "kolegi." is the error token
+            correctToken = "kolegę.",  // correct form at that position
+            errorForm = "kolegi",
+            correctForm = "kolegę",
+            options = listOf("kolegę", "kolegi", "kolega"),
+            gapLexemeKey = "noun:friend",
+            skillId = "case.acc",
+            ruleText = null,
+            sourceExerciseId = "src-punct",
+        )
+        val s = ErrorHuntSessionState(exercises = listOf(punctEx))
+        // Tap index 2 → tapIsError = (2 == 2) = true → found
+        val after = reduceErrorHuntSession(s, ErrorHuntAction.TapToken("punct-1", 2))
+        assertTrue("punct-1" in after.found)
+        assertEquals(0, after.missCounts["punct-1"] ?: 0)
+    }
+
+    // Edge case: sub-mode with null errorHunt session — TapToken on unknown id is a no-op.
+    @Test fun tapUnknownExerciseIdIsNoop() {
+        val s = state()
+        val after = reduceErrorHuntSession(s, ErrorHuntAction.TapToken("no-such-id", 0))
+        assertEquals(s, after)
+    }
 }

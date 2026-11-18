@@ -464,3 +464,36 @@ test('timed session expires on tab focus after a wall-clock jump', async ({ page
   await page.evaluate(() => window.dispatchEvent(new Event('focus')));
   await expect(page.locator('.exam-progress').first()).toHaveText('Часть 2 / 4');
 });
+
+// AC-8 / AC-2: phrase insertion at a mid-caret position preserves text before and after.
+test('letter template: phrase insertion at mid-caret keeps text before and after', async ({ page }) => {
+  // Open B2 2019 writing (Set I Task 1 is linked to complaint template).
+  await page.goto('/#/exam');
+  await page.locator('.exam-card').filter({ hasText: 'B2 Certyfikat 2019' }).getByRole('button', { name: 'Начать' }).click();
+  await page.locator('.exam-module-card').filter({ hasText: 'Pisanie' }).getByRole('button', { name: 'Начать' }).click();
+  await page.getByRole('button', { name: 'Набор I', exact: true }).click();
+
+  const ta = page.locator('.exam-textarea');
+  await ta.fill('BEFORE AFTER');
+  // Position cursor between "BEFORE " and "AFTER".
+  await page.evaluate(() => {
+    const el = document.querySelector<HTMLTextAreaElement>('.exam-textarea');
+    if (!el) return;
+    el.selectionStart = 7; // right after "BEFORE "
+    el.selectionEnd = 7;
+    el.focus();
+  });
+
+  // Open template and insert a phrase at the cursor.
+  await page.locator('.exam-writing-template > summary').click();
+  const phraseBtn = page.locator('.exam-template-phrase').first();
+  const phraseText = await phraseBtn.getAttribute('data-phrase-text') ?? '';
+  await phraseBtn.click();
+
+  const draft = await ta.inputValue();
+  expect(draft.startsWith('BEFORE')).toBe(true);
+  expect(draft.includes('AFTER')).toBe(true);
+  expect(draft.includes(phraseText)).toBe(true);
+  // "AFTER" must still appear after the inserted phrase.
+  expect(draft.indexOf(phraseText)).toBeLessThan(draft.indexOf('AFTER'));
+});

@@ -145,7 +145,8 @@ test('error hunt: correct option shows positive feedback', async ({ page }) => {
   await page.waitForSelector('.eh-token:not([disabled])');
 
   await findErrorToken(page);
-  await page.locator('.exam-option').filter({ hasText: correctForm }).click();
+  const exact = new RegExp(`^[A-Z]\\.\\s*${correctForm.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')}$`);
+  await page.locator('.exam-option').filter({ hasText: exact }).click();
   await expect(page.locator('.exam-feedback.feedback-correct')).toBeVisible();
 });
 
@@ -235,4 +236,26 @@ test('error hunt: progress preserved when switching sub-modes', async ({ page })
   await expect(page.locator('.eh-sentence')).toBeVisible();
 
   await expect(page.locator('.exam-progress-text')).toHaveText(progressText!);
+});
+
+// ─── AC-9 / AC-EH-03 (en-ru): graceful degradation ─────────────────────────
+
+test('en-ru: error hunt shows empty-state message; exam screen hides templates button', async ({ page }) => {
+  // Switch to en course (en-ru pack has no tileTargetSlots exercises → empty pool).
+  await page.goto('/#/settings');
+  await page.getByRole('combobox', { name: 'Изучаемый язык' }).selectOption('en');
+
+  // Error Hunt sub-mode: empty state message present, no token buttons.
+  await page.goto('/#/cloze');
+  await switcherBtn(page, 'Find the Error').click();
+  await expect(page.locator('.eh-sentence')).toHaveCount(0);
+  await expect(page.locator('.notice')).toBeVisible();
+
+  // Exam screen: no templates browser button (en-ru has no letter_task_link rows).
+  await page.goto('/#/exam');
+  await expect(page.locator('button').filter({ hasText: /шаблон|template/i })).toHaveCount(0);
+
+  // Restore to Polish — must not throw console errors during the whole sequence.
+  await page.goto('/#/settings');
+  await page.getByRole('combobox', { name: 'Изучаемый язык' }).selectOption('pl');
 });
