@@ -268,3 +268,8 @@ UI_COPY {key: examFeedbackPartial text: "Частично верно"}
 UI_COPY {key: examAnswerLocked text: "Ответ зафиксирован"}
 UI_COPY {key: tileBuilderMode text: "Собрать из слов"}
 UI_COPY {key: checkTiles text: "Проверить"}
+UI_COPY {key: errorHunt text: "Найди ошибку"}
+UI_COPY {key: errorHuntPrompt text: "Нажми на ошибочное слово"}
+UI_COPY {key: errorHuntWordCorrect text: "Это слово верное"}
+UI_COPY {key: errorHuntFound text: "Ошибка найдена"}
+UI_COPY {key: errorHuntSummary text: "Результат"}

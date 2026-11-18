@@ -1048,4 +1048,9 @@ val UI_COPY_ROW_ROWS: List<UiCopyRow> = listOf(
     UiCopyRow(key = "examAnswerLocked", text = "Ответ зафиксирован"),
     UiCopyRow(key = "tileBuilderMode", text = "Собрать из слов"),
     UiCopyRow(key = "checkTiles", text = "Проверить"),
+    UiCopyRow(key = "errorHunt", text = "Найди ошибку"),
+    UiCopyRow(key = "errorHuntPrompt", text = "Нажми на ошибочное слово"),
+    UiCopyRow(key = "errorHuntWordCorrect", text = "Это слово верное"),
+    UiCopyRow(key = "errorHuntFound", text = "Ошибка найдена"),
+    UiCopyRow(key = "errorHuntSummary", text = "Результат"),
 )

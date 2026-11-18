@@ -14,7 +14,7 @@ class ErrorHuntPoolIntegrationTest {
     private var idSeq = 0
     private val engine = PlExerciseEngine(RandomSource { 0.0 }, ExerciseIdFactory { "g${idSeq++}" })
     private val generator = ErrorHuntGenerator(plMorphology, RandomSource { 0.0 })
-    private val courseExercises = engine.coreExercisesForClozePool()
+    private val courseExercises = engine.coreExercisesForErrorHuntPool()
     private val pool = DefaultErrorHuntPool(courseExercises, generator)
     private val exerciseById = courseExercises.associateBy { it.id }
 

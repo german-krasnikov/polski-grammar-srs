@@ -265,3 +265,8 @@ UI_COPY {key: examFeedbackPartial text: "Partly correct"}
 UI_COPY {key: examAnswerLocked text: "Answer locked"}
 UI_COPY {key: tileBuilderMode text: "Build from words"}
 UI_COPY {key: checkTiles text: Check}
+UI_COPY {key: errorHunt text: "Find the Error"}
+UI_COPY {key: errorHuntPrompt text: "Tap the wrong word"}
+UI_COPY {key: errorHuntWordCorrect text: "This word is correct"}
+UI_COPY {key: errorHuntFound text: "Error found"}
+UI_COPY {key: errorHuntSummary text: Results}

@@ -5,18 +5,18 @@ import polski.core.engine.MorphologyParadigm
 import polski.core.engine.RandomSource
 import polski.core.engine.pickDistractors
 import polski.core.model.CoreExercise
-import polski.data.skills
 import polski.grammar.normalize
 
 /**
- * Generates [ErrorHuntExercise]s from core exercises. Fail-soft: returns null when preconditions
- * fail. Known limitation: multi-word slots (correctForm contains a space) are skipped in MVP.
- * Syncretism (paradigm forms valid in the same slot) is detected by the validity guard but
- * undetected instances remain low-frequency; noted here as a known open issue.
+ * Generates [ErrorHuntExercise]s from core exercises. [theoryFor] supplies per-skill rule text
+ * from the active course pack without coupling this class to the pack globals.
+ * Fail-soft: returns null when preconditions fail. Known limitation: multi-word slots are skipped.
+ * Syncretism may slip through the validity guard; noted here as a known open issue.
  */
 class ErrorHuntGenerator(
     private val morphology: MorphologyParadigm,
     private val random: RandomSource,
+    private val theoryFor: (skillId: String) -> String? = { null },
 ) {
     fun fromCoreExercise(exercise: CoreExercise): ErrorHuntExercise? {
         val slot = extractSlot(exercise) ?: return null
@@ -43,7 +43,7 @@ class ErrorHuntGenerator(
         if (prefixTokenCount !in originalTokens.indices) return null
 
         val ruleText = exercise.explanation.takeIf { it.isNotBlank() }
-            ?: skills.firstOrNull { it.id == exercise.primarySkill }?.theory?.takeIf { it.isNotBlank() }
+            ?: theoryFor(exercise.primarySkill)
 
         return ErrorHuntExercise(
             id = "hunt:${exercise.id}",

@@ -1098,4 +1098,19 @@ val UI_COPY_CASE_ROW_ROWS: List<UiCopyCaseRow> = listOf(
     UiCopyCaseRow(key = "examAnswerLocked", plRu = "Ответ зафиксирован", enRu = "Answer locked", placeholders = ""),
     UiCopyCaseRow(key = "tileBuilderMode", plRu = "Собрать из слов", enRu = "Build from words", placeholders = ""),
     UiCopyCaseRow(key = "checkTiles", plRu = "Проверить", enRu = "Check", placeholders = ""),
+    UiCopyCaseRow(key = "errorHunt", plRu = "Найди ошибку", enRu = "Find the Error", placeholders = ""),
+    UiCopyCaseRow(
+        key = "errorHuntPrompt",
+        plRu = "Нажми на ошибочное слово",
+        enRu = "Tap the wrong word",
+        placeholders = "",
+    ),
+    UiCopyCaseRow(
+        key = "errorHuntWordCorrect",
+        plRu = "Это слово верное",
+        enRu = "This word is correct",
+        placeholders = "",
+    ),
+    UiCopyCaseRow(key = "errorHuntFound", plRu = "Ошибка найдена", enRu = "Error found", placeholders = ""),
+    UiCopyCaseRow(key = "errorHuntSummary", plRu = "Результат", enRu = "Results", placeholders = ""),
 )

@@ -575,3 +575,33 @@ UI_COPY_CASE {
   placeholders: ""
 }
 UI_COPY_CASE {key: checkTiles plRu: "Проверить" enRu: Check placeholders: ""}
+UI_COPY_CASE {
+  key: errorHunt
+  plRu: "Найди ошибку"
+  enRu: "Find the Error"
+  placeholders: ""
+}
+UI_COPY_CASE {
+  key: errorHuntPrompt
+  plRu: "Нажми на ошибочное слово"
+  enRu: "Tap the wrong word"
+  placeholders: ""
+}
+UI_COPY_CASE {
+  key: errorHuntWordCorrect
+  plRu: "Это слово верное"
+  enRu: "This word is correct"
+  placeholders: ""
+}
+UI_COPY_CASE {
+  key: errorHuntFound
+  plRu: "Ошибка найдена"
+  enRu: "Error found"
+  placeholders: ""
+}
+UI_COPY_CASE {
+  key: errorHuntSummary
+  plRu: "Результат"
+  enRu: Results
+  placeholders: ""
+}
