@@ -58,7 +58,7 @@ The `invitation` template is a natural second wave — the structure is distinct
 DSL 1
 # Letter/email templates: section structure, phrase banks, mistakes and model letters.
 # Target-language phrases and native-language notes are pair data (courses-biome/<pair>/).
-# genreRef matches the tag of WritingTaskRow.genre enum values.
+# Task→template links are authored per real WritingTaskRow id (LetterTaskLinkRow).
 
 # Top-level ENUMs generate a single shared enum class in Kotlin (e.g. `enum class LetterRegister`),
 # reused across all records that reference it.  Record-inline `enum` fields generate a
@@ -69,9 +69,8 @@ ENUM LetterVerificationStatus verified|needs_review|inferred
 
 RECORD LetterTemplateRow KEY templateId COUNT 1..
   templateId: string
-  letterType: enum complaint|request|inquiry|application|apology|invitation|informal_email
+  letterType: enum complaint|request|inquiry|application|apology|invitation|formal_email|informal_letter
   register: LetterRegister
-  genreRef: string
 END
 
 RECORD LetterSectionRow KEY sectionId COUNT 1..
@@ -114,6 +113,15 @@ RECORD ModelLetterRow KEY letterId COUNT 0..
   sourceNote: string OPTIONAL
   verificationStatus: LetterVerificationStatus
 END
+
+# Per-task links: one row per (WritingTaskRow id, LetterTemplateRow id) pair.
+# taskRef is a plain string (not ref) to avoid a cross-contract dependency — same reasoning
+# as genreRef was, but explicit and per-task accurate rather than genre-approximate.
+RECORD LetterTaskLinkRow KEY linkId COUNT 0..
+  linkId: string
+  taskRef: string
+  templateRef: ref LetterTemplateRow
+END
 ```
 
 **Notes on design choices:**
@@ -123,17 +131,24 @@ END
   типы адаптера; ручной второй словарь типов запрещён" — ProjectMigratioPrincipals §Практика типов).
 - `letterType` and `sectionKey` are inline enums (each used in exactly one record) — they generate
   `LetterTemplateRowLetterType` and `LetterSectionRowSectionKey`.
-- `genreRef` is a plain string (not `ref WritingTaskRow.genre`) to avoid a cross-contract
-  dependency. The host calls `model.forGenre(task.genre)` where `task.genre` is already a tag
-  string from the existing `officialWritingData` mapper.
-- `LetterTemplateRow` has no explicit `targetLanguage`/`nativeLanguage` fields — these are
-  pack-implicit (data lives in `courses-biome/pl-ru/`), following the same convention as
-  `LifehackRow` and all other pair-layer records.
-- `verificationStatus` on every content row satisfies the content accuracy requirement. The
-  cross-field conditional "verified row must have non-empty sourceNote" is NOT expressible
-  in the data-contract format (which supports type checks, ref resolution, COUNT and
-  OPTIONAL/NULLABLE, but not cross-field predicates). This check lives as a native Kotlin
-  unit test — a **small-case measured-better native** remainder (P25/P8).
+- `genreRef` is REMOVED (finding: `genre: letter` in B1 covers both informal letters to friends
+  and formal complaints/requests in B2 — genre-based matching would suggest wrong templates).
+  Replaced by `LetterTaskLinkRow` with `taskRef: string` (WritingTaskRow task id, plain string
+  to avoid cross-contract dependency) + `templateRef: ref LetterTemplateRow`. The companion
+  panel calls `model.forTask(taskId)` and shows only templates linked to that specific task.
+  A task with no links shows no "Шаблон" toggle. The standalone browser lists `model.all()`
+  grouped by `letterType` / `register`.
+- `informal_email` renamed to `informal_letter` — the informal template covers both informal
+  letters to friends and informal emails (the distinction is structural, not register-based;
+  the template content notes cover both contexts).
+- `formal_email` added to `letterType` — required by AC-3 and to distinguish formal email
+  tasks (B2/2017, B2/2020, B2/2023-06, B2/2024-02, B2/2024-06) from formal letters.
+- `LetterTemplateRow` has no explicit `targetLanguage`/`nativeLanguage` fields — pack-implicit
+  (data in `courses-biome/pl-ru/`), same convention as `LifehackRow`.
+- `verificationStatus` on every content row. The cross-field conditional "verified row must have
+  non-empty sourceNote" is NOT expressible in data-contract (no cross-field predicate syntax).
+  This check lives as a native Kotlin unit test — a **small-case measured-better native**
+  remainder (P25/P8).
 
 ### New Kotlin domain types: `polski/exam/template/` (NEW, commonMain)
 
@@ -171,7 +186,6 @@ data class ModelLetter(
 )
 data class LetterTemplate(
     val id: String, val letterType: LetterType, val register: LetterRegister,
-    val genreRef: String,
     val sections: List<LetterSection>,
     val mistakes: List<LetterMistake>,
     val modelLetter: ModelLetter?,
@@ -182,14 +196,25 @@ data class LetterTemplate(
 
 ```kotlin
 // LetterTemplateModel.kt
-class LetterTemplateModel(private val templates: List<LetterTemplate>) {
-    /** All templates whose genreRef matches the given genre tag. Empty if none authored. */
-    fun forGenre(genre: String): List<LetterTemplate> = templates.filter { it.genreRef == genre }
+class LetterTemplateModel(
+    private val templates: List<LetterTemplate>,
+    private val links: List<LetterTaskLink>,   // from LetterTaskLinkRow mapper
+) {
+    /** Templates explicitly linked to this writing task. Empty if none authored. */
+    fun forTask(taskId: String): List<LetterTemplate> {
+        val ids = links.filter { it.taskRef == taskId }.map { it.templateRef }
+        return templates.filter { it.id in ids }
+    }
     fun all(): List<LetterTemplate> = templates
 }
+
+// LetterTaskLink — domain wrapper for LetterTaskLinkRow
+data class LetterTaskLink(val linkId: String, val taskRef: String, val templateRef: String)
 ```
 
 No coroutines, no IO. Instantiated once at host startup alongside `officialWritingData`.
+Companion panel calls `forTask(task.id)`. If the list is empty, no "Шаблон" toggle is shown.
+Standalone browser calls `all()` and groups by `letterType` / `register`.
 
 ### LetterTemplateProvider (NEW, commonMain, interface)
 
@@ -211,8 +236,13 @@ with no authored templates — no null, no exception.
 
 | Path | Status | Responsibility |
 |---|---|---|
-| `dsl/letter-template.data-contract` | NEW | DSL schema (5 record types above) |
-| `courses-biome/pl-ru/letter-templates.core-data` | NEW | 6 MVP templates: complaint/request/inquiry letter, formal email, informal email, application. 4–6 phrases/section, 3–5 mistakes/template, 1 model letter/template. All `verified` phrases cite sourceNote. |
+| `dsl/letter-template.data-contract` | NEW | DSL schema (6 record types above) |
+| `courses-biome/pl-ru/letter-templates/letter_template.core-data` | NEW | 6 MVP `LetterTemplateRow` records (complaint, request, inquiry, application, formal_email, informal_letter) |
+| `courses-biome/pl-ru/letter-templates/letter_section.core-data` | NEW | `LetterSectionRow` records; each template has 4–6 sections ordered by `order` field |
+| `courses-biome/pl-ru/letter-templates/letter_phrase.core-data` | NEW | `LetterPhraseRow` records; 4–6 phrases/section; all `verified` rows cite `sourceNote` |
+| `courses-biome/pl-ru/letter-templates/letter_mistake.core-data` | NEW | `LetterMistakeRow` records; 3–5 per template |
+| `courses-biome/pl-ru/letter-templates/model_letter.core-data` | NEW | `ModelLetterRow` records; 1 model letter per template |
+| `courses-biome/pl-ru/letter-templates/letter_task_link.core-data` | NEW | `LetterTaskLinkRow` records; maps real B1/B2 task ids to template ids |
 | `kotlin/shared/src/commonMain/kotlin/polski/exam/template/LetterTemplate.kt` | NEW | Domain types (enums + data classes above) |
 | `kotlin/shared/src/commonMain/kotlin/polski/exam/template/LetterTemplateModel.kt` | NEW | Stateless query model |
 | `kotlin/shared/src/commonMain/kotlin/polski/exam/template/LetterTemplateProvider.kt` | NEW | Interface + `StaticLetterTemplateProvider` |
@@ -231,24 +261,25 @@ with no authored templates — no null, no exception.
 | Path | Change |
 |---|---|
 | `kotlin/composeApp/src/webMain/kotlin/polski/ui/ExamWeb.kt` | Add `ExamScreen.Templates` to enum; wire "Шаблоны" link on exam list; render standalone template browser |
-| `kotlin/composeApp/src/webMain/kotlin/polski/ui/ExamWritingWeb.kt` | Add "Шаблон" collapsible below guidance when `LetterTemplateModel.forGenre(task.genre).isNotEmpty()` |
+| `kotlin/composeApp/src/webMain/kotlin/polski/ui/ExamWritingWeb.kt` | Add "Шаблон" collapsible below guidance when `LetterTemplateModel.forTask(task.id).isNotEmpty()` |
 | `kotlin/composeApp/src/androidMain/kotlin/polski/ui/screens/AndroidExamWritingScreen.kt` | Integrate `AndroidLetterTemplatePanel` composable; phrase tap appends to draft textarea |
 | `kotlin/apple-bridge/src/iosMain/kotlin/polski/ios/IosSnapshot.kt` | No change required; `IosLetterTemplateSession` is a separate on-demand session |
-| `dsl/biome.project` | Register `letter-template.data-contract` and `courses-biome/pl-ru/letter-templates.core-data` |
-| `tests/browser/exam-playtest-host.ts` | Add 3 actions (`openLetterTemplate`, `selectLetterTemplate genre=... type=...`, `insertLetterPhrase phrase=...`) and 3 snapshot keys (`writing.templateVisible: bool`, `writing.templateSections: string` (comma-joined section keys), `writing.templateTypes: string` (comma-joined type labels)) |
+| `dsl/biome.project` | Register `letter-template.data-contract` and all 6 `.core-data` files in `courses-biome/pl-ru/letter-templates/` |
+| `tests/browser/exam-playtest-host.ts` | Add 3 actions (`openLetterTemplate`, `selectLetterTemplate type=...`, `insertLetterPhrase phrase=...`) and 3 snapshot keys (`writing.templateVisible: bool`, `writing.templateSections: string` (comma-joined section keys), `writing.templateTypes: string` (comma-joined type labels)) |
 
 ### Dependency direction
 
 ```
-courses-biome/pl-ru/letter-templates.core-data
+courses-biome/pl-ru/letter-templates/{letter_template,letter_section,letter_phrase,
+                                       letter_mistake,model_letter,letter_task_link}.core-data
     ↓ biome generate (--project dsl/biome.project)
 commonMain/generated/.../LetterTemplateRows.kt    [generated, never edited]
     ↓ PlRuLetterTemplateRows.kt mapper
-polski/exam/template/ {LetterTemplate, LetterTemplateModel, LetterTemplateProvider}
+polski/exam/template/ {LetterTemplate, LetterTaskLink, LetterTemplateModel, LetterTemplateProvider}
     ↓ LetterTemplateSourceData.kt  (lazy val, no IO)
     ↓ used by exam hosts
-webMain/LetterTemplateWeb.kt  ←  ExamWritingWeb.kt (companion panel)
-                              ←  ExamWeb.kt         (standalone screen)
+webMain/LetterTemplateWeb.kt  ←  ExamWritingWeb.kt (companion panel: forTask(task.id))
+                              ←  ExamWeb.kt         (standalone screen: all())
 androidMain/AndroidLetterTemplatePanel.kt    ← AndroidExamWritingScreen.kt
 apple-bridge/iosMain/IosLetterTemplateSession.kt ← SwiftUI host
 ```
@@ -265,7 +296,7 @@ initialized once. No subscriptions, no coroutines, no cleanup needed.
 
 The `IosLetterTemplateSession` (in `kotlin/apple-bridge/src/iosMain/kotlin/polski/ios/`)
 follows the same on-demand snapshot pattern as `IosVocabularySession` in the same package:
-a Kotlin method returns a JSON snapshot for a given genre string, Swift decodes it.
+a Kotlin method returns a JSON snapshot for a given `taskId` string, Swift decodes it.
 This avoids embedding all template data in every `IosSnapshot` emission.
 
 ---
@@ -282,17 +313,18 @@ A row whose source was not opened is `needs_review`.
 | Rule | Correct forms | Typical learner mistake | Authoring note |
 |---|---|---|---|
 | Salutation punctuation | Both "Szanowny Panie!" and "Szanowny Panie," are correct. After "!" the body starts with CAPITAL; after "," the body starts with LOWERCASE. | Mixing: "Szanowny Panie," + "Chciałbym…" (comma + capital) OR "Szanowny Panie!" + "chciałbym…" (exclamation + lowercase) | Record as a `noteNative` on the salutation section, not as two separate `LetterMistakeRow` entries. |
-| Formal closing punctuation | "Z poważaniem" (NO comma); signature on the next line | "Z poważaniem," (comma is an English calque; non-standard in Polish) | Mistake row: `wrongForm: "Z poważaniem,"` → `correctForm: "Z poważaniem"`. Verify source. |
+| Formal closing punctuation | "Z poważaniem" (no comma preferred); signature on the next line | "Z poważaniem," (comma is an English calque; non-standard but widely used) | Convention, not a hard error. Mistake row: `wrongForm: "Z poważaniem,"` → `correctForm: "Z poważaniem"` with note that the comma form appears in practice but is non-standard per PWN. `verificationStatus: verified`, source cited. |
 | Closing register — formal letter | "Z poważaniem" | Informal closing ("Buziaki", "Cześć") in a formal letter; also "Pozdrawiam serdecznie" (semi-formal only) | Mistake row on formal template |
 | Closing register — informal letter | "Pozdrawiam serdecznie", "Ściskam", "Buziaki" | "Z poważaniem" in a letter to a friend (over-formal) | Mistake row on informal template |
 | Salutation gender agreement | "Szanowny Panie" (m), "Szanowna Pani" (f), "Szanowni Państwo" (mixed/unknown) | Agreement errors: "Szanowny Pani", "Szanowna Panie" | Mistake rows with wrong/correct pairs |
 | Spelling | "Z poważaniem" | "Z pozawaniem", "Z powazaniem" | Highest-priority mistake row (source: the user's motivating example) |
 | Pan/Pani capitalization | Capitalizing Pan/Pani/Państwo in the letter body is a **courtesy option**, not mandatory. Both "Pan" and "pan" are acceptable. | — | Record as a `noteNative` tip ("Zaleca się pisać Pan/Pani wielką literą jako wyraz szacunku"), not as a `LetterMistakeRow`. |
 
-All entries in `courses-biome/pl-ru/letter-templates.core-data` with `verificationStatus: verified`
+All entries in `courses-biome/pl-ru/letter-templates/` with `verificationStatus: verified`
 must have a non-empty `sourceNote` naming the actual source opened.
-Content flagged `needs_review` is shown with a visual indicator ("⚠ не проверено").
-Provisional content without a source is marked `inferred`.
+Content flagged `needs_review` is shown with a visual badge (⚠).
+Content that is correct but was not independently sourced is marked `inferred` — shown without a badge (reviewed by main agent).
+Content that needs a source check is marked `needs_review`.
 Task A aims for all 6 MVP templates fully `verified` before merge.
 
 ---
@@ -308,16 +340,20 @@ contract without breaking it (P14 additive).
 contextual access at the right moment. The standalone "Шаблоны" link on the exam home screen gives
 discovery. Both are within the existing `ExamScreen` state machine — no new routing infrastructure.
 
-**D3: `genreRef` is a plain string, not a typed ref.** Avoids a cross-contract dependency from
-`letter-template.data-contract` to `exam.data-contract`. The host resolves the mapping at render
-time (`model.forGenre(task.genre)` where `task.genre` is the tag string from `officialWritingData`).
-A `ref WritingTaskRow` would create a build-order dependency and the value at runtime is already
-a plain string.
+**D3: `LetterTaskLinkRow.taskRef` is a plain string, not a typed ref.** Avoids a cross-contract
+dependency from `letter-template.data-contract` to `exam.data-contract`. The host passes
+`task.id` (a plain string from `officialWritingData`) to `model.forTask(taskId)`. A
+`ref WritingTaskRow` would create a build-order dependency; the runtime value is already a string.
+Genre-based matching (`genreRef`) was rejected because `genre: "letter"` in B1 covers informal
+letters to friends, while in B2 it covers formal complaints — suggesting the same templates for
+both would be wrong. Per-task links are precise and always correct.
 
-**D4: `letterType` distinguishes subtypes of `genre: "letter"`.** A single `genre: "letter"` can
-be a complaint, request, or inquiry — these need different phrase banks and model letters. Multiple
-`LetterTemplateRow` rows share `genreRef: "letter"` with different `letterType` values. The UI
-shows all templates for the genre and lets the user pick the subtype.
+**D4: `letterType` distinguishes subtypes within a template set.** A writing task may be linked
+to multiple `LetterTemplateRow` records with different `letterType` values (e.g. complaint and
+request). The UI shows all templates linked to the task and lets the user pick the subtype.
+`informal_letter` covers both informal letters to friends and informal emails — the distinction is
+structural (greeting/signoff differ), not register-based; a single template handles both with
+context notes per section.
 
 **D5: Pair-layer data only in `courses-biome/pl-ru/`.** Section labels, notes and Russian
 explanations are Russian-speaker concerns — they belong in the pair layer, not in a
@@ -352,8 +388,8 @@ relevant template tree, following the precedent of `IosVocabularySession`.
 - `eachTemplateSectionsAreOrderedWithoutGaps` — asserts sections 1..N sequential. **Remainder
   class: ordering invariant on a set of records** — not expressible in data-contract syntax;
   native test (P8/P25).
-- `forGenreReturnsAllTemplatesMatchingGenreTag` — loads pl-ru model, `forGenre("letter")` returns 3.
-- `forGenreReturnsEmptyForUnknownGenre` — `forGenre("speech")` returns empty list.
+- `forTaskReturnsLinkedTemplates` — loads pl-ru model; task with 2 linked templates → `forTask(id)` returns 2.
+- `forTaskReturnsEmptyForUnlinkedTask` — task with no `LetterTaskLinkRow` rows → `forTask(id)` returns empty.
 - `formalTemplateHasOnlyFormalPhrases` — formal template salutation section phrases all have
   `register == LetterRegister.FORMAL`. **Remainder class: register isolation** — a data
   authoring invariant not expressible in data-contract; native test (P8/P25).
@@ -368,8 +404,10 @@ Implemented as `dsl/exam-web/writing-letter-template.playtest` (profile `playmod
 
 ```
 TEST "Letter template companion shows in writing task and inserts phrase" PROFILE playmode
-  open exam="B1 Certyfikat sample" module="writing"
-  # (select the set/task whose genre is letter)
+  open exam="B2 Certyfikat 2019" module="writing"
+  # (select writing set whose task has LetterTaskLinkRow entries in letter_task_link.core-data)
+  selectWritingSet set="I"
+  # Task 1 must be linked to complaint template via letter_task_link.core-data
   ASSERT writing.templateVisible == true
   openLetterTemplate
   ASSERT writing.templateTypes contains "complaint"
@@ -385,7 +423,8 @@ END
 ```
 
 (Exact phrase text is taken from the first `isPreferred: true` salutation phrase in the authored
-data. The playtest file is finalized in Task B once the data is authored in Task A.)
+data. `writing.templateVisible` is `false` for tasks with no `LetterTaskLinkRow` entries — no toggle
+shown. The playtest file is finalized in Task B once the data is authored in Task A.)
 
 ### AC-3 (web standalone — Task B gate, playtest)
 
@@ -409,9 +448,10 @@ Both playtest files are run by `runExamPlaytest` in `exam-playtest-host.ts`. The
 
 ### AC-4 (Android companion — Task C gate)
 
-Open B2/2020 (genre: `email`) writing task on Android emulator → `AndroidLetterTemplatePanel`
-shown below guidance, collapsed by default. Expand → email sections visible. Tap a phrase →
-phrase text appended to draft. Phrases match web content (shared `LetterTemplateSourceData`).
+Open a B2 writing task linked to `formal_email` template (via `letter_task_link.core-data`) on
+Android emulator → `AndroidLetterTemplatePanel` shown below guidance, collapsed by default.
+Expand → email sections visible. Tap a phrase → phrase text appended to draft. Phrases match web
+content (shared `LetterTemplateSourceData`). A task with no `LetterTaskLinkRow` rows shows no panel.
 
 ### AC-5 (iOS bridge — Task D gate)
 
@@ -440,9 +480,11 @@ szacunku"), not a `LetterMistakeRow`.
 ### AC-8 (E2E walk — web + Android, playtest + emulator)
 
 **Web (playtest):** Covered by `writing-letter-template.playtest` above (AC-2). Additionally:
-Exam → B2/2019 → Writing → Set I → Task 1 (formal letter) → open template → select "Prośba" →
-navigate to `signoff` section → insert preferred phrase "Z poważaniem" → `writing.draft` contains
-"Z poważaniem" (phrase inserted without destroying existing draft content).
+Exam → B2/2019 → Writing → Set I → Task 1 (formal letter) → open template → select "Prośba"
+(request template) → navigate to `signoff` section → insert preferred phrase "Z wyrazami szacunku"
+→ `writing.draft` contains "Z wyrazami szacunku" (phrase inserted without destroying existing draft
+content). "Z wyrazami szacunku" is the preferred sign-off for request letters (more deferential than
+"Z poważaniem").
 
 **Android (emulator walk):** Exam → B1/sample → Writing → genre `letter` task → template panel
 visible and expandable → tap salutation phrase → phrase text appears in draft → submit →
@@ -450,9 +492,9 @@ review shows draft including inserted phrase text. App does not crash; back navi
 
 ### AC-9 (en-ru graceful degradation)
 
-Switch active pack to en-ru (if available) → open any writing task with genre `letter` → no
-"Шаблон" toggle shown (en-ru has no templates) → no exception, no console error.
-`LetterTemplateModel.forGenre("letter")` returns empty list for en-ru.
+Switch active pack to en-ru (if available) → open any writing task → no "Шаблон" toggle shown
+(en-ru `letter_task_link.core-data` has no rows) → no exception, no console error.
+`LetterTemplateModel.forTask(anyTaskId)` returns empty list for en-ru.
 
 ---
 
@@ -465,8 +507,8 @@ Each task is one developer, one file unit, ~100–150 lines (BestPractice §8).
 | Task | Scope | Gates |
 |---|---|---|
 | **A1: Contract + infrastructure** | `letter-template.data-contract` with top-level ENUMs; register in `dsl/biome.project`; `biome generate` → `LetterTemplateRows.kt`; `LetterTemplate.kt` (domain types + typealiases, NO redeclared enums); `LetterTemplateModel.kt`; `LetterTemplateProvider.kt` + `StaticLetterTemplateProvider`; `PlRuLetterTemplateRows.kt` mapper; `LetterTemplateSourceData.kt`; `LetterTemplateModelTest.kt` with 1-template seed in `.core-data` to prove generate→mapper→model chain | `biome generate --check`, `:shared:desktopTest` with AC-1 partial (1 template, all native tests green on seed data) |
-| **A2: Content authoring** | Remaining 5 templates in `courses-biome/pl-ru/letter-templates.core-data` — all 6 fully authored with fetched source URLs; aim for all rows `verificationStatus: verified` | AC-1 full (6 templates), all 6 `LetterTemplateModelTest` assertions green |
-| **B1: Web companion panel** | `LetterTemplateWeb.kt` (panel component only); `ExamWritingWeb.kt` toggle (shown when `model.forGenre(task.genre).isNotEmpty()`); phrase→draft insertion at caret; `exam-playtest-host.ts` new actions/snapshot keys; `writing-letter-template.playtest` | AC-2, AC-8 (web), AC-9 |
+| **A2: Content authoring** | Remaining 5 templates + all task link rows across the 6 files in `courses-biome/pl-ru/letter-templates/`; all rows `verificationStatus: verified`; real B1/B2 task ids in `letter_task_link.core-data` | AC-1 full (6 templates), all 6 `LetterTemplateModelTest` assertions green |
+| **B1: Web companion panel** | `LetterTemplateWeb.kt` (panel component only); `ExamWritingWeb.kt` toggle (shown when `model.forTask(task.id).isNotEmpty()`); phrase→draft insertion at caret; `exam-playtest-host.ts` new actions/snapshot keys; `writing-letter-template.playtest` | AC-2, AC-8 (web), AC-9 |
 | **B2: Web standalone browse** | `ExamWeb.kt` standalone "Шаблоны" link + `ExamScreen.Templates`; browse renderer in `LetterTemplateWeb.kt`; `writing-letter-templates-browse.playtest` | AC-3 |
 | **C: Android** | `AndroidLetterTemplatePanel.kt` (companion collapsible, phrase tap appends to draft); integration into `AndroidExamWritingScreen.kt` | AC-4, AC-8 (Android), `:androidApp:testDebugUnitTest` |
 | **D: iOS** | `IosLetterTemplateSession.kt` in `kotlin/apple-bridge/src/iosMain/kotlin/polski/ios/`; SwiftUI `LetterTemplateView` | AC-5, simulator walk |
@@ -475,40 +517,47 @@ Each task is one developer, one file unit, ~100–150 lines (BestPractice §8).
 
 ## Documentation and handoff
 
-- **Content accuracy owner: user.** All authored phrases in `courses-biome/pl-ru/letter-templates.core-data`
+- **Content accuracy owner: user.** All authored phrases in `courses-biome/pl-ru/letter-templates/`
   must be verified against cited Polish sources before `verificationStatus: verified`.
-  Provisional rows ship as `needs_review` and display a warning in the UI.
+  Content that is correct but not independently sourced is `inferred` (no badge in UI — reviewed
+  by main agent). Content needing a source check ships as `needs_review` (badge shown).
 - **Sources to cite:** Poradnia językowa PWN (poradnia.pwn.pl), official Certyfikat Polski
   exam sample arkusze and klucze (PDF), Certyfikat Polski marking rubrics.
 - **Task A1 developer steps:**
   1. Add `letter-template.data-contract` to `dsl/` with top-level ENUMs (`LetterRegister`,
-     `LetterVerificationStatus`) and 5 RECORD types.
-  2. Register contract and seed data file in `dsl/biome.project` (follow `exam.data-contract`
-     registration pattern).
-  3. Author a minimal 1-template seed in `courses-biome/pl-ru/letter-templates.core-data`
-     (1 complaint letter with 2 phrases and 1 mistake — enough to prove the generate chain).
+     `LetterVerificationStatus`) and 6 RECORD types (including `LetterTaskLinkRow`).
+  2. Create `courses-biome/pl-ru/letter-templates/` directory. Register the contract and all 6
+     `.core-data` file paths in `dsl/biome.project` (follow `exam.data-contract` pattern).
+  3. Author a minimal 1-template seed across the 6 files: 1 complaint `LetterTemplateRow`,
+     2 `LetterSectionRow`, 2 `LetterPhraseRow`, 1 `LetterMistakeRow`, 1 `ModelLetterRow`,
+     1 `LetterTaskLinkRow` (a real B2 task id) — enough to prove the generate chain.
   4. Run `biome generate` to emit `LetterTemplateRows.kt`; verify generated enum naming
      (`LetterRegister`, `LetterVerificationStatus`, `LetterTemplateRowLetterType`,
-     `LetterSectionRowSectionKey`).
-  5. Write `PlRuLetterTemplateRows.kt` mapper (follow `PlRu*Rows.kt` pattern; en-ru derive
-     deferred — no `derive-enru-mappers.mjs` change until en-ru data exists).
-  6. Write `LetterTemplate.kt` (domain data classes + typealiases, NO redeclared enums),
-     `LetterTemplateModel.kt`, `LetterTemplateProvider.kt`, `LetterTemplateSourceData.kt`.
-  7. Write `LetterTemplateModelTest.kt`; run `:shared:desktopTest` — seed data sufficient.
+     `LetterSectionRowSectionKey`). Also verify `LetterTaskLinkRow` rows.
+  5. Write `PlRuLetterTemplateRows.kt` mapper (follow `PlRu*Rows.kt` pattern; include
+     `LetterTaskLink` domain type; en-ru derive deferred — no `derive-enru-mappers.mjs` change
+     until en-ru data exists).
+  6. Write `LetterTemplate.kt` (domain data classes + `LetterTaskLink` + typealiases, NO
+     redeclared enums), `LetterTemplateModel.kt`, `LetterTemplateProvider.kt`,
+     `LetterTemplateSourceData.kt`.
+  7. Write `LetterTemplateModelTest.kt`; run `:shared:desktopTest` — seed data sufficient
+     for `forTaskReturnsLinkedTemplates` and `forTaskReturnsEmptyForUnlinkedTask`.
 - **Task A2 developer steps:**
   1. For each of the remaining 5 templates: open the source URL (PWN Poradnia answer or exam
-     PDF), author the phrases and mistakes, set `verificationStatus: verified` with the URL.
-  2. Run `biome generate --check` and `:shared:desktopTest` after each template addition.
-  3. Gate: all 6 `LetterTemplateModelTest` assertions green; `modelLetterPresentForAllTemplates`
+     PDF), author phrases/mistakes/model letter across the 5 files, set
+     `verificationStatus: verified` with the URL.
+  2. Author `LetterTaskLinkRow` rows for all relevant real B1/B2 task ids.
+  3. Run `biome generate --check` and `:shared:desktopTest` after each template addition.
+  4. Gate: all 6 `LetterTemplateModelTest` assertions green; `modelLetterPresentForAllTemplates`
      confirms all 6 have model letters.
 - **Playtest spec files:** `dsl/exam-web/writing-letter-template.playtest` and
   `writing-letter-templates-browse.playtest` are driven by the existing `runExamPlaytest` harness
   in `tests/browser/exam-playtest-host.ts`. No new `.spec.ts` file; no `playwright.kotlin.config.ts`
   change required.
 - **Desktop:** frozen. Add exhaustiveness arms for any new enum values only.
-- **Open question resolved:** `needs_review` phrases are shown with a "⚠ не проверено" badge.
-  Task A aims for all 6 MVP templates fully `verified` (source URLs confirmed). `needs_review`
-  rows are only a fallback if a source cannot be opened before merge.
+- **Display policy resolved:** `needs_review` rows show a badge (⚠). `inferred` rows show no
+  badge (reviewed by main agent; content is correct but unsourced). `verified` rows show source
+  on demand. Task A aims for all 6 MVP templates fully `verified`.
 
 ---
 
@@ -536,7 +585,7 @@ DSL), §8 (проверка каждой правки); ProjectMigratioPrincipal
 
 | Remainder | Location | Class | Reason |
 |---|---|---|---|
-| Genre lookup (`forGenre`) | `LetterTemplateModel.kt` | Mechanical / measured-better native | Pure list filter; S4 (1 consumer); native ≤ DSL PROGRAM by token count |
+| Task lookup (`forTask`) | `LetterTemplateModel.kt` | Mechanical / measured-better native | Pure list filter over task link records; S4 (1 consumer); native ≤ DSL PROGRAM by token count |
 | Sections ordered 1..N check | `LetterTemplateModelTest` | Small case — ordering invariant on record set | Not expressible in data-contract; P8 "малый механический случай может быть нативным" |
 | Verified row has sourceNote | `LetterTemplateModelTest` | Small case — cross-field conditional | data-contract has no cross-field predicate syntax; P8 |
 | Register isolation check | `LetterTemplateModelTest` | Authoring-invariant test | Data quality invariant, not application logic; P8 |
