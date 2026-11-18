@@ -78,6 +78,11 @@ CATALOG UiCopy IN polski.presentation
   KEY errorHuntCorrectAnswer
   KEY loading
   KEY clozeTab
+  KEY letterTemplateToggle
+  KEY letterTemplatePicker
+  KEY letterTemplateMistakes
+  KEY letterTemplateModelLetter
+  KEY letterTemplateNeedsReview
 
   FN languageName "lang.$code" code
   FN languageAdverb "adverb.$code" code

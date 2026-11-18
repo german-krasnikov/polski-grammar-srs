@@ -1058,4 +1058,9 @@ val UI_COPY_ROW_ROWS: List<UiCopyRow> = listOf(
     UiCopyRow(key = "errorHuntScoreWrongForm", text = "Wrong form"),
     UiCopyRow(key = "errorHuntCorrectAnswer", text = "correct answer"),
     UiCopyRow(key = "clozeTab", text = "Fill in"),
+    UiCopyRow(key = "letterTemplateToggle", text = "Template"),
+    UiCopyRow(key = "letterTemplatePicker", text = "Letter type:"),
+    UiCopyRow(key = "letterTemplateMistakes", text = "Common mistakes"),
+    UiCopyRow(key = "letterTemplateModelLetter", text = "Model letter"),
+    UiCopyRow(key = "letterTemplateNeedsReview", text = "⚠ unverified"),
 )

@@ -278,3 +278,8 @@ UI_COPY {key: errorHuntScoreRevealedCorrect text: "Correct answer revealed"}
 UI_COPY {key: errorHuntScoreWrongForm text: "Wrong form"}
 UI_COPY {key: errorHuntCorrectAnswer text: "correct answer"}
 UI_COPY {key: clozeTab text: "Fill in"}
+UI_COPY {key: letterTemplateToggle text: Template}
+UI_COPY {key: letterTemplatePicker text: "Letter type:"}
+UI_COPY {key: letterTemplateMistakes text: "Common mistakes"}
+UI_COPY {key: letterTemplateModelLetter text: "Model letter"}
+UI_COPY {key: letterTemplateNeedsReview text: "⚠ unverified"}

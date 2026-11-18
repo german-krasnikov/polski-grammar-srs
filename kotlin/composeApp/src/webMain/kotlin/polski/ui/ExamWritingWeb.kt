@@ -7,6 +7,8 @@ import polski.presentation.UiCopy
 import polski.exam.writing.*
 import polski.exam.formatQuarterPoints
 import org.w3c.dom.HTMLTextAreaElement
+import polski.data.activeCoursePackId
+import polski.exam.template.StaticLetterTemplateProvider
 
 internal class ExamWritingController(
     examId: String, private val onBack: () -> Unit,
@@ -61,21 +63,30 @@ internal class ExamWritingController(
             appendChild(node("summary", text = UiCopy.WritingInstructionsAndCriteria))
             appendInstruction(this, task.instruction)
         })
-        if (sets.isNotEmpty()) c.appendChild(navBtn(UiCopy.ChangeWritingSet) { dispatch(WritingExamAction.SelectSet(null)); redraw() })
-        c.appendChild(node("div", "exam-writing-prompt").apply {
+        val templates = StaticLetterTemplateProvider.forPack(activeCoursePackId).forTask(task.id)
+        val draftCol: HTMLElement = if (templates.isNotEmpty()) {
+            val area = node("div", "exam-writing-area")
+            c.appendChild(area)
+            renderLetterTemplatePanel(area, templates) {
+                root?.querySelector(".exam-textarea") as? HTMLTextAreaElement
+            }
+            node("div", "exam-writing-right").also { area.appendChild(it) }
+        } else c
+        if (sets.isNotEmpty()) draftCol.appendChild(navBtn(UiCopy.ChangeWritingSet) { dispatch(WritingExamAction.SelectSet(null)); redraw() })
+        draftCol.appendChild(node("div", "exam-writing-prompt").apply {
             setAttribute("lang", "pl")
             task.promptText.split("\n").forEach { line ->
                 if (line.isNotBlank()) appendChild(node("p", text = line.trim()))
             }
         })
         task.promptImageUrl?.let { imageUrl ->
-            c.appendChild(node("img", "exam-writing-image").apply {
+            draftCol.appendChild(node("img", "exam-writing-image").apply {
                 setAttribute("src", imageUrl)
                 setAttribute("alt", requireNotNull(task.promptImageAlt) { "Missing image description for ${task.id}" })
             })
         }
         if (task.wordLimit != null) {
-            c.appendChild(node("div", "exam-word-limit", "Limit: ${task.wordLimit} słów"))
+            draftCol.appendChild(node("div", "exam-word-limit", "Limit: ${task.wordLimit} słów"))
         }
         val draft = drafts[task.id].orEmpty()
         val wordCount = draft.trim().split("\\s+".toRegex()).filter { it.isNotBlank() }.size
@@ -84,8 +95,8 @@ internal class ExamWritingController(
             value = draft
             addEventListener("input", { dispatch(WritingExamAction.Answer(task.id, this.value)); updateWordCount(this) })
         }
-        c.appendChild(textarea)
-        c.appendChild(node("div", "exam-word-count").apply {
+        draftCol.appendChild(textarea)
+        draftCol.appendChild(node("div", "exam-word-count").apply {
             id = "word-count"
             textContent = "Słów: $wordCount" + (task.wordLimit?.let { " / $it" } ?: "")
         })

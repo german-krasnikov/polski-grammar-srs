@@ -1,0 +1,18 @@
+TEST "letter template panel on linked and unlinked writing tasks" PROFILE playmode
+  open exam="B2 Certyfikat 2024-02" module="writing"
+  selectWritingSet set="I"
+  ASSERT writing.templateVisible == true
+  ASSERT writing.templateTypes == ""
+  openLetterTemplate
+  ASSERT writing.templateSections == "salutation|opening|body|request|closing|signoff"
+  insertLetterPhrase phrase="Cześć, Aniu!"
+  ASSERT writing.draft == "Cześć, Aniu!"
+  writeDraft text="Witam cię,"
+  insertLetterPhrase phrase="Cześć, Aniu!"
+  ASSERT writing.draft == "Witam cię, Cześć, Aniu!"
+  nextWriting
+  ASSERT writing.templateVisible == false
+  submitWriting
+  ASSERT writing.reviewCount == 2
+  ASSERT writing.autoScoreVisible == false
+END

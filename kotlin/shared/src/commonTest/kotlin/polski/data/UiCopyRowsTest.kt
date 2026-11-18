@@ -17,9 +17,10 @@ class UiCopyRowsTest {
             val en = UiCopy.all()
             // 220 original keys + six practice keys + one official-writing disclosure key +
             // one M9 "Миссии" nav key + two tile builder keys + five error hunt keys +
-            // seven error-hunt-score/restart/no-tasks/cloze-switcher/loading keys.
-            assertEquals(243, pl.size)
-            assertEquals(243, en.size)
+            // seven error-hunt-score/restart/no-tasks/cloze-switcher/loading keys +
+            // five letter-template panel keys.
+            assertEquals(248, pl.size)
+            assertEquals(248, en.size)
             assertEquals(pl.keys, en.keys)
             assertTrue(pl.values.all(String::isNotBlank))
             assertTrue(en.values.all(String::isNotBlank))

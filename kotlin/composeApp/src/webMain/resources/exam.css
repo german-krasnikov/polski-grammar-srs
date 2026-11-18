@@ -80,6 +80,47 @@
 .exam-writing-review { margin: 12px 0; padding: 12px; border: 1px solid var(--outline, #444); border-radius: 8px; }
 .exam-writing-draft { white-space: pre-wrap; font-size: 0.9rem; line-height: 1.5; margin: 8px 0 0; }
 
+/* Letter template panel */
+.exam-writing-area { display: grid; grid-template-columns: 1fr; gap: 0; }
+.exam-writing-right { display: flex; flex-direction: column; }
+@media (min-width: 1100px) {
+  .exam-writing-area { grid-template-columns: 300px 1fr; gap: 16px; align-items: start; }
+  .exam-writing-template { max-height: calc(100vh - 120px); overflow-y: auto; position: sticky; top: 16px; }
+}
+.exam-writing-template { margin-bottom: 12px; border: 1px solid var(--outline, #444); border-radius: 10px; padding: 2px 12px 8px; }
+.exam-writing-template > summary { cursor: pointer; font-size: 0.95rem; font-weight: 600; padding: 6px 0; list-style: none; }
+.exam-writing-template > summary::-webkit-details-marker { display: none; }
+.exam-writing-template-body { padding: 2px 0 2px; }
+.exam-template-picker-row { display: flex; align-items: center; gap: 6px; flex-wrap: wrap; margin-bottom: 8px; }
+.exam-template-picker-label { font-size: 0.85rem; color: var(--on-surface-variant, #888); }
+.exam-template-type-btn { padding: 3px 10px; border-radius: 6px; border: 1px solid var(--outline, #444); background: transparent; color: inherit; font-size: 0.85rem; cursor: pointer; }
+.exam-template-type-btn.selected { background: var(--primary, #7eb6ff); color: var(--on-primary, #003059); border-color: transparent; }
+.exam-template-section { margin-bottom: 3px; border: 1px solid var(--outline, #333); border-radius: 6px; overflow: hidden; }
+.exam-template-section > summary { cursor: pointer; padding: 5px 10px; font-size: 0.85rem; font-weight: 500; color: var(--on-surface-variant, #aaa); list-style: none; display: flex; align-items: center; gap: 5px; }
+.exam-template-section > summary::-webkit-details-marker { display: none; }
+.exam-template-section > summary::before { content: "▶"; font-size: 0.6rem; flex-shrink: 0; transition: transform 0.15s; }
+.exam-template-section[open] > summary::before { transform: rotate(90deg); }
+.exam-template-section-note { font-size: 0.78rem; color: var(--on-surface-variant, #888); margin: 2px 10px 4px; }
+.exam-template-phrase-row { display: flex; align-items: baseline; gap: 8px; padding: 2px 10px; flex-wrap: wrap; }
+.exam-template-phrase { background: transparent; border: 1px solid var(--outline, #444); border-radius: 5px; padding: 2px 8px; font-size: 0.88rem; cursor: pointer; color: inherit; text-align: left; white-space: normal; }
+.exam-template-phrase:hover { background: var(--surface-raised, #142133); }
+.exam-template-phrase.preferred { border-color: var(--primary, #7eb6ff); }
+.exam-template-phrase-note { font-size: 0.78rem; color: var(--on-surface-variant, #888); }
+.exam-template-unverified { font-size: 0.75rem; color: var(--warning, #ffb347); }
+.exam-template-mistakes { margin-top: 4px; }
+.exam-template-mistakes > summary { cursor: pointer; padding: 5px 10px; font-size: 0.85rem; font-weight: 500; color: var(--on-surface-variant, #aaa); list-style: none; }
+.exam-template-mistakes > summary::-webkit-details-marker { display: none; }
+.exam-template-mistake { padding: 2px 10px; font-size: 0.85rem; }
+.exam-template-wrong { color: var(--error, #f28b82); text-decoration: line-through; }
+.exam-template-correct { color: var(--green, #81c995); }
+.exam-template-mistake-rule { font-size: 0.78rem; color: var(--on-surface-variant, #888); margin: 1px 0 0; }
+.exam-template-model-letter { margin-top: 4px; }
+.exam-template-model-letter > summary { cursor: pointer; padding: 5px 10px; font-size: 0.85rem; color: var(--on-surface-variant, #aaa); list-style: none; }
+.exam-template-model-letter > summary::-webkit-details-marker { display: none; }
+.exam-template-model-title { font-size: 0.82rem; font-weight: 500; padding: 4px 10px; }
+.exam-template-model-text { padding: 8px 10px; font-size: 0.82rem; white-space: pre-wrap; overflow-x: auto; margin: 0; }
+.exam-template-model-annotation { font-size: 0.78rem; color: var(--on-surface-variant, #888); padding: 2px 10px 4px; margin: 0; }
+
 /* Custom audio player — segment only */
 .exam-audio-hidden { display: none; }
 .exam-custom-player { display: flex; align-items: center; gap: 12px; padding: 12px 16px; background: var(--surface-raised, #142133); color: var(--text, #e4ebf5); border-radius: 24px; margin-bottom: 12px; }

@@ -281,3 +281,8 @@ UI_COPY {key: errorHuntScoreRevealedCorrect text: "Правильный отве
 UI_COPY {key: errorHuntScoreWrongForm text: "Неверная форма"}
 UI_COPY {key: errorHuntCorrectAnswer text: "правильный ответ"}
 UI_COPY {key: clozeTab text: "Подстановка"}
+UI_COPY {key: letterTemplateToggle text: "Шаблон"}
+UI_COPY {key: letterTemplatePicker text: "Тип письма:"}
+UI_COPY {key: letterTemplateMistakes text: "Типичные ошибки"}
+UI_COPY {key: letterTemplateModelLetter text: "Образец письма"}
+UI_COPY {key: letterTemplateNeedsReview text: "⚠ не проверено"}

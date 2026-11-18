@@ -339,6 +339,10 @@ test('DSL writing PlayTest: certified maximum remains pending manual assessment'
   await runExamPlaytest(page, resolve('dsl/exam-web/writing-certified-manual.playtest'));
 });
 
+test('DSL writing PlayTest: letter template panel on linked tasks, invisible on unlinked', async ({ page }) => {
+  await runExamPlaytest(page, resolve('dsl/exam-web/writing-letter-template.playtest'));
+});
+
 for (const paper of ['b1-2017', 'b2-2017', 'b2-2024-06', 'c1-2022-11', 'c1-2024-04']) {
   test(`DSL writing PlayTest: ${paper} official guidance in sets I and III`, async ({ page }) => {
     await runExamPlaytest(page, resolve(`dsl/exam-web/writing-guidance-${paper}.playtest`));

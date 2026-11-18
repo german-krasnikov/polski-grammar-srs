@@ -654,3 +654,33 @@ UI_COPY_CASE {
   enRu: "Fill in"
   placeholders: ""
 }
+UI_COPY_CASE {
+  key: letterTemplateToggle
+  plRu: "Шаблон"
+  enRu: Template
+  placeholders: ""
+}
+UI_COPY_CASE {
+  key: letterTemplatePicker
+  plRu: "Тип письма:"
+  enRu: "Letter type:"
+  placeholders: ""
+}
+UI_COPY_CASE {
+  key: letterTemplateMistakes
+  plRu: "Типичные ошибки"
+  enRu: "Common mistakes"
+  placeholders: ""
+}
+UI_COPY_CASE {
+  key: letterTemplateModelLetter
+  plRu: "Образец письма"
+  enRu: "Model letter"
+  placeholders: ""
+}
+UI_COPY_CASE {
+  key: letterTemplateNeedsReview
+  plRu: "⚠ не проверено"
+  enRu: "⚠ unverified"
+  placeholders: ""
+}

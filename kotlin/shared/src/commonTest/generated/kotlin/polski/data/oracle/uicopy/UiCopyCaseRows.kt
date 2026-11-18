@@ -1147,4 +1147,14 @@ val UI_COPY_CASE_ROW_ROWS: List<UiCopyCaseRow> = listOf(
     ),
     UiCopyCaseRow(key = "loading", plRu = "Загружаем…", enRu = "Loading…", placeholders = ""),
     UiCopyCaseRow(key = "clozeTab", plRu = "Подстановка", enRu = "Fill in", placeholders = ""),
+    UiCopyCaseRow(key = "letterTemplateToggle", plRu = "Шаблон", enRu = "Template", placeholders = ""),
+    UiCopyCaseRow(key = "letterTemplatePicker", plRu = "Тип письма:", enRu = "Letter type:", placeholders = ""),
+    UiCopyCaseRow(
+        key = "letterTemplateMistakes",
+        plRu = "Типичные ошибки",
+        enRu = "Common mistakes",
+        placeholders = "",
+    ),
+    UiCopyCaseRow(key = "letterTemplateModelLetter", plRu = "Образец письма", enRu = "Model letter", placeholders = ""),
+    UiCopyCaseRow(key = "letterTemplateNeedsReview", plRu = "⚠ не проверено", enRu = "⚠ unverified", placeholders = ""),
 )

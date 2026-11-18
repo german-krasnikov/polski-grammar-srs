@@ -1,5 +1,5 @@
 // Generated from dsl/ui-copy.declare
-// source-sha256=040e43e71d83c1c6cfb62a1d29b345125e8ec8a46d7c772b27d5d1047907597b
+// source-sha256=a8290081bd9bf61b7324ac06f35461382bbe81ad835b546f6e59ac89484e0edf
 // Edit the source, then run biome generate.
 
 // Generated from dsl/ui-copy.declare, checked against courses-biome/pl-ru/uiCopy.core-data and courses-biome/en-ru/uiCopy.core-data.
@@ -166,6 +166,16 @@ object UiCopy {
     val Loading: String get() = text("loading")
 
     val ClozeTab: String get() = text("clozeTab")
+
+    val LetterTemplateToggle: String get() = text("letterTemplateToggle")
+
+    val LetterTemplatePicker: String get() = text("letterTemplatePicker")
+
+    val LetterTemplateMistakes: String get() = text("letterTemplateMistakes")
+
+    val LetterTemplateModelLetter: String get() = text("letterTemplateModelLetter")
+
+    val LetterTemplateNeedsReview: String get() = text("letterTemplateNeedsReview")
 
     fun languageName(code: String): String = text("lang.$code")
 
