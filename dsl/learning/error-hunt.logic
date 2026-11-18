@@ -1,0 +1,21 @@
+# ErrorHunt tap-word reducer decisions (TrainingStore/ErrorHuntGenerator consumers).
+# tapIsError, distractorEqualsCorrect, distractorInAccepted are native boolean facts.
+# missCount is accumulated natively; 2-miss reveal threshold is encoded here.
+DECISION tapOutcome DEFAULT miss
+  hit AT 10 WHEN hunt.tapIsError -> hit
+END
+
+DECISION shouldReveal DEFAULT hidden
+  revealedAfterMisses AT 10 WHEN hunt.missCount >= 2 AND NOT hunt.found -> revealed
+  revealedFoundByUser AT 20 WHEN hunt.found -> revealed
+END
+
+DECISION scoreClass DEFAULT wrong_form
+  perfect AT 10 WHEN hunt.found AND hunt.missCount == 0 AND hunt.answerCorrect -> perfect
+  foundLate AT 20 WHEN hunt.found AND hunt.missCount > 0 AND hunt.answerCorrect -> found_late
+  revealedCorrect AT 30 WHEN NOT hunt.found AND hunt.answerCorrect -> revealed_correct
+END
+
+DECISION distractorValid DEFAULT invalid
+  valid AT 10 WHEN NOT hunt.distractorEqualsCorrect AND NOT hunt.distractorInAccepted -> valid
+END

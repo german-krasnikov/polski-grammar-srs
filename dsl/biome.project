@@ -139,6 +139,9 @@ GENERATE learning-tile-scaffolding-outcomes data --contract tile-scaffolding-out
 GENERATE learning-tile-scaffolding-examples logic examples --source {dir}/learning/tile-scaffolding.examples --logic {dir}/learning/tile-scaffolding.logic --contract {dir}/learning/tile-scaffolding.contract --out {dir}/learning/generated/tile-scaffolding-examples.json
 GENERATE learning-daily-step logic generate --source {dir}/learning/daily-step.logic --contract {dir}/learning/daily-step.contract --target "kt {dir}/../kotlin/shared/src/commonMain/generated/kotlin/polski/presentation/dailysteppolicy/DailyStepPolicy.kt AS polski.presentation.dailysteppolicy"
 GENERATE learning-daily-step-examples logic examples --source {dir}/learning/daily-step.examples --logic {dir}/learning/daily-step.logic --contract {dir}/learning/daily-step.contract --out {dir}/learning/generated/daily-step-examples.json
+GENERATE learning-error-hunt logic generate --source {dir}/learning/error-hunt.logic --contract {dir}/learning/error-hunt.contract --target "kt {dir}/../kotlin/shared/src/commonMain/generated/kotlin/polski/cloze/policy/ErrorHuntPolicy.kt AS polski.cloze.policy"
+GENERATE learning-error-hunt-examples logic examples --source {dir}/learning/error-hunt.examples --logic {dir}/learning/error-hunt.logic --contract {dir}/learning/error-hunt.contract --out {dir}/learning/generated/error-hunt-examples.json
+GENERATE learning-error-hunt-test derive {dir}/derive-logic-examples-test.mjs errorHunt OUT_ERRORHUNT {dir}/learning/generated/error-hunt-examples.json
 # COMPOSE_HOST pilot slice (Plans/DSL-CONSTRUCT-PLAN.md §2): the AppearanceSettings FEATURE (mvp) and its
 # Compose glue, shared by composeApp's Android and Desktop (JVM) targets only — the generated kt code
 # imports java.io.Closeable, unavailable on composeApp's js/wasmJs targets, so it lives in a plain
