@@ -1,5 +1,5 @@
 // Generated from dsl/ui-copy.declare
-// source-sha256=21ffcbf6106af82aa73ebf294eaa9314586a179bc3e8a3f29a15b4fceec52ccb
+// source-sha256=040e43e71d83c1c6cfb62a1d29b345125e8ec8a46d7c772b27d5d1047907597b
 // Edit the source, then run biome generate.
 
 // Generated from dsl/ui-copy.declare, checked against courses-biome/pl-ru/uiCopy.core-data and courses-biome/en-ru/uiCopy.core-data.
@@ -148,6 +148,24 @@ object UiCopy {
     val ErrorHuntFound: String get() = text("errorHuntFound")
 
     val ErrorHuntSummary: String get() = text("errorHuntSummary")
+
+    val ErrorHuntNoTasks: String get() = text("errorHuntNoTasks")
+
+    val ErrorHuntRestart: String get() = text("errorHuntRestart")
+
+    val ErrorHuntScorePerfect: String get() = text("errorHuntScorePerfect")
+
+    val ErrorHuntScoreFoundLate: String get() = text("errorHuntScoreFoundLate")
+
+    val ErrorHuntScoreRevealedCorrect: String get() = text("errorHuntScoreRevealedCorrect")
+
+    val ErrorHuntScoreWrongForm: String get() = text("errorHuntScoreWrongForm")
+
+    val ErrorHuntCorrectAnswer: String get() = text("errorHuntCorrectAnswer")
+
+    val Loading: String get() = text("loading")
+
+    val ClozeTab: String get() = text("clozeTab")
 
     fun languageName(code: String): String = text("lang.$code")
 

@@ -273,3 +273,11 @@ UI_COPY {key: errorHuntPrompt text: "Нажми на ошибочное слов
 UI_COPY {key: errorHuntWordCorrect text: "Это слово верное"}
 UI_COPY {key: errorHuntFound text: "Ошибка найдена"}
 UI_COPY {key: errorHuntSummary text: "Результат"}
+UI_COPY {key: errorHuntNoTasks text: "Нет доступных заданий."}
+UI_COPY {key: errorHuntRestart text: "Заново"}
+UI_COPY {key: errorHuntScorePerfect text: "Всё верно с первого раза"}
+UI_COPY {key: errorHuntScoreFoundLate text: "Найдено не с первого раза"}
+UI_COPY {key: errorHuntScoreRevealedCorrect text: "Правильный ответ показан"}
+UI_COPY {key: errorHuntScoreWrongForm text: "Неверная форма"}
+UI_COPY {key: errorHuntCorrectAnswer text: "правильный ответ"}
+UI_COPY {key: clozeTab text: "Подстановка"}

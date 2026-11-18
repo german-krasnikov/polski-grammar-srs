@@ -1113,4 +1113,38 @@ val UI_COPY_CASE_ROW_ROWS: List<UiCopyCaseRow> = listOf(
     ),
     UiCopyCaseRow(key = "errorHuntFound", plRu = "Ошибка найдена", enRu = "Error found", placeholders = ""),
     UiCopyCaseRow(key = "errorHuntSummary", plRu = "Результат", enRu = "Results", placeholders = ""),
+    UiCopyCaseRow(
+        key = "errorHuntNoTasks",
+        plRu = "Нет доступных заданий.",
+        enRu = "No exercises available.",
+        placeholders = "",
+    ),
+    UiCopyCaseRow(key = "errorHuntRestart", plRu = "Заново", enRu = "Restart", placeholders = ""),
+    UiCopyCaseRow(
+        key = "errorHuntScorePerfect",
+        plRu = "Всё верно с первого раза",
+        enRu = "All correct on first try",
+        placeholders = "",
+    ),
+    UiCopyCaseRow(
+        key = "errorHuntScoreFoundLate",
+        plRu = "Найдено не с первого раза",
+        enRu = "Found after wrong taps",
+        placeholders = "",
+    ),
+    UiCopyCaseRow(
+        key = "errorHuntScoreRevealedCorrect",
+        plRu = "Правильный ответ показан",
+        enRu = "Correct answer revealed",
+        placeholders = "",
+    ),
+    UiCopyCaseRow(key = "errorHuntScoreWrongForm", plRu = "Неверная форма", enRu = "Wrong form", placeholders = ""),
+    UiCopyCaseRow(
+        key = "errorHuntCorrectAnswer",
+        plRu = "правильный ответ",
+        enRu = "correct answer",
+        placeholders = "",
+    ),
+    UiCopyCaseRow(key = "loading", plRu = "Загружаем…", enRu = "Loading…", placeholders = ""),
+    UiCopyCaseRow(key = "clozeTab", plRu = "Подстановка", enRu = "Fill in", placeholders = ""),
 )

@@ -69,6 +69,15 @@ CATALOG UiCopy IN polski.presentation
   KEY errorHuntWordCorrect
   KEY errorHuntFound
   KEY errorHuntSummary
+  KEY errorHuntNoTasks
+  KEY errorHuntRestart
+  KEY errorHuntScorePerfect
+  KEY errorHuntScoreFoundLate
+  KEY errorHuntScoreRevealedCorrect
+  KEY errorHuntScoreWrongForm
+  KEY errorHuntCorrectAnswer
+  KEY loading
+  KEY clozeTab
 
   FN languageName "lang.$code" code
   FN languageAdverb "adverb.$code" code

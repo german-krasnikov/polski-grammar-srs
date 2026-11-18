@@ -1050,4 +1050,12 @@ val UI_COPY_ROW_ROWS: List<UiCopyRow> = listOf(
     UiCopyRow(key = "errorHuntWordCorrect", text = "This word is correct"),
     UiCopyRow(key = "errorHuntFound", text = "Error found"),
     UiCopyRow(key = "errorHuntSummary", text = "Results"),
+    UiCopyRow(key = "errorHuntNoTasks", text = "No exercises available."),
+    UiCopyRow(key = "errorHuntRestart", text = "Restart"),
+    UiCopyRow(key = "errorHuntScorePerfect", text = "All correct on first try"),
+    UiCopyRow(key = "errorHuntScoreFoundLate", text = "Found after wrong taps"),
+    UiCopyRow(key = "errorHuntScoreRevealedCorrect", text = "Correct answer revealed"),
+    UiCopyRow(key = "errorHuntScoreWrongForm", text = "Wrong form"),
+    UiCopyRow(key = "errorHuntCorrectAnswer", text = "correct answer"),
+    UiCopyRow(key = "clozeTab", text = "Fill in"),
 )
