@@ -1,0 +1,289 @@
+DSL 1
+LETTER_SECTION {
+  sectionId: complaint-salutation
+  templateRef: complaint
+  order: 1
+  sectionKey: salutation
+  labelNative: "Обращение"
+  noteNative: "После обращения ставь запятую — тогда текст начинается с маленькой буквы («Szanowni Państwo,» → «zwracam się…»). Можно «!» — тогда с большой («Szanowni Państwo!» → «Zwracam się…»). Ошибка — смешивать: «,» + большая или «!» + маленькая. Точку после обращения не ставят. Незнакомому адресату лучше запятая: «!» звучит тревожно."
+}
+LETTER_SECTION {
+  sectionId: complaint-opening
+  templateRef: complaint
+  order: 2
+  sectionKey: opening
+  labelNative: "Вступление: повод жалобы"
+  noteNative: "Сразу назови повод: что, когда, где (дата, номер заказа или договора)."
+}
+LETTER_SECTION {
+  sectionId: complaint-body
+  templateRef: complaint
+  order: 3
+  sectionKey: body
+  labelNative: "Суть: что случилось"
+  noteNative: "Pan/Pani/Państwo, обращённые к адресату, пишут с большой буквы из вежливости («Państwa biuro», «Pana decyzja»). По правилам RJP 2024 это выбор пишущего, не обязанность, — но на экзамене пиши с большой и одинаково во всём письме. Излагай факты по порядку, без эмоций и оскорблений."
+}
+LETTER_SECTION {
+  sectionId: complaint-request
+  templateRef: complaint
+  order: 4
+  sectionKey: request
+  labelNative: "Требование"
+  noteNative: "Чётко скажи, чего ждёшь: возврат денег, замену, извинения, срок ответа."
+}
+LETTER_SECTION {
+  sectionId: complaint-closing
+  templateRef: complaint
+  order: 5
+  sectionKey: closing
+  labelNative: "Завершение"
+  noteNative: "Коротко: ожидание ответа, возможные дальнейшие шаги."
+}
+LETTER_SECTION {
+  sectionId: complaint-signoff
+  templateRef: complaint
+  order: 6
+  sectionKey: signoff
+  labelNative: "Прощальная формула и подпись"
+  noteNative: "Формула — отдельной строкой, с большой буквы, без запятой. Имя и фамилия — на следующей строке, без точки. Для жалобы лучше всего подходит сдержанная «Z poważaniem»."
+}
+LETTER_SECTION {
+  sectionId: request-salutation
+  templateRef: request
+  order: 1
+  sectionKey: salutation
+  labelNative: "Обращение"
+  noteNative: "После обращения ставь запятую — тогда текст начинается с маленькой буквы («Szanowni Państwo,» → «zwracam się…»). Можно «!» — тогда с большой («Szanowni Państwo!» → «Zwracam się…»). Ошибка — смешивать: «,» + большая или «!» + маленькая. Точку после обращения не ставят. Незнакомому адресату лучше запятая: «!» звучит тревожно."
+}
+LETTER_SECTION {
+  sectionId: request-opening
+  templateRef: request
+  order: 2
+  sectionKey: opening
+  labelNative: "Вступление: кто вы и о чём просите"
+  noteNative: "Представься (кого представляешь) и сразу назови просьбу."
+}
+LETTER_SECTION {
+  sectionId: request-body
+  templateRef: request
+  order: 3
+  sectionKey: body
+  labelNative: "Обоснование просьбы"
+  noteNative: "Pan/Pani/Państwo, обращённые к адресату, пишут с большой буквы из вежливости («Państwa biuro», «Pana decyzja»). По правилам RJP 2024 это выбор пишущего, не обязанность, — но на экзамене пиши с большой и одинаково во всём письме. Объясни цель, кому это поможет и сколько нужно."
+}
+LETTER_SECTION {
+  sectionId: request-request
+  templateRef: request
+  order: 4
+  sectionKey: request
+  labelNative: "Просьба"
+  noteNative: "prosić o + винительный падеж: proszę o pomoc, o wsparcie (не «o pomocy»)."
+}
+LETTER_SECTION {
+  sectionId: request-closing
+  templateRef: request
+  order: 5
+  sectionKey: closing
+  labelNative: "Завершение"
+  noteNative: "Благодарность и готовность дать подробности."
+}
+LETTER_SECTION {
+  sectionId: request-signoff
+  templateRef: request
+  order: 6
+  sectionKey: signoff
+  labelNative: "Прощальная формула и подпись"
+  noteNative: "Формула — отдельной строкой, с большой буквы, без запятой. Имя и фамилия — на следующей строке, без точки. В просьбе лучше «Z wyrazami szacunku»: она теплее, чем «Z poważaniem»."
+}
+LETTER_SECTION {
+  sectionId: inquiry-salutation
+  templateRef: inquiry
+  order: 1
+  sectionKey: salutation
+  labelNative: "Обращение"
+  noteNative: "После обращения ставь запятую — тогда текст начинается с маленькой буквы («Szanowni Państwo,» → «zwracam się…»). Можно «!» — тогда с большой («Szanowni Państwo!» → «Zwracam się…»). Ошибка — смешивать: «,» + большая или «!» + маленькая. Точку после обращения не ставят. Незнакомому адресату лучше запятая: «!» звучит тревожно."
+}
+LETTER_SECTION {
+  sectionId: inquiry-opening
+  templateRef: inquiry
+  order: 2
+  sectionKey: opening
+  labelNative: "Вступление: о чём спрашиваете"
+  noteNative: "Назови предмет запроса и откуда узнал(а) о предложении."
+}
+LETTER_SECTION {
+  sectionId: inquiry-body
+  templateRef: inquiry
+  order: 3
+  sectionKey: body
+  labelNative: "Вопросы"
+  noteNative: "Pan/Pani/Państwo, обращённые к адресату, пишут с большой буквы из вежливости («Państwa biuro», «Pana decyzja»). По правилам RJP 2024 это выбор пишущего, не обязанность, — но на экзамене пиши с большой и одинаково во всём письме. Задавай вопросы по одному; да/нет-вопрос начинай с «Czy»."
+}
+LETTER_SECTION {
+  sectionId: inquiry-request
+  templateRef: inquiry
+  order: 4
+  sectionKey: request
+  labelNative: "Просьба об информации"
+  noteNative: "Попроси прислать то, что нужно: предложение, прайс, расписание."
+}
+LETTER_SECTION {
+  sectionId: inquiry-closing
+  templateRef: inquiry
+  order: 5
+  sectionKey: closing
+  labelNative: "Завершение"
+  noteNative: "Поблагодари и укажи, как с тобой связаться."
+}
+LETTER_SECTION {
+  sectionId: inquiry-signoff
+  templateRef: inquiry
+  order: 6
+  sectionKey: signoff
+  labelNative: "Прощальная формула и подпись"
+  noteNative: "Формула — отдельной строкой, с большой буквы, без запятой. Имя и фамилия — на следующей строке, без точки."
+}
+LETTER_SECTION {
+  sectionId: formal-email-salutation
+  templateRef: formal-email
+  order: 1
+  sectionKey: salutation
+  labelNative: "Обращение"
+  noteNative: "В официальном e-mailе — те же формулы, что в письме: «Szanowna Pani,», «Szanowni Państwo,». «Dzień dobry,» — полуофициально, для знакомого адресата. «Witam» не используй. После «,» — маленькая буква, после «!» — большая; точку не ставят."
+}
+LETTER_SECTION {
+  sectionId: formal-email-opening
+  templateRef: formal-email
+  order: 2
+  sectionKey: opening
+  labelNative: "Вступление: цель письма"
+  noteNative: "Строка «Temat:» — коротко и по делу («Prośba o zmianę terminu egzaminu»). Первое предложение — зачем пишешь."
+}
+LETTER_SECTION {
+  sectionId: formal-email-body
+  templateRef: formal-email
+  order: 3
+  sectionKey: body
+  labelNative: "Детали"
+  noteNative: "Pan/Pani/Państwo, обращённые к адресату, пишут с большой буквы из вежливости («Państwa biuro», «Pana decyzja»). По правилам RJP 2024 это выбор пишущего, не обязанность, — но на экзамене пиши с большой и одинаково во всём письме. E-mail короче письма: 3–4 коротких абзаца, без адресов и даты в шапке."
+}
+LETTER_SECTION {
+  sectionId: formal-email-request
+  templateRef: formal-email
+  order: 4
+  sectionKey: request
+  labelNative: "Просьба"
+  noteNative: "Одна чёткая просьба; при необходимости — попроси подтвердить получение."
+}
+LETTER_SECTION {
+  sectionId: formal-email-closing
+  templateRef: formal-email
+  order: 5
+  sectionKey: closing
+  labelNative: "Завершение"
+  noteNative: "Поблагодари; при нужде извинись за беспокойство."
+}
+LETTER_SECTION {
+  sectionId: formal-email-signoff
+  templateRef: formal-email
+  order: 6
+  sectionKey: signoff
+  labelNative: "Прощальная формула и подпись"
+  noteNative: "Как в письме: «Z poważaniem» или «Z wyrazami szacunku». «Pozdrawiam» — только неофициально или полуофициально (знакомому коллеге). Имя и фамилия — новой строкой без запятой; запятая допустима лишь в одну строку («Pozdrawiam, Jan Kowalski»)."
+}
+LETTER_SECTION {
+  sectionId: informal-email-salutation
+  templateRef: informal-email
+  order: 1
+  sectionKey: salutation
+  labelNative: "Обращение"
+  noteNative: "Другу: «Cześć, Aniu!», «Droga Aniu,». Обращение отделяется запятой: «Cześć, Aniu!». Имя лучше в звательном падеже (Aniu, Marku, Piotrze); «Ania» — разговорный вариант. После «!» — с большой буквы, после «,» — с маленькой; точку не ставят."
+}
+LETTER_SECTION {
+  sectionId: informal-email-opening
+  templateRef: informal-email
+  order: 2
+  sectionKey: opening
+  labelNative: "Начало: реакция и новость"
+  noteNative: "Ty/Ciebie/Ci в письме можно писать с большой буквы из вежливости — по желанию."
+}
+LETTER_SECTION {
+  sectionId: informal-email-body
+  templateRef: informal-email
+  order: 3
+  sectionKey: body
+  labelNative: "Рассказ"
+  noteNative: "Живо и с деталями: что было, что чувствуешь. Разговорные связки — уместны."
+}
+LETTER_SECTION {
+  sectionId: informal-email-request
+  templateRef: informal-email
+  order: 4
+  sectionKey: request
+  labelNative: "Вопросы и предложения другу"
+  noteNative: "Спроси о новостях друга, предложи встречу — так письмо звучит естественно."
+}
+LETTER_SECTION {
+  sectionId: informal-email-closing
+  templateRef: informal-email
+  order: 5
+  sectionKey: closing
+  labelNative: "Завершение"
+  noteNative: "Короткая фраза перед прощанием."
+}
+LETTER_SECTION {
+  sectionId: informal-email-signoff
+  templateRef: informal-email
+  order: 6
+  sectionKey: signoff
+  labelNative: "Прощание и подпись"
+  noteNative: "Без запятой после формулы; имя — новой строкой, без точки. «Z poważaniem» другу — слишком холодно."
+}
+LETTER_SECTION {
+  sectionId: application-salutation
+  templateRef: application
+  order: 1
+  sectionKey: salutation
+  labelNative: "Обращение"
+  noteNative: "После обращения ставь запятую — тогда текст начинается с маленькой буквы («Szanowni Państwo,» → «zwracam się…»). Можно «!» — тогда с большой («Szanowni Państwo!» → «Zwracam się…»). Ошибка — смешивать: «,» + большая или «!» + маленькая. Точку после обращения не ставят. Незнакомому адресату лучше запятая: «!» звучит тревожно. В подании (podanie) обращение часто опускают: сверху место и дата, данные отправителя, адресат, затем сразу «Uprzejmie proszę…»."
+}
+LETTER_SECTION {
+  sectionId: application-opening
+  templateRef: application
+  order: 2
+  sectionKey: opening
+  labelNative: "Вступление: на что претендуете"
+  noteNative: "Укажи, откуда узнал(а) о вакансии и на какую должность претендуешь. В подании — сразу суть просьбы."
+}
+LETTER_SECTION {
+  sectionId: application-body
+  templateRef: application
+  order: 3
+  sectionKey: body
+  labelNative: "Опыт и качества"
+  noteNative: "Pan/Pani/Państwo, обращённые к адресату, пишут с большой буквы из вежливости («Państwa biuro», «Pana decyzja»). По правилам RJP 2024 это выбор пишущего, не обязанность, — но на экзамене пиши с большой и одинаково во всём письме. Свяжи свой опыт и качества с требованиями объявления."
+}
+LETTER_SECTION {
+  sectionId: application-request
+  templateRef: application
+  order: 4
+  sectionKey: request
+  labelNative: "Просьба о рассмотрении"
+  noteNative: "Попроси рассмотреть кандидатуру или просьбу; предложи встречу."
+}
+LETTER_SECTION {
+  sectionId: application-closing
+  templateRef: application
+  order: 5
+  sectionKey: closing
+  labelNative: "Завершение"
+  noteNative: "Вежливо и уверенно, без лишней скромности."
+}
+LETTER_SECTION {
+  sectionId: application-signoff
+  templateRef: application
+  order: 6
+  sectionKey: signoff
+  labelNative: "Прощальная формула и подпись"
+  noteNative: "Формула — отдельной строкой, с большой буквы, без запятой. Имя и фамилия — на следующей строке, без точки."
+}

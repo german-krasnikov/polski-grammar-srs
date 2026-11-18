@@ -1,0 +1,96 @@
+DSL 1
+LETTER_TASK_LINK {
+  linkId: b1-2019-writing-i-b-informal-email
+  taskRef: B1-2019-writing-I-b
+  templateRef: informal-email
+}
+LETTER_TASK_LINK {
+  linkId: b1-2019-writing-ii-a-informal-email
+  taskRef: B1-2019-writing-II-a
+  templateRef: informal-email
+}
+LETTER_TASK_LINK {
+  linkId: b2-2017-writing-ii-1-informal-email
+  taskRef: certyfikat-polski-B2-2017-writing-II-1
+  templateRef: informal-email
+}
+LETTER_TASK_LINK {
+  linkId: b2-2019-writing-1a-application
+  taskRef: B2-2019-writing-1a
+  templateRef: application
+}
+LETTER_TASK_LINK {
+  linkId: b2-2019-writing-3a-application
+  taskRef: B2-2019-writing-3a
+  templateRef: application
+}
+LETTER_TASK_LINK {
+  linkId: b2-2019-writing-3a-request
+  taskRef: B2-2019-writing-3a
+  templateRef: request
+}
+LETTER_TASK_LINK {
+  linkId: b2-2020-writing-i-1-informal-email
+  taskRef: certyfikat-polski-B2-2020-writing-I-1
+  templateRef: informal-email
+}
+LETTER_TASK_LINK {
+  linkId: b2-2020-writing-ii-1-application
+  taskRef: certyfikat-polski-B2-2020-writing-II-1
+  templateRef: application
+}
+LETTER_TASK_LINK {
+  linkId: b2-2022-02-write-ii-b-request
+  taskRef: certyfikat-polski-B2-2022-02-write-ii-b
+  templateRef: request
+}
+LETTER_TASK_LINK {
+  linkId: b2-2023-02-write-ii-a-application
+  taskRef: certyfikat-polski-B2-2023-02-write-ii-a
+  templateRef: application
+}
+LETTER_TASK_LINK {
+  linkId: b2-2023-06-write-i-a-informal-email
+  taskRef: certyfikat-polski-B2-2023-06-write-i-a
+  templateRef: informal-email
+}
+LETTER_TASK_LINK {
+  linkId: b2-2024-02-write-i-a-informal-email
+  taskRef: certyfikat-polski-B2-2024-02-write-i-a
+  templateRef: informal-email
+}
+LETTER_TASK_LINK {
+  linkId: b2-2024-02-write-ii-a-application
+  taskRef: certyfikat-polski-B2-2024-02-write-ii-a
+  templateRef: application
+}
+LETTER_TASK_LINK {
+  linkId: b2-2024-02-write-ii-b-complaint
+  taskRef: certyfikat-polski-B2-2024-02-write-ii-b
+  templateRef: complaint
+}
+LETTER_TASK_LINK {
+  linkId: b2-2024-06-write-ii-b-informal-email
+  taskRef: certyfikat-polski-B2-2024-06-write-ii-b
+  templateRef: informal-email
+}
+LETTER_TASK_LINK {
+  linkId: c1-2022-03-write-i-a-request
+  taskRef: certyfikat-polski-C1-2022-03-write-i-a
+  templateRef: request
+}
+LETTER_TASK_LINK {
+  linkId: c1-2023-04-write-ii-a-complaint
+  taskRef: certyfikat-polski-C1-2023-04-write-ii-a
+  templateRef: complaint
+}
+LETTER_TASK_LINK {
+  linkId: c1-2023-04-write-ii-a-formal-email
+  taskRef: certyfikat-polski-C1-2023-04-write-ii-a
+  templateRef: formal-email
+}
+LETTER_TASK_LINK {
+  linkId: c1-2023-11-write-ii-b-request
+  taskRef: certyfikat-polski-C1-2023-11-write-ii-b
+  templateRef: request
+}

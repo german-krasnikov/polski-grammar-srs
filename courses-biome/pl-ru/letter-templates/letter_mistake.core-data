@@ -1,0 +1,244 @@
+DSL 1
+LETTER_MISTAKE {
+  mistakeId: complaint-mistake-1
+  templateRef: complaint
+  wrongForm: "Z pozawaniem"
+  correctForm: "Z poważaniem"
+  ruleNative: "Слово «poważanie» (уважение) пишется через «ż»: powa-ż-anie. Варианты «pozawaniem», «powazaniem» — ошибки."
+  sourceNote: "https://sjp.pwn.pl/slowniki/powa%C5%BCanie.html — słownik PWN: poważanie «szacunek, uznanie»; https://rjp.pan.pl/app/uploads/2026/02/2_zalacznik-do-komunikatu-Zasady-pisowni-07-10-2024.pdf (11.3, п. 6, с. 61) — образец «Z poważaniem»."
+  verificationStatus: verified
+}
+LETTER_MISTAKE {
+  mistakeId: complaint-mistake-2
+  templateRef: complaint
+  wrongForm: "Z poważaniem,"
+  correctForm: "Z poważaniem"
+  ruleNative: "После прощальной формулы запятую по польской традиции не ставят; имя и фамилия — с новой строки. Запятая — привычка из английского. Строго говоря, это не пунктуационная ошибка, а нарушение конвенции, но на экзамене пиши без запятой."
+  sourceNote: "https://sjp.pwn.pl/poradnia/haslo/z-powazaniem;8312.html — Bańko: «zwyczaj każe przecinka tu nie umieszczać»; https://sjp.pwn.pl/poradnia/haslo/szanowna-pani;2190.html — Marcjanik: без знака; https://sjp.pwn.pl/poradnia/haslo/z-powazaniem;14005.html — Bańko: не ошибка в строгом смысле, но правила построения текста велят не ставить знак."
+  verificationStatus: verified
+}
+LETTER_MISTAKE {
+  mistakeId: complaint-mistake-3
+  templateRef: complaint
+  wrongForm: "Buziaki / Cześć (в конце официального письма)"
+  correctForm: "Z poważaniem"
+  ruleNative: "В официальном письме — только официальные формулы: «Z poważaniem», «Z wyrazami szacunku». «Buziaki», «Cześć» — разговорные, для друзей."
+  sourceNote: "https://sjp.pwn.pl/poradnia/haslo/pozdrawiam-na-koncu-korespondencji-mailowej;23538.html — Wolański: в официальной переписке — «Z poważaniem»/«Z wyrazami szacunku»; https://sjp.pwn.pl/slowniki/buziak.html — słownik PWN: buziak — pot. «pocałunek»."
+  verificationStatus: verified
+}
+LETTER_MISTAKE {
+  mistakeId: complaint-mistake-4
+  templateRef: complaint
+  wrongForm: "Szanowny Pani,"
+  correctForm: "Szanowna Pani,"
+  ruleNative: "Прилагательное согласуется с родом: Szanowny Panie (м.), Szanowna Pani (ж.), Szanowni Państwo (группа/неизвестный адресат)."
+  sourceNote: "https://rjp.pan.pl/app/uploads/2026/02/2_zalacznik-do-komunikatu-Zasady-pisowni-07-10-2024.pdf (15, п. 2c, с. 72) — образцы «Szanowna Pani», «Szanowni Państwo»; https://rjp.pan.pl/app/uploads/2026/02/2_zalacznik-do-komunikatu-Zasady-pisowni-07-10-2024.pdf (8.1.3, с. 49) — «Szanowny Panie»; https://sjp.pwn.pl/poradnia/haslo/szanowna-pani;19403.html."
+  verificationStatus: verified
+}
+LETTER_MISTAKE {
+  mistakeId: complaint-mistake-5
+  templateRef: complaint
+  wrongForm: "Szanowny Panie Kowalski,"
+  correctForm: "Szanowny Panie,"
+  ruleNative: "По фамилии в польском не обращаются ни устно, ни письменно. Пиши «Szanowny Panie» или с должностью: «Szanowny Panie Dyrektorze»."
+  sourceNote: "https://sjp.pwn.pl/poradnia/haslo/szanowny-panie-kowalski;12364.html — Marcjanik: обращение с фамилией неуместно; в письме «Szanowny Panie» (всегда без фамилии)."
+  verificationStatus: verified
+}
+LETTER_MISTAKE {
+  mistakeId: request-mistake-1
+  templateRef: request
+  wrongForm: "Proszę o pomocy"
+  correctForm: "Proszę o pomoc"
+  ruleNative: "После «prosić o» — винительный падеж (o pomoc, o wsparcie, o informację). «O pomocy» — калька с русского «о помощи» (предложный)."
+  sourceNote: "https://wsjp.pl/haslo/podglad/7501/prosic/4598076 — WSJP: prosić o CO; пример «prosić o pomoc»."
+  verificationStatus: verified
+}
+LETTER_MISTAKE {
+  mistakeId: request-mistake-2
+  templateRef: request
+  wrongForm: "Proszę Was o wsparcie (к учреждению или директору)"
+  correctForm: "Proszę Państwa o wsparcie / Proszę Pana o wsparcie"
+  ruleNative: "Вежливое «вы» в польском — Pan/Pani/Państwo с глаголом в 3-м лице. «Wy/Was» звучит фамильярно — калька с русского «Вы»."
+  sourceNote: "https://sjp.pwn.pl/poradnia/haslo/szanowni-panstwo;21447.html — Kłosińska: к учреждению — «Szanowni Państwo»; https://sjp.pwn.pl/poradnia/haslo/szanowny-panie-kowalski;12364.html — Marcjanik: в отношениях «на pan – pani» — proszę pana/pani. Прямого запрета формы «Wy» в источниках не найдено."
+  verificationStatus: needs_review
+}
+LETTER_MISTAKE {
+  mistakeId: request-mistake-3
+  templateRef: request
+  wrongForm: "Szanowna Pani Dyrektorze,"
+  correctForm: "Szanowna Pani Dyrektor,"
+  ruleNative: "О женщине «dyrektor» — несклоняемое существительное женского рода: Pani Dyrektor. «Dyrektorze» — звательный падеж мужского рода."
+  sourceNote: "https://sjp.pwn.pl/poradnia/haslo/jak-pisac-do-pani-dyrektor;18651.html — Kłosińska: «Nie ma powodu, by zmieniać płeć pani Annie Kowalskiej»."
+  verificationStatus: verified
+}
+LETTER_MISTAKE {
+  mistakeId: request-mistake-4
+  templateRef: request
+  wrongForm: "Szanowni Państwo."
+  correctForm: "Szanowni Państwo,"
+  ruleNative: "Точку после обращения не ставят никогда — только запятую (дальше маленькая буква) или «!» (дальше большая)."
+  sourceNote: "https://sjp.pwn.pl/poradnia/haslo/szanowni-panstwo;7616.html — Bańko: «Kropki po formule adresatywnej w ogóle nie stawiamy»; https://sjp.pwn.pl/poradnia/haslo/co-po-szanowni-panstwo;18610.html — Kłosińska: «Kropki nie stawiamy»."
+  verificationStatus: verified
+}
+LETTER_MISTAKE {
+  mistakeId: request-mistake-5
+  templateRef: request
+  wrongForm: "Szanowny Panie, (к директору или доктору)"
+  correctForm: "Szanowny Panie Dyrektorze, / Szanowny Panie Doktorze,"
+  ruleNative: "Если у адресата есть должность или учёная степень, обращайся по ней: просто «Szanowny Panie» — менее вежливо: принято обращаться по должности."
+  sourceNote: "https://sjp.pwn.pl/poradnia/haslo/szanowny-panie-doktorze;14979.html — Bańko; https://sjp.pwn.pl/poradnia/haslo/szanowny-panie-doktorze;20021.html — Kłosińska: «Szanowny Panie» может казаться умаляющим для людей с титулом или должностью."
+  verificationStatus: verified
+}
+LETTER_MISTAKE {
+  mistakeId: inquiry-mistake-1
+  templateRef: inquiry
+  wrongForm: "odnośnie kursu"
+  correctForm: "odnośnie do kursu / w sprawie kursu"
+  ruleNative: "Правильно «odnośnie do czegoś» (odnosić się do czegoś). Без «do» — ошибка. Проще: «w sprawie kursu»."
+  sourceNote: "https://sjp.pwn.pl/poradnia/haslo/odnosnie-do;20994.html — Kłosińska: poprawna konstrukcja to «odnośnie do czegoś»."
+  verificationStatus: verified
+}
+LETTER_MISTAKE {
+  mistakeId: inquiry-mistake-2
+  templateRef: inquiry
+  wrongForm: "Piszę w temacie kursu"
+  correctForm: "Piszę w sprawie kursu / Piszę na temat kursu"
+  ruleNative: "«W temacie» — неудачная конструкция (PWN). Используй «w sprawie» или «na temat»."
+  sourceNote: "https://sjp.pwn.pl/poradnia/haslo/w-tym-temacie;15018.html — Bańko: «w tym temacie» — «konstrukcja naganna»; вместо неё «na ten temat», «w tym zakresie»."
+  verificationStatus: verified
+}
+LETTER_MISTAKE {
+  mistakeId: inquiry-mistake-3
+  templateRef: inquiry
+  wrongForm: "Uważany Panie,"
+  correctForm: "Szanowny Panie,"
+  ruleNative: "Калька с русского «Уважаемый». Польское «uważany» значит «считающийся» (uważać — быть мнения, обращать внимание). «Уважаемый» = szanowny."
+  sourceNote: "https://sjp.pwn.pl/slowniki/uwa%C5%BCany.html — słownik PWN: у uważać нет значения «уважать»; https://sjp.pwn.pl/slowniki/szanowny.html — szanowny «godny szacunku»."
+  verificationStatus: verified
+}
+LETTER_MISTAKE {
+  mistakeId: inquiry-mistake-4
+  templateRef: inquiry
+  wrongForm: "Chciałbym się zapytać…"
+  correctForm: "Chciałbym zapytać…"
+  ruleNative: "«Się» при «pytać/zapytać» — регионализм (так в источнике PWN), в официальном письме неуместен. Пиши без «się»."
+  sourceNote: "https://sjp.pwn.pl/poradnia/haslo/chcialem-sie-zapytac;1367.html — Bralczyk: «się» в «chcę się zapytać» uznawane za regionalizm."
+  verificationStatus: verified
+}
+LETTER_MISTAKE {
+  mistakeId: formal-email-mistake-1
+  templateRef: formal-email
+  wrongForm: "Witam,"
+  correctForm: "Szanowna Pani, / Szanowni Państwo,"
+  ruleNative: "«Witam» в начале официального письма считается неуместным (не грамматической ошибкой): так «приветствует» хозяин, это ставит автора выше адресата."
+  sourceNote: "https://sjp.pwn.pl/poradnia/haslo/witam;21126.html — Marcjanik: «Witam» niestosowne (nie niepoprawne); https://sjp.pwn.pl/poradnia/haslo/witam;23556.html — Wolański: критика касается официальных ситуаций."
+  verificationStatus: verified
+}
+LETTER_MISTAKE {
+  mistakeId: formal-email-mistake-2
+  templateRef: formal-email
+  wrongForm: "Pozdrawiam (директору, преподавателю, в учреждение)"
+  correctForm: "Z poważaniem / Z wyrazami szacunku"
+  ruleNative: "«Pozdrawiam» уместно только в неофициальной и полуофициальной переписке. Тому, кто выше по статусу, и в официальном письме — «Z poważaniem» или «Z wyrazami szacunku»."
+  sourceNote: "https://sjp.pwn.pl/poradnia/haslo/pozdrawiam-na-koncu-korespondencji-mailowej;23538.html — Wolański (2024)."
+  verificationStatus: verified
+}
+LETTER_MISTAKE {
+  mistakeId: formal-email-mistake-3
+  templateRef: formal-email
+  wrongForm: "Dzień dobry Panie Adamie,"
+  correctForm: "Dzień dobry, Panie Adamie,"
+  ruleNative: "Обращение в звательном падеже отделяется запятой. Но «Dzień dobry Panu,» — без запятой: Panu — дательный падеж, не обращение."
+  sourceNote: "https://sjp.pwn.pl/poradnia/haslo/interpunkcja-formul-powitalnych-we-wspolczesnej-korespondencji;23043.html — Wolański: «Dzień dobry, Panie Adamie,», но «Dzień dobry Panu,»."
+  verificationStatus: verified
+}
+LETTER_MISTAKE {
+  mistakeId: formal-email-mistake-4
+  templateRef: formal-email
+  wrongForm: "Szanowny Panie, (к директору или доктору)"
+  correctForm: "Szanowny Panie Dyrektorze, / Szanowny Panie Doktorze,"
+  ruleNative: "Если у адресата есть должность или учёная степень, обращайся по ней: просто «Szanowny Panie» — менее вежливо: принято обращаться по должности."
+  sourceNote: "https://sjp.pwn.pl/poradnia/haslo/szanowny-panie-doktorze;14979.html — Bańko; https://sjp.pwn.pl/poradnia/haslo/szanowny-panie-doktorze;20021.html — Kłosińska: «Szanowny Panie» может казаться умаляющим для людей с титулом или должностью."
+  verificationStatus: verified
+}
+LETTER_MISTAKE {
+  mistakeId: informal-email-mistake-1
+  templateRef: informal-email
+  wrongForm: "Z poważaniem (другу)"
+  correctForm: "Pozdrawiam serdecznie / Ściskam"
+  ruleNative: "«Z poważaniem» — формула максимальной дистанции. В письме другу она звучит холодно или иронично."
+  sourceNote: "https://sjp.pwn.pl/poradnia/haslo/z-powazaniem;9286.html — Marcjanik: «Z poważaniem» — когда не хотят ни капли «утеплить» отношения; https://sjp.pwn.pl/poradnia/haslo/pozdrawiam-na-koncu-korespondencji-mailowej;23538.html — Wolański: «Pozdrawiam» — в неофициальных контактах."
+  verificationStatus: verified
+}
+LETTER_MISTAKE {
+  mistakeId: informal-email-mistake-2
+  templateRef: informal-email
+  wrongForm: "Cześć Aniu!"
+  correctForm: "Cześć, Aniu!"
+  ruleNative: "Обращение (звательный падеж) всегда отделяется запятой, и в заголовке письма тоже."
+  sourceNote: "https://sjp.pwn.pl/poradnia/haslo/wolacz-a-przecinek;15730.html — Bańko: «nagłówki listów nie są wyjątkiem»."
+  verificationStatus: verified
+}
+LETTER_MISTAKE {
+  mistakeId: informal-email-mistake-3
+  templateRef: informal-email
+  wrongForm: "Droga Ania,"
+  correctForm: "Droga Aniu,"
+  ruleNative: "В письме — звательный падеж имени (Aniu, Marku). Именительный в роли обращения допустим только в разговорной норме, не в образцовой."
+  sourceNote: "https://sjp.pwn.pl/poradnia/haslo/wolacz-imion-kobiet-i-mezczyzn;23487.html — Wolański: обе формы допустимы, звательный — для «normy wzorcowej»; https://sjp.pwn.pl/poradnia/haslo/wolacz-a-przecinek;15730.html — образец «Droga Olu»."
+  verificationStatus: verified
+}
+LETTER_MISTAKE {
+  mistakeId: informal-email-mistake-4
+  templateRef: informal-email
+  wrongForm: "Pozdrawiam,\nOla"
+  correctForm: "Pozdrawiam\nOla"
+  ruleNative: "После прощальной формулы запятую не ставят, если имя на следующей строке."
+  sourceNote: "https://sjp.pwn.pl/poradnia/haslo/interpunkcja-zwrotow-adresatywnych-oraz-pozegnalnych;17928.html — Wolański: «po formule pożegnalnej… przecinka się nie stawia»; https://sjp.pwn.pl/poradnia/haslo/pozdrawiam;21391.html — запятая допустима только в одну строку."
+  verificationStatus: verified
+}
+LETTER_MISTAKE {
+  mistakeId: informal-email-mistake-5
+  templateRef: informal-email
+  wrongForm: "Cześć, Aniu."
+  correctForm: "Cześć, Aniu! / Cześć, Aniu,"
+  ruleNative: "После обращения не ставят точку — даже в неформальном письме."
+  sourceNote: "https://sjp.pwn.pl/poradnia/haslo/szanowni-panstwo;7616.html — Bańko: точку не ставят, в том числе после «Cześć, stare rozrabiaki»."
+  verificationStatus: verified
+}
+LETTER_MISTAKE {
+  mistakeId: application-mistake-1
+  templateRef: application
+  wrongForm: "Jestem zainteresowany w tej ofercie"
+  correctForm: "Jestem zainteresowany tą ofertą"
+  ruleNative: "«Zainteresowany czymś» — творительный падеж без предлога. «W + предложный» — калька с русского «заинтересован в»."
+  sourceNote: "ExamBin/pl/B2/2019/arkusz.pdf s. 26 — формулировка задания: «Pan zainteresowany poniższą ofertą pracy» (творительный). Отдельного разбора формы «zainteresowany w» в PWN не найдено."
+  verificationStatus: needs_review
+}
+LETTER_MISTAKE {
+  mistakeId: application-mistake-2
+  templateRef: application
+  wrongForm: "Pracowałem jako opiekunem"
+  correctForm: "Pracowałem jako opiekun"
+  ruleNative: "Предлог «jako» требует именительного падежа: jako opiekun, jako kelner. Русское «работал опекуном» не переносится."
+  sourceNote: "https://sjp.pwn.pl/poradnia/haslo/pracowal-jako-tlumacz;24956.html — Kołodziejek: «Przyimek jako łączy się z rzeczownikiem w mianowniku»."
+  verificationStatus: verified
+}
+LETTER_MISTAKE {
+  mistakeId: application-mistake-3
+  templateRef: application
+  wrongForm: "Pozdrawiam (директору, преподавателю, в учреждение)"
+  correctForm: "Z poważaniem / Z wyrazami szacunku"
+  ruleNative: "«Pozdrawiam» уместно только в неофициальной и полуофициальной переписке. Тому, кто выше по статусу, и в официальном письме — «Z poważaniem» или «Z wyrazami szacunku»."
+  sourceNote: "https://sjp.pwn.pl/poradnia/haslo/pozdrawiam-na-koncu-korespondencji-mailowej;23538.html — Wolański (2024)."
+  verificationStatus: verified
+}
+LETTER_MISTAKE {
+  mistakeId: application-mistake-4
+  templateRef: application
+  wrongForm: "Witam,"
+  correctForm: "Szanowna Pani, / Szanowni Państwo,"
+  ruleNative: "«Witam» в начале официального письма считается неуместным (не грамматической ошибкой): так «приветствует» хозяин, это ставит автора выше адресата."
+  sourceNote: "https://sjp.pwn.pl/poradnia/haslo/witam;21126.html — Marcjanik: «Witam» niestosowne (nie niepoprawne); https://sjp.pwn.pl/poradnia/haslo/witam;23556.html — Wolański: критика касается официальных ситуаций."
+  verificationStatus: verified
+}

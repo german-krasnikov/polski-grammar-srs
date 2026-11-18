@@ -1,0 +1,19 @@
+DSL 1
+LETTER_TEMPLATE {templateId: complaint letterType: complaint register: formal}
+LETTER_TEMPLATE {templateId: request letterType: request register: formal}
+LETTER_TEMPLATE {templateId: inquiry letterType: inquiry register: formal}
+LETTER_TEMPLATE {
+  templateId: formal-email
+  letterType: formal_email
+  register: formal
+}
+LETTER_TEMPLATE {
+  templateId: informal-email
+  letterType: informal_letter
+  register: informal
+}
+LETTER_TEMPLATE {
+  templateId: application
+  letterType: application
+  register: formal
+}

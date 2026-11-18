@@ -1,0 +1,1420 @@
+DSL 1
+LETTER_PHRASE {
+  phraseId: complaint-salutation-1
+  sectionRef: complaint-salutation
+  targetText: "Szanowni Państwo,"
+  nativeNote: "«Уважаемые дамы и господа» — в учреждение, фирму или когда адресат неизвестен."
+  register: formal
+  isPreferred: true
+  sourceNote: "https://sjp.pwn.pl/poradnia/haslo/szanowni-panstwo;21447.html — Kłosińska: в письме в учреждение «Szanowni Państwo» — самая уместная форма; https://sjp.pwn.pl/poradnia/haslo/co-zamiast-szanowni-panstwo;18371.html — в официальном контакте."
+  verificationStatus: verified
+}
+LETTER_PHRASE {
+  phraseId: complaint-salutation-2
+  sectionRef: complaint-salutation
+  targetText: "Szanowna Pani,"
+  nativeNote: "К женщине, официально (имя можно не писать)."
+  register: formal
+  sourceNote: "https://sjp.pwn.pl/poradnia/haslo/szanowna-pani;19403.html — Kłosińska: к незнакомой — «Szanowna Pani», Pani с большой; https://rjp.pan.pl/app/uploads/2026/02/2_zalacznik-do-komunikatu-Zasady-pisowni-07-10-2024.pdf (15, п. 2c, с. 72) — пример «Szanowna Pani,»."
+  verificationStatus: verified
+}
+LETTER_PHRASE {
+  phraseId: complaint-salutation-3
+  sectionRef: complaint-salutation
+  targetText: "Szanowny Panie,"
+  nativeNote: "К мужчине, официально. Фамилию не добавляют."
+  register: formal
+  mistakeNote: "Не «Szanowny Panie Kowalski» и не «Szanowny Pan» (нужен звательный падеж)."
+  sourceNote: "https://sjp.pwn.pl/poradnia/haslo/szanowny-panie-kowalski;12364.html — Marcjanik: в письме «Szanowny Panie» (всегда без фамилии)."
+  verificationStatus: verified
+}
+LETTER_PHRASE {
+  phraseId: complaint-salutation-4
+  sectionRef: complaint-salutation
+  targetText: "Szanowny Panie Dyrektorze,"
+  nativeNote: "К директору-мужчине. Есть должность или титул — используй его."
+  register: formal
+  sourceNote: "https://sjp.pwn.pl/poradnia/haslo/szanowny-panie-doktorze;14979.html — Bańko: если можно обратиться по титулу/должности, лучше так, чем просто «Szanowny Panie»."
+  verificationStatus: verified
+}
+LETTER_PHRASE {
+  phraseId: complaint-salutation-5
+  sectionRef: complaint-salutation
+  targetText: "Szanowna Pani Dyrektor,"
+  nativeNote: "К директору-женщине. «Dyrektor» о женщине не склоняется."
+  register: formal
+  mistakeNote: "Не «Pani Dyrektorze» (мужская форма)."
+  sourceNote: "https://sjp.pwn.pl/poradnia/haslo/jak-pisac-do-pani-dyrektor;18651.html — Kłosińska: dyrektor о женщине — несклоняемое существительное ж. р.; https://sjp.pwn.pl/poradnia/haslo/szanowny-panie-kowalski;12364.html — образец «Pani Kierownik»."
+  verificationStatus: verified
+}
+LETTER_PHRASE {
+  phraseId: complaint-opening-1
+  sectionRef: complaint-opening
+  targetText: "Zwracam się do Państwa ze skargą na…"
+  nativeNote: "«Обращаюсь к вам с жалобой на…» — skarga: жалоба на людей или обслуживание."
+  register: formal
+  isPreferred: true
+  sourceNote: "https://sjp.pwn.pl/slowniki/skarga.html — słownik PWN: skarga «wypowiedź, w której ktoś uskarża się na coś»."
+  verificationStatus: inferred
+}
+LETTER_PHRASE {
+  phraseId: complaint-opening-2
+  sectionRef: complaint-opening
+  targetText: "Składam reklamację dotyczącą…"
+  nativeNote: "«Подаю претензию по…» — reklamacja: претензия к товару или услуге с дефектом."
+  register: formal
+  sourceNote: "https://sjp.pwn.pl/slowniki/reklamacja.html — słownik PWN: reklamacja — обращение к продавцу/исполнителю из-за дефектов товара или услуги."
+  verificationStatus: inferred
+}
+LETTER_PHRASE {
+  phraseId: complaint-opening-3
+  sectionRef: complaint-opening
+  targetText: "Piszę w sprawie wycieczki z dnia 12 maja."
+  nativeNote: "«Пишу по поводу экскурсии от 12 мая» — нейтральное начало."
+  register: formal
+  verificationStatus: inferred
+}
+LETTER_PHRASE {
+  phraseId: complaint-opening-4
+  sectionRef: complaint-opening
+  targetText: "W nawiązaniu do rozmowy telefonicznej z dnia 3 marca…"
+  nativeNote: "«В продолжение телефонного разговора от 3 марта…»"
+  register: formal
+  verificationStatus: inferred
+}
+LETTER_PHRASE {
+  phraseId: complaint-opening-5
+  sectionRef: complaint-opening
+  targetText: "Z przykrością informuję, że…"
+  nativeNote: "«С сожалением сообщаю, что…»"
+  register: formal
+  verificationStatus: inferred
+}
+LETTER_PHRASE {
+  phraseId: complaint-body-1
+  sectionRef: complaint-body
+  targetText: "Program wycieczki nie był zgodny z ofertą."
+  nativeNote: "«Программа не соответствовала предложению»."
+  register: formal
+  isPreferred: true
+  verificationStatus: inferred
+}
+LETTER_PHRASE {
+  phraseId: complaint-body-2
+  sectionRef: complaint-body
+  targetText: "Przewodnik spóźnił się o ponad godzinę."
+  nativeNote: "«Гид опоздал больше чем на час»."
+  register: formal
+  verificationStatus: inferred
+}
+LETTER_PHRASE {
+  phraseId: complaint-body-3
+  sectionRef: complaint-body
+  targetText: "Mimo wielokrotnych próśb nikt nie rozwiązał problemu."
+  nativeNote: "«Несмотря на многократные просьбы, проблему никто не решил»."
+  register: formal
+  verificationStatus: inferred
+}
+LETTER_PHRASE {
+  phraseId: complaint-body-4
+  sectionRef: complaint-body
+  targetText: "Towar okazał się wadliwy."
+  nativeNote: "«Товар оказался бракованным» — для reklamacji."
+  register: formal
+  verificationStatus: inferred
+}
+LETTER_PHRASE {
+  phraseId: complaint-body-5
+  sectionRef: complaint-body
+  targetText: "Usługa nie spełniła moich oczekiwań."
+  nativeNote: "«Услуга не оправдала моих ожиданий»."
+  register: formal
+  verificationStatus: inferred
+}
+LETTER_PHRASE {
+  phraseId: complaint-request-1
+  sectionRef: complaint-request
+  targetText: "Proszę o zwrot części kosztów wycieczki."
+  nativeNote: "«Прошу вернуть часть стоимости». prosić o + винительный падеж."
+  register: formal
+  isPreferred: true
+  sourceNote: "https://wsjp.pl/haslo/podglad/7501/prosic/4598076 — WSJP: prosić o CO."
+  verificationStatus: inferred
+}
+LETTER_PHRASE {
+  phraseId: complaint-request-2
+  sectionRef: complaint-request
+  targetText: "Oczekuję zwrotu pieniędzy w ciągu 14 dni."
+  nativeNote: "«Ожидаю возврата денег в течение 14 дней» (oczekiwać + родительный)."
+  register: formal
+  verificationStatus: inferred
+}
+LETTER_PHRASE {
+  phraseId: complaint-request-3
+  sectionRef: complaint-request
+  targetText: "Proszę o wymianę towaru na nowy."
+  nativeNote: "«Прошу заменить товар на новый»."
+  register: formal
+  verificationStatus: inferred
+}
+LETTER_PHRASE {
+  phraseId: complaint-request-4
+  sectionRef: complaint-request
+  targetText: "Proszę o pisemne wyjaśnienie tej sytuacji."
+  nativeNote: "«Прошу письменно объяснить эту ситуацию»."
+  register: formal
+  verificationStatus: inferred
+}
+LETTER_PHRASE {
+  phraseId: complaint-closing-1
+  sectionRef: complaint-closing
+  targetText: "Liczę na szybką odpowiedź."
+  nativeNote: "«Рассчитываю на быстрый ответ»."
+  register: formal
+  isPreferred: true
+  verificationStatus: inferred
+}
+LETTER_PHRASE {
+  phraseId: complaint-closing-2
+  sectionRef: complaint-closing
+  targetText: "Mam nadzieję, że sprawa zostanie szybko wyjaśniona."
+  nativeNote: "«Надеюсь, что дело быстро прояснится»."
+  register: formal
+  verificationStatus: inferred
+}
+LETTER_PHRASE {
+  phraseId: complaint-closing-3
+  sectionRef: complaint-closing
+  targetText: "W przeciwnym razie skieruję sprawę do rzecznika konsumentów."
+  nativeNote: "«Иначе обращусь к уполномоченному по правам потребителей (rzecznik konsumentów)» — твёрдо, но вежливо."
+  register: formal
+  verificationStatus: inferred
+}
+LETTER_PHRASE {
+  phraseId: complaint-closing-4
+  sectionRef: complaint-closing
+  targetText: "Dziękuję za zajęcie się sprawą."
+  nativeNote: "«Спасибо, что займётесь этим вопросом»."
+  register: formal
+  verificationStatus: inferred
+}
+LETTER_PHRASE {
+  phraseId: complaint-signoff-1
+  sectionRef: complaint-signoff
+  targetText: "Z poważaniem"
+  nativeNote: "«С уважением» — стандарт официального письма. Сдержанная, без «тепла»."
+  register: formal
+  isPreferred: true
+  mistakeNote: "Без запятой, подпись — новой строкой. Пишется через «ż»: poważanie."
+  sourceNote: "https://sjp.pwn.pl/poradnia/haslo/z-powazaniem;9286.html — Marcjanik: формула для случаев, когда не хотят «утеплять» отношения; https://sjp.pwn.pl/poradnia/haslo/z-powazaniem;8312.html — Bańko: запятую не ставят; https://rjp.pan.pl/app/uploads/2026/02/2_zalacznik-do-komunikatu-Zasady-pisowni-07-10-2024.pdf (11.3, п. 6, с. 61) — образец «Z poważaniem / Tomasz Malinowski»."
+  verificationStatus: verified
+}
+LETTER_PHRASE {
+  phraseId: complaint-signoff-2
+  sectionRef: complaint-signoff
+  targetText: "Z wyrazami szacunku"
+  nativeNote: "«С выражением уважения» — официально, но теплее, чем «Z poważaniem»."
+  register: formal
+  mistakeNote: "Без запятой."
+  sourceNote: "https://sjp.pwn.pl/poradnia/haslo/pozdrawiam-na-koncu-korespondencji-mailowej;23538.html — Wolański: в официальной переписке — «Z poważaniem» или «Z wyrazami szacunku»; https://sjp.pwn.pl/poradnia/haslo/szanowny-z-wyrazami-szacunku;14771.html — Bańko: «Z poważaniem» выражает меньше учтивости."
+  verificationStatus: verified
+}
+LETTER_PHRASE {
+  phraseId: complaint-signoff-3
+  sectionRef: complaint-signoff
+  targetText: "Łączę wyrazy szacunku"
+  nativeNote: "«Примите выражения уважения» — официальная формула."
+  register: formal
+  sourceNote: "https://sjp.pwn.pl/poradnia/haslo/szanowna-pani;2190.html — Marcjanik: «Łączę wyrazy szacunku» оставляют без знака препинания; https://rjp.pan.pl/app/uploads/2026/02/2_zalacznik-do-komunikatu-Zasady-pisowni-07-10-2024.pdf (11.3, п. 6, с. 61) — образец."
+  verificationStatus: verified
+}
+LETTER_PHRASE {
+  phraseId: complaint-signoff-4
+  sectionRef: complaint-signoff
+  targetText: "Pozostaję z poważaniem"
+  nativeNote: "«Остаюсь с уважением» — книжный вариант. После глагола «z» маленькая."
+  register: formal
+  sourceNote: "https://sjp.pwn.pl/poradnia/haslo/z-powazaniem;5318.html — Bralczyk: перед «poważaniem» с глаголом (pozostaję, kreślę się) пишем маленькую «z»."
+  verificationStatus: verified
+}
+LETTER_PHRASE {
+  phraseId: request-salutation-1
+  sectionRef: request-salutation
+  targetText: "Szanowny Panie Dyrektorze,"
+  nativeNote: "К директору-мужчине. Есть должность или титул — используй его."
+  register: formal
+  isPreferred: true
+  sourceNote: "https://sjp.pwn.pl/poradnia/haslo/szanowny-panie-doktorze;14979.html — Bańko: если можно обратиться по титулу/должности, лучше так, чем просто «Szanowny Panie»."
+  verificationStatus: verified
+}
+LETTER_PHRASE {
+  phraseId: request-salutation-2
+  sectionRef: request-salutation
+  targetText: "Szanowna Pani Dyrektor,"
+  nativeNote: "К директору-женщине. «Dyrektor» о женщине не склоняется."
+  register: formal
+  mistakeNote: "Не «Pani Dyrektorze» (мужская форма)."
+  sourceNote: "https://sjp.pwn.pl/poradnia/haslo/jak-pisac-do-pani-dyrektor;18651.html — Kłosińska: dyrektor о женщине — несклоняемое существительное ж. р.; https://sjp.pwn.pl/poradnia/haslo/szanowny-panie-kowalski;12364.html — образец «Pani Kierownik»."
+  verificationStatus: verified
+}
+LETTER_PHRASE {
+  phraseId: request-salutation-3
+  sectionRef: request-salutation
+  targetText: "Szanowni Państwo,"
+  nativeNote: "«Уважаемые дамы и господа» — в учреждение, фирму или когда адресат неизвестен."
+  register: formal
+  sourceNote: "https://sjp.pwn.pl/poradnia/haslo/szanowni-panstwo;21447.html — Kłosińska: в письме в учреждение «Szanowni Państwo» — самая уместная форма; https://sjp.pwn.pl/poradnia/haslo/co-zamiast-szanowni-panstwo;18371.html — в официальном контакте."
+  verificationStatus: verified
+}
+LETTER_PHRASE {
+  phraseId: request-salutation-4
+  sectionRef: request-salutation
+  targetText: "Szanowna Pani,"
+  nativeNote: "К женщине, официально (имя можно не писать)."
+  register: formal
+  sourceNote: "https://sjp.pwn.pl/poradnia/haslo/szanowna-pani;19403.html — Kłosińska: к незнакомой — «Szanowna Pani», Pani с большой; https://rjp.pan.pl/app/uploads/2026/02/2_zalacznik-do-komunikatu-Zasady-pisowni-07-10-2024.pdf (15, п. 2c, с. 72) — пример «Szanowna Pani,»."
+  verificationStatus: verified
+}
+LETTER_PHRASE {
+  phraseId: request-salutation-5
+  sectionRef: request-salutation
+  targetText: "Szanowny Panie,"
+  nativeNote: "К мужчине, официально. Фамилию не добавляют."
+  register: formal
+  mistakeNote: "Не «Szanowny Panie Kowalski» и не «Szanowny Pan» (нужен звательный падеж)."
+  sourceNote: "https://sjp.pwn.pl/poradnia/haslo/szanowny-panie-kowalski;12364.html — Marcjanik: в письме «Szanowny Panie» (всегда без фамилии)."
+  verificationStatus: verified
+}
+LETTER_PHRASE {
+  phraseId: request-opening-1
+  sectionRef: request-opening
+  targetText: "Zwracam się do Pana z uprzejmą prośbą o…"
+  nativeNote: "«Обращаюсь к Вам с просьбой о…» — классическая формула официальной просьбы; шаблонна, но корректна."
+  register: formal
+  isPreferred: true
+  sourceNote: "https://sjp.pwn.pl/poradnia/haslo/zwracam-sie-z-uprzejmna-prosba;9189.html — Marcjanik: szablon pism urzędowych; «prośba może być uprzejma»."
+  verificationStatus: verified
+}
+LETTER_PHRASE {
+  phraseId: request-opening-2
+  sectionRef: request-opening
+  targetText: "Uprzejmie proszę o…"
+  nativeNote: "«Вежливо прошу о…» — короче и проще, стандарт официальных писем."
+  register: formal
+  sourceNote: "https://sjp.pwn.pl/zasady/103-19-2-nazwy-osób-do-których-się-zwracamy-w-listach-podaniach;629419.html — Zasady PWN 19.2 [103]: образец «Uprzejmie proszę Pana Dziekana…»."
+  verificationStatus: verified
+}
+LETTER_PHRASE {
+  phraseId: request-opening-3
+  sectionRef: request-opening
+  targetText: "Reprezentuję Fundację „Aktywni Seniorzy”, która…"
+  nativeNote: "«Я представляю фонд…, который…» — кто вы."
+  register: formal
+  verificationStatus: inferred
+}
+LETTER_PHRASE {
+  phraseId: request-opening-4
+  sectionRef: request-opening
+  targetText: "Piszę do Pana w imieniu mieszkańców naszego osiedla."
+  nativeNote: "«Пишу Вам от имени жильцов нашего района»."
+  register: formal
+  verificationStatus: inferred
+}
+LETTER_PHRASE {
+  phraseId: request-opening-5
+  sectionRef: request-opening
+  targetText: "Pozwalam sobie zwrócić się do Pana z prośbą o…"
+  nativeNote: "«Позволю себе обратиться к Вам с просьбой о…» — очень вежливо."
+  register: formal
+  verificationStatus: inferred
+}
+LETTER_PHRASE {
+  phraseId: request-body-1
+  sectionRef: request-body
+  targetText: "Planujemy zorganizować pięciodniowy wyjazd dla naszych podopiecznych."
+  nativeNote: "«Мы планируем организовать пятидневную поездку для наших подопечных»."
+  register: formal
+  isPreferred: true
+  verificationStatus: inferred
+}
+LETTER_PHRASE {
+  phraseId: request-body-2
+  sectionRef: request-body
+  targetText: "Niestety, nasza fundacja nie dysponuje wystarczającymi środkami."
+  nativeNote: "«К сожалению, у фонда нет достаточных средств»."
+  register: formal
+  verificationStatus: inferred
+}
+LETTER_PHRASE {
+  phraseId: request-body-3
+  sectionRef: request-body
+  targetText: "Wiemy, że Pana bank wspiera lokalne inicjatywy społeczne."
+  nativeNote: "«Мы знаем, что Ваш банк поддерживает местные инициативы» — почему именно этот адресат."
+  register: formal
+  verificationStatus: inferred
+}
+LETTER_PHRASE {
+  phraseId: request-body-4
+  sectionRef: request-body
+  targetText: "Koszt całego wyjazdu wynosi około 20 000 złotych."
+  nativeNote: "«Стоимость всей поездки — около 20 000 злотых»."
+  register: formal
+  verificationStatus: inferred
+}
+LETTER_PHRASE {
+  phraseId: request-body-5
+  sectionRef: request-body
+  targetText: "Dzięki Pana pomocy wiele osób mogłoby…"
+  nativeNote: "«Благодаря Вашей помощи многие могли бы…»"
+  register: formal
+  verificationStatus: inferred
+}
+LETTER_PHRASE {
+  phraseId: request-request-1
+  sectionRef: request-request
+  targetText: "Bardzo proszę o wsparcie finansowe naszego projektu."
+  nativeNote: "«Очень прошу о финансовой поддержке нашего проекта»."
+  register: formal
+  isPreferred: true
+  sourceNote: "https://wsjp.pl/haslo/podglad/7501/prosic/4598076 — WSJP: prosić o CO (prosić o pomoc)."
+  verificationStatus: inferred
+}
+LETTER_PHRASE {
+  phraseId: request-request-2
+  sectionRef: request-request
+  targetText: "Czy byłaby możliwość dofinansowania wyjazdu?"
+  nativeNote: "«Была бы возможность софинансировать поездку?» — мягкая просьба."
+  register: formal
+  verificationStatus: inferred
+}
+LETTER_PHRASE {
+  phraseId: request-request-3
+  sectionRef: request-request
+  targetText: "Będziemy wdzięczni za każdą formę pomocy."
+  nativeNote: "«Будем благодарны за любую помощь»."
+  register: formal
+  verificationStatus: inferred
+}
+LETTER_PHRASE {
+  phraseId: request-request-4
+  sectionRef: request-request
+  targetText: "Proszę o pozytywne rozpatrzenie mojej prośby."
+  nativeNote: "«Прошу положительно рассмотреть мою просьбу» — шаблон; годится для рутинных просьб."
+  register: formal
+  sourceNote: "https://sjp.pwn.pl/poradnia/haslo/prosze-o-pozytywne-rozpatrzenie-mojej-prosby;17890.html — Kłosińska: шаблонная формула, уместна в стандартных прошениях."
+  verificationStatus: verified
+}
+LETTER_PHRASE {
+  phraseId: request-request-5
+  sectionRef: request-request
+  targetText: "Wierząc w zrozumienie mojej sytuacji, proszę o przychylne odniesienie się do przedstawionej prośby."
+  nativeNote: "«Надеясь на понимание, прошу благосклонно отнестись к просьбе» — для нестандартной просьбы."
+  register: formal
+  sourceNote: "https://sjp.pwn.pl/poradnia/haslo/prosze-o-pozytywne-rozpatrzenie-mojej-prosby;17890.html — Kłosińska предлагает эту формулу (в оригинале: «mojej nietypowej sytuacji… przedstawionej tu prośby»)."
+  verificationStatus: verified
+}
+LETTER_PHRASE {
+  phraseId: request-closing-1
+  sectionRef: request-closing
+  targetText: "Z góry dziękuję za rozpatrzenie mojej prośby."
+  nativeNote: "«Заранее благодарю за рассмотрение моей просьбы»."
+  register: formal
+  isPreferred: true
+  verificationStatus: inferred
+}
+LETTER_PHRASE {
+  phraseId: request-closing-2
+  sectionRef: request-closing
+  targetText: "Chętnie przedstawię szczegóły projektu podczas spotkania."
+  nativeNote: "«С удовольствием расскажу о проекте подробнее при встрече»."
+  register: formal
+  verificationStatus: inferred
+}
+LETTER_PHRASE {
+  phraseId: request-closing-3
+  sectionRef: request-closing
+  targetText: "W razie pytań jestem do dyspozycji pod numerem 600 123 456."
+  nativeNote: "«По всем вопросам я в Вашем распоряжении по номеру…»"
+  register: formal
+  verificationStatus: inferred
+}
+LETTER_PHRASE {
+  phraseId: request-closing-4
+  sectionRef: request-closing
+  targetText: "Liczę na przychylną odpowiedź."
+  nativeNote: "«Надеюсь на благосклонный ответ»."
+  register: formal
+  verificationStatus: inferred
+}
+LETTER_PHRASE {
+  phraseId: request-signoff-1
+  sectionRef: request-signoff
+  targetText: "Z wyrazami szacunku"
+  nativeNote: "«С выражением уважения» — официально, но теплее, чем «Z poważaniem»."
+  register: formal
+  isPreferred: true
+  mistakeNote: "Без запятой."
+  sourceNote: "https://sjp.pwn.pl/poradnia/haslo/pozdrawiam-na-koncu-korespondencji-mailowej;23538.html — Wolański: в официальной переписке — «Z poważaniem» или «Z wyrazami szacunku»; https://sjp.pwn.pl/poradnia/haslo/szanowny-z-wyrazami-szacunku;14771.html — Bańko: «Z poważaniem» выражает меньше учтивости."
+  verificationStatus: verified
+}
+LETTER_PHRASE {
+  phraseId: request-signoff-2
+  sectionRef: request-signoff
+  targetText: "Z poważaniem"
+  nativeNote: "«С уважением» — стандарт официального письма. Сдержанная, без «тепла»."
+  register: formal
+  mistakeNote: "Без запятой, подпись — новой строкой. Пишется через «ż»: poważanie."
+  sourceNote: "https://sjp.pwn.pl/poradnia/haslo/z-powazaniem;9286.html — Marcjanik: формула для случаев, когда не хотят «утеплять» отношения; https://sjp.pwn.pl/poradnia/haslo/z-powazaniem;8312.html — Bańko: запятую не ставят; https://rjp.pan.pl/app/uploads/2026/02/2_zalacznik-do-komunikatu-Zasady-pisowni-07-10-2024.pdf (11.3, п. 6, с. 61) — образец «Z poważaniem / Tomasz Malinowski»."
+  verificationStatus: verified
+}
+LETTER_PHRASE {
+  phraseId: request-signoff-3
+  sectionRef: request-signoff
+  targetText: "Łączę wyrazy szacunku"
+  nativeNote: "«Примите выражения уважения» — официальная формула."
+  register: formal
+  sourceNote: "https://sjp.pwn.pl/poradnia/haslo/szanowna-pani;2190.html — Marcjanik: «Łączę wyrazy szacunku» оставляют без знака препинания; https://rjp.pan.pl/app/uploads/2026/02/2_zalacznik-do-komunikatu-Zasady-pisowni-07-10-2024.pdf (11.3, п. 6, с. 61) — образец."
+  verificationStatus: verified
+}
+LETTER_PHRASE {
+  phraseId: request-signoff-4
+  sectionRef: request-signoff
+  targetText: "Pozostaję z poważaniem"
+  nativeNote: "«Остаюсь с уважением» — книжный вариант. После глагола «z» маленькая."
+  register: formal
+  sourceNote: "https://sjp.pwn.pl/poradnia/haslo/z-powazaniem;5318.html — Bralczyk: перед «poważaniem» с глаголом (pozostaję, kreślę się) пишем маленькую «z»."
+  verificationStatus: verified
+}
+LETTER_PHRASE {
+  phraseId: inquiry-salutation-1
+  sectionRef: inquiry-salutation
+  targetText: "Szanowni Państwo,"
+  nativeNote: "«Уважаемые дамы и господа» — в учреждение, фирму или когда адресат неизвестен."
+  register: formal
+  isPreferred: true
+  sourceNote: "https://sjp.pwn.pl/poradnia/haslo/szanowni-panstwo;21447.html — Kłosińska: в письме в учреждение «Szanowni Państwo» — самая уместная форма; https://sjp.pwn.pl/poradnia/haslo/co-zamiast-szanowni-panstwo;18371.html — в официальном контакте."
+  verificationStatus: verified
+}
+LETTER_PHRASE {
+  phraseId: inquiry-salutation-2
+  sectionRef: inquiry-salutation
+  targetText: "Szanowna Pani,"
+  nativeNote: "К женщине, официально (имя можно не писать)."
+  register: formal
+  sourceNote: "https://sjp.pwn.pl/poradnia/haslo/szanowna-pani;19403.html — Kłosińska: к незнакомой — «Szanowna Pani», Pani с большой; https://rjp.pan.pl/app/uploads/2026/02/2_zalacznik-do-komunikatu-Zasady-pisowni-07-10-2024.pdf (15, п. 2c, с. 72) — пример «Szanowna Pani,»."
+  verificationStatus: verified
+}
+LETTER_PHRASE {
+  phraseId: inquiry-salutation-3
+  sectionRef: inquiry-salutation
+  targetText: "Szanowny Panie,"
+  nativeNote: "К мужчине, официально. Фамилию не добавляют."
+  register: formal
+  mistakeNote: "Не «Szanowny Panie Kowalski» и не «Szanowny Pan» (нужен звательный падеж)."
+  sourceNote: "https://sjp.pwn.pl/poradnia/haslo/szanowny-panie-kowalski;12364.html — Marcjanik: в письме «Szanowny Panie» (всегда без фамилии)."
+  verificationStatus: verified
+}
+LETTER_PHRASE {
+  phraseId: inquiry-salutation-4
+  sectionRef: inquiry-salutation
+  targetText: "Szanowna Pani Kierownik,"
+  nativeNote: "К руководительнице (kierownik о женщине не склоняется)."
+  register: formal
+  sourceNote: "https://sjp.pwn.pl/poradnia/haslo/szanowny-panie-kowalski;12364.html — Marcjanik: в письме уместны формы вроде «Pani Kierownik»."
+  verificationStatus: verified
+}
+LETTER_PHRASE {
+  phraseId: inquiry-opening-1
+  sectionRef: inquiry-opening
+  targetText: "Piszę w sprawie kursu przygotowującego do egzaminu certyfikatowego."
+  nativeNote: "«Пишу по поводу курса подготовки к сертификационному экзамену»."
+  register: formal
+  isPreferred: true
+  verificationStatus: inferred
+}
+LETTER_PHRASE {
+  phraseId: inquiry-opening-2
+  sectionRef: inquiry-opening
+  targetText: "Zwracam się do Państwa z zapytaniem o…"
+  nativeNote: "«Обращаюсь к вам с вопросом о…» — официально."
+  register: formal
+  verificationStatus: inferred
+}
+LETTER_PHRASE {
+  phraseId: inquiry-opening-3
+  sectionRef: inquiry-opening
+  targetText: "Zainteresowała mnie Państwa oferta kursu języka polskiego."
+  nativeNote: "«Меня заинтересовало ваше предложение курса польского»."
+  register: formal
+  verificationStatus: inferred
+}
+LETTER_PHRASE {
+  phraseId: inquiry-opening-4
+  sectionRef: inquiry-opening
+  targetText: "W nawiązaniu do ogłoszenia zamieszczonego na portalu…"
+  nativeNote: "«В связи с объявлением, размещённым на портале…»"
+  register: formal
+  verificationStatus: inferred
+}
+LETTER_PHRASE {
+  phraseId: inquiry-opening-5
+  sectionRef: inquiry-opening
+  targetText: "Piszę z prośbą o informacje dotyczące…"
+  nativeNote: "«Пишу с просьбой предоставить информацию о…»"
+  register: formal
+  verificationStatus: inferred
+}
+LETTER_PHRASE {
+  phraseId: inquiry-body-1
+  sectionRef: inquiry-body
+  targetText: "Interesuje mnie, ile kosztuje kurs i czy cena obejmuje podręczniki."
+  nativeNote: "«Меня интересует, сколько стоит курс и входят ли учебники в цену»."
+  register: formal
+  isPreferred: true
+  verificationStatus: inferred
+}
+LETTER_PHRASE {
+  phraseId: inquiry-body-2
+  sectionRef: inquiry-body
+  targetText: "Czy mogliby Państwo poinformować mnie, kiedy rozpoczyna się kurs?"
+  nativeNote: "«Не могли бы вы сообщить, когда начинается курс?»"
+  register: formal
+  verificationStatus: inferred
+}
+LETTER_PHRASE {
+  phraseId: inquiry-body-3
+  sectionRef: inquiry-body
+  targetText: "Czy zajęcia odbywają się również w weekendy?"
+  nativeNote: "«Проходят ли занятия также по выходным?»"
+  register: formal
+  verificationStatus: inferred
+}
+LETTER_PHRASE {
+  phraseId: inquiry-body-4
+  sectionRef: inquiry-body
+  targetText: "Ile osób liczy grupa?"
+  nativeNote: "«Сколько человек в группе?»"
+  register: formal
+  verificationStatus: inferred
+}
+LETTER_PHRASE {
+  phraseId: inquiry-body-5
+  sectionRef: inquiry-body
+  targetText: "Czy po zakończeniu kursu otrzymam zaświadczenie?"
+  nativeNote: "«Получу ли я сертификат после окончания курса?»"
+  register: formal
+  verificationStatus: inferred
+}
+LETTER_PHRASE {
+  phraseId: inquiry-request-1
+  sectionRef: inquiry-request
+  targetText: "Uprzejmie proszę o przesłanie szczegółowej oferty."
+  nativeNote: "«Прошу прислать подробное предложение»."
+  register: formal
+  isPreferred: true
+  verificationStatus: inferred
+}
+LETTER_PHRASE {
+  phraseId: inquiry-request-2
+  sectionRef: inquiry-request
+  targetText: "Proszę o informację, czy są jeszcze wolne miejsca."
+  nativeNote: "«Прошу сообщить, есть ли ещё свободные места»."
+  register: formal
+  verificationStatus: inferred
+}
+LETTER_PHRASE {
+  phraseId: inquiry-request-3
+  sectionRef: inquiry-request
+  targetText: "Czy istnieje możliwość zapisania się na zajęcia próbne?"
+  nativeNote: "«Есть ли возможность записаться на пробное занятие?»"
+  register: formal
+  verificationStatus: inferred
+}
+LETTER_PHRASE {
+  phraseId: inquiry-request-4
+  sectionRef: inquiry-request
+  targetText: "Proszę o przesłanie cennika na mój adres e-mail."
+  nativeNote: "«Прошу прислать прайс на мой e-mail»."
+  register: formal
+  verificationStatus: inferred
+}
+LETTER_PHRASE {
+  phraseId: inquiry-closing-1
+  sectionRef: inquiry-closing
+  targetText: "Z góry dziękuję za odpowiedź."
+  nativeNote: "«Заранее спасибо за ответ»."
+  register: formal
+  isPreferred: true
+  verificationStatus: inferred
+}
+LETTER_PHRASE {
+  phraseId: inquiry-closing-2
+  sectionRef: inquiry-closing
+  targetText: "Czekam na Państwa odpowiedź."
+  nativeNote: "«Жду вашего ответа»."
+  register: formal
+  verificationStatus: inferred
+}
+LETTER_PHRASE {
+  phraseId: inquiry-closing-3
+  sectionRef: inquiry-closing
+  targetText: "Odpowiedź proszę przesłać na adres: natalia.orlowa@example.com"
+  nativeNote: "«Ответ прошу прислать на адрес…»"
+  register: formal
+  verificationStatus: inferred
+}
+LETTER_PHRASE {
+  phraseId: inquiry-closing-4
+  sectionRef: inquiry-closing
+  targetText: "W razie pytań proszę o kontakt pod numerem 600 123 456."
+  nativeNote: "«При вопросах прошу связаться по номеру…»"
+  register: formal
+  verificationStatus: inferred
+}
+LETTER_PHRASE {
+  phraseId: inquiry-signoff-1
+  sectionRef: inquiry-signoff
+  targetText: "Z poważaniem"
+  nativeNote: "«С уважением» — стандарт официального письма. Сдержанная, без «тепла»."
+  register: formal
+  isPreferred: true
+  mistakeNote: "Без запятой, подпись — новой строкой. Пишется через «ż»: poważanie."
+  sourceNote: "https://sjp.pwn.pl/poradnia/haslo/z-powazaniem;9286.html — Marcjanik: формула для случаев, когда не хотят «утеплять» отношения; https://sjp.pwn.pl/poradnia/haslo/z-powazaniem;8312.html — Bańko: запятую не ставят; https://rjp.pan.pl/app/uploads/2026/02/2_zalacznik-do-komunikatu-Zasady-pisowni-07-10-2024.pdf (11.3, п. 6, с. 61) — образец «Z poważaniem / Tomasz Malinowski»."
+  verificationStatus: verified
+}
+LETTER_PHRASE {
+  phraseId: inquiry-signoff-2
+  sectionRef: inquiry-signoff
+  targetText: "Z wyrazami szacunku"
+  nativeNote: "«С выражением уважения» — официально, но теплее, чем «Z poważaniem»."
+  register: formal
+  mistakeNote: "Без запятой."
+  sourceNote: "https://sjp.pwn.pl/poradnia/haslo/pozdrawiam-na-koncu-korespondencji-mailowej;23538.html — Wolański: в официальной переписке — «Z poważaniem» или «Z wyrazami szacunku»; https://sjp.pwn.pl/poradnia/haslo/szanowny-z-wyrazami-szacunku;14771.html — Bańko: «Z poważaniem» выражает меньше учтивости."
+  verificationStatus: verified
+}
+LETTER_PHRASE {
+  phraseId: inquiry-signoff-3
+  sectionRef: inquiry-signoff
+  targetText: "Łączę wyrazy szacunku"
+  nativeNote: "«Примите выражения уважения» — официальная формула."
+  register: formal
+  sourceNote: "https://sjp.pwn.pl/poradnia/haslo/szanowna-pani;2190.html — Marcjanik: «Łączę wyrazy szacunku» оставляют без знака препинания; https://rjp.pan.pl/app/uploads/2026/02/2_zalacznik-do-komunikatu-Zasady-pisowni-07-10-2024.pdf (11.3, п. 6, с. 61) — образец."
+  verificationStatus: verified
+}
+LETTER_PHRASE {
+  phraseId: inquiry-signoff-4
+  sectionRef: inquiry-signoff
+  targetText: "Pozostaję z poważaniem"
+  nativeNote: "«Остаюсь с уважением» — книжный вариант. После глагола «z» маленькая."
+  register: formal
+  sourceNote: "https://sjp.pwn.pl/poradnia/haslo/z-powazaniem;5318.html — Bralczyk: перед «poważaniem» с глаголом (pozostaję, kreślę się) пишем маленькую «z»."
+  verificationStatus: verified
+}
+LETTER_PHRASE {
+  phraseId: formal-email-salutation-1
+  sectionRef: formal-email-salutation
+  targetText: "Szanowna Pani,"
+  nativeNote: "К женщине, официально (имя можно не писать)."
+  register: formal
+  isPreferred: true
+  sourceNote: "https://sjp.pwn.pl/poradnia/haslo/szanowna-pani;19403.html — Kłosińska: к незнакомой — «Szanowna Pani», Pani с большой; https://rjp.pan.pl/app/uploads/2026/02/2_zalacznik-do-komunikatu-Zasady-pisowni-07-10-2024.pdf (15, п. 2c, с. 72) — пример «Szanowna Pani,»."
+  verificationStatus: verified
+}
+LETTER_PHRASE {
+  phraseId: formal-email-salutation-2
+  sectionRef: formal-email-salutation
+  targetText: "Szanowni Państwo,"
+  nativeNote: "«Уважаемые дамы и господа» — в учреждение, фирму или когда адресат неизвестен."
+  register: formal
+  sourceNote: "https://sjp.pwn.pl/poradnia/haslo/szanowni-panstwo;21447.html — Kłosińska: в письме в учреждение «Szanowni Państwo» — самая уместная форма; https://sjp.pwn.pl/poradnia/haslo/co-zamiast-szanowni-panstwo;18371.html — в официальном контакте."
+  verificationStatus: verified
+}
+LETTER_PHRASE {
+  phraseId: formal-email-salutation-3
+  sectionRef: formal-email-salutation
+  targetText: "Szanowny Panie,"
+  nativeNote: "К мужчине, официально. Фамилию не добавляют."
+  register: formal
+  mistakeNote: "Не «Szanowny Panie Kowalski» и не «Szanowny Pan» (нужен звательный падеж)."
+  sourceNote: "https://sjp.pwn.pl/poradnia/haslo/szanowny-panie-kowalski;12364.html — Marcjanik: в письме «Szanowny Panie» (всегда без фамилии)."
+  verificationStatus: verified
+}
+LETTER_PHRASE {
+  phraseId: formal-email-salutation-4
+  sectionRef: formal-email-salutation
+  targetText: "Szanowna Pani Katarzyno,"
+  nativeNote: "Знакомой адресатке: «Szanowna Pani» + имя в звательном падеже."
+  register: formal
+  sourceNote: "https://sjp.pwn.pl/poradnia/haslo/szanowna-pani;19403.html — Kłosińska: если адресат в какой-то мере близок, «Szanowny Panie + imię» уместно; Pani — с большой буквы."
+  verificationStatus: verified
+}
+LETTER_PHRASE {
+  phraseId: formal-email-salutation-5
+  sectionRef: formal-email-salutation
+  targetText: "Szanowny Panie Doktorze,"
+  nativeNote: "Преподавателю с учёной степенью — по титулу."
+  register: formal
+  mistakeNote: "Без сокращений: не «Szanowny Panie Dr.»."
+  sourceNote: "https://sjp.pwn.pl/poradnia/haslo/szanowny-panie-doktorze;14979.html — Bańko; https://sjp.pwn.pl/poradnia/haslo/szanowny-panie-doktorze;20021.html — Kłosińska: «Najwłaściwsza forma to Szanowny Panie Doktorze»."
+  verificationStatus: verified
+}
+LETTER_PHRASE {
+  phraseId: formal-email-opening-1
+  sectionRef: formal-email-opening
+  targetText: "Zwracam się z uprzejmą prośbą o…"
+  nativeNote: "«Обращаюсь с просьбой о…»"
+  register: formal
+  isPreferred: true
+  sourceNote: "https://sjp.pwn.pl/poradnia/haslo/zwracam-sie-z-uprzejmna-prosba;9189.html — Marcjanik: szablon pism urzędowych."
+  verificationStatus: verified
+}
+LETTER_PHRASE {
+  phraseId: formal-email-opening-2
+  sectionRef: formal-email-opening
+  targetText: "Piszę w sprawie terminu egzaminu ustnego."
+  nativeNote: "«Пишу по поводу даты устного экзамена»."
+  register: formal
+  verificationStatus: inferred
+}
+LETTER_PHRASE {
+  phraseId: formal-email-opening-3
+  sectionRef: formal-email-opening
+  targetText: "W nawiązaniu do wiadomości z dnia 5 listopada…"
+  nativeNote: "«В связи с сообщением от 5 ноября…»"
+  register: formal
+  verificationStatus: inferred
+}
+LETTER_PHRASE {
+  phraseId: formal-email-opening-4
+  sectionRef: formal-email-opening
+  targetText: "Dziękuję za szybką odpowiedź na moją poprzednią wiadomość."
+  nativeNote: "«Спасибо за быстрый ответ на моё предыдущее письмо»."
+  register: formal
+  verificationStatus: inferred
+}
+LETTER_PHRASE {
+  phraseId: formal-email-body-1
+  sectionRef: formal-email-body
+  targetText: "Niestety, w wyznaczonym terminie nie mogę przyjść na egzamin, ponieważ…"
+  nativeNote: "«К сожалению, в назначенный день я не могу прийти на экзамен, потому что…»"
+  register: formal
+  isPreferred: true
+  verificationStatus: inferred
+}
+LETTER_PHRASE {
+  phraseId: formal-email-body-2
+  sectionRef: formal-email-body
+  targetText: "W załączniku przesyłam skan zaświadczenia."
+  nativeNote: "«Во вложении отправляю скан справки»."
+  register: formal
+  verificationStatus: inferred
+}
+LETTER_PHRASE {
+  phraseId: formal-email-body-3
+  sectionRef: formal-email-body
+  targetText: "Mój numer zgłoszenia to 1234/2026."
+  nativeNote: "«Мой номер заявки — 1234/2026»."
+  register: formal
+  verificationStatus: inferred
+}
+LETTER_PHRASE {
+  phraseId: formal-email-body-4
+  sectionRef: formal-email-body
+  targetText: "Poniżej przesyłam najważniejsze informacje:"
+  nativeNote: "«Ниже — самое важное:» — перед списком."
+  register: formal
+  verificationStatus: inferred
+}
+LETTER_PHRASE {
+  phraseId: formal-email-request-1
+  sectionRef: formal-email-request
+  targetText: "Uprzejmie proszę o zmianę terminu egzaminu."
+  nativeNote: "«Прошу перенести дату экзамена»."
+  register: formal
+  isPreferred: true
+  verificationStatus: inferred
+}
+LETTER_PHRASE {
+  phraseId: formal-email-request-2
+  sectionRef: formal-email-request
+  targetText: "Czy byłaby możliwość przesunięcia terminu na przyszły tydzień?"
+  nativeNote: "«Можно ли перенести на следующую неделю?»"
+  register: formal
+  verificationStatus: inferred
+}
+LETTER_PHRASE {
+  phraseId: formal-email-request-3
+  sectionRef: formal-email-request
+  targetText: "Proszę o potwierdzenie otrzymania tej wiadomości."
+  nativeNote: "«Прошу подтвердить получение письма»."
+  register: formal
+  verificationStatus: inferred
+}
+LETTER_PHRASE {
+  phraseId: formal-email-request-4
+  sectionRef: formal-email-request
+  targetText: "Proszę o informację, jakie dokumenty są potrzebne."
+  nativeNote: "«Прошу сообщить, какие документы нужны»."
+  register: formal
+  verificationStatus: inferred
+}
+LETTER_PHRASE {
+  phraseId: formal-email-closing-1
+  sectionRef: formal-email-closing
+  targetText: "Z góry dziękuję za pomoc."
+  nativeNote: "«Заранее спасибо за помощь»."
+  register: formal
+  isPreferred: true
+  verificationStatus: inferred
+}
+LETTER_PHRASE {
+  phraseId: formal-email-closing-2
+  sectionRef: formal-email-closing
+  targetText: "Przepraszam za kłopot i dziękuję za zrozumienie."
+  nativeNote: "«Извините за беспокойство, спасибо за понимание»."
+  register: formal
+  verificationStatus: inferred
+}
+LETTER_PHRASE {
+  phraseId: formal-email-closing-3
+  sectionRef: formal-email-closing
+  targetText: "W razie pytań proszę o kontakt pod numerem 600 123 456."
+  nativeNote: "«При вопросах — звоните по номеру…»"
+  register: formal
+  verificationStatus: inferred
+}
+LETTER_PHRASE {
+  phraseId: formal-email-closing-4
+  sectionRef: formal-email-closing
+  targetText: "Czekam na Pani odpowiedź."
+  nativeNote: "«Жду Вашего ответа» (Pani — с большой)."
+  register: formal
+  verificationStatus: inferred
+}
+LETTER_PHRASE {
+  phraseId: formal-email-signoff-1
+  sectionRef: formal-email-signoff
+  targetText: "Z wyrazami szacunku"
+  nativeNote: "«С выражением уважения» — официально, но теплее, чем «Z poważaniem»."
+  register: formal
+  isPreferred: true
+  mistakeNote: "Без запятой."
+  sourceNote: "https://sjp.pwn.pl/poradnia/haslo/pozdrawiam-na-koncu-korespondencji-mailowej;23538.html — Wolański: в официальной переписке — «Z poważaniem» или «Z wyrazami szacunku»; https://sjp.pwn.pl/poradnia/haslo/szanowny-z-wyrazami-szacunku;14771.html — Bańko: «Z poważaniem» выражает меньше учтивости."
+  verificationStatus: verified
+}
+LETTER_PHRASE {
+  phraseId: formal-email-signoff-2
+  sectionRef: formal-email-signoff
+  targetText: "Z poważaniem"
+  nativeNote: "«С уважением» — стандарт официального письма. Сдержанная, без «тепла»."
+  register: formal
+  mistakeNote: "Без запятой, подпись — новой строкой. Пишется через «ż»: poważanie."
+  sourceNote: "https://sjp.pwn.pl/poradnia/haslo/z-powazaniem;9286.html — Marcjanik: формула для случаев, когда не хотят «утеплять» отношения; https://sjp.pwn.pl/poradnia/haslo/z-powazaniem;8312.html — Bańko: запятую не ставят; https://rjp.pan.pl/app/uploads/2026/02/2_zalacznik-do-komunikatu-Zasady-pisowni-07-10-2024.pdf (11.3, п. 6, с. 61) — образец «Z poważaniem / Tomasz Malinowski»."
+  verificationStatus: verified
+}
+LETTER_PHRASE {
+  phraseId: formal-email-signoff-3
+  sectionRef: formal-email-signoff
+  targetText: "Łączę wyrazy szacunku"
+  nativeNote: "«Примите выражения уважения» — официальная формула."
+  register: formal
+  sourceNote: "https://sjp.pwn.pl/poradnia/haslo/szanowna-pani;2190.html — Marcjanik: «Łączę wyrazy szacunku» оставляют без знака препинания; https://rjp.pan.pl/app/uploads/2026/02/2_zalacznik-do-komunikatu-Zasady-pisowni-07-10-2024.pdf (11.3, п. 6, с. 61) — образец."
+  verificationStatus: verified
+}
+LETTER_PHRASE {
+  phraseId: formal-email-signoff-4
+  sectionRef: formal-email-signoff
+  targetText: "Pozostaję z poważaniem"
+  nativeNote: "«Остаюсь с уважением» — книжный вариант. После глагола «z» маленькая."
+  register: formal
+  sourceNote: "https://sjp.pwn.pl/poradnia/haslo/z-powazaniem;5318.html — Bralczyk: перед «poważaniem» с глаголом (pozostaję, kreślę się) пишем маленькую «z»."
+  verificationStatus: verified
+}
+LETTER_PHRASE {
+  phraseId: informal-email-salutation-1
+  sectionRef: informal-email-salutation
+  targetText: "Cześć, Aniu!"
+  nativeNote: "«Привет, Аня!» — самое частое начало письма другу."
+  register: informal
+  isPreferred: true
+  mistakeNote: "Запятая перед именем обязательна."
+  sourceNote: "https://sjp.pwn.pl/poradnia/haslo/wolacz-a-przecinek;15730.html — Bańko: обращение в заголовке письма отделяется запятой («Cześć, Olu!»)."
+  verificationStatus: verified
+}
+LETTER_PHRASE {
+  phraseId: informal-email-salutation-2
+  sectionRef: informal-email-salutation
+  targetText: "Droga Aniu,"
+  nativeNote: "«Дорогая Аня,» — тепло, чуть более «письменно»."
+  register: informal
+  sourceNote: "https://sjp.pwn.pl/poradnia/haslo/wolacz-a-przecinek;15730.html — Bańko: образец «Droga Olu, dawno się nie widziałyśmy»."
+  verificationStatus: verified
+}
+LETTER_PHRASE {
+  phraseId: informal-email-salutation-3
+  sectionRef: informal-email-salutation
+  targetText: "Drogi Marku,"
+  nativeNote: "«Дорогой Марек,» — другу-мужчине."
+  register: informal
+  verificationStatus: inferred
+}
+LETTER_PHRASE {
+  phraseId: informal-email-salutation-4
+  sectionRef: informal-email-salutation
+  targetText: "Hej, Kasiu!"
+  nativeNote: "«Привет, Кася!» — очень непринуждённо."
+  register: informal
+  verificationStatus: inferred
+}
+LETTER_PHRASE {
+  phraseId: informal-email-salutation-5
+  sectionRef: informal-email-salutation
+  targetText: "Drodzy Przyjaciele,"
+  nativeNote: "«Дорогие друзья,» — группе друзей."
+  register: informal
+  sourceNote: "https://sjp.pwn.pl/poradnia/haslo/szanowni-panstwo;7616.html — Bańko приводит «Drodzy Przyjaciele» среди формул обращения."
+  verificationStatus: verified
+}
+LETTER_PHRASE {
+  phraseId: informal-email-opening-1
+  sectionRef: informal-email-opening
+  targetText: "Dzięki za wiadomość!"
+  nativeNote: "«Спасибо за письмо!»"
+  register: informal
+  isPreferred: true
+  verificationStatus: inferred
+}
+LETTER_PHRASE {
+  phraseId: informal-email-opening-2
+  sectionRef: informal-email-opening
+  targetText: "Co u Ciebie słychać?"
+  nativeNote: "«Как у тебя дела?»"
+  register: informal
+  verificationStatus: inferred
+}
+LETTER_PHRASE {
+  phraseId: informal-email-opening-3
+  sectionRef: informal-email-opening
+  targetText: "Wybacz, że odpisuję dopiero teraz."
+  nativeNote: "«Прости, что отвечаю только сейчас»."
+  register: informal
+  verificationStatus: inferred
+}
+LETTER_PHRASE {
+  phraseId: informal-email-opening-4
+  sectionRef: informal-email-opening
+  targetText: "Mam dla Ciebie świetną wiadomość!"
+  nativeNote: "«У меня для тебя отличная новость!»"
+  register: informal
+  verificationStatus: inferred
+}
+LETTER_PHRASE {
+  phraseId: informal-email-opening-5
+  sectionRef: informal-email-opening
+  targetText: "Muszę Ci coś opowiedzieć."
+  nativeNote: "«Должен(на) тебе кое-что рассказать»."
+  register: informal
+  verificationStatus: inferred
+}
+LETTER_PHRASE {
+  phraseId: informal-email-body-1
+  sectionRef: informal-email-body
+  targetText: "Wyobraź sobie, że…"
+  nativeNote: "«Представь себе, что…»"
+  register: informal
+  isPreferred: true
+  verificationStatus: inferred
+}
+LETTER_PHRASE {
+  phraseId: informal-email-body-2
+  sectionRef: informal-email-body
+  targetText: "Na początku było trudno, ale teraz idzie mi coraz lepiej."
+  nativeNote: "«Сначала было трудно, но теперь у меня получается всё лучше»."
+  register: informal
+  verificationStatus: inferred
+}
+LETTER_PHRASE {
+  phraseId: informal-email-body-3
+  sectionRef: informal-email-body
+  targetText: "Szczerze mówiąc, …"
+  nativeNote: "«Честно говоря, …»"
+  register: informal
+  verificationStatus: inferred
+}
+LETTER_PHRASE {
+  phraseId: informal-email-body-4
+  sectionRef: informal-email-body
+  targetText: "Najgorsze było to, że…"
+  nativeNote: "«Хуже всего было то, что…»"
+  register: informal
+  verificationStatus: inferred
+}
+LETTER_PHRASE {
+  phraseId: informal-email-body-5
+  sectionRef: informal-email-body
+  targetText: "Na szczęście…"
+  nativeNote: "«К счастью…»"
+  register: informal
+  verificationStatus: inferred
+}
+LETTER_PHRASE {
+  phraseId: informal-email-request-1
+  sectionRef: informal-email-request
+  targetText: "Daj znać, co u Ciebie."
+  nativeNote: "«Дай знать, как ты»."
+  register: informal
+  isPreferred: true
+  verificationStatus: inferred
+}
+LETTER_PHRASE {
+  phraseId: informal-email-request-2
+  sectionRef: informal-email-request
+  targetText: "Może spotkamy się w przyszły weekend?"
+  nativeNote: "«Может, встретимся в следующие выходные?»"
+  register: informal
+  verificationStatus: inferred
+}
+LETTER_PHRASE {
+  phraseId: informal-email-request-3
+  sectionRef: informal-email-request
+  targetText: "Napisz, jak Ci idzie w nowej pracy."
+  nativeNote: "«Напиши, как у тебя на новой работе»."
+  register: informal
+  verificationStatus: inferred
+}
+LETTER_PHRASE {
+  phraseId: informal-email-request-4
+  sectionRef: informal-email-request
+  targetText: "Odezwij się, jak znajdziesz chwilę."
+  nativeNote: "«Напиши, когда будет минутка»."
+  register: informal
+  verificationStatus: inferred
+}
+LETTER_PHRASE {
+  phraseId: informal-email-closing-1
+  sectionRef: informal-email-closing
+  targetText: "Muszę już kończyć."
+  nativeNote: "«Мне пора заканчивать»."
+  register: informal
+  isPreferred: true
+  verificationStatus: inferred
+}
+LETTER_PHRASE {
+  phraseId: informal-email-closing-2
+  sectionRef: informal-email-closing
+  targetText: "Czekam na wiadomość od Ciebie!"
+  nativeNote: "«Жду от тебя весточки!»"
+  register: informal
+  verificationStatus: inferred
+}
+LETTER_PHRASE {
+  phraseId: informal-email-closing-3
+  sectionRef: informal-email-closing
+  targetText: "Pozdrów ode mnie rodziców."
+  nativeNote: "«Передай от меня привет родителям»."
+  register: informal
+  verificationStatus: inferred
+}
+LETTER_PHRASE {
+  phraseId: informal-email-closing-4
+  sectionRef: informal-email-closing
+  targetText: "Trzymaj się!"
+  nativeNote: "«Держись! / Пока!»"
+  register: informal
+  verificationStatus: inferred
+}
+LETTER_PHRASE {
+  phraseId: informal-email-signoff-1
+  sectionRef: informal-email-signoff
+  targetText: "Pozdrawiam serdecznie"
+  nativeNote: "«Сердечно приветствую» — тёплое универсальное прощание."
+  register: informal
+  isPreferred: true
+  mistakeNote: "Не для официальных писем."
+  sourceNote: "https://sjp.pwn.pl/poradnia/haslo/pozdrawiam-na-koncu-korespondencji-mailowej;23538.html — Wolański: «Pozdrawiam» уместно в неофициальных и полуофициальных контактах («serdecznie» лишь усиливает теплоту)."
+  verificationStatus: verified
+}
+LETTER_PHRASE {
+  phraseId: informal-email-signoff-2
+  sectionRef: informal-email-signoff
+  targetText: "Ściskam"
+  nativeNote: "«Обнимаю» — близкому другу."
+  register: informal
+  sourceNote: "https://sjp.pwn.pl/slowniki/%C5%9Bciska%C4%87.html — słownik PWN: ścisnąć, знач. 5 «objąć lub przytulić kogoś»."
+  verificationStatus: inferred
+}
+LETTER_PHRASE {
+  phraseId: informal-email-signoff-3
+  sectionRef: informal-email-signoff
+  targetText: "Całuję"
+  nativeNote: "«Целую» — очень близким (семья, подруги)."
+  register: informal
+  sourceNote: "https://sjp.pwn.pl/poradnia/haslo/interpunkcja-zwrotow-adresatywnych-oraz-pozegnalnych;17928.html — Wolański приводит «Całuję» среди прощальных формул."
+  verificationStatus: verified
+}
+LETTER_PHRASE {
+  phraseId: informal-email-signoff-4
+  sectionRef: informal-email-signoff
+  targetText: Buziaki
+  nativeNote: "«Целую» — разговорно, для самых близких."
+  register: informal
+  sourceNote: "https://sjp.pwn.pl/slowniki/buziak.html — słownik PWN: buziak — pot. «pocałunek»."
+  verificationStatus: inferred
+}
+LETTER_PHRASE {
+  phraseId: informal-email-signoff-5
+  sectionRef: informal-email-signoff
+  targetText: "Moc uścisków"
+  nativeNote: "«Крепко обнимаю»."
+  register: informal
+  sourceNote: "https://sjp.pwn.pl/poradnia/haslo/szanowna-pani;2190.html — Marcjanik: «Moc uścisków» — формула, оставляемая без знака препинания."
+  verificationStatus: verified
+}
+LETTER_PHRASE {
+  phraseId: informal-email-signoff-6
+  sectionRef: informal-email-signoff
+  targetText: "Do zobaczenia!"
+  nativeNote: "«До встречи!» — если скоро увидитесь."
+  register: informal
+  verificationStatus: inferred
+}
+LETTER_PHRASE {
+  phraseId: application-salutation-1
+  sectionRef: application-salutation
+  targetText: "Szanowni Państwo,"
+  nativeNote: "«Уважаемые дамы и господа» — в учреждение, фирму или когда адресат неизвестен."
+  register: formal
+  isPreferred: true
+  sourceNote: "https://sjp.pwn.pl/poradnia/haslo/szanowni-panstwo;21447.html — Kłosińska: в письме в учреждение «Szanowni Państwo» — самая уместная форма; https://sjp.pwn.pl/poradnia/haslo/co-zamiast-szanowni-panstwo;18371.html — в официальном контакте."
+  verificationStatus: verified
+}
+LETTER_PHRASE {
+  phraseId: application-salutation-2
+  sectionRef: application-salutation
+  targetText: "Szanowna Pani,"
+  nativeNote: "К женщине, официально (имя можно не писать)."
+  register: formal
+  sourceNote: "https://sjp.pwn.pl/poradnia/haslo/szanowna-pani;19403.html — Kłosińska: к незнакомой — «Szanowna Pani», Pani с большой; https://rjp.pan.pl/app/uploads/2026/02/2_zalacznik-do-komunikatu-Zasady-pisowni-07-10-2024.pdf (15, п. 2c, с. 72) — пример «Szanowna Pani,»."
+  verificationStatus: verified
+}
+LETTER_PHRASE {
+  phraseId: application-salutation-3
+  sectionRef: application-salutation
+  targetText: "Szanowny Panie,"
+  nativeNote: "К мужчине, официально. Фамилию не добавляют."
+  register: formal
+  mistakeNote: "Не «Szanowny Panie Kowalski» и не «Szanowny Pan» (нужен звательный падеж)."
+  sourceNote: "https://sjp.pwn.pl/poradnia/haslo/szanowny-panie-kowalski;12364.html — Marcjanik: в письме «Szanowny Panie» (всегда без фамилии)."
+  verificationStatus: verified
+}
+LETTER_PHRASE {
+  phraseId: application-salutation-4
+  sectionRef: application-salutation
+  targetText: "Szanowna Pani Dyrektor,"
+  nativeNote: "К директору-женщине. «Dyrektor» о женщине не склоняется."
+  register: formal
+  mistakeNote: "Не «Pani Dyrektorze» (мужская форма)."
+  sourceNote: "https://sjp.pwn.pl/poradnia/haslo/jak-pisac-do-pani-dyrektor;18651.html — Kłosińska: dyrektor о женщине — несклоняемое существительное ж. р.; https://sjp.pwn.pl/poradnia/haslo/szanowny-panie-kowalski;12364.html — образец «Pani Kierownik»."
+  verificationStatus: verified
+}
+LETTER_PHRASE {
+  phraseId: application-salutation-5
+  sectionRef: application-salutation
+  targetText: "Szanowny Panie Dyrektorze,"
+  nativeNote: "К директору-мужчине. Есть должность или титул — используй его."
+  register: formal
+  sourceNote: "https://sjp.pwn.pl/poradnia/haslo/szanowny-panie-doktorze;14979.html — Bańko: если можно обратиться по титулу/должности, лучше так, чем просто «Szanowny Panie»."
+  verificationStatus: verified
+}
+LETTER_PHRASE {
+  phraseId: application-opening-1
+  sectionRef: application-opening
+  targetText: "W odpowiedzi na Państwa ogłoszenie zamieszczone na portalu praca.pl…"
+  nativeNote: "«В ответ на ваше объявление на портале praca.pl…»"
+  register: formal
+  isPreferred: true
+  verificationStatus: inferred
+}
+LETTER_PHRASE {
+  phraseId: application-opening-2
+  sectionRef: application-opening
+  targetText: "Ubiegam się o stanowisko opiekuna osób starszych."
+  nativeNote: "«Претендую на должность опекуна пожилых людей». «Aplikować na stanowisko» тоже допустимо, но «ubiegać się o» — классика."
+  register: formal
+  sourceNote: "https://sjp.pwn.pl/poradnia/haslo/aplikowac;22709.html — Wolański: «aplikować na jakieś stanowisko» допустимо в официальной коммуникации."
+  verificationStatus: inferred
+}
+LETTER_PHRASE {
+  phraseId: application-opening-3
+  sectionRef: application-opening
+  targetText: "Państwa oferta pracy bardzo mnie zainteresowała."
+  nativeNote: "«Ваше предложение работы меня очень заинтересовало»."
+  register: formal
+  verificationStatus: inferred
+}
+LETTER_PHRASE {
+  phraseId: application-opening-4
+  sectionRef: application-opening
+  targetText: "Zwracam się z uprzejmą prośbą o…"
+  nativeNote: "«Обращаюсь с просьбой о…» — классическое начало подания."
+  register: formal
+  sourceNote: "https://sjp.pwn.pl/poradnia/haslo/zwracam-sie-z-uprzejmna-prosba;9189.html — Marcjanik: szablon, zwłaszcza w podaniach."
+  verificationStatus: verified
+}
+LETTER_PHRASE {
+  phraseId: application-opening-5
+  sectionRef: application-opening
+  targetText: "Uprzejmie proszę o…"
+  nativeNote: "«Прошу о…» — начало подания после блока с адресатом."
+  register: formal
+  sourceNote: "https://sjp.pwn.pl/zasady/103-19-2-nazwy-osób-do-których-się-zwracamy-w-listach-podaniach;629419.html — Zasady PWN 19.2 [103]: образец подания: адресат, затем «Uprzejmie proszę Pana Dziekana…»."
+  verificationStatus: verified
+}
+LETTER_PHRASE {
+  phraseId: application-body-1
+  sectionRef: application-body
+  targetText: "Mam trzyletnie doświadczenie w opiece nad osobami starszymi."
+  nativeNote: "«У меня трёхлетний опыт ухода за пожилыми людьми»."
+  register: formal
+  isPreferred: true
+  verificationStatus: inferred
+}
+LETTER_PHRASE {
+  phraseId: application-body-2
+  sectionRef: application-body
+  targetText: "Od trzech lat pracuję jako opiekunka w domu opieki."
+  nativeNote: "«Три года работаю опекуншей в доме престарелых». После «jako» — именительный падеж."
+  register: formal
+  sourceNote: "https://sjp.pwn.pl/poradnia/haslo/pracowal-jako-tlumacz;24956.html — Kołodziejek: предлог «jako» + именительный («jako tłumacz»)."
+  verificationStatus: inferred
+}
+LETTER_PHRASE {
+  phraseId: application-body-3
+  sectionRef: application-body
+  targetText: "Jestem osobą cierpliwą, odpowiedzialną i komunikatywną."
+  nativeNote: "«Я терпеливый, ответственный и коммуникабельный человек»."
+  register: formal
+  verificationStatus: inferred
+}
+LETTER_PHRASE {
+  phraseId: application-body-4
+  sectionRef: application-body
+  targetText: "Mam certyfikat ukończenia kursu pierwszej pomocy."
+  nativeNote: "«У меня есть сертификат курса первой помощи»."
+  register: formal
+  verificationStatus: inferred
+}
+LETTER_PHRASE {
+  phraseId: application-body-5
+  sectionRef: application-body
+  targetText: "Dobrze znam język polski w mowie i piśmie."
+  nativeNote: "«Хорошо владею польским устно и письменно»."
+  register: formal
+  verificationStatus: inferred
+}
+LETTER_PHRASE {
+  phraseId: application-request-1
+  sectionRef: application-request
+  targetText: "Uprzejmie proszę o rozpatrzenie mojej kandydatury."
+  nativeNote: "«Прошу рассмотреть мою кандидатуру»."
+  register: formal
+  isPreferred: true
+  verificationStatus: inferred
+}
+LETTER_PHRASE {
+  phraseId: application-request-2
+  sectionRef: application-request
+  targetText: "Proszę o pozytywne rozpatrzenie mojej prośby."
+  nativeNote: "«Прошу положительно рассмотреть мою просьбу» — шаблон подания, для рутинных просьб."
+  register: formal
+  sourceNote: "https://sjp.pwn.pl/poradnia/haslo/prosze-o-pozytywne-rozpatrzenie-mojej-prosby;17890.html — Kłosińska: шаблонная формула подания."
+  verificationStatus: verified
+}
+LETTER_PHRASE {
+  phraseId: application-request-3
+  sectionRef: application-request
+  targetText: "Chętnie przyjdę na rozmowę kwalifikacyjną w dogodnym dla Państwa terminie."
+  nativeNote: "«С удовольствием приду на собеседование в удобное для вас время»."
+  register: formal
+  verificationStatus: inferred
+}
+LETTER_PHRASE {
+  phraseId: application-request-4
+  sectionRef: application-request
+  targetText: "W załączeniu przesyłam swoje CV."
+  nativeNote: "«В приложении отправляю своё резюме»."
+  register: formal
+  verificationStatus: inferred
+}
+LETTER_PHRASE {
+  phraseId: application-closing-1
+  sectionRef: application-closing
+  targetText: "Dziękuję za poświęcony czas."
+  nativeNote: "«Спасибо за уделённое время»."
+  register: formal
+  isPreferred: true
+  verificationStatus: inferred
+}
+LETTER_PHRASE {
+  phraseId: application-closing-2
+  sectionRef: application-closing
+  targetText: "Uważam, że moje doświadczenie pozwoli mi dobrze wykonywać tę pracę."
+  nativeNote: "«Считаю, что мой опыт позволит мне хорошо выполнять эту работу»."
+  register: formal
+  verificationStatus: inferred
+}
+LETTER_PHRASE {
+  phraseId: application-closing-3
+  sectionRef: application-closing
+  targetText: "Liczę na pozytywną odpowiedź."
+  nativeNote: "«Надеюсь на положительный ответ»."
+  register: formal
+  verificationStatus: inferred
+}
+LETTER_PHRASE {
+  phraseId: application-closing-4
+  sectionRef: application-closing
+  targetText: "W razie pytań jestem do dyspozycji pod numerem 600 123 456."
+  nativeNote: "«По вопросам — я в вашем распоряжении по номеру…»"
+  register: formal
+  verificationStatus: inferred
+}
+LETTER_PHRASE {
+  phraseId: application-signoff-1
+  sectionRef: application-signoff
+  targetText: "Z poważaniem"
+  nativeNote: "«С уважением» — стандарт официального письма. Сдержанная, без «тепла»."
+  register: formal
+  isPreferred: true
+  mistakeNote: "Без запятой, подпись — новой строкой. Пишется через «ż»: poważanie."
+  sourceNote: "https://sjp.pwn.pl/poradnia/haslo/z-powazaniem;9286.html — Marcjanik: формула для случаев, когда не хотят «утеплять» отношения; https://sjp.pwn.pl/poradnia/haslo/z-powazaniem;8312.html — Bańko: запятую не ставят; https://rjp.pan.pl/app/uploads/2026/02/2_zalacznik-do-komunikatu-Zasady-pisowni-07-10-2024.pdf (11.3, п. 6, с. 61) — образец «Z poważaniem / Tomasz Malinowski»."
+  verificationStatus: verified
+}
+LETTER_PHRASE {
+  phraseId: application-signoff-2
+  sectionRef: application-signoff
+  targetText: "Z wyrazami szacunku"
+  nativeNote: "«С выражением уважения» — официально, но теплее, чем «Z poważaniem»."
+  register: formal
+  mistakeNote: "Без запятой."
+  sourceNote: "https://sjp.pwn.pl/poradnia/haslo/pozdrawiam-na-koncu-korespondencji-mailowej;23538.html — Wolański: в официальной переписке — «Z poważaniem» или «Z wyrazami szacunku»; https://sjp.pwn.pl/poradnia/haslo/szanowny-z-wyrazami-szacunku;14771.html — Bańko: «Z poważaniem» выражает меньше учтивости."
+  verificationStatus: verified
+}
+LETTER_PHRASE {
+  phraseId: application-signoff-3
+  sectionRef: application-signoff
+  targetText: "Łączę wyrazy szacunku"
+  nativeNote: "«Примите выражения уважения» — официальная формула."
+  register: formal
+  sourceNote: "https://sjp.pwn.pl/poradnia/haslo/szanowna-pani;2190.html — Marcjanik: «Łączę wyrazy szacunku» оставляют без знака препинания; https://rjp.pan.pl/app/uploads/2026/02/2_zalacznik-do-komunikatu-Zasady-pisowni-07-10-2024.pdf (11.3, п. 6, с. 61) — образец."
+  verificationStatus: verified
+}
+LETTER_PHRASE {
+  phraseId: application-signoff-4
+  sectionRef: application-signoff
+  targetText: "Pozostaję z poważaniem"
+  nativeNote: "«Остаюсь с уважением» — книжный вариант. После глагола «z» маленькая."
+  register: formal
+  sourceNote: "https://sjp.pwn.pl/poradnia/haslo/z-powazaniem;5318.html — Bralczyk: перед «poważaniem» с глаголом (pozostaję, kreślę się) пишем маленькую «z»."
+  verificationStatus: verified
+}
