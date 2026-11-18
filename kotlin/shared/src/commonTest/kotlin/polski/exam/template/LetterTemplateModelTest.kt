@@ -16,17 +16,7 @@ class LetterTemplateModelTest {
 
     @Test
     fun verifiedRowHasNonEmptySourceNote() {
-        // Every LetterPhraseRow with verificationStatus==VERIFIED must have a non-empty sourceNote.
-        // This is a cross-field predicate not expressible in data-contract (P8/P25).
-        val badPhrases = model.all().flatMap { t ->
-            t.sections.flatMap { s ->
-                s.phrases.filter { p ->
-                    p.verificationStatus == LetterVerificationStatus.VERIFIED && p.mistakeNote == null
-                    // We check sourceNote via the raw rows since domain drops it; re-check via data
-                }
-            }
-        }
-        // We must check raw rows — domain type drops sourceNote; use generated rows directly
+        // Cross-field predicate the data-contract cannot express; checked on raw rows because the domain drops sourceNote.
         val badRows = polski.data.rows.plru.lettertemplate.LETTER_PHRASE_ROW_ROWS.filter { r ->
             r.verificationStatus == LetterVerificationStatus.VERIFIED && r.sourceNote.isNullOrBlank()
         } + polski.data.rows.plru.lettertemplate.LETTER_MISTAKE_ROW_ROWS.filter { r ->

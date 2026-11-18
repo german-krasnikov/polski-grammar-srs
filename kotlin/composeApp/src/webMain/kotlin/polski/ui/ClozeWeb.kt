@@ -174,7 +174,7 @@ internal fun renderClozeWeb(
             val session = state.cloze
             if (session == null) {
                 dispatch(AppAction.StartCloze)
-                content.appendChild(node("p", text = "Загрузка…"))
+                content.appendChild(node("p", text = UiCopy.Loading))
             } else {
                 cloze.render(content, session, dispatch)
             }
